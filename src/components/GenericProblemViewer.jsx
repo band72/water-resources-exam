@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const GenericProblemViewer = ({ problem }) => {
   const [showSolution, setShowSolution] = useState(false);
   const [userNotes, setUserNotes] = useState('');
+
+  // Load saved notes when the problem changes
+  useEffect(() => {
+    const savedNotes = localStorage.getItem(`scratchpad_${problem.id}`);
+    setUserNotes(savedNotes || '');
+    setShowSolution(false); // Reset solution visibility on problem change
+  }, [problem.id]);
+
+  // Save notes automatically as the user types
+  const handleNotesChange = (e) => {
+    const newNotes = e.target.value;
+    setUserNotes(newNotes);
+    localStorage.setItem(`scratchpad_${problem.id}`, newNotes);
+  };
 
   return (
     <div className="visualizer-wrapper" style={{ flexDirection: 'column', gap: '1.5rem' }}>
@@ -11,7 +25,7 @@ const GenericProblemViewer = ({ problem }) => {
         <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>{problem.description}</p>
         
         <div className="control-group mt-4">
-          <label className="mb-2" style={{ display: 'block', color: 'var(--accent-cyan)' }}>Engineering Scratchpad</label>
+          <label className="mb-2" style={{ display: 'block', color: 'var(--accent-cyan)' }}>Engineering Scratchpad (Auto-saved)</label>
           <textarea 
             className="w-full"
             style={{ 
@@ -26,7 +40,7 @@ const GenericProblemViewer = ({ problem }) => {
             }}
             placeholder="Work out your equations here... (e.g. Area = L * W)"
             value={userNotes}
-            onChange={(e) => setUserNotes(e.target.value)}
+            onChange={handleNotesChange}
           />
         </div>
 

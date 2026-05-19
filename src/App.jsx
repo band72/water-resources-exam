@@ -65,39 +65,37 @@ function App() {
               <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>{currentProblem.description}</p>
             </header>
 
-            {currentProblem.component === 'ProblemVisualizer' ? (
-              <OpenChannelVisualizer 
-                diameter={currentProblem.diameter} 
-                initialDepth={currentProblem.depth}
-                slope={currentProblem.slope}
-                n={currentProblem.n}
-              />
-            ) : currentProblem.component === 'CanalVisualizer' ? (
-              <CanalVisualizer 
-                initialLength={currentProblem.length}
-                initialWaste={currentProblem.waste}
-                initialThickness={currentProblem.thickness}
-                initialBottomWidth={currentProblem.bottomWidth}
-                initialDepth={currentProblem.depth}
-              />
-            ) : currentProblem.component === 'EconVisualizer' ? (
-              <EconVisualizer 
-                initialCost={currentProblem.initialCost}
-                initialSalvage={currentProblem.initialSalvage}
-                initialLife={currentProblem.initialLife}
-                initialTargetYear={currentProblem.initialTargetYear}
-              />
-            ) : currentProblem.component === 'EnviroVisualizer' ? (
-              <EnviroVisualizer />
-            ) : currentProblem.component === 'WellVisualizer' ? (
-              <WellVisualizer />
-            ) : currentProblem.component === 'GradingVisualizer' ? (
-              <GradingVisualizer />
-            ) : currentProblem.component === 'EnergyRunoffVisualizer' ? (
-              <EnergyRunoffVisualizer />
-            ) : (
-              <GenericProblemViewer problem={currentProblem} />
-            )}
+            {(() => {
+              const VisualizerMap = {
+                'ProblemVisualizer': OpenChannelVisualizer,
+                'CanalVisualizer': CanalVisualizer,
+                'EconVisualizer': EconVisualizer,
+                'EnviroVisualizer': EnviroVisualizer,
+                'WellVisualizer': WellVisualizer,
+                'GradingVisualizer': GradingVisualizer,
+                'EnergyRunoffVisualizer': EnergyRunoffVisualizer
+              };
+              
+              const ActiveComponent = VisualizerMap[currentProblem.component] || GenericProblemViewer;
+              
+              return (
+                <ActiveComponent 
+                  problem={currentProblem} 
+                  diameter={currentProblem.diameter}
+                  slope={currentProblem.slope}
+                  n={currentProblem.n}
+                  initialDepth={currentProblem.depth}
+                  initialLength={currentProblem.length}
+                  initialWaste={currentProblem.waste}
+                  initialThickness={currentProblem.thickness}
+                  initialBottomWidth={currentProblem.bottomWidth}
+                  initialCost={currentProblem.initialCost}
+                  initialSalvage={currentProblem.initialSalvage}
+                  initialLife={currentProblem.initialLife}
+                  initialTargetYear={currentProblem.initialTargetYear}
+                />
+              );
+            })()}
           </>
         )}
       </main>
