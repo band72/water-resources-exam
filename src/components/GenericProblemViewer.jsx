@@ -7,14 +7,13 @@ const GenericProblemViewer = ({ problem }) => {
   return (
     <div className="visualizer-wrapper" style={{ flexDirection: 'column', gap: '1.5rem' }}>
       <div className="glass-panel" style={{ width: '100%', borderLeft: '4px solid var(--accent-indigo)' }}>
-        <h3 className="text-gradient mb-2" style={{ fontSize: '1.5rem' }}>Problem Analysis</h3>
-        <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>{problem.description}</p>
+        <h3 className="text-gradient mb-2" style={{ fontSize: '1.5rem' }}>Problem Analysis & Scratchpad</h3>
         
         <div className="control-group mt-4">
-          <label className="mb-2" style={{ display: 'block', color: 'var(--accent-cyan)' }}>Engineering Scratchpad</label>
+          <label className="mb-2" style={{ display: 'block', color: 'var(--accent-cyan)' }}>Engineering Notes</label>
           <textarea 
-            className="w-full"
             style={{ 
+              width: '100%',
               background: 'rgba(0,0,0,0.2)', 
               border: '1px solid var(--border-color)', 
               borderRadius: '8px', 

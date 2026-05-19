@@ -7,6 +7,13 @@ import WellVisualizer from './components/WellVisualizer';
 import GradingVisualizer from './components/GradingVisualizer';
 import EnergyRunoffVisualizer from './components/EnergyRunoffVisualizer';
 import GenericProblemViewer from './components/GenericProblemViewer';
+import CpmArrowVisualizer from './components/CpmArrowVisualizer';
+import HardnessVisualizer from './components/HardnessVisualizer';
+import StructuralVisualizer from './components/StructuralVisualizer';
+import SoilVisualizer from './components/SoilVisualizer';
+import ConstructionVisualizer from './components/ConstructionVisualizer';
+import WaterVisualizer from './components/WaterVisualizer';
+import DocumentVisualizer from './components/DocumentVisualizer';
 import Dashboard from './components/Dashboard';
 import problemsData from './data/problems.json';
 
@@ -62,7 +69,7 @@ function App() {
           <>
             <header className="glass-panel" style={{ marginBottom: '1rem' }}>
               <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{currentProblem.title}</h2>
-              <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>{currentProblem.description}</p>
+              <p style={{ lineHeight: '1.6', fontSize: '1.1rem', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{currentProblem.description}</p>
             </header>
 
             {currentProblem.component === 'ProblemVisualizer' ? (
@@ -95,6 +102,41 @@ function App() {
               <GradingVisualizer />
             ) : currentProblem.component === 'EnergyRunoffVisualizer' ? (
               <EnergyRunoffVisualizer />
+            ) : currentProblem.component === 'CpmArrowVisualizer' ? (
+              <>
+                <CpmArrowVisualizer steps={currentProblem.steps} />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'HardnessVisualizer' ? (
+              <>
+                <HardnessVisualizer cations={currentProblem.cations} anions={currentProblem.anions} />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'StructuralVisualizer' ? (
+              <>
+                <StructuralVisualizer />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'SoilVisualizer' ? (
+              <>
+                <SoilVisualizer />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'ConstructionVisualizer' ? (
+              <>
+                <ConstructionVisualizer />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'WaterVisualizer' ? (
+              <>
+                <WaterVisualizer />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
+            ) : currentProblem.component === 'DocumentVisualizer' ? (
+              <>
+                <DocumentVisualizer />
+                <GenericProblemViewer problem={currentProblem} />
+              </>
             ) : (
               <GenericProblemViewer problem={currentProblem} />
             )}

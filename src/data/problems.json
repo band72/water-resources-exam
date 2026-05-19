@@ -1,9 +1,9 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "category": "Hydraulics",
     "title": "Open Channel Flow Hydraulics",
-    "description": "A pipe with an inside diameter of 18.8 inches contains water to a depth of 15.7 inches. The pipe is on a 1.5% slope and has a Manning’s n of 0.012. What is the hydraulic radius in inches?",
+    "description": "A pipe with an inside diameter of 18.8 inches contains water to a depth of 15.7 inches. The pipe is on a 1.5% slope and has a Manning\u2019s n of 0.012. What is the hydraulic radius in inches?",
     "implemented": true,
     "component": "ProblemVisualizer",
     "diameter": 18.8,
@@ -15,10 +15,10 @@
     "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!"
   },
   {
-    "id": 1,
+    "id": 2,
     "category": "Quantity Estimating",
     "title": "Concrete Canal Lining",
-    "description": "A 227-ft length of canal is to be lined with concrete for erosion control. With 12% allowance for waste and overexcavation, the volume (yd³) of concrete that must be delivered is most nearly:",
+    "description": "A 227-ft length of canal is to be lined with concrete for erosion control. With 12% allowance for waste and overexcavation, the volume (yd\u00b3) of concrete that must be delivered is most nearly:",
     "implemented": true,
     "component": "CanalVisualizer",
     "length": 227,
@@ -31,7 +31,7 @@
     "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
   },
   {
-    "id": 2,
+    "id": 3,
     "category": "Engineering Economics",
     "title": "Track Loader Depreciation",
     "description": "A track loader has an initial cost of $75,000 and a salvage value of $10,000 at the end of its expected life of 10 years. Based on the straight-line method of depreciation, at the end of the track loader's 8th year, its book value is most nearly:",
@@ -46,490 +46,538 @@
     "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years."
   },
   {
-    "id": 3,
+    "id": 4,
     "category": "Project Planning",
     "title": "Excavation Labor Scheduling",
     "description": "The budgeted labor amount for an excavation task is $4,000. The hourly labor cost is $50 per worker, and the workday is 8 hours. Two workers are assigned to excavate the material. The time (days) available for the workers to complete this task is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Draw a cash flow diagram! Use the Engineering Economics tables in the NCEES handbook. Pay attention to Present Worth (P) vs Annual (A) costs.",
     "shortcut": "For capitalized cost (infinite life), the formula is just Present Worth = Annual Cost / Interest Rate (P = A/i).",
-    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years."
-  },
-  {
-    "id": 4,
-    "category": "Project Planning",
-    "title": "CPM Arrow Diagram",
-    "description": "A CPM arrow diagram is shown below. Nine activities have been estimated with durations ranging from 5 to 35 days. The minimum time (days) required to finish the project is most nearly:",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years.",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 5,
-    "category": "Means and Methods",
-    "title": "Hydraulic Ram Capacity",
-    "description": "A bridge is to be jacked up to replace its bearings. The design requires a hydraulic ram with a minimum capacity of 1,000 kilonewtons (kN). The hydraulic rams that are available are rated in tons (2,000 lb/ton). The minimum size (tons) ram to use is most nearly:",
-    "implemented": false,
+    "category": "Project Planning",
+    "title": "CPM Arrow Diagram",
+    "description": "A CPM arrow diagram is shown below. Nine activities have been estimated with durations ranging from 5 to 35 days. The minimum time (days) required to finish the project is most nearly:",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 6,
     "category": "Means and Methods",
-    "title": "Crane Boom Standoff Distance",
-    "description": "A crane with a 100-ft boom is being used to set a small load on the roof of the building shown. The minimum standoff (Point A) from the corner of the building to the centerline of the boom is indicated. What is the maximum distance (ft) from the edge of the building that the load can be placed on the roof?",
-    "implemented": false,
+    "title": "Hydraulic Ram Capacity",
+    "description": "A bridge is to be jacked up to replace its bearings. The design requires a hydraulic ram with a minimum capacity of 1,000 kilonewtons (kN). The hydraulic rams that are available are rated in tons (2,000 lb/ton). The minimum size (tons) ram to use is most nearly:",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 7,
     "category": "Means and Methods",
-    "title": "Wall Form Overturning Brace",
-    "description": "A wall form subjected to a wind load of 20 psf is prevented from overturning by diagonal braces spaced at 8 ft on center along the length of the wall form as shown in the figure. The connection at the base of the form at Point A is equivalent to a hinge. Ignore the weight of the form. The axial force (lb) resisted by the brace is most nearly:",
-    "implemented": false,
+    "title": "Crane Boom Standoff Distance",
+    "description": "A crane with a 100-ft boom is being used to set a small load on the roof of the building shown. The minimum standoff (Point A) from the corner of the building to the centerline of the boom is indicated. What is the maximum distance (ft) from the edge of the building that the load can be placed on the roof?",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 8,
-    "category": "Soil Mechanics",
-    "title": "Lateral Earth Pressures",
-    "description": "Which one of the following statements regarding lateral earth pressures is correct?",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "category": "Means and Methods",
+    "title": "Wall Form Overturning Brace",
+    "description": "A wall form subjected to a wind load of 20 psf is prevented from overturning by diagonal braces spaced at 8 ft on center along the length of the wall form as shown in the figure. The connection at the base of the form at Point A is equivalent to a hinge. Ignore the weight of the form. The axial force (lb) resisted by the brace is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 9,
     "category": "Soil Mechanics",
-    "title": "Wick Drain Effluent Disposal Cost",
-    "description": "Site preparation and grading require the placement of 20 ft of new fill. An analysis of the resulting consolidation of the underlying soft, saturated, compressible deposits reveals a mean consolidation settlement of 22 in. affecting a 21.5-acre area. Prefabricated wick drains will be used to accelerate the settlement to meet the project schedule. Because of contamination from the former site use, the effluent from the wick drains must be collected and treated prior to disposal.",
-    "implemented": false,
-    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
-    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
+    "title": "Lateral Earth Pressures",
+    "description": "Which one of the following statements regarding lateral earth pressures is correct?",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 10,
     "category": "Soil Mechanics",
-    "title": "Effective Vertical Stress",
-    "description": "A soil profile is shown in the figure. The effective vertical stress (psf) at Point A is most nearly:",
-    "implemented": false,
+    "title": "Wick Drain Effluent Disposal Cost",
+    "description": "Site preparation and grading require the placement of 20 ft of new fill. An analysis of the resulting consolidation of the underlying soft, saturated, compressible deposits reveals a mean consolidation settlement of 22 in. affecting a 21.5-acre area. Prefabricated wick drains will be used to accelerate the settlement to meet the project schedule. Because of contamination from the former site use, the effluent from the wick drains must be collected and treated prior to disposal.",
+    "implemented": true,
     "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
     "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "StructuralVisualizer"
   },
   {
-    "id": 13,
+    "id": 11,
+    "category": "Soil Mechanics",
+    "title": "Effective Vertical Stress",
+    "description": "A soil profile is shown in the figure. The effective vertical stress (psf) at Point A is most nearly:",
+    "implemented": true,
+    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
+    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 12,
     "category": "Soil Mechanics",
     "title": "Slope Factor of Safety",
     "description": "The minimum factor of safety against rotational failure for permanent slopes under long-term, nonseismic conditions influencing occupied structures is closest to:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 13,
+    "category": "Structural Mechanics",
+    "title": "Maximum Uplift Load Combination",
+    "description": "In the figure below, what load combination produces the maximum uplift on Footing A?",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 14,
     "category": "Structural Mechanics",
-    "title": "Maximum Uplift Load Combination",
-    "description": "In the figure below, what load combination produces the maximum uplift on Footing A?",
-    "implemented": false,
+    "title": "Truss Member Loads",
+    "description": "A simply supported truss is loaded as shown in the figure. The loads (kips) for Members b and c are most nearly:",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 15,
     "category": "Structural Mechanics",
-    "title": "Truss Member Loads",
-    "description": "A simply supported truss is loaded as shown in the figure. The loads (kips) for Members b and c are most nearly:",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "title": "Maximum Bending Stress",
+    "description": "Consider two beams with equal cross sections, made of the same material, having the same support conditions, and each loaded with equal uniform load per length. One beam is twice as long as the other. The maximum bending stress in the longer beam is larger by a factor of:",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 16,
     "category": "Structural Mechanics",
-    "title": "Maximum Bending Stress",
-    "description": "Consider two beams with equal cross sections, made of the same material, having the same support conditions, and each loaded with equal uniform load per length. One beam is twice as long as the other. The maximum bending stress in the longer beam is larger by a factor of:",
-    "implemented": false,
+    "title": "Equivalent Maximum Shear",
+    "description": "The point load (kips) placed at the centerline of a 30-ft beam that produces the same maximum shear in the beam as a uniform load of 1 kip/ft is most nearly:",
+    "implemented": true,
     "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
     "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 17,
     "category": "Structural Mechanics",
-    "title": "Equivalent Maximum Shear",
-    "description": "The point load (kips) placed at the centerline of a 30-ft beam that produces the same maximum shear in the beam as a uniform load of 1 kip/ft is most nearly:",
-    "implemented": false,
+    "title": "Flexural Rigidity",
+    "description": "The beam sections shown are fabricated from 1/2-in. \u00d7 6-in. steel plates. Which of the following cross sections will provide the greatest flexural rigidity about the x-axis?",
+    "implemented": true,
     "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
     "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 18,
-    "category": "Structural Mechanics",
-    "title": "Flexural Rigidity",
-    "description": "The beam sections shown are fabricated from 1/2-in. × 6-in. steel plates. Which of the following cross sections will provide the greatest flexural rigidity about the x-axis?",
-    "implemented": false,
-    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
-    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
-  },
-  {
-    "id": 24,
     "category": "Hydraulics and Hydrology",
     "title": "Detention Basin Fill Time",
     "description": "A stormwater drainage ditch with a maximum capacity of 10 cfs discharges into a detention basin. The detention basin volume is 400,000 gal. During a storm event, the average discharge into the detention basin was 1.5 cfs. The time (hours) to fill the empty basin is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
     "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
-    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!"
+    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 25,
+    "id": 19,
     "category": "Hydraulics and Hydrology",
     "title": "Pipe Flow Rate",
     "description": "Assume fully turbulent flow in a 1,650-ft section of 3-ft-diameter pipe. The Darcy-Weisbach friction factor f is 0.0115. There is a 5-ft drop in the energy grade line over the section. The flow rate (cfs) is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 526,
+    "id": 20,
     "category": "Timber Design",
     "title": "Timber Column Buckling",
     "description": "The figure shows a timber column. Building Code: NDS: National Design Specification for Wood Construction ASD/LRFD, 2012 edition and National Design Specification Supplement, Design Values for Wood Construction, 2012 edition. Assuming dry service, normal temperature conditions, and Ci = 1.00, the critical buckling design value FcE (psi) using allowable stress design for the column is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
   },
   {
-    "id": 527,
+    "id": 21,
     "category": "Timber Design",
     "title": "Lag Screw Connection",
     "description": "A lag screw connection is shown in the figure. The tensile force (lb) in the top lag screw is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
   },
   {
-    "id": 528,
+    "id": 22,
     "category": "Steel Design",
     "title": "Angle Connection Load Capacity",
-    "description": "A connection is shown in the figure. Design Code: AISC: Steel Construction Manual, 14th edition. Material: A36 steel. Assumptions: The bolt is sufficient. The concrete is sufficient. The load P is equally distributed along the entire 6-in.-long angle. The maximum load P (ASD) or ϕPn (LRFD) in kips that can be carried by the angle is most nearly:",
-    "implemented": false,
+    "description": "A connection is shown in the figure. Design Code: AISC: Steel Construction Manual, 14th edition. Material: A36 steel. Assumptions: The bolt is sufficient. The concrete is sufficient. The load P is equally distributed along the entire 6-in.-long angle. The maximum load P (ASD) or \u03d5Pn (LRFD) in kips that can be carried by the angle is most nearly:",
+    "implemented": true,
     "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
     "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
   },
   {
-    "id": 529,
+    "id": 23,
     "category": "Timber Design",
     "title": "Roof Diaphragm Characterization",
     "description": "The following information applies to the roof diaphragm shown in the figure: Story Drifts: Wall A 0.30 in. Wall B 0.50 in. Diaphragm: wood constructed in accordance with applicable codes. Diaphragm in-plane deflection: V = 1.00 in. (of the diaphragm itself) Diaphragm deflections can be tolerated. The diaphragm can be characterized as:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
   },
   {
-    "id": 530,
+    "id": 24,
     "category": "Foundation Design",
     "title": "Footing Bearing Pressure",
     "description": "The concrete footing shown is subjected to loads from a braced frame. Assume the footing is rigid compared to the soil. The maximum bearing pressure (ksf) under the footing is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "SoilVisualizer"
   },
   {
-    "id": 11,
+    "id": 25,
     "category": "PE Exam Topic",
     "title": "Problem 11",
-    "description": "A bridge footing i tobe constructed in sand. The groundwater level sat the ground surface. The imate bearing capacity i based on what type of soil nit weight? = ror = - wo norroseus © A Buoyant unit weight © B. Saturated unit weight © C. Dry unit weight © D. Tolal unit weight",
-    "implemented": false,
+    "description": "A bridge footing i tobe constructed in sand. The groundwater level sat the ground surface. The imate bearing capacity i based on what type of soil nit weight? = ror = - wo norroseus \u00a9 A Buoyant unit weight \u00a9 B. Saturated unit weight \u00a9 C. Dry unit weight \u00a9 D. Tolal unit weight",
+    "implemented": true,
     "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
     "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
-  },
-  {
-    "id": 12,
-    "category": "PE Exam Topic",
-    "title": "Problem 12",
-    "description": "The figure shows two identical building footings with the same load but constructed in two different soil types. Which of the folowing statements is most correct? veoingaise Loy ERCaISUATED ose! case © A The long-term setiement for Case i less than Case IL. © B. The long-term settlement for Case 1 i ess than Case |. © C. The long-term setements are the same for both cases © D.Setlement is not a concen for either case copyrign 2021 by NEES 1s next",
-    "implemented": false,
-    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
-    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
-  },
-  {
-    "id": 34,
-    "category": "PE Exam Topic",
-    "title": "Problem 34",
-    "description": "A sms duluag ich wih mass pay of 1058 des tos din fed To een ia vole 40000 a. Di mo vent, sven dacs ino he Gmon basis 15. Th i nour 10 he cy sin 1 ma nay oa is on 99 cc mi op mi",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "WaterVisualizer"
   },
   {
     "id": 26,
     "category": "PE Exam Topic",
-    "title": "Problem 26",
-    "description": "Assume ths Beno ution pps gor ead sss oh ie low shown is ie nofollow Semen mon So ] — = pear © A Pressured ness from 1 102 © B. Press head decreases fom 1102 © C. Press head remain unchanged rom 1102, ©. Bemouls cation does nt nue presse hed [— 2 ors",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "title": "Problem 12",
+    "description": "The figure shows two identical building footings with the same load but constructed in two different soil types. Which of the folowing statements is most correct? veoingaise Loy ERCaISUATED ose! case \u00a9 A The long-term setiement for Case i less than Case IL. \u00a9 B. The long-term settlement for Case 1 i ess than Case |. \u00a9 C. The long-term setements are the same for both cases \u00a9 D.Setlement is not a concen for either case copyrign 2021 by NEES 1s next",
+    "implemented": true,
+    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
+    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "DocumentVisualizer"
   },
   {
-    "id": 21,
+    "id": 27,
     "category": "PE Exam Topic",
-    "title": "Problem 21",
-    "description": "The following informations for a proposed horizontal curve in new subdivision: Pl sion 1214000 Degresofarve 10° Dellecion angle 12°30 The sition of the PT s mst nearly: oA 1mm 0B 1248010 oc mam oD reds",
-    "implemented": false,
+    "title": "Problem 34",
+    "description": "A sms duluag ich wih mass pay of 1058 des tos din fed To een ia vole 40000 a. Di mo vent, sven dacs ino he Gmon basis 15. Th i nour 10 he cy sin 1 ma nay oa is on 99 cc mi op mi",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 28,
     "category": "PE Exam Topic",
-    "title": "Problem 28",
-    "description": "For he sag vrial curve shown, the tangent ioe at Sion 140 s mst nary 3 [H — wor —————off 8 E S—— & ie he wis NorTosous oA tos om +2 oc wm ob 2m fS—— B Next",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "title": "Problem 26",
+    "description": "Assume ths Beno ution pps gor ead sss oh ie low shown is ie nofollow Semen mon So ] \u2014 = pear \u00a9 A Pressured ness from 1 102 \u00a9 B. Press head decreases fom 1102 \u00a9 C. Press head remain unchanged rom 1102, \u00a9. Bemouls cation does nt nue presse hed [\u2014 2 ors",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "DocumentVisualizer"
   },
   {
-    "id": 20,
+    "id": 29,
     "category": "PE Exam Topic",
-    "title": "Problem 20",
-    "description": "Aniinerstate highway has the following traffic count data or a day in each month as shown below: Jan. 63.500 Feb 62,100 Mar, 64400 Apr. 64900 May 75.800 June 77,300 uly 78950 Aug. 77200 Sept. 70050 Oct. 69,000 Nov. 66,000 De. 64.000 Annual Total 833.200 To determine the seasonal average daily traffic volume for June through August, the seasonal factor to be multiplied by the average daily traffic volume is most nearly: oA 028 oB 08 oc 12 op 112",
-    "implemented": false,
+    "title": "Problem 21",
+    "description": "The following informations for a proposed horizontal curve in new subdivision: Pl sion 1214000 Degresofarve 10\u00b0 Dellecion angle 12\u00b030 The sition of the PT s mst nearly: oA 1mm 0B 1248010 oc mam oD reds",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 30,
     "category": "PE Exam Topic",
-    "title": "Problem 30",
-    "description": "The most essential eritera for proper soil classification using the Unified Soil Classification System or the AASHTO Soil Classification System are: © A. water content and soil density © B. Atterberg limits and specific gravity © C grain-size distribution and water content © D. grain-size distribution and Atterberg limits Copyright 2021 by CEES. u next»",
-    "implemented": false,
-    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
-    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
+    "title": "Problem 28",
+    "description": "For he sag vrial curve shown, the tangent ioe at Sion 140 s mst nary 3 [H \u2014 wor \u2014\u2014\u2014\u2014\u2014off 8 E S\u2014\u2014 & ie he wis NorTosous oA tos om +2 oc wm ob 2m fS\u2014\u2014 B Next",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 31,
     "category": "PE Exam Topic",
-    "title": "Problem 31",
-    "description": "The standard penetration test (SPT) is widely used as a simple and economic means of obtaining which of the following? © A. A measurement of sil compressibility expressed in terms of a compression index © B. Adirect measurement of the undrained shear strength © C. Anindirect indication of the relative density of cohesionless soils © Do A direct measurement of the angle of internal friction",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "title": "Problem 20",
+    "description": "Aniinerstate highway has the following traffic count data or a day in each month as shown below: Jan. 63.500 Feb 62,100 Mar, 64400 Apr. 64900 May 75.800 June 77,300 uly 78950 Aug. 77200 Sept. 70050 Oct. 69,000 Nov. 66,000 De. 64.000 Annual Total 833.200 To determine the seasonal average daily traffic volume for June through August, the seasonal factor to be multiplied by the average daily traffic volume is most nearly: oA 028 oB 08 oc 12 op 112",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 32,
     "category": "PE Exam Topic",
-    "title": "Problem 32",
-    "description": "A department of transportation must remove and replace a 12-ft x 20-f concrete slab on an interstate facility. To minimize disruption to traffic, the work must be completed during an 8-hour nightime work shift. Nighttime temperatures average S0°F. If the minimum required compressive strength is 3,500 psi, the concrete mix most likely consists of © A. coarse aggregate, sand, Type If cement, chemical accelerator © B. sand, Type Ill cement, water, chemical accelerator OC. coarse aggregate, sand, Type V cement, water, chemical accelerator © D. coarse aggregate, sand, Type Il cement, water, chemical accelerator  Copyrgnt 22021 by NCEE 5 Next",
-    "implemented": false,
-    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
-    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+    "title": "Problem 30",
+    "description": "The most essential eritera for proper soil classification using the Unified Soil Classification System or the AASHTO Soil Classification System are: \u00a9 A. water content and soil density \u00a9 B. Atterberg limits and specific gravity \u00a9 C grain-size distribution and water content \u00a9 D. grain-size distribution and Atterberg limits Copyright 2021 by CEES. u next\u00bb",
+    "implemented": true,
+    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
+    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "WaterVisualizer"
   },
   {
     "id": 33,
     "category": "PE Exam Topic",
-    "title": "Problem 33",
-    "description": "Fatigue in steel can be the result of © A. reduction in strength due to cyclical loads © B. deformation under impact loads © C. deflection due o overload © D. expansion due to corrosion",
-    "implemented": false,
+    "title": "Problem 31",
+    "description": "The standard penetration test (SPT) is widely used as a simple and economic means of obtaining which of the following? \u00a9 A. A measurement of sil compressibility expressed in terms of a compression index \u00a9 B. Adirect measurement of the undrained shear strength \u00a9 C. Anindirect indication of the relative density of cohesionless soils \u00a9 Do A direct measurement of the angle of internal friction",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 34,
+    "category": "PE Exam Topic",
+    "title": "Problem 32",
+    "description": "A department of transportation must remove and replace a 12-ft x 20-f concrete slab on an interstate facility. To minimize disruption to traffic, the work must be completed during an 8-hour nightime work shift. Nighttime temperatures average S0\u00b0F. If the minimum required compressive strength is 3,500 psi, the concrete mix most likely consists of \u00a9 A. coarse aggregate, sand, Type If cement, chemical accelerator \u00a9 B. sand, Type Ill cement, water, chemical accelerator OC. coarse aggregate, sand, Type V cement, water, chemical accelerator \u00a9 D. coarse aggregate, sand, Type Il cement, water, chemical accelerator  Copyrgnt 22021 by NCEE 5 Next",
+    "implemented": true,
     "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
     "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
-    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "WaterVisualizer"
+  },
+  {
+    "id": 35,
+    "category": "PE Exam Topic",
+    "title": "Problem 33",
+    "description": "Fatigue in steel can be the result of \u00a9 A. reduction in strength due to cyclical loads \u00a9 B. deformation under impact loads \u00a9 C. deflection due o overload \u00a9 D. expansion due to corrosion",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 36,
     "category": "PE Exam Topic",
     "title": "Problem 36",
-    "description": "Refer tothe figure. The net excess excavated material (yd) from Station 1+00 to Sation 3+00 is os ary © ee, - H SR sw \\ | Some | TEE ale fae sao on on oc m ob ww RO E .",
-    "implemented": false,
+    "description": "Refer tothe figure. The net excess excavated material (yd) from Station 1+00 to Sation 3+00 is os ary \u00a9 ee, - H SR sw \\ | Some | TEE ale fae sao on on oc m ob ww RO E .",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 37,
     "category": "PE Exam Topic",
     "title": "Problem 37",
-    "description": "Anexistng pipe connects two maintenance holes (MH). A third MH is planned between the two. At the new MH, the elevation (ft) of the top of the pipe is most nearly: Team, oposeonenm oweRTER sony ASHI Pe mT CRUSE TOON ef BE Teeny | at al | / Concasreee pee / nwa | ee] ee Tey — oA e306 ob ss oc e806 oD. esse",
-    "implemented": false,
+    "description": "Anexistng pipe connects two maintenance holes (MH). A third MH is planned between the two. At the new MH, the elevation (ft) of the top of the pipe is most nearly: Team, oposeonenm oweRTER sony ASHI Pe mT CRUSE TOON ef BE Teeny | at al | / Concasreee pee / nwa | ee] ee Tey \u2014 oA e306 ob ss oc e806 oD. esse",
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 38,
     "category": "PE Exam Topic",
     "title": "Problem 38",
-    "description": "Which of the following is not a stormwater erosion classification’ © A Shesterosion 0B. Rillerosion oC Gulyersion © D. Rushing erosion p———— x Next",
-    "implemented": false,
+    "description": "Which of the following is not a stormwater erosion classification\u2019 \u00a9 A Shesterosion 0B. Rillerosion oC Gulyersion \u00a9 D. Rushing erosion p\u2014\u2014\u2014\u2014 x Next",
+    "implemented": true,
     "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
     "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
-    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!"
+    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!",
+    "component": "WaterVisualizer"
   },
   {
     "id": 39,
     "category": "PE Exam Topic",
     "title": "Problem 39",
-    "description": "Based on the soil classification system found in the federal OSHA 20 CFR 1926, Subpart, Excavations, the soil adjacent to an existing building has been classified as Type B. An undisturbed perimeter stip that is § ft wide is 10 be maintained along th face of the building. “The excavation i 0 be 12 ft deep. To meet OSHA excavation requirements, the minimum horizontal distance X (1) from the toe of the slope to the face of the structure is most nearly: °°) i oa nn — NOTTOSCALE oa 1 0B 1 oc 1 ob 2 Copyright e2021 by CEES. » Next",
-    "implemented": false,
+    "description": "Based on the soil classification system found in the federal OSHA 20 CFR 1926, Subpart, Excavations, the soil adjacent to an existing building has been classified as Type B. An undisturbed perimeter stip that is \u00a7 ft wide is 10 be maintained along th face of the building. \u201cThe excavation i 0 be 12 ft deep. To meet OSHA excavation requirements, the minimum horizontal distance X (1) from the toe of the slope to the face of the structure is most nearly: \u00b0\u00b0) i oa nn \u2014 NOTTOSCALE oa 1 0B 1 oc 1 ob 2 Copyright e2021 by CEES. \u00bb Next",
+    "implemented": true,
     "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
     "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
-    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!"
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 40,
+    "category": "PE Exam Topic",
+    "title": "Problem 43",
+    "description": "A 60-fi-diameter acrobic digester with an 8-ft side wall depth treats 20,000 gpd of thickened",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 41,
+    "category": "PE Exam Topic",
+    "title": "Problem 44",
+    "description": "A90\u00b0 V-notch weir has an upstream depth of 13 in. above the weir crest. The flow (cfs) is most nearly oA 14 0B 175 oc 310 oD 1510",
+    "implemented": true,
+    "hint": "Use Manning's Equation: Q = (1.49/n) * A * R^(2/3) * S^(1/2). Remember Hydraulic Radius R = Area / Wetted Perimeter.",
+    "shortcut": "For wide rectangular channels, Hydraulic Radius (R) is approximately equal to the depth (y). This saves you from calculating the full wetted perimeter!",
+    "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!",
+    "component": "WaterVisualizer"
+  },
+  {
+    "id": 42,
+    "category": "PE Exam Topic",
+    "title": "Problem 45",
+    "description": "Water flows from a reservoir through pipe and then discharges into the atmosphere as shown. Neglect energy losses in the pipe enirance and exit The water elevation is changed such that the 2-f-diameter pipe is flowing at a velocity of fps. A 4-in. nozzle is installed on the discharge end of the 2-fl-diameter pipe. The velocity (fps) of the discharge jt is most nearly: Dean oA 1 oB 5 oc 1m oD m0",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 43,
     "category": "PE Exam Topic",
-    "title": "Problem 43",
-    "description": "A 60-fi-diameter acrobic digester with an 8-ft side wall depth treats 20,000 gpd of thickened",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "title": "Problem 46",
+    "description": "Flowis delivered from a splitter box to an aeration basin through a 12-in. ductile iron pipe. Fora flow ate of 3 MGD, the velocity head (R) in the ductile iron pipe is most nearly: oA 0; 0B 054 oc so oD sol Copyright 2021 by NEES ES ext",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 44,
     "category": "PE Exam Topic",
-    "title": "Problem 44",
-    "description": "A90° V-notch weir has an upstream depth of 13 in. above the weir crest. The flow (cfs) is most nearly oA 14 0B 175 oc 310 oD 1510",
-    "implemented": false,
-    "hint": "Use Manning's Equation: Q = (1.49/n) * A * R^(2/3) * S^(1/2). Remember Hydraulic Radius R = Area / Wetted Perimeter.",
-    "shortcut": "For wide rectangular channels, Hydraulic Radius (R) is approximately equal to the depth (y). This saves you from calculating the full wetted perimeter!",
-    "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!"
+    "title": "Problem 47",
+    "description": "Flow from a subdivision is collected in a detention basin. Assume that a short length of 3-f- diameter reinforced concrete pipe with a square edge inlet (loss coefficient Co = 0.5) is used fo drain the basin, the outlet of the pipe is unsubmerged, and the inlet head is 10 f above the invert of the inlet end. The discharge (cfs) through the pipe is most nearly: oA 18 os 8 oc 150 oD 30",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 45,
     "category": "PE Exam Topic",
-    "title": "Problem 45",
-    "description": "Water flows from a reservoir through pipe and then discharges into the atmosphere as shown. Neglect energy losses in the pipe enirance and exit The water elevation is changed such that the 2-f-diameter pipe is flowing at a velocity of fps. A 4-in. nozzle is installed on the discharge end of the 2-fl-diameter pipe. The velocity (fps) of the discharge jt is most nearly: Dean oA 1 oB 5 oc 1m oD m0",
-    "implemented": false,
+    "title": "Problem 48",
+    "description": "A centrifugal pump has a power input of 20 hp, pumps water atthe rate of 400 gpm, and produces a total dynamic pressure of 75 psi. The overall efficiency of the pump is most nearly oA 1% oB 2% oc 4m oD 8%  \u2018Copyright \u00a32021 by NEES. n next",
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 46,
     "category": "PE Exam Topic",
-    "title": "Problem 46",
-    "description": "Flowis delivered from a splitter box to an aeration basin through a 12-in. ductile iron pipe. Fora flow ate of 3 MGD, the velocity head (R) in the ductile iron pipe is most nearly: oA 0; 0B 054 oc so oD sol Copyright 2021 by NEES ES ext",
-    "implemented": false,
+    "title": "Problem 49",
+    "description": "Given the pipe system shown in the figure, if the total low through the system is 2 cfs, the flow ate (cfs) in the 8-in.-diameter pipeline is most nearly: pre Bin DETER 30o0RLONS MOODY FRICTION FACTOR \u00a320.24 Al 8 prez Bin DAVETER 40001LONG. 1K00DY FRICTION FACTOR \u00a3=0020 oA 145 oB 137 oc 13 oD 10 Copyrintc2021 by NCES next",
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 47,
     "category": "PE Exam Topic",
-    "title": "Problem 47",
-    "description": "Flow from a subdivision is collected in a detention basin. Assume that a short length of 3-f- diameter reinforced concrete pipe with a square edge inlet (loss coefficient Co = 0.5) is used fo drain the basin, the outlet of the pipe is unsubmerged, and the inlet head is 10 f above the invert of the inlet end. The discharge (cfs) through the pipe is most nearly: oA 18 os 8 oc 150 oD 30",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "title": "Problem 50",
+    "description": "The channel shown has  logitadinl sop of 1001 UR. Fora design lod of 3000 fs, he minimum id (1) of the verb section ecsssar o keep the water dep in he channel. 0 reste han 10 under uniform velocity is most early:  PETE EAT Tor n=04 Eom ee EC F & n=005 J 340 CSE AR BES pms ros  on 1s on \u00ae oc es op 3  SL. A saiary swe ine must be designed ith a slop of 0.20%. The design lw for the ln has een dermined to be 3.0 MOD nctudin consideration fo gov ad wet weather Assume the following  A Mannings actor of 0.012 or gravity flow inthe swe line \"Th pipe doe no surcharge  \u201cThe minima diameter (in. of a sanitary sever ln eq obandi the design flow is most nearly: . oA 1 ob 1s oc 1 ob  Coppice oy cee s exes",
+    "implemented": true,
+    "hint": "Use Manning's Equation: Q = (1.49/n) * A * R^(2/3) * S^(1/2). Remember Hydraulic Radius R = Area / Wetted Perimeter.",
+    "shortcut": "For wide rectangular channels, Hydraulic Radius (R) is approximately equal to the depth (y). This saves you from calculating the full wetted perimeter!",
+    "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!",
+    "component": "WaterVisualizer"
   },
   {
     "id": 48,
     "category": "PE Exam Topic",
-    "title": "Problem 48",
-    "description": "A centrifugal pump has a power input of 20 hp, pumps water atthe rate of 400 gpm, and produces a total dynamic pressure of 75 psi. The overall efficiency of the pump is most nearly oA 1% oB 2% oc 4m oD 8%  ‘Copyright £2021 by NEES. n next",
-    "implemented": false,
+    "title": "Problem 55",
+    "description": "The conning reso thd ave the tines of concn or of ows ona os Fol es he le ie Ap. A diss fo bl he et ow pom (Poy $50 ht voy ip AB Te time of concentration (min) to be used for the design of Pipe BC is most nearly: : ila > 1 \\ | ~~ 2 J Lu A gy = RCA Ae | Lge 14 Tn ok / TB cl =e heed oa 2s on wo oc ms ob. wo cpio: tics = =",
+    "implemented": true,
     "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
     "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 49,
     "category": "PE Exam Topic",
-    "title": "Problem 49",
-    "description": "Given the pipe system shown in the figure, if the total low through the system is 2 cfs, the flow ate (cfs) in the 8-in.-diameter pipeline is most nearly: pre Bin DETER 30o0RLONS MOODY FRICTION FACTOR £20.24 Al 8 prez Bin DAVETER 40001LONG. 1K00DY FRICTION FACTOR £=0020 oA 145 oB 137 oc 13 oD 10 Copyrintc2021 by NCES next",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
+    "title": "Problem 57",
+    "description": "A drainage basin has a total watercourse length of 2,100 ft to the hydraulically most remote point. \u201cThe water flows as shown in Figure 1. Figure 2 hows ntnsity-duraton- frequency curves for {he basin, and Figure 3 shows flow velocities for overland and shallow concentrated lows. The rainfall intensity (inh) fo a SO-year storm is most nearly: orion INTLED hey BA sol. ERAGE Sore +005 1. PAN | ton srr PRED ARE En. | FIGURE 1 1 | 4 to pr J 0 | Fi] vo | [I ow i 3 nv en nw i 4 EIST TT [er FI == J th == J A tm 6 wm ww ww THE OF CONCENTRATION re FIGURE 2 oA 4s ob ss oc 6s on 76 [\u2014\u2014\u2014\u2014 \u00a9 Nexto,",
+    "implemented": true,
+    "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
+    "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
+    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!",
+    "component": "WaterVisualizer"
   },
   {
     "id": 50,
     "category": "PE Exam Topic",
-    "title": "Problem 50",
-    "description": "The channel shown has  logitadinl sop of 1001 UR. Fora design lod of 3000 fs, he minimum id (1) of the verb section ecsssar o keep the water dep in he channel. 0 reste han 10 under uniform velocity is most early:  PETE EAT Tor n=04 Eom ee EC F & n=005 J 340 CSE AR BES pms ros  on 1s on ® oc es op 3  SL. A saiary swe ine must be designed ith a slop of 0.20%. The design lw for the ln has een dermined to be 3.0 MOD nctudin consideration fo gov ad wet weather Assume the following  A Mannings actor of 0.012 or gravity flow inthe swe line \"Th pipe doe no surcharge  “The minima diameter (in. of a sanitary sever ln eq obandi the design flow is most nearly: . oA 1 ob 1s oc 1 ob  Coppice oy cee s exes",
-    "implemented": false,
-    "hint": "Use Manning's Equation: Q = (1.49/n) * A * R^(2/3) * S^(1/2). Remember Hydraulic Radius R = Area / Wetted Perimeter.",
-    "shortcut": "For wide rectangular channels, Hydraulic Radius (R) is approximately equal to the depth (y). This saves you from calculating the full wetted perimeter!",
-    "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!"
-  },
-  {
-    "id": 55,
-    "category": "PE Exam Topic",
-    "title": "Problem 55",
-    "description": "The conning reso thd ave the tines of concn or of ows ona os Fol es he le ie Ap. A diss fo bl he et ow pom (Poy $50 ht voy ip AB Te time of concentration (min) to be used for the design of Pipe BC is most nearly: : ila > 1 \\ | ~~ 2 J Lu A gy = RCA Ae | Lge 14 Tn ok / TB cl =e heed oa 2s on wo oc ms ob. wo cpio: tics = =",
-    "implemented": false,
-    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
-    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
-    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe."
-  },
-  {
-    "id": 57,
-    "category": "PE Exam Topic",
-    "title": "Problem 57",
-    "description": "A drainage basin has a total watercourse length of 2,100 ft to the hydraulically most remote point. “The water flows as shown in Figure 1. Figure 2 hows ntnsity-duraton- frequency curves for {he basin, and Figure 3 shows flow velocities for overland and shallow concentrated lows. The rainfall intensity (inh) fo a SO-year storm is most nearly: orion INTLED hey BA sol. ERAGE Sore +005 1. PAN | ton srr PRED ARE En. | FIGURE 1 1 | 4 to pr J 0 | Fi] vo | [I ow i 3 nv en nw i 4 EIST TT [er FI == J th == J A tm 6 wm ww ww THE OF CONCENTRATION re FIGURE 2 oA 4s ob ss oc 6s on 76 [———— © Nexto,",
-    "implemented": false,
-    "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
-    "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
-    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!"
-  },
-  {
-    "id": 60,
-    "category": "PE Exam Topic",
     "title": "Problem 60",
-    "description": "A lake has a surface area of 10,000,000 ff and an impervious bottom and sides. For the month of June, the average inflow was 5.0 cfs and the average outflow was 4.5 cfs. The precipitation recorded for the month was 4 in. and the storage volume decreased by 83,000 ft. The estimated. ‘evaporation (in) is most nearly: oA 25 0B. 415 oc ses oD. 365",
-    "implemented": false,
+    "description": "A lake has a surface area of 10,000,000 ff and an impervious bottom and sides. For the month of June, the average inflow was 5.0 cfs and the average outflow was 4.5 cfs. The precipitation recorded for the month was 4 in. and the storage volume decreased by 83,000 ft. The estimated. \u2018evaporation (in) is most nearly: oA 25 0B. 415 oc ses oD. 365",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 61,
+    "id": 51,
     "category": "PE Exam Topic",
     "title": "Problem 61",
-    "description": "The figure shows a graph of rainfall over time falling on a 100-acre site. Assume 0.2 in. of rainfall is infiltrated each 10 min for the frst 30 min. Further assume the surface storage on the site: is 440,000 f. If the rest of the water flows fo a 1-acre retention pond with vertical sides and is retained, then the water depth (ft) in the pond is most nearly: ot 00 [23 oar RANFALL (nmin) 20% 005 oo 003 oo 001 0 102 % 4000 0w TIVE (ri) oA 16 oB 2 oc 2% oD 31 Copyright 62021 by NCEES “ Nexto",
-    "implemented": false,
+    "description": "The figure shows a graph of rainfall over time falling on a 100-acre site. Assume 0.2 in. of rainfall is infiltrated each 10 min for the frst 30 min. Further assume the surface storage on the site: is 440,000 f. If the rest of the water flows fo a 1-acre retention pond with vertical sides and is retained, then the water depth (ft) in the pond is most nearly: ot 00 [23 oar RANFALL (nmin) 20% 005 oo 003 oo 001 0 102 % 4000 0w TIVE (ri) oA 16 oB 2 oc 2% oD 31 Copyright 62021 by NCEES \u201c Nexto",
+    "implemented": true,
     "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
     "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
-    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!"
+    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 62,
+    "id": 52,
     "category": "PE Exam Topic",
     "title": "Problem 62",
-    "description": "A horizontal confined aquifer is made up of three layers with the following properties: me [TE] fa Lower 210 03 | ‘The aquifer transmissivity (*/day) is most nearly: Fe er oe SE “ oe",
+    "description": "A horizontal confined aquifer is made up of three layers with the following properties: me [TE] fa Lower 210 03 | \u2018The aquifer transmissivity (*/day) is most nearly: Fe er oe SE \u201c oe",
     "implemented": true,
     "component": "WellVisualizer",
     "hint": "Use the Thiem equation for steady state or Theis equation for transient. Transmissivity (T) = Hydraulic Conductivity (K) * Aquifer Thickness (b).",
@@ -537,234 +585,257 @@
     "fifthGrader": "Imagine an underground sponge full of water. If you stick a straw in and suck really fast, the water around the straw dips down like a funnel. We are measuring that dip!"
   },
   {
-    "id": 66,
+    "id": 53,
     "category": "PE Exam Topic",
     "title": "Problem 66",
     "description": "The primary clarifier of a trickling filter plant receives 1,000 Ib of solids daily. The clarifier has a. solid capture at of 0% and produces an underflow sludge concentration of 9% The volume of primary sludge (ft'/day) is most nearly: oA 2 ob % oc 10 oD 210",
-    "implemented": false,
+    "implemented": true,
     "hint": "Use the mass flux equation: Mass (lb/day) = Flow (MGD) * Concentration (mg/L) * 8.34.",
     "shortcut": "The number 8.34 is magic! It's the weight of 1 gallon of water in pounds. Always use it when converting MGD and mg/L to pounds.",
-    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake."
+    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 67,
+    "id": 54,
     "category": "PE Exam Topic",
     "title": "Problem 67",
-    "description": "A 10-MGD activated sludge plant is being designed to treat domestic wastewater. The following operational design parameters ar chosen the mixed liquor volatile suspended solids concentration in th aeration basin is 2.200 me/L: th influent BOD: concentration is 200 mL. oF which 35% is removed by primary clarification; the food-to-microorganism ato in the ‘aeration basin is 0.2 day”, The total acration tank volume required (ft') is most nearly: oA 2300 oB 316000 oc som oD 6800",
-    "implemented": false,
+    "description": "A 10-MGD activated sludge plant is being designed to treat domestic wastewater. The following operational design parameters ar chosen the mixed liquor volatile suspended solids concentration in th aeration basin is 2.200 me/L: th influent BOD: concentration is 200 mL. oF which 35% is removed by primary clarification; the food-to-microorganism ato in the \u2018aeration basin is 0.2 day\u201d, The total acration tank volume required (ft') is most nearly: oA 2300 oB 316000 oc som oD 6800",
+    "implemented": true,
     "hint": "Use the mass flux equation: Mass (lb/day) = Flow (MGD) * Concentration (mg/L) * 8.34.",
     "shortcut": "The number 8.34 is magic! It's the weight of 1 gallon of water in pounds. Always use it when converting MGD and mg/L to pounds.",
-    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake."
+    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 69,
+    "id": 55,
     "category": "PE Exam Topic",
     "title": "Problem 69",
-    "description": "Primary sewage sludge from a 5-MGD wastewater treatment plant is to be reated by anacrobic digestion. The following data apply’ Ocin digester 14 days at 30°C Moisture content of primary sludge ~~ 95% Specific gravity of shudge 105 Dry solids removed in primary tank ~~ 6,500 bday “The required volume (fF) of the anacrobie digester is most nearly oA 180 oB 514 oc 2690 oD 27.80",
-    "implemented": false,
+    "description": "Primary sewage sludge from a 5-MGD wastewater treatment plant is to be reated by anacrobic digestion. The following data apply\u2019 Ocin digester 14 days at 30\u00b0C Moisture content of primary sludge ~~ 95% Specific gravity of shudge 105 Dry solids removed in primary tank ~~ 6,500 bday \u201cThe required volume (fF) of the anacrobie digester is most nearly oA 180 oB 514 oc 2690 oD 27.80",
+    "implemented": true,
     "hint": "Use the mass flux equation: Mass (lb/day) = Flow (MGD) * Concentration (mg/L) * 8.34.",
     "shortcut": "The number 8.34 is magic! It's the weight of 1 gallon of water in pounds. Always use it when converting MGD and mg/L to pounds.",
-    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake."
+    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 70,
+    "id": 56,
     "category": "PE Exam Topic",
     "title": "Problem 70",
-    "description": "A consulting engineer is performing a diagnostic evaluation of .0.5-MGD wastewater treatment plant. The engineer is required o evaluate the existing chlorination system, which consists of two 150-b cylinders. Using a chlorine dosage of 8 mg/L, the number of days of disinfection the system will provide is most nearly: oA 45 oB 90 oc 10 oD 340 Copyright £20121 by NCEES o Next",
-    "implemented": false,
+    "description": "A consulting engineer is performing a diagnostic evaluation of .0.5-MGD wastewater treatment plant. The engineer is required o evaluate the existing chlorination system, which consists of two 150-b cylinders. Using a chlorine dosage of 8 mg/L, the number of days of disinfection the system will provide is most nearly: oA 45 oB 90 oc 10 oD 340 Copyright \u00a320121 by NCEES o Next",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 71,
+    "id": 57,
     "category": "PE Exam Topic",
     "title": "Problem 71",
-    "description": "Selo a qty prt fc ver nd rtm are follows: [Parameter [River | Tributary | Flow rate (cfs) 50 20 Tow propos (gt) | 002 | 0s Chip mg. os | on EE —— 0013 mgt logit ole of elas concrio in er dwt oe Ct it wl ply 0 A sythesme 0B decease continously 0C. decease ist and hen crease 0D incase fst and hen dcrse",
-    "implemented": false,
+    "description": "Selo a qty prt fc ver nd rtm are follows: [Parameter [River | Tributary | Flow rate (cfs) 50 20 Tow propos (gt) | 002 | 0s Chip mg. os | on EE \u2014\u2014 0013 mgt logit ole of elas concrio in er dwt oe Ct it wl ply 0 A sythesme 0B decease continously 0C. decease ist and hen crease 0D incase fst and hen dcrse",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 72,
+    "id": 58,
     "category": "PE Exam Topic",
     "title": "Problem 72",
-    "description": "River converge with Rive Band forms River Cat Poi Pas shown i te Fire 115 rete to el ra ern Rive sre te Ghsoed OB (50) C3 maT ut aptcam of on Pharr capable of ping 1 veg of 030 Dl pe nt 5 mos of ar ot of lors edo pre the water. ly of Rr» most ner. Fn Pp Te [CX TIea— — oun szmi0 oa mw ob a0 oc 1s ob 13 EST \" errs",
-    "implemented": false,
+    "description": "River converge with Rive Band forms River Cat Poi Pas shown i te Fire 115 rete to el ra ern Rive sre te Ghsoed OB (50) C3 maT ut aptcam of on Pharr capable of ping 1 veg of 030 Dl pe nt 5 mos of ar ot of lors edo pre the water. ly of Rr\u00bb most ner. Fn Pp Te [CX TIea\u2014 \u2014 oun szmi0 oa mw ob a0 oc 1s ob 13 EST \" errs",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 75,
+    "id": 59,
     "category": "PE Exam Topic",
     "title": "Problem 75",
-    "description": "Acity had a 2000 census population of 85,000 people and a 2010 census population of 92,000 people. Ifthe water usage remains constant at 160 gal (capita-day) (gpec), and assuming a ‘geometric growth rat, th additional daily demand (gal/day) in 2017 sbove that in 2010 due to ‘population growth is most nearly: OA 840000 © B. 1200000 oC 15500000 © D 16000000",
-    "implemented": false,
+    "description": "Acity had a 2000 census population of 85,000 people and a 2010 census population of 92,000 people. Ifthe water usage remains constant at 160 gal (capita-day) (gpec), and assuming a \u2018geometric growth rat, th additional daily demand (gal/day) in 2017 sbove that in 2010 due to \u2018population growth is most nearly: OA 840000 \u00a9 B. 1200000 oC 15500000 \u00a9 D 16000000",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 76,
+    "id": 60,
     "category": "PE Exam Topic",
     "title": "Problem 76",
-    "description": "You are designing an elevated (potable) water tank. Match the system requirements data 0 the tank design parameters they influence. Tank Design Parameters System Requirements Data Maximum dlesation [rp— Chorin rsiual Fight pth Minium elevation priine Pup cal discharge head (TDH) hi) Floodplain cevstion Sufce overflow ste Copyright 2021 by NEES. 0 next»",
-    "implemented": false,
+    "description": "You are designing an elevated (potable) water tank. Match the system requirements data 0 the tank design parameters they influence. Tank Design Parameters System Requirements Data Maximum dlesation [rp\u2014 Chorin rsiual Fight pth Minium elevation priine Pup cal discharge head (TDH) hi) Floodplain cevstion Sufce overflow ste Copyright 2021 by NEES. 0 next\u00bb",
+    "implemented": true,
     "hint": "Pump Power = (Gamma * Q * Head) / Efficiency. Check if the question asks for Water Horsepower (WHP) or Brake Horsepower (BHP).",
     "shortcut": "1 Horsepower = 550 ft-lb/sec. If your units are in GPM and feet, use HP = (Q * H) / 3960 * Efficiency.",
-    "fifthGrader": "A water pump is just a giant fan that pushes water instead of air. We are calculating how big the fan's motor needs to be to push the water to the top of a hill."
+    "fifthGrader": "A water pump is just a giant fan that pushes water instead of air. We are calculating how big the fan's motor needs to be to push the water to the top of a hill.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 77,
+    "id": 61,
     "category": "PE Exam Topic",
     "title": "Problem 77",
-    "description": "With a design retention time of | min, dynamic viscosity of 2.735 x 10-5 l-sec/f, anda velocity gradient value of 700 sec, the power (f-bisec) that must be imparted to 1 MGD of ‘water passing through a rapid mix unit is most nearly oA m0 oB 1240 oc 9300 oD. 74400",
-    "implemented": false,
+    "description": "With a design retention time of | min, dynamic viscosity of 2.735 x 10-5 l-sec/f, anda velocity gradient value of 700 sec, the power (f-bisec) that must be imparted to 1 MGD of \u2018water passing through a rapid mix unit is most nearly oA m0 oB 1240 oc 9300 oD. 74400",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 78,
+    "id": 62,
     "category": "PE Exam Topic",
     "title": "Problem 78",
-    "description": "A 16-0 x 40-R dual media drinking water filter is to be cleaned using an air wash followed by a water wash. The air wash is at rate of § sf. The recommended airflow rate (scfm) for the air wash is most nearly oA s oB 1280 oc 320 oD 8000  Copyright 2071 by NoeES. 5 Next»",
-    "implemented": false,
+    "description": "A 16-0 x 40-R dual media drinking water filter is to be cleaned using an air wash followed by a water wash. The air wash is at rate of \u00a7 sf. The recommended airflow rate (scfm) for the air wash is most nearly oA s oB 1280 oc 320 oD 8000  Copyright 2071 by NoeES. 5 Next\u00bb",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
-    "id": 79,
+    "id": 63,
     "category": "PE Exam Topic",
     "title": "Problem 79",
-    "description": "“The constituents of a water supply are shown inthe bar chart. Thee s no magnesium, 1 i desired 10 remove the carbonate hardness due to calcium. No noncarbonate hardness willbe removed. Excess Time beyond the stoichiometric amount wil be added a a dose of 20 mg/L as CaCO3. The otal amount of ime (mg/L as CaCO) that mst be added is most nearly: 0 150 215 Carbon [Calcium | Other cations dioxide | 150 125 50\" bicarbonate | Other cations 120 155 T Eg 7s Length of bars not 0 scale. All concentrations are ma. as CaCO, oA 10 © B 150 oc 19 oD 2",
-    "implemented": false,
+    "description": "\u201cThe constituents of a water supply are shown inthe bar chart. Thee s no magnesium, 1 i desired 10 remove the carbonate hardness due to calcium. No noncarbonate hardness willbe removed. Excess Time beyond the stoichiometric amount wil be added a a dose of 20 mg/L as CaCO3. The otal amount of ime (mg/L as CaCO) that mst be added is most nearly: 0 150 215 Carbon [Calcium | Other cations dioxide | 150 125 50\" bicarbonate | Other cations 120 155 T Eg 7s Length of bars not 0 scale. All concentrations are ma. as CaCO, oA 10 \u00a9 B 150 oc 19 oD 2",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
-  },
-  {
-    "id": 80,
-    "category": "PE Exam Topic",
-    "title": "Problem 80",
-    "description": "A uiiity company can purchase a packaged wastewater plant with a capital cost of $10,000,000 and ‘2 maintenance cost of $200,000/ycar. Another option sto lease the plant with $1,006,000 down payment and $600,000 semiannual payments (including maintenance). Assume the plan has a salvage value of zero. Which of th following statements is most curate usin present worth analysis, 6% interest, and a 20-year useful lfelease period? © A Buying s beter by $2.6 millon © B. Buying is better by $4.9 millon. © C. Leasing is better by $4.4 millon. © D. Buying and leasing costs are about the same. ony e2021 by ces «",
-    "implemented": false,
-    "hint": "Draw a cash flow diagram! Use the Engineering Economics tables in the NCEES handbook. Pay attention to Present Worth (P) vs Annual (A) costs.",
-    "shortcut": "For capitalized cost (infinite life), the formula is just Present Worth = Annual Cost / Interest Rate (P = A/i).",
-    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years."
-  },
-  {
-    "id": 19,
-    "category": "PE Exam Topic",
-    "title": "Problem 19",
-    "description": "¢=32 K, =tan?(45 - 12) = 0.307 Yo =110pef P, =(0.5X110)8(0.307) = 1,081 Ibe M, =(LOBIXS/3) = 2883 fl (2X8XISO0XIN3) = 7,200 felb/ft hy (/2)02)8)(150)(1)(2)(2/3) = 1,600 f-Tb/ft TAL 3,600 So: SF = 8,802,883 305 PO 2nxanx isoprene [Om—— jo ——tonn 4 Ua conto)! En a pe pra par THE CORRECT ANSWER IS: A no -va-{Lesia as Tascam 120 unl saan 0022] 3A +205M) Stach 9 Volume = 25cm x S500 gg 10 0 time <LOB9XIR min lhe \"Tl6a/sec 60sec 60min -18.5bours THE CORRECT ANSWER IS: C [— »",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
-  },
-  {
-    "id": 22,
-    "category": "PE Exam Topic",
-    "title": "Problem 22",
-    "description": "According to the arithmetic mean metho, the average presiptton s simply the average ofl the rainfll gauges Average precipitation = (1 +364 1315426 46.1 + 5.1 + 48+ 41+ 28+ 30y11 ~34in THE CORRECT ANSWER IS: A.",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
-  },
-  {
-    "id": 23,
-    "category": "PE Exam Topic",
-    "title": "Problem 23",
-    "description": "From the IDF curve, read a rainfall intensity of 3.5 in. or fora 0-year fequency rainfall with 60-min durstion From th abc, the runoff coeficient for a downtown reais 0.10-0.95. For the maximum runoff ate, use the high value of 0.05 Q=CiA=095 x3 Sin/hr x 90 ac Q=300cts THE CORRECT ANSWER I: C 2% ime Y Q RI Jp V= 400,001 _53 476 Rr Q=150% sec 470° nr me = BATON Lhe gg Time thes” S00 20 THE CORRECT ANSWER IS: B re p——— ao",
-    "implemented": false,
-    "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
-    "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
-    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!"
-  },
-  {
-    "id": 27,
-    "category": "PE Exam Topic",
-    "title": "Problem 27",
-    "description": "R -5 796480, Pre = 5,720.648/10=57296 E pre im -Run( 1a) Runo2s7) kiitos binad = 572.96 (tan 6.25°) = moo =57296(0.1095178) oes REE) Staton PC = Station PIT =(12+40)-6275 1147725 Station PT. = Station PC + length of curve Length of curve = L =100 AID 100025101258 Station PT = Station PC +125 1 = (1147725) +125 1302.25 ‘THE CORRECT ANSWERS: C Conon 0202 by NES @",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
-  },
-  {
-    "id": 41,
-    "category": "PE Exam Topic",
-    "title": "Problem 41",
-    "description": "mg BOD: in 1547 onvered from 10MGD) +2 mg BODS in 100s ~ mf. BODs isa Sov ors = 28.4 my, whichis 75 6% removal, THE CORRECT ANSWER 18: 75% and < 76% a 2m Flo porte -2490_ 066710 Overton te « SLD _ST00 ga (30) 7069. = THE CORRECT ANSWER IS: PE. re y ips volume = 3071 0785 GO RS) =22,608 f° Dayle ome » 20,000 aldey 002 MGD. Studg lds concenttion = 24 = 20,000 mg. Daily VSS mass = 8.34 QC 534 B88 2046075100 00 mt) ~2.502 day VSS aay VSS mss _ 2502 bday VSS oing aly VSS mass \"= digester volume ~~ 22,608 1 = 0.111 Ibi(R3-day) THE CORRECT ANSWER 1: 5 “4. Qa2s4H? 13m}? “es{it) =3.10t%sec THE CORRECT ANSWER 1S: [R—— »",
-    "implemented": false,
-    "hint": "Use the mass flux equation: Mass (lb/day) = Flow (MGD) * Concentration (mg/L) * 8.34.",
-    "shortcut": "The number 8.34 is magic! It's the weight of 1 gallon of water in pounds. Always use it when converting MGD and mg/L to pounds.",
-    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake."
-  },
-  {
-    "id": 52,
-    "category": "PE Exam Topic",
-    "title": "Problem 52",
-    "description": "Given: Q=1815cfs, Hy =6f, L, =40ft Require:L for Q; = 2,500 cfs and H, = 6 Q=CLH™? Q=CL? 1815 ¢fs=C, (40x61) Cy=308 C=C =3087 Q=CiLy,\" 2,500¢f5 =3.087L, (6 1)\" Ly=351f AL=Ly-Ly=5510-0R=1510 Alternate solution: QQ. Lb QL Lsise 0 2,500cfs Ly Ly=ssin AL=Ly-1y=551R-0R=1S10 THE CORRECT ANSWER IS: A",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
-  },
-  {
-    "id": 83,
-    "category": "PE Exam Topic",
-    "title": "Problem 83",
-    "description": "Q=ViA, = (50 Usec)(3.8 RIS 1) = 6,650 ft’ sec v, 50sec [E/E an ) Jer Jor2 msec 80) Le THT 1) (ar 1) -s91 3 B J2= 5913, = 5910.80) =22.46 8 Q, __6650 1 isec ~Q SE0R gy Vt Es @en fab Vv; 846 ses Fy == ~o031 TVD; Jor2 see x22 46) THE CORRECT ANSWER: C Pv p——",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 64,
     "category": "PE Exam Topic",
-    "title": "Problem 64",
-    "description": "Q (1500 gomX60 mine X24 bday) 7.48 gt) 365775 dy q - ZK -h) Int) [L008 Ti 77 1) In] “Jo (8in)| ~ Komal = 191 (hi -h)) (140-27)? - (140 - 49)°] id THE CORRECT ANSWERS: C",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "title": "Problem 80",
+    "description": "A uiiity company can purchase a packaged wastewater plant with a capital cost of $10,000,000 and \u20182 maintenance cost of $200,000/ycar. Another option sto lease the plant with $1,006,000 down payment and $600,000 semiannual payments (including maintenance). Assume the plan has a salvage value of zero. Which of th following statements is most curate usin present worth analysis, 6% interest, and a 20-year useful lfelease period? \u00a9 A Buying s beter by $2.6 millon \u00a9 B. Buying is better by $4.9 millon. \u00a9 C. Leasing is better by $4.4 millon. \u00a9 D. Buying and leasing costs are about the same. ony e2021 by ces \u00ab",
+    "implemented": true,
+    "hint": "Draw a cash flow diagram! Use the Engineering Economics tables in the NCEES handbook. Pay attention to Present Worth (P) vs Annual (A) costs.",
+    "shortcut": "For capitalized cost (infinite life), the formula is just Present Worth = Annual Cost / Interest Rate (P = A/i).",
+    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 65,
     "category": "PE Exam Topic",
-    "title": "Problem 65",
-    "description": "Tora daly low rte = domestic + commercial = 70-+ 10 80 gal capia-day) Population a th end of 5 years = 25,000(115%) = 28,750 Daily flow rate in years = 28,750(80) = 2,300,000 galiday = 2.3 MGD Peak flow rate =2.3(2.) = 575 MGD ‘THE CORRECT ANSWERS: D (1 solids) (solids capture) Vig = 301d) (solids capture) 6 TT underlow) 10 & Lohr 09) 160377 /day © oe I) THE CORRECT ANSWER IS: C Copyignt 02021 by o£ a",
-    "implemented": false,
+    "title": "Problem 19",
+    "description": "\u00a2=32 K, =tan?(45 - 12) = 0.307 Yo =110pef P, =(0.5X110)8(0.307) = 1,081 Ibe M, =(LOBIXS/3) = 2883 fl (2X8XISO0XIN3) = 7,200 felb/ft hy (/2)02)8)(150)(1)(2)(2/3) = 1,600 f-Tb/ft TAL 3,600 So: SF = 8,802,883 305 PO 2nxanx isoprene [Om\u2014\u2014 jo \u2014\u2014tonn 4 Ua conto)! En a pe pra par THE CORRECT ANSWER IS: A no -va-{Lesia as Tascam 120 unl saan 0022] 3A +205M) Stach 9 Volume = 25cm x S500 gg 10 0 time <LOB9XIR min lhe \"Tl6a/sec 60sec 60min -18.5bours THE CORRECT ANSWER IS: C [\u2014 \u00bb",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 66,
+    "category": "PE Exam Topic",
+    "title": "Problem 22",
+    "description": "According to the arithmetic mean metho, the average presiptton s simply the average ofl the rainfll gauges Average precipitation = (1 +364 1315426 46.1 + 5.1 + 48+ 41+ 28+ 30y11 ~34in THE CORRECT ANSWER IS: A.",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 67,
+    "category": "PE Exam Topic",
+    "title": "Problem 23",
+    "description": "From the IDF curve, read a rainfall intensity of 3.5 in. or fora 0-year fequency rainfall with 60-min durstion From th abc, the runoff coeficient for a downtown reais 0.10-0.95. For the maximum runoff ate, use the high value of 0.05 Q=CiA=095 x3 Sin/hr x 90 ac Q=300cts THE CORRECT ANSWER I: C 2% ime Y Q RI Jp V= 400,001 _53 476 Rr Q=150% sec 470\u00b0 nr me = BATON Lhe gg Time thes\u201d S00 20 THE CORRECT ANSWER IS: B re p\u2014\u2014\u2014 ao",
+    "implemented": true,
+    "hint": "Use the Rational Method (Q = CiA) for small watersheds. Ensure Area is in acres and Intensity is in inches/hour.",
+    "shortcut": "In the Rational Method (Q=CiA), the units magically work out so that 1 acre-inch/hour is almost exactly equal to 1 cubic foot per second (cfs). No conversion needed!",
+    "fifthGrader": "When it rains on a parking lot, the water has nowhere to soak in, so it all runs into the storm drain. We are calculating how big the drain needs to be so the parking lot doesn't flood!",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 68,
     "category": "PE Exam Topic",
-    "title": "Problem 68",
-    "description": "Abou 2 mele Os re required per mele NIE]. THE CORRECT ANSWER 5: B [—— «",
-    "implemented": false,
+    "title": "Problem 27",
+    "description": "R -5 796480, Pre = 5,720.648/10=57296 E pre im -Run( 1a) Runo2s7) kiitos binad = 572.96 (tan 6.25\u00b0) = moo =57296(0.1095178) oes REE) Staton PC = Station PIT =(12+40)-6275 1147725 Station PT. = Station PC + length of curve Length of curve = L =100 AID 100025101258 Station PT = Station PC +125 1 = (1147725) +125 1302.25 \u2018THE CORRECT ANSWERS: C Conon 0202 by NES @",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 69,
+    "category": "PE Exam Topic",
+    "title": "Problem 41",
+    "description": "mg BOD: in 1547 onvered from 10MGD) +2 mg BODS in 100s ~ mf. BODs isa Sov ors = 28.4 my, whichis 75 6% removal, THE CORRECT ANSWER 18: 75% and < 76% a 2m Flo porte -2490_ 066710 Overton te \u00ab SLD _ST00 ga (30) 7069. = THE CORRECT ANSWER IS: PE. re y ips volume = 3071 0785 GO RS) =22,608 f\u00b0 Dayle ome \u00bb 20,000 aldey 002 MGD. Studg lds concenttion = 24 = 20,000 mg. Daily VSS mass = 8.34 QC 534 B88 2046075100 00 mt) ~2.502 day VSS aay VSS mss _ 2502 bday VSS oing aly VSS mass \"= digester volume ~~ 22,608 1 = 0.111 Ibi(R3-day) THE CORRECT ANSWER 1: 5 \u201c4. Qa2s4H? 13m}? \u201ces{it) =3.10t%sec THE CORRECT ANSWER 1S: [R\u2014\u2014 \u00bb",
+    "implemented": true,
+    "hint": "Use the mass flux equation: Mass (lb/day) = Flow (MGD) * Concentration (mg/L) * 8.34.",
+    "shortcut": "The number 8.34 is magic! It's the weight of 1 gallon of water in pounds. Always use it when converting MGD and mg/L to pounds.",
+    "fifthGrader": "Imagine your city's wastewater is a giant river filled with tiny food particles. We are calculating how many pounds of particles we caught in our net before the water went into the lake.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 70,
+    "category": "PE Exam Topic",
+    "title": "Problem 52",
+    "description": "Given: Q=1815cfs, Hy =6f, L, =40ft Require:L for Q; = 2,500 cfs and H, = 6 Q=CLH\u2122? Q=CL? 1815 \u00a2fs=C, (40x61) Cy=308 C=C =3087 Q=CiLy,\" 2,500\u00a2f5 =3.087L, (6 1)\" Ly=351f AL=Ly-Ly=5510-0R=1510 Alternate solution: QQ. Lb QL Lsise 0 2,500cfs Ly Ly=ssin AL=Ly-1y=551R-0R=1S10 THE CORRECT ANSWER IS: A",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 71,
+    "category": "PE Exam Topic",
+    "title": "Problem 83",
+    "description": "Q=ViA, = (50 Usec)(3.8 RIS 1) = 6,650 ft\u2019 sec v, 50sec [E/E an ) Jer Jor2 msec 80) Le THT 1) (ar 1) -s91 3 B J2= 5913, = 5910.80) =22.46 8 Q, __6650 1 isec ~Q SE0R gy Vt Es @en fab Vv; 846 ses Fy == ~o031 TVD; Jor2 see x22 46) THE CORRECT ANSWER: C Pv p\u2014\u2014",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 72,
+    "category": "PE Exam Topic",
+    "title": "Problem 64",
+    "description": "Q (1500 gomX60 mine X24 bday) 7.48 gt) 365775 dy q - ZK -h) Int) [L008 Ti 77 1) In] \u201cJo (8in)| ~ Komal = 191 (hi -h)) (140-27)? - (140 - 49)\u00b0] id THE CORRECT ANSWERS: C",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 73,
+    "category": "PE Exam Topic",
+    "title": "Problem 65",
+    "description": "Tora daly low rte = domestic + commercial = 70-+ 10 80 gal capia-day) Population a th end of 5 years = 25,000(115%) = 28,750 Daily flow rate in years = 28,750(80) = 2,300,000 galiday = 2.3 MGD Peak flow rate =2.3(2.) = 575 MGD \u2018THE CORRECT ANSWERS: D (1 solids) (solids capture) Vig = 301d) (solids capture) 6 TT underlow) 10 & Lohr 09) 160377 /day \u00a9 oe I) THE CORRECT ANSWER IS: C Copyignt 02021 by o\u00a3 a",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "WaterVisualizer"
   },
   {
     "id": 74,
     "category": "PE Exam Topic",
-    "title": "Problem 74",
-    "description": "Points B and E are the two high points nth ne withthe exception ofthe ark, which vents 0  {he atmosphere and docs not need an ait release valve  THE CORRECT ANSWERS ARE: B and pr —— Ml",
-    "implemented": false,
+    "title": "Problem 68",
+    "description": "Abou 2 mele Os re required per mele NIE]. THE CORRECT ANSWER 5: B [\u2014\u2014 \u00ab",
+    "implemented": true,
     "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
     "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
+  },
+  {
+    "id": 75,
+    "category": "PE Exam Topic",
+    "title": "Problem 74",
+    "description": "Points B and E are the two high points nth ne withthe exception ofthe ark, which vents 0  {he atmosphere and docs not need an ait release valve  THE CORRECT ANSWERS ARE: B and pr \u2014\u2014 Ml",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 76,
@@ -778,7 +849,7 @@
     "slope": 1,
     "n": 0.013,
     "hint": "For inlet control, use the FHWA nomograph or the specific inlet control equations based on Q/(AD^0.5).",
-    "shortcut": "If it's inlet control, the barrel slope and length don't matter—only the inlet geometry and headwater.",
+    "shortcut": "If it's inlet control, the barrel slope and length don't matter\u2014only the inlet geometry and headwater.",
     "fifthGrader": "Think of a funnel. If you pour water in too fast, it backs up. We are just measuring how high the water backs up before the pipe can swallow it all!"
   },
   {
@@ -788,7 +859,7 @@
     "description": "A primary clarifier receives a flow of 2.5 MGD with an influent BOD5 of 220 mg/L. If the effluent BOD5 is 140 mg/L, the daily mass of BOD5 removed (lb/day) is most nearly:",
     "implemented": true,
     "component": "EnviroVisualizer",
-    "hint": "Mass (lb/day) = Flow (MGD) × Concentration (mg/L) × 8.34 lb/gal.",
+    "hint": "Mass (lb/day) = Flow (MGD) \u00d7 Concentration (mg/L) \u00d7 8.34 lb/gal.",
     "shortcut": "Calculate the difference in concentration first (220 - 140 = 80 mg/L), then multiply by flow and 8.34.",
     "fifthGrader": "If you have 220 pieces of trash in the water, and 140 make it out, you caught 80 pieces! Multiply that by how much water flows each day to find total trash caught."
   },
@@ -797,30 +868,33 @@
     "category": "Soil Mechanics & Foundations",
     "title": "Retaining Wall Overturning Moment",
     "description": "A 15-ft high cantilever retaining wall holds back backfill with a unit weight of 120 pcf and an active earth pressure coefficient (Ka) of 0.33. The overturning moment (lb-ft/ft) about the toe is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Active force Pa = 0.5 * Ka * gamma * H^2. The moment arm is H/3.",
     "shortcut": "Since the triangular load acts at 1/3 the height from the base, overturning moment = Pa * (15/3).",
-    "fifthGrader": "Pushing a tall bookshelf is easiest at the top! The dirt pushes the wall in a triangle shape, so we measure the total push and multiply by how high up it acts."
+    "fifthGrader": "Pushing a tall bookshelf is easiest at the top! The dirt pushes the wall in a triangle shape, so we measure the total push and multiply by how high up it acts.",
+    "component": "StructuralVisualizer"
   },
   {
     "id": 79,
     "category": "Transportation & Geometrics",
     "title": "Horizontal Curve Sight Distance",
     "description": "A horizontal curve has a radius of 1,200 ft. A retaining wall is built on the inside of the curve. The minimum clearance distance (Middle Ordinate, M) required to provide a stopping sight distance of 400 ft is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Use the formula: M = R [1 - cos(28.65 * S / R)], where S is sight distance and R is radius.",
-    "shortcut": "For quick approximation, M ≈ S² / (8R).",
-    "fifthGrader": "If you're driving around a sharp turn and there's a wall on the inside, you can't see around it! This math tells us exactly how far back the wall needs to be so you don't crash."
+    "shortcut": "For quick approximation, M \u2248 S\u00b2 / (8R).",
+    "fifthGrader": "If you're driving around a sharp turn and there's a wall on the inside, you can't see around it! This math tells us exactly how far back the wall needs to be so you don't crash.",
+    "component": "DocumentVisualizer"
   },
   {
     "id": 80,
     "category": "Project Planning & Economics",
     "title": "Capitalized Cost Analysis",
     "description": "A new pump station has a first cost of $150,000, annual maintenance of $5,000, and must be replaced every 20 years at a cost of $120,000. If the interest rate is 6%, the capitalized cost is most nearly:",
-    "implemented": false,
+    "implemented": true,
     "hint": "Capitalized Cost (CC) = First Cost + P(A/i) + P(A/F, i, n). Convert all recurring costs to their Present Worth over an infinite life.",
     "shortcut": "Capitalized cost just means 'Present Worth of a project that lasts forever'. Use CC = P + (A/i).",
-    "fifthGrader": "If you wanted to put enough money in a magic bank account today so the interest pays for this pump station forever and ever, how much money do you need? That's Capitalized Cost!"
+    "fifthGrader": "If you wanted to put enough money in a magic bank account today so the interest pays for this pump station forever and ever, how much money do you need? That's Capitalized Cost!",
+    "component": "ConstructionVisualizer"
   },
   {
     "id": 81,
@@ -843,5 +917,400 @@
     "hint": "Use Conservation of Energy: Kinetic Energy (Velocity Head) converts to Potential Energy (Elevation Head). V^2 / 2g = Elevation change.",
     "shortcut": "Max Distance = (V^2 / 2g) / Driveway Slope.",
     "fifthGrader": "Think of rolling a ball up a hill. If you roll it really fast (high velocity), it rolls further up the hill before stopping and rolling back down. If the hill is steep, it stops sooner!"
+  },
+  {
+    "id": 83,
+    "category": "CPM Arrow Math",
+    "title": "CPM Arrow Way: Addition",
+    "description": "Using the Arrow Way, what is 245 + 132?\n\nStart at 245 -> +100 -> 345 -> +30 -> 375 -> +2 -> 377",
+    "implemented": true,
+    "hint": "Break 132 into its place values: 100, 30, and 2.",
+    "shortcut": "Add the hundreds first, then tens, then ones.",
+    "fifthGrader": "Start at 245. Make a big jump of 100 to 345. Make a medium jump of 30 to 375. Make a tiny hop of 2 to get 377!",
+    "component": "CpmArrowVisualizer",
+    "steps": [
+      {
+        "val": 245
+      },
+      {
+        "op": "+100",
+        "val": 345
+      },
+      {
+        "op": "+30",
+        "val": 375
+      },
+      {
+        "op": "+2",
+        "val": 377
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "category": "CPM Arrow Math",
+    "title": "CPM Arrow Way: Subtraction",
+    "description": "Using the Arrow Way, what is 560 - 245?\n\nStart at 560 -> -200 -> 360 -> -40 -> 320 -> -5 -> 315",
+    "implemented": true,
+    "hint": "Break the number you are subtracting (245) into easy backward jumps.",
+    "shortcut": "Subtract hundreds, then tens, then ones.",
+    "fifthGrader": "Start at 560. Jump backward 200 to 360. Jump backward 40 to 320. Hop backward 5 to get 315!",
+    "component": "CpmArrowVisualizer",
+    "steps": [
+      {
+        "val": 560
+      },
+      {
+        "op": "-200",
+        "val": 360
+      },
+      {
+        "op": "-40",
+        "val": 320
+      },
+      {
+        "op": "-5",
+        "val": 315
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "category": "CPM Arrow Math",
+    "title": "CPM Arrow Way: Make a 10",
+    "description": "Using the Arrow Way, what is 398 + 45?\n\nStart at 398 -> +2 -> 400 -> +43 -> 443",
+    "implemented": true,
+    "hint": "Use 'friendly numbers'. Add 2 to 398 to get 400, then add the rest.",
+    "shortcut": "Round 398 to 400, add 45 (445), and then subtract the 2 you added (443).",
+    "fifthGrader": "398 is so close to 400! Add just 2 to reach 400. Since we took 2 out of the 45, we only have 43 left to add. 400 + 43 = 443!",
+    "component": "CpmArrowVisualizer",
+    "steps": [
+      {
+        "val": 398
+      },
+      {
+        "op": "+2",
+        "val": 400
+      },
+      {
+        "op": "+43",
+        "val": 443
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "category": "Water & Wastewater Systems",
+    "title": "Total Hardness Calculation",
+    "description": "A water sample contains 60 mg/L of Ca2+ and 24 mg/L of Mg2+. The equivalent weights are Ca2+ = 20.0 mg/meq, Mg2+ = 12.2 mg/meq, and CaCO3 = 50.0 mg/meq. The Total Hardness (TH) in mg/L as CaCO3 is most nearly:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 150,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 98.4,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2-",
+        "value": 98.4,
+        "color": "#a855f7"
+      }
+    ],
+    "hint": "Convert mg/L to mg/L as CaCO3 by multiplying by (50 / Equivalent Weight). TH = Ca Hardness + Mg Hardness.",
+    "shortcut": "Ca Hardness is approx (mg/L Ca * 2.5). Mg Hardness is approx (mg/L Mg * 4.12). 60 * 2.5 + 24 * 4.12 = 150 + 98.8 = 248.8.",
+    "fifthGrader": "Think of hardness as the amount of tiny rocks dissolved in the water. We are just putting all the different rocks on the same scale so we can add them up!"
+  },
+  {
+    "id": 87,
+    "category": "Water & Wastewater Systems",
+    "title": "Carbonate vs Noncarbonate Hardness",
+    "description": "A water analysis shows Total Hardness = 250 mg/L as CaCO3 and Alkalinity = 180 mg/L as CaCO3. The Carbonate Hardness (CH) and Noncarbonate Hardness (NCH) in mg/L as CaCO3 are respectively most nearly:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 180,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 70,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3- (Alkalinity)",
+        "value": 180,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2- (NCH)",
+        "value": 70,
+        "color": "#a855f7"
+      }
+    ],
+    "hint": "If Alkalinity < Total Hardness, then Carbonate Hardness = Alkalinity. Noncarbonate Hardness = Total Hardness - Carbonate Hardness.",
+    "shortcut": "Just look at the graph! The alkalinity (green) matches up with the hardness. Any hardness hanging over the edge of the green bar is Noncarbonate (purple).",
+    "fifthGrader": "Carbonate hardness is the part of the hardness that matches the alkalinity. Anything leftover is called noncarbonate!"
+  },
+  {
+    "id": 88,
+    "category": "Water & Wastewater Systems",
+    "title": "Lime Dosage for Carbonate Hardness",
+    "description": "A water has a CO2 concentration of 15 mg/L as CaCO3, Ca2+ of 140 mg/L as CaCO3, Mg2+ of 60 mg/L as CaCO3, and Alkalinity of 150 mg/L as CaCO3. What is the stoichiometric lime (CaO) dose required in mg/L as CaCO3 to remove the carbonate hardness?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 140,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 60,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "Cl-",
+        "value": 50,
+        "color": "#ef4444"
+      }
+    ],
+    "hint": "Lime dose = CO2 + HCO3(Alkalinity) + Mg (if removing Mg). If only removing Ca Carbonate hardness, Lime = CO2 + Alkalinity associated with Ca.",
+    "shortcut": "For every molecule of bicarbonate alkalinity, you need one molecule of lime. Don't forget to add lime to destroy the free CO2 first!",
+    "fifthGrader": "Lime is like a chemical sponge. We need enough sponge to soak up the CO2 gas first, and then enough to soak up the carbonate hardness."
+  },
+  {
+    "id": 89,
+    "category": "Water & Wastewater Systems",
+    "title": "Soda Ash Dosage",
+    "description": "A water has Total Hardness = 300 mg/L as CaCO3 and Alkalinity = 200 mg/L as CaCO3. If all Noncarbonate Hardness (NCH) is associated with Calcium, the required Soda Ash (Na2CO3) dose in mg/L as CaCO3 to completely soften the NCH is most nearly:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 250,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 50,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3-",
+        "value": 200,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2- (NCH)",
+        "value": 100,
+        "color": "#a855f7"
+      }
+    ],
+    "hint": "Soda Ash is used ONLY to remove Noncarbonate Hardness (NCH). Calculate NCH = Total Hardness - Alkalinity.",
+    "shortcut": "The Soda Ash dose in mg/L as CaCO3 is exactly equal to the Noncarbonate Hardness (NCH). 300 - 200 = 100 mg/L as CaCO3.",
+    "fifthGrader": "Soda ash is a special powder that only attacks 'Noncarbonate' rocks. We just measure how much noncarbonate rock is in the water and add that exact amount of powder!"
+  },
+  {
+    "id": 90,
+    "category": "Water & Wastewater Systems",
+    "title": "Excess Lime Softening (Magnesium Removal)",
+    "description": "To precipitate Magnesium during softening, the pH must be raised to around 11.0. This requires an 'excess lime' dose. If the total Mg2+ is 80 mg/L as CaCO3, and the standard excess lime dose is 35 mg/L as CaCO3, the total lime required for Mg removal (excluding CO2 and HCO3) is:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 120,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 80,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "Cl-",
+        "value": 50,
+        "color": "#ef4444"
+      }
+    ],
+    "hint": "Lime required for Mg removal = Mg2+ concentration + Excess Lime.",
+    "shortcut": "Magnesium is stubborn! It requires 1 part lime to react with the alkalinity, 1 part lime to precipitate the Mg, PLUS an extra 35 mg/L to drive the pH to 11.",
+    "fifthGrader": "Magnesium rocks only melt when the water is super basic (pH 11). We have to add extra 'excess' lime just to push the pH up high enough!"
+  },
+  {
+    "id": 91,
+    "category": "Water & Wastewater Systems",
+    "title": "Ion Exchange Softening Capacity",
+    "description": "An ion exchange softener has a resin capacity of 20 kilograins per cubic foot (kgr/ft3). The resin volume is 50 ft3. The raw water has a hardness of 300 mg/L as CaCO3. What is the maximum volume of water (gallons) that can be softened before regeneration?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Hardness (Ca+Mg)",
+        "value": 300,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Total Anions",
+        "value": 300,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "1 grain per gallon (gpg) = 17.1 mg/L. Total Capacity (grains) = Volume * Capacity. Gallons = Total Capacity / Hardness (in gpg).",
+    "shortcut": "Convert 300 mg/L to grains per gallon: 300 / 17.1 = 17.5 gpg. Total grains = 20,000 * 50 = 1,000,000. 1,000,000 / 17.5 = 57,142 gallons.",
+    "fifthGrader": "Think of the resin like a sponge that can hold exactly 1,000,000 pieces of dirt. If every gallon of water has 17.5 pieces of dirt, how many gallons until the sponge is full?"
+  },
+  {
+    "id": 92,
+    "category": "Water & Wastewater Systems",
+    "title": "Softened Water Blending (Bypass)",
+    "description": "A treatment plant must deliver water with a hardness of 100 mg/L. The raw water has a hardness of 350 mg/L, and the ion exchange softener reduces hardness to 10 mg/L. What percentage of the flow should bypass the softener?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Bypass (350 mg/L)",
+        "value": 26.5,
+        "color": "#f59e0b"
+      },
+      {
+        "name": "Softened (10 mg/L)",
+        "value": 73.5,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Target (100 mg/L)",
+        "value": 100,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "Use the mass balance equation: Q_total * C_target = Q_bypass * C_raw + Q_soft * C_soft. Let Q_total = 1.",
+    "shortcut": "Bypass Fraction = (Target - Softened) / (Raw - Softened). (100 - 10) / (350 - 10) = 90 / 340 = 26.5%.",
+    "fifthGrader": "If you mix super salty water with pure water, you get medium salty water. We are just using math to figure out the perfect recipe for the mix!"
+  },
+  {
+    "id": 93,
+    "category": "Water & Wastewater Systems",
+    "title": "Equivalent Weight Conversion",
+    "description": "A water sample has 96 mg/L of Sulfate (SO4 2-). The atomic weights are S=32.1, O=16.0. The equivalent weight of CaCO3 is 50.0 g/eq. What is the Sulfate concentration in mg/L as CaCO3?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Total Cations",
+        "value": 100,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "SO4 2- (as CaCO3)",
+        "value": 100,
+        "color": "#a855f7"
+      }
+    ],
+    "hint": "Molecular weight of SO4 = 32.1 + 4(16) = 96.1 g/mol. Charge is 2, so Equivalent Weight = 96.1 / 2 = 48.05 g/eq. Multiply mg/L by (50 / 48.05).",
+    "shortcut": "The equivalent weight of Sulfate is roughly 48. Since 96 / 48 = 2 meq/L. Multiply by 50 to get 100 mg/L as CaCO3.",
+    "fifthGrader": "Scientists like to measure everything using the exact same ruler (CaCO3). We are just converting Sulfate's weight into the universal ruler's weight!"
+  },
+  {
+    "id": 94,
+    "category": "Water & Wastewater Systems",
+    "title": "Alkalinity Relationships",
+    "description": "A water sample has a pH of 10.2. The Phenolphthalein alkalinity (P) is 40 mg/L as CaCO3 and the Total alkalinity (T) is 120 mg/L as CaCO3. The concentration of Carbonate (CO3 2-) alkalinity is most nearly:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Total Cations",
+        "value": 120,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "CO3 2-",
+        "value": 80,
+        "color": "#f59e0b"
+      },
+      {
+        "name": "HCO3-",
+        "value": 40,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "Check the Alkalinity Relationship Table. If P < 1/2 T, then Carbonate = 2*P and Bicarbonate = T - 2P.",
+    "shortcut": "P = 40, T = 120. Since 40 is less than half of 120, Carbonate is 2 * P = 80 mg/L as CaCO3.",
+    "fifthGrader": "Alkalinity comes in three flavors: Hydroxide, Carbonate, and Bicarbonate. Depending on the pH, we can figure out exactly how much of each flavor is in the water!"
+  },
+  {
+    "id": 95,
+    "category": "Water & Wastewater Systems",
+    "title": "Split Treatment Softening",
+    "description": "In a split treatment softening process, a portion of the raw water bypasses the first stage (excess lime) and is mixed with the first stage effluent in the second stage. The primary purpose of this bypassed flow is to:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Raw Water Mg2+",
+        "value": 150,
+        "color": "#06b6d4"
+      },
+      {
+        "name": "Softened Water Mg2+",
+        "value": 40,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Alkalinity",
+        "value": 190,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "The first stage operates at pH 11 to drop out Mg. The bypassed raw water contains HCO3- and CO2, which naturally lowers the pH and provides carbonate to react with excess Ca.",
+    "shortcut": "Bypassing raw water saves money! You don't need as much CO2 for recarbonation because the raw water naturally neutralizes the high pH of the first stage.",
+    "fifthGrader": "Instead of adding expensive acid to fix the super basic water from the first tank, we just mix in some normal raw water. It naturally cools off the chemicals and saves money!"
   }
 ]

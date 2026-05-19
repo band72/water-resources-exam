@@ -124,7 +124,8 @@ input[type=range]::-webkit-slider-runnable-track {
 .app-container {
   display: grid;
   grid-template-columns: 350px 1fr;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -136,6 +137,8 @@ input[type=range]::-webkit-slider-runnable-track {
   background: rgba(10, 12, 16, 0.8);
   backdrop-filter: blur(20px);
   z-index: 10;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .main-content {
@@ -143,8 +146,9 @@ input[type=range]::-webkit-slider-runnable-track {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-height: 100vh;
+  height: 100%;
   overflow-y: auto;
+  padding-bottom: 4rem; /* Add extra padding at bottom so nothing is flush against the edge */
 }
 
 .problem-card {
