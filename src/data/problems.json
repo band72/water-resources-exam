@@ -50,10 +50,11 @@
     "category": "Project Planning",
     "title": "Excavation Labor Scheduling",
     "description": "The budgeted labor amount for an excavation task is $4,000. The hourly labor cost is $50 per worker, and the workday is 8 hours. Two workers are assigned to excavate the material. The time (days) available for the workers to complete this task is most nearly:",
-    "implemented": false,
-    "hint": "Draw a cash flow diagram! Use the Engineering Economics tables in the NCEES handbook. Pay attention to Present Worth (P) vs Annual (A) costs.",
-    "shortcut": "For capitalized cost (infinite life), the formula is just Present Worth = Annual Cost / Interest Rate (P = A/i).",
-    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years."
+    "implemented": true,
+    "component": "LaborVisualizer",
+    "hint": "Calculate the total daily cost first (Hourly rate x Hours per day x Number of workers). Then divide the total budget by the daily cost.",
+    "shortcut": "If you double the workers, you halve the time! Always keep units straight: $/hr to $/day.",
+    "fifthGrader": "If you have $100 and you spend $20 every day, your money lasts 5 days. We are doing the exact same thing but with construction workers!"
   },
   {
     "id": 4,
@@ -70,10 +71,11 @@
     "category": "Means and Methods",
     "title": "Hydraulic Ram Capacity",
     "description": "A bridge is to be jacked up to replace its bearings. The design requires a hydraulic ram with a minimum capacity of 1,000 kilonewtons (kN). The hydraulic rams that are available are rated in tons (2,000 lb/ton). The minimum size (tons) ram to use is most nearly:",
-    "implemented": false,
-    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
-    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
-    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale."
+    "implemented": true,
+    "component": "HydraulicRamVisualizer",
+    "hint": "Convert kN to pounds first (1 kN = 224.8 lbs). Then divide by 2000 to get US Tons.",
+    "shortcut": "A quick rule of thumb: 1 kN is about 0.11 tons. So 1000 kN is roughly 110 tons. Pick the answer closest (and safely above) that!",
+    "fifthGrader": "Different countries use different rulers to measure weight! We just need to translate the European weight (kiloNewtons) into the American weight (Tons) so we know which machine to buy."
   },
   {
     "id": 6,

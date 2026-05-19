@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import hydraulicsImg from '../assets/blueprints/hydraulics.png';
+import structuralImg from '../assets/blueprints/structural.png';
+import environmentalImg from '../assets/blueprints/environmental.png';
+import geotechnicalImg from '../assets/blueprints/geotechnical.png';
 
 const GenericProblemViewer = ({ problem }) => {
   const [showSolution, setShowSolution] = useState(false);
@@ -18,9 +22,33 @@ const GenericProblemViewer = ({ problem }) => {
     localStorage.setItem(`scratchpad_${problem.id}`, newNotes);
   };
 
+  // Map the correct blueprint visual based on category
+  const getBlueprintGraphic = (category = '') => {
+    const cat = category.toLowerCase();
+    if (cat.includes('hydraulic') || cat.includes('water')) return hydraulicsImg;
+    if (cat.includes('soil') || cat.includes('foundation') || cat.includes('site') || cat.includes('geotech') || cat.includes('transportation')) return geotechnicalImg;
+    if (cat.includes('enviro') || cat.includes('wastewater')) return environmentalImg;
+    return structuralImg; // Default to structural/construction for econ/methods/etc
+  };
+
   return (
     <div className="visualizer-wrapper" style={{ flexDirection: 'column', gap: '1.5rem' }}>
       <div className="glass-panel" style={{ width: '100%', borderLeft: '4px solid var(--accent-indigo)' }}>
+        
+        {/* Dynamic Graphic Header */}
+        <div style={{ width: '100%', height: '200px', borderRadius: '8px', overflow: 'hidden', marginBottom: '1.5rem', position: 'relative' }}>
+          <img 
+            src={getBlueprintGraphic(problem.category)} 
+            alt="Engineering Blueprint"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.8 }}
+          />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1rem', background: 'linear-gradient(transparent, rgba(0,0,0,0.8))' }}>
+            <span style={{ background: 'var(--accent-indigo)', color: 'white', padding: '0.2rem 0.6rem', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold', textTransform: 'uppercase' }}>
+              {problem.category || 'General Engineering'} Reference
+            </span>
+          </div>
+        </div>
+
         <h3 className="text-gradient mb-2" style={{ fontSize: '1.5rem' }}>Problem Analysis</h3>
         <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>{problem.description}</p>
         

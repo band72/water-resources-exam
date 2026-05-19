@@ -7,6 +7,8 @@ import WellVisualizer from './components/WellVisualizer';
 import GradingVisualizer from './components/GradingVisualizer';
 import EnergyRunoffVisualizer from './components/EnergyRunoffVisualizer';
 import GenericProblemViewer from './components/GenericProblemViewer';
+import LaborVisualizer from './components/LaborVisualizer';
+import HydraulicRamVisualizer from './components/HydraulicRamVisualizer';
 import Dashboard from './components/Dashboard';
 import problemsData from './data/problems.json';
 
@@ -73,7 +75,9 @@ function App() {
                 'EnviroVisualizer': EnviroVisualizer,
                 'WellVisualizer': WellVisualizer,
                 'GradingVisualizer': GradingVisualizer,
-                'EnergyRunoffVisualizer': EnergyRunoffVisualizer
+                'EnergyRunoffVisualizer': EnergyRunoffVisualizer,
+                'LaborVisualizer': LaborVisualizer,
+                'HydraulicRamVisualizer': HydraulicRamVisualizer
               };
               
               const ActiveComponent = VisualizerMap[currentProblem.component] || GenericProblemViewer;
