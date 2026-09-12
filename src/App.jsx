@@ -1,24 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import OpenChannelVisualizer from './components/ProblemVisualizer';
-import CanalVisualizer from './components/CanalVisualizer';
-import EconVisualizer from './components/EconVisualizer';
-import EnviroVisualizer from './components/EnviroVisualizer';
-import WellVisualizer from './components/WellVisualizer';
-import GradingVisualizer from './components/GradingVisualizer';
-import EnergyRunoffVisualizer from './components/EnergyRunoffVisualizer';
-import GenericProblemViewer from './components/GenericProblemViewer';
-import CpmArrowVisualizer from './components/CpmArrowVisualizer';
-import HardnessVisualizer from './components/HardnessVisualizer';
-import StructuralVisualizer from './components/StructuralVisualizer';
-import SoilVisualizer from './components/SoilVisualizer';
-import ConstructionVisualizer from './components/ConstructionVisualizer';
-import WaterVisualizer from './components/WaterVisualizer';
-import DocumentVisualizer from './components/DocumentVisualizer';
-import HydraulicRamVisualizer from './components/HydraulicRamVisualizer';
-import LaborVisualizer from './components/LaborVisualizer';
-import RetainingWallVisualizer from './components/RetainingWallVisualizer';
 import Dashboard from './components/Dashboard';
-import problemsData from './data/problems.json';
+import { pluginRegistry, PluginRenderer } from './plugins';
 
 // Standardized Category Resolver
 export function getProblemCategory(prob) {
@@ -55,7 +37,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const problems = problemsData;
+  const problems = useMemo(() => pluginRegistry.getAllProblems(), []);
 
   const currentProblem = useMemo(() => {
     return problems.find(p => p.id === activeProblem) || problems[0];
@@ -302,6 +284,7 @@ function App() {
           {activeView === 'dashboard' ? (
             <Dashboard 
               problems={problems} 
+              tools={pluginRegistry.getSimulatorTools()}
               onSelectProblem={handleSelectProblem} 
               onFilterCategory={(cat) => { setSelectedCategory(cat); }}
             />
@@ -407,88 +390,8 @@ function App() {
                 </div>
               </section>
 
-              {/* Dedicated Visualizer Component Rendering */}
-              {currentProblem.component === 'ProblemVisualizer' ? (
-                <OpenChannelVisualizer 
-                  diameter={currentProblem.diameter} 
-                  initialDepth={currentProblem.depth}
-                  slope={currentProblem.slope}
-                  n={currentProblem.n}
-                  problem={currentProblem}
-                />
-              ) : currentProblem.component === 'CanalVisualizer' ? (
-                <CanalVisualizer 
-                  initialLength={currentProblem.length}
-                  initialWaste={currentProblem.waste}
-                  initialThickness={currentProblem.thickness}
-                  initialBottomWidth={currentProblem.bottomWidth}
-                  initialDepth={currentProblem.depth}
-                />
-              ) : currentProblem.component === 'EconVisualizer' ? (
-                <EconVisualizer 
-                  initialCost={currentProblem.initialCost}
-                  initialSalvage={currentProblem.initialSalvage}
-                  initialLife={currentProblem.initialLife}
-                  initialTargetYear={currentProblem.initialTargetYear}
-                />
-              ) : currentProblem.component === 'EnviroVisualizer' ? (
-                <EnviroVisualizer />
-              ) : currentProblem.component === 'WellVisualizer' ? (
-                <WellVisualizer />
-              ) : currentProblem.component === 'GradingVisualizer' ? (
-                <GradingVisualizer />
-              ) : currentProblem.component === 'EnergyRunoffVisualizer' ? (
-                <EnergyRunoffVisualizer />
-              ) : currentProblem.component === 'CpmArrowVisualizer' ? (
-                <>
-                  <CpmArrowVisualizer steps={currentProblem.steps} />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'HardnessVisualizer' ? (
-                <>
-                  <HardnessVisualizer cations={currentProblem.cations} anions={currentProblem.anions} />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'StructuralVisualizer' ? (
-                <>
-                  <StructuralVisualizer />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'SoilVisualizer' ? (
-                <>
-                  <SoilVisualizer />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'ConstructionVisualizer' ? (
-                <>
-                  <ConstructionVisualizer />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'HydraulicRamVisualizer' ? (
-                <>
-                  <HydraulicRamVisualizer problem={currentProblem} />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'LaborVisualizer' ? (
-                <>
-                  <LaborVisualizer problem={currentProblem} />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'WaterVisualizer' ? (
-                <>
-                  <WaterVisualizer />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'DocumentVisualizer' ? (
-                <>
-                  <DocumentVisualizer />
-                  <GenericProblemViewer problem={currentProblem} />
-                </>
-              ) : currentProblem.component === 'RetainingWallVisualizer' ? (
-                <RetainingWallVisualizer problem={currentProblem} />
-              ) : (
-                <GenericProblemViewer problem={currentProblem} />
-              )}
+              {/* Dedicated Plugin Visualizer Rendering */}
+              <PluginRenderer problem={currentProblem} />
             </>
           )}
         </div>

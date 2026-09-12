@@ -1356,5 +1356,51 @@
         "feedback": "Incorrect: Be sure to divide the wall into triangular and rectangular components rather than assuming a single rectangular block."
       }
     ]
+  },
+  {
+    "id": 97,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Retaining Wall Stability with Submerged Backfill & Pore Water Pressure",
+    "description": "A concrete gravity retaining wall having a unit weight of 150 pcf is shown in the figure. The wall is 8 ft high, with a top width of 2 ft and a base width of 4 ft.\n\nThe retained granular backfill has a friction angle φ = 32°, cohesion c = 0, moist unit weight γ = 110 pcf, and saturated unit weight γsat = 125 pcf.\n\nDue to clogged weep holes after heavy rainfall, the lower 4 ft of the backfill is submerged under a water table (submerged portion hw = 4 ft, unit weight of water γw = 62.4 pcf). Use Rankine active earth pressure theory, neglect wall friction, and neglect base uplift.\n\nThe factor of safety against overturning about the toe at Point O is most nearly:",
+    "implemented": true,
+    "component": "RetainingWallVisualizer",
+    "height": 8,
+    "topWidth": 2,
+    "baseWidth": 4,
+    "gammaConc": 150,
+    "phi": 32,
+    "gammaSoil": 110,
+    "gammaSat": 125,
+    "submergedHeight": 4,
+    "hint": "1. Active Earth Pressure Coefficient Ka:\nKa = tan²(45° - φ/2) = (1 - sin 32°) / (1 + sin 32°) = 0.3073\n\n2. Upper Dry Layer (h1 = 4 ft):\n• Effective stress at GWT: σ'v1 = 110 × 4 = 440 psf\n• Lateral thrust Pa1 = 0.5 × Ka × γ × h1² = 0.5 × 0.3073 × 110 × 16 = 270.4 lb/ft\n• Lever arm above toe: y1 = hw + h1/3 = 4 + 1.333 = 5.333 ft\n• Overturning moment M1 = 270.4 × 5.333 = 1,442.1 ft-lb/ft\n\n3. Submerged Layer (hw = 4 ft, γ' = 125 - 62.4 = 62.6 pcf):\n• Surcharge from dry soil: Pa2,rect = Ka × (γ × h1) × hw = 0.3073 × 440 × 4 = 540.8 lb/ft\n  Arm y2,rect = hw / 2 = 2.0 ft → M2,rect = 540.8 × 2.0 = 1,081.6 ft-lb/ft\n• Triangular Submerged Soil Thrust: Pa2,tri = 0.5 × Ka × γ' × hw² = 0.5 × 0.3073 × 62.6 × 16 = 153.9 lb/ft\n  Arm y2,tri = hw / 3 = 1.333 ft → M2,tri = 153.9 × 1.333 = 205.2 ft-lb/ft\n\n4. Hydrostatic Pore Water Pressure Thrust (Pw):\n• Max pore pressure at base: u_base = γw × hw = 62.4 × 4 = 249.6 psf\n• Hydrostatic thrust Pw = 0.5 × γw × hw² = 0.5 × 62.4 × 16 = 499.2 lb/ft\n• Arm yw = hw / 3 = 1.333 ft → Mw = 499.2 × 1.333 = 665.6 ft-lb/ft\n\n5. Total Overturning Moment MOT:\nMOT = 1,442.1 + 1,081.6 + 205.2 + 665.6 = 3,394.5 ft-lb/ft\n\n6. Resisting Moment ΣMR (same concrete wall sections as Problem 96):\n• W1 = 0.5 × 2 × 8 × 150 = 1,200 lb, arm = ⅔ × 2 = 1.333 ft → MR1 = 1,600 ft-lb\n• W2 = 2 × 8 × 150 = 2,400 lb, arm = 2 + 1 = 3.0 ft → MR2 = 7,200 ft-lb\n• ΣMR = 1,600 + 7,200 = 8,800 ft-lb/ft\n\n7. Factor of Safety against Overturning (FS_OT):\nFS_OT = ΣMR / MOT = 8,800 / 3,394.5 = 2.59 (Rounds to 2.6)",
+    "shortcut": "Notice the dramatic effect of pore water pressure! In Problem 96 (dry backfill), FS was 3.1. When water fills the lower 4 ft, hydrostatic pore water pressure pushes directly with Ka = 1.0 (water exerts isotropic fluid pressure), reducing the safety factor from 3.1 to 2.6.\n\nQuick Check Rule:\nHydrostatic water force alone is Pw = 0.5 × 62.4 × hw² = 31.2 × hw².\nAlways remember: below the water table, use the buoyant unit weight (γ' = γsat - 62.4) for effective soil pressure, and then ADD the full hydrostatic pore water pressure (γw) separately!",
+    "fifthGrader": "Think of what happens when you soak dirt behind a wall with water. Water is heavy and pushes outward like a swimming pool against the back of the concrete wall.\n\nBecause water has no friction to hold itself together, it pushes with 100% of its fluid force! This extra pore water push makes the wall tip much more easily, dropping our factor of safety from 3.1 down to 2.6.",
+    "diagramUrl": "/diagrams/problem_97.svg",
+    "options": [
+      {
+        "label": "A",
+        "text": "2.1",
+        "correct": false,
+        "feedback": "Incorrect: 2.1 occurs if you mistakenly use the full saturated unit weight (γsat = 125 pcf) below the water table without subtracting the unit weight of water (buoyant unit weight γ' = γsat - 62.4 = 62.6 pcf)."
+      },
+      {
+        "label": "B",
+        "text": "2.6",
+        "correct": true,
+        "feedback": "✓ Correct! ΣMR = 8,800 ft-lb/ft, MOT = 3,394.5 ft-lb/ft (including 665.6 ft-lb/ft from hydrostatic pore water pressure), giving FS_OT = 8,800 / 3,394.5 = 2.59 ≈ 2.6."
+      },
+      {
+        "label": "C",
+        "text": "3.1",
+        "correct": false,
+        "feedback": "Incorrect: 3.1 is the safety factor for the completely dry wall from Problem 96. Neglecting the submerged pore water pressure gives an unsafely unconservative estimate!"
+      },
+      {
+        "label": "D",
+        "text": "3.5",
+        "correct": false,
+        "feedback": "Incorrect: Check your moment calculation about toe Point O and ensure pore water pressure Pw = 0.5 * γw * hw² acts at hw/3."
+      }
+    ]
   }
 ]

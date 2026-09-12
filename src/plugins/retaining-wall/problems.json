@@ -1,0 +1,92 @@
+[
+  {
+    "id": 96,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Gravity Retaining Wall Overturning Stability",
+    "description": "A concrete gravity retaining wall having a unit weight of 150 pcf is shown in the figure. The wall is 8 ft high, with a top width of 2 ft and a base width of 4 ft.\n\nThe retained granular backfill has a friction angle \u03c6 = 32\u00b0, cohesion c = 0, and total unit weight \u03b3t = 110 pcf. Use Rankine active earth pressure theory and neglect wall friction.\n\nThe factor of safety against overturning about the toe at Point O is most nearly:",
+    "implemented": true,
+    "component": "RetainingWallVisualizer",
+    "height": 8,
+    "topWidth": 2,
+    "baseWidth": 4,
+    "gammaConc": 150,
+    "phi": 32,
+    "gammaSoil": 110,
+    "hint": "1. Calculate Rankine active earth pressure coefficient Ka:\nKa = tan\u00b2(45\u00b0 - \u03c6/2) = (1 - sin 32\u00b0) / (1 + sin 32\u00b0) = 0.3073\n\n2. Compute total active lateral thrust Pa and overturning lever arm:\nPa = 0.5 \u00d7 Ka \u00d7 \u03b3 \u00d7 H\u00b2 = 0.5 \u00d7 0.3073 \u00d7 110 \u00d7 64 = 1,081.5 lb/ft\nLever arm y = H / 3 = 8 / 3 = 2.667 ft above the base\n\n3. Compute overturning moment MOT about toe Point O:\nMOT = Pa \u00d7 (H/3) = 1,081.5 \u00d7 2.667 = 2,884.1 ft-lb/ft\n\n4. Divide the wall into front triangular toe wedge (b=2', h=8') and back rectangular stem (b=2', h=8'). Sum resisting moments about toe Point O:\n\u2022 W1 = 0.5 \u00d7 2 \u00d7 8 \u00d7 150 = 1,200 lb, arm = \u2154 \u00d7 2 = 1.333 ft \u2192 MR1 = 1,600 ft-lb\n\u2022 W2 = 2 \u00d7 8 \u00d7 150 = 2,400 lb, arm = 2 + 1 = 3.0 ft \u2192 MR2 = 7,200 ft-lb\n\u2022 \u03a3MR = 1,600 + 7,200 = 8,800 ft-lb/ft\n\n5. Factor of Safety against Overturning (FS_OT):\nFS = \u03a3MR / MOT = 8,800 / 2,884.1 = 3.05 (Rounds to 3.1)",
+    "shortcut": "For a trapezoidal gravity wall with a vertical back face, divide into triangle (toe) + rectangle (stem).\n\n\u2022 Toe Triangle Centroid: From the sharp toe Point O, the arm is at \u2154 \u00d7 base = 1.333 ft (NOT \u2153!).\n\u2022 Stem Rectangle Centroid: From Point O, arm = b_toe + \u00bd \u00d7 b_stem = 2 + 1 = 3.0 ft.\n\n\u26a0\ufe0f Classic Distractor Trap: If you accidentally take the triangle centroid at \u2153, your calculated FS will be ~2.7 (Option B)!",
+    "fifthGrader": "Think of a heavy book standing upright on a table. If someone pushes sideways against it, the book wants to tip over around its bottom front edge.\n\nTo keep it standing, the heavy downward weight of the concrete wall acts like a massive anchor.\n\nWe simply compare the overturning torque from the dirt against the resisting torque of the concrete: if the resisting torque is at least 1.5\u00d7 to 2.0\u00d7 larger (here it is 3.1\u00d7 larger), the wall is completely safe from overturning!",
+    "diagramUrl": "/diagrams/problem_96.svg",
+    "options": [
+      {
+        "label": "A",
+        "text": "2.2",
+        "correct": false,
+        "feedback": "Incorrect: Make sure you compute the active lateral thrust Pa = 0.5 * Ka * \u03b3 * H\u00b2 acting at H/3 = 2.67 ft."
+      },
+      {
+        "label": "B",
+        "text": "2.7",
+        "correct": false,
+        "feedback": "Incorrect: 2.7 is the classic NCEES distractor trap! The centroid of the triangular toe is 2/3 * b_tri = 1.333 ft from Point O, not 1/3."
+      },
+      {
+        "label": "C",
+        "text": "3.1",
+        "correct": true,
+        "feedback": "\u2713 Correct! \u03a3MR = 8,800 ft-lb/ft, MOT = 2,884.1 ft-lb/ft, yielding FS_OT = 8,800 / 2,884.1 = 3.05 \u2248 3.1."
+      },
+      {
+        "label": "D",
+        "text": "3.8",
+        "correct": false,
+        "feedback": "Incorrect: Be sure to divide the wall into triangular and rectangular components rather than assuming a single rectangular block."
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Retaining Wall Stability with Submerged Backfill & Pore Water Pressure",
+    "description": "A concrete gravity retaining wall having a unit weight of 150 pcf is shown in the figure. The wall is 8 ft high, with a top width of 2 ft and a base width of 4 ft.\n\nThe retained granular backfill has a friction angle \u03c6 = 32\u00b0, cohesion c = 0, moist unit weight \u03b3 = 110 pcf, and saturated unit weight \u03b3sat = 125 pcf.\n\nDue to clogged weep holes after heavy rainfall, the lower 4 ft of the backfill is submerged under a water table (submerged portion hw = 4 ft, unit weight of water \u03b3w = 62.4 pcf). Use Rankine active earth pressure theory, neglect wall friction, and neglect base uplift.\n\nThe factor of safety against overturning about the toe at Point O is most nearly:",
+    "implemented": true,
+    "component": "RetainingWallVisualizer",
+    "height": 8,
+    "topWidth": 2,
+    "baseWidth": 4,
+    "gammaConc": 150,
+    "phi": 32,
+    "gammaSoil": 110,
+    "gammaSat": 125,
+    "submergedHeight": 4,
+    "hint": "1. Active Earth Pressure Coefficient Ka:\nKa = tan\u00b2(45\u00b0 - \u03c6/2) = (1 - sin 32\u00b0) / (1 + sin 32\u00b0) = 0.3073\n\n2. Upper Dry Layer (h1 = 4 ft):\n\u2022 Effective stress at GWT: \u03c3'v1 = 110 \u00d7 4 = 440 psf\n\u2022 Lateral thrust Pa1 = 0.5 \u00d7 Ka \u00d7 \u03b3 \u00d7 h1\u00b2 = 0.5 \u00d7 0.3073 \u00d7 110 \u00d7 16 = 270.4 lb/ft\n\u2022 Lever arm above toe: y1 = hw + h1/3 = 4 + 1.333 = 5.333 ft\n\u2022 Overturning moment M1 = 270.4 \u00d7 5.333 = 1,442.1 ft-lb/ft\n\n3. Submerged Layer (hw = 4 ft, \u03b3' = 125 - 62.4 = 62.6 pcf):\n\u2022 Surcharge from dry soil: Pa2,rect = Ka \u00d7 (\u03b3 \u00d7 h1) \u00d7 hw = 0.3073 \u00d7 440 \u00d7 4 = 540.8 lb/ft\n  Arm y2,rect = hw / 2 = 2.0 ft \u2192 M2,rect = 540.8 \u00d7 2.0 = 1,081.6 ft-lb/ft\n\u2022 Triangular Submerged Soil Thrust: Pa2,tri = 0.5 \u00d7 Ka \u00d7 \u03b3' \u00d7 hw\u00b2 = 0.5 \u00d7 0.3073 \u00d7 62.6 \u00d7 16 = 153.9 lb/ft\n  Arm y2,tri = hw / 3 = 1.333 ft \u2192 M2,tri = 153.9 \u00d7 1.333 = 205.2 ft-lb/ft\n\n4. Hydrostatic Pore Water Pressure Thrust (Pw):\n\u2022 Max pore pressure at base: u_base = \u03b3w \u00d7 hw = 62.4 \u00d7 4 = 249.6 psf\n\u2022 Hydrostatic thrust Pw = 0.5 \u00d7 \u03b3w \u00d7 hw\u00b2 = 0.5 \u00d7 62.4 \u00d7 16 = 499.2 lb/ft\n\u2022 Arm yw = hw / 3 = 1.333 ft \u2192 Mw = 499.2 \u00d7 1.333 = 665.6 ft-lb/ft\n\n5. Total Overturning Moment MOT:\nMOT = 1,442.1 + 1,081.6 + 205.2 + 665.6 = 3,394.5 ft-lb/ft\n\n6. Resisting Moment \u03a3MR (same concrete wall sections as Problem 96):\n\u2022 W1 = 0.5 \u00d7 2 \u00d7 8 \u00d7 150 = 1,200 lb, arm = \u2154 \u00d7 2 = 1.333 ft \u2192 MR1 = 1,600 ft-lb\n\u2022 W2 = 2 \u00d7 8 \u00d7 150 = 2,400 lb, arm = 2 + 1 = 3.0 ft \u2192 MR2 = 7,200 ft-lb\n\u2022 \u03a3MR = 1,600 + 7,200 = 8,800 ft-lb/ft\n\n7. Factor of Safety against Overturning (FS_OT):\nFS_OT = \u03a3MR / MOT = 8,800 / 3,394.5 = 2.59 (Rounds to 2.6)",
+    "shortcut": "Notice the dramatic effect of pore water pressure! In Problem 96 (dry backfill), FS was 3.1. When water fills the lower 4 ft, hydrostatic pore water pressure pushes directly with Ka = 1.0 (water exerts isotropic fluid pressure), reducing the safety factor from 3.1 to 2.6.\n\nQuick Check Rule:\nHydrostatic water force alone is Pw = 0.5 \u00d7 62.4 \u00d7 hw\u00b2 = 31.2 \u00d7 hw\u00b2.\nAlways remember: below the water table, use the buoyant unit weight (\u03b3' = \u03b3sat - 62.4) for effective soil pressure, and then ADD the full hydrostatic pore water pressure (\u03b3w) separately!",
+    "fifthGrader": "Think of what happens when you soak dirt behind a wall with water. Water is heavy and pushes outward like a swimming pool against the back of the concrete wall.\n\nBecause water has no friction to hold itself together, it pushes with 100% of its fluid force! This extra pore water push makes the wall tip much more easily, dropping our factor of safety from 3.1 down to 2.6.",
+    "diagramUrl": "/diagrams/problem_97.svg",
+    "options": [
+      {
+        "label": "A",
+        "text": "2.1",
+        "correct": false,
+        "feedback": "Incorrect: 2.1 occurs if you mistakenly use the full saturated unit weight (\u03b3sat = 125 pcf) below the water table without subtracting the unit weight of water (buoyant unit weight \u03b3' = \u03b3sat - 62.4 = 62.6 pcf)."
+      },
+      {
+        "label": "B",
+        "text": "2.6",
+        "correct": true,
+        "feedback": "\u2713 Correct! \u03a3MR = 8,800 ft-lb/ft, MOT = 3,394.5 ft-lb/ft (including 665.6 ft-lb/ft from hydrostatic pore water pressure), giving FS_OT = 8,800 / 3,394.5 = 2.59 \u2248 2.6."
+      },
+      {
+        "label": "C",
+        "text": "3.1",
+        "correct": false,
+        "feedback": "Incorrect: 3.1 is the safety factor for the completely dry wall from Problem 96. Neglecting the submerged pore water pressure gives an unsafely unconservative estimate!"
+      },
+      {
+        "label": "D",
+        "text": "3.5",
+        "correct": false,
+        "feedback": "Incorrect: Check your moment calculation about toe Point O and ensure pore water pressure Pw = 0.5 * \u03b3w * hw\u00b2 acts at hw/3."
+      }
+    ]
+  }
+]

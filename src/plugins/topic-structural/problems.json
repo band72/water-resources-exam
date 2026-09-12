@@ -1,0 +1,156 @@
+[
+  {
+    "id": 9,
+    "category": "Soil Mechanics",
+    "title": "Lateral Earth Pressures",
+    "description": "Which one of the following statements regarding lateral earth pressures is correct?",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 10,
+    "category": "Soil Mechanics",
+    "title": "Wick Drain Effluent Disposal Cost",
+    "description": "Site preparation and grading require the placement of 20 ft of new fill. An analysis of the resulting consolidation of the underlying soft, saturated, compressible deposits reveals a mean consolidation settlement of 22 in. affecting a 21.5-acre area. Prefabricated wick drains will be used to accelerate the settlement to meet the project schedule. Because of contamination from the former site use, the effluent from the wick drains must be collected and treated prior to disposal.",
+    "implemented": true,
+    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
+    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 11,
+    "category": "Soil Mechanics",
+    "title": "Effective Vertical Stress",
+    "description": "A soil profile is shown in the figure. The effective vertical stress (psf) at Point A is most nearly:",
+    "implemented": true,
+    "hint": "Check phase diagrams (Weight vs Volume). For consolidation, use the Compression Index (Cc) formula: Sc = [Cc * H / (1+e0)] * log(P2/P1).",
+    "shortcut": "If a soil is fully saturated, the Volume of Voids equals the Volume of Water. You can skip a bunch of math steps if S = 100%!",
+    "fifthGrader": "Think of soil like a sponge full of water. If you put a heavy brick on the sponge, the water slowly squishes out and the sponge gets flatter. We are measuring how flat it gets!",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 12,
+    "category": "Soil Mechanics",
+    "title": "Slope Factor of Safety",
+    "description": "The minimum factor of safety against rotational failure for permanent slopes under long-term, nonseismic conditions influencing occupied structures is closest to:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 13,
+    "category": "Structural Mechanics",
+    "title": "Maximum Uplift Load Combination",
+    "description": "In the figure below, what load combination produces the maximum uplift on Footing A?",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 14,
+    "category": "Structural Mechanics",
+    "title": "Truss Member Loads",
+    "description": "A simply supported truss is loaded as shown in the figure. The loads (kips) for Members b and c are most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 15,
+    "category": "Structural Mechanics",
+    "title": "Maximum Bending Stress",
+    "description": "Consider two beams with equal cross sections, made of the same material, having the same support conditions, and each loaded with equal uniform load per length. One beam is twice as long as the other. The maximum bending stress in the longer beam is larger by a factor of:",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 16,
+    "category": "Structural Mechanics",
+    "title": "Equivalent Maximum Shear",
+    "description": "The point load (kips) placed at the centerline of a 30-ft beam that produces the same maximum shear in the beam as a uniform load of 1 kip/ft is most nearly:",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 17,
+    "category": "Structural Mechanics",
+    "title": "Flexural Rigidity",
+    "description": "The beam sections shown are fabricated from 1/2-in. \u00d7 6-in. steel plates. Which of the following cross sections will provide the greatest flexural rigidity about the x-axis?",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 20,
+    "category": "Timber Design",
+    "title": "Timber Column Buckling",
+    "description": "The figure shows a timber column. Building Code: NDS: National Design Specification for Wood Construction ASD/LRFD, 2012 edition and National Design Specification Supplement, Design Values for Wood Construction, 2012 edition. Assuming dry service, normal temperature conditions, and Ci = 1.00, the critical buckling design value FcE (psi) using allowable stress design for the column is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 21,
+    "category": "Timber Design",
+    "title": "Lag Screw Connection",
+    "description": "A lag screw connection is shown in the figure. The tensile force (lb) in the top lag screw is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 22,
+    "category": "Steel Design",
+    "title": "Angle Connection Load Capacity",
+    "description": "A connection is shown in the figure. Design Code: AISC: Steel Construction Manual, 14th edition. Material: A36 steel. Assumptions: The bolt is sufficient. The concrete is sufficient. The load P is equally distributed along the entire 6-in.-long angle. The maximum load P (ASD) or \u03d5Pn (LRFD) in kips that can be carried by the angle is most nearly:",
+    "implemented": true,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 23,
+    "category": "Timber Design",
+    "title": "Roof Diaphragm Characterization",
+    "description": "The following information applies to the roof diaphragm shown in the figure: Story Drifts: Wall A 0.30 in. Wall B 0.50 in. Diaphragm: wood constructed in accordance with applicable codes. Diaphragm in-plane deflection: V = 1.00 in. (of the diaphragm itself) Diaphragm deflections can be tolerated. The diaphragm can be characterized as:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "StructuralVisualizer"
+  },
+  {
+    "id": 78,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Retaining Wall Overturning Moment",
+    "description": "A 15-ft high cantilever retaining wall holds back backfill with a unit weight of 120 pcf and an active earth pressure coefficient (Ka) of 0.33. The overturning moment (lb-ft/ft) about the toe is most nearly:",
+    "implemented": true,
+    "hint": "Active force Pa = 0.5 * Ka * gamma * H^2. The moment arm is H/3.",
+    "shortcut": "Since the triangular load acts at 1/3 the height from the base, overturning moment = Pa * (15/3).",
+    "fifthGrader": "Pushing a tall bookshelf is easiest at the top! The dirt pushes the wall in a triangle shape, so we measure the total push and multiply by how high up it acts.",
+    "component": "StructuralVisualizer"
+  }
+]

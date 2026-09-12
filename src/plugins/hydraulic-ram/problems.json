@@ -1,0 +1,13 @@
+[
+  {
+    "id": 6,
+    "category": "Means and Methods",
+    "title": "Hydraulic Ram Capacity",
+    "description": "A bridge is to be jacked up to replace its bearings. The design requires a hydraulic ram with a minimum capacity of 1,000 kilonewtons (kN). The hydraulic rams that are available are rated in tons (2,000 lb/ton). The minimum size (tons) ram to use is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "HydraulicRamVisualizer"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "category": "Hydraulics",
+    "title": "Open Channel Flow Hydraulics",
+    "description": "A pipe with an inside diameter of 18.8 inches contains water to a depth of 15.7 inches. The pipe is on a 1.5% slope and has a Manning\u2019s n of 0.012. What is the hydraulic radius in inches?",
+    "implemented": true,
+    "component": "ProblemVisualizer",
+    "diameter": 18.8,
+    "depth": 15.7,
+    "slope": 1.5,
+    "n": 0.012,
+    "hint": "Use Manning's Equation: Q = (1.49/n) * A * R^(2/3) * S^(1/2). Remember Hydraulic Radius R = Area / Wetted Perimeter.",
+    "shortcut": "For wide rectangular channels, Hydraulic Radius (R) is approximately equal to the depth (y). This saves you from calculating the full wetted perimeter!",
+    "fifthGrader": "Imagine sliding down a water slide. If the slide is smooth, you go fast. If it's sticky, you go slow. We're just calculating how much water can slide down a pipe based on how sticky the walls are!"
+  },
+  {
+    "id": 76,
+    "category": "Hydraulics & Hydrology",
+    "title": "Culvert Design Flow",
+    "description": "A 48-inch diameter concrete culvert (n=0.013) is designed to carry a peak flow of 120 cfs under inlet control. Assuming the entrance loss coefficient Ke is 0.5, the required headwater depth (ft) is most nearly:",
+    "implemented": true,
+    "component": "ProblemVisualizer",
+    "diameter": 48,
+    "depth": 24,
+    "slope": 1,
+    "n": 0.013,
+    "hint": "For inlet control, use the FHWA nomograph or the specific inlet control equations based on Q/(AD^0.5).",
+    "shortcut": "If it's inlet control, the barrel slope and length don't matter\u2014only the inlet geometry and headwater.",
+    "fifthGrader": "Think of a funnel. If you pour water in too fast, it backs up. We are just measuring how high the water backs up before the pipe can swallow it all!"
+  }
+]

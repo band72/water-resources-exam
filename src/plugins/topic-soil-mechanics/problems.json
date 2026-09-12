@@ -1,0 +1,13 @@
+[
+  {
+    "id": 24,
+    "category": "Foundation Design",
+    "title": "Footing Bearing Pressure",
+    "description": "The concrete footing shown is subjected to loads from a braced frame. Assume the footing is rigid compared to the soil. The maximum bearing pressure (ksf) under the footing is most nearly:",
+    "implemented": true,
+    "hint": "Apply the Energy Equation (Bernoulli) or Hazen-Williams for friction loss. Don't forget to account for minor losses (valves/bends) if given K values.",
+    "shortcut": "Velocity head (v^2/2g) is often negligibly small compared to pressure and elevation heads. You can usually ignore it for a quick first estimate.",
+    "fifthGrader": "When you blow water through a straw, it's harder if the straw is super long or really skinny. We are just measuring how much energy the water loses while squeezing through the pipe.",
+    "component": "SoilVisualizer"
+  }
+]

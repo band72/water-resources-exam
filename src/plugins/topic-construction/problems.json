@@ -1,0 +1,46 @@
+[
+  {
+    "id": 5,
+    "category": "Project Planning",
+    "title": "CPM Arrow Diagram",
+    "description": "A CPM arrow diagram is shown below. Nine activities have been estimated with durations ranging from 5 to 35 days. The minimum time (days) required to finish the project is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
+  },
+  {
+    "id": 7,
+    "category": "Means and Methods",
+    "title": "Crane Boom Standoff Distance",
+    "description": "A crane with a 100-ft boom is being used to set a small load on the roof of the building shown. The minimum standoff (Point A) from the corner of the building to the centerline of the boom is indicated. What is the maximum distance (ft) from the edge of the building that the load can be placed on the roof?",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
+  },
+  {
+    "id": 8,
+    "category": "Means and Methods",
+    "title": "Wall Form Overturning Brace",
+    "description": "A wall form subjected to a wind load of 20 psf is prevented from overturning by diagonal braces spaced at 8 ft on center along the length of the wall form as shown in the figure. The connection at the base of the form at Point A is equivalent to a hinge. Ignore the weight of the form. The axial force (lb) resisted by the brace is most nearly:",
+    "implemented": true,
+    "hint": "Identify the core variables and check the NCEES Reference Handbook for the governing equation.",
+    "shortcut": "Check the multiple-choice answers first! Eliminate outliers based on the magnitude of your inputs.",
+    "fifthGrader": "Think about this like a simple balancing puzzle. We are just using math to figure out how much weight or water it takes to tip the scale.",
+    "component": "ConstructionVisualizer"
+  },
+  {
+    "id": 80,
+    "category": "Project Planning & Economics",
+    "title": "Capitalized Cost Analysis",
+    "description": "A new pump station has a first cost of $150,000, annual maintenance of $5,000, and must be replaced every 20 years at a cost of $120,000. If the interest rate is 6%, the capitalized cost is most nearly:",
+    "implemented": true,
+    "hint": "Capitalized Cost (CC) = First Cost + P(A/i) + P(A/F, i, n). Convert all recurring costs to their Present Worth over an infinite life.",
+    "shortcut": "Capitalized cost just means 'Present Worth of a project that lasts forever'. Use CC = P + (A/i).",
+    "fifthGrader": "If you wanted to put enough money in a magic bank account today so the interest pays for this pump station forever and ever, how much money do you need? That's Capitalized Cost!",
+    "component": "ConstructionVisualizer"
+  }
+]

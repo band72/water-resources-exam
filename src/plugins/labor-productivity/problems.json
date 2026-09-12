@@ -1,0 +1,13 @@
+[
+  {
+    "id": 4,
+    "category": "Project Planning",
+    "title": "Excavation Labor Scheduling",
+    "description": "The budgeted labor amount for an excavation task is $4,000. The hourly labor cost is $50 per worker, and the workday is 8 hours. Two workers are assigned to excavate the material. The time (days) available for the workers to complete this task is most nearly:",
+    "implemented": true,
+    "hint": "Draw a cash flow diagram! Use the Engineering Economics tables in the NCEES handbook. Pay attention to Present Worth (P) vs Annual (A) costs.",
+    "shortcut": "For capitalized cost (infinite life), the formula is just Present Worth = Annual Cost / Interest Rate (P = A/i).",
+    "fifthGrader": "If you buy a car today, it's worth less money every year because it gets old. We are just using math to figure out exactly how much money the car will be worth in 10 years.",
+    "component": "LaborVisualizer"
+  }
+]

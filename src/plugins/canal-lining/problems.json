@@ -1,0 +1,18 @@
+[
+  {
+    "id": 2,
+    "category": "Quantity Estimating",
+    "title": "Concrete Canal Lining",
+    "description": "A 227-ft length of canal is to be lined with concrete for erosion control. With 12% allowance for waste and overexcavation, the volume (yd\u00b3) of concrete that must be delivered is most nearly:",
+    "implemented": true,
+    "component": "CanalVisualizer",
+    "length": 227,
+    "waste": 12,
+    "thickness": 7,
+    "bottomWidth": 9,
+    "depth": 14,
+    "hint": "Find the maximum bending moment (M = wL^2/8 for a simply supported uniform load). Then check ACI or AISC tables for capacity.",
+    "shortcut": "For reinforced concrete, if the steel yields before the concrete crushes, it's a tension-controlled (ductile) failure, which is exactly what you want.",
+    "fifthGrader": "If you hold a ruler at both ends and push down in the middle, it bends. We are just doing math to find out exactly how much weight it takes to snap the ruler in half."
+  }
+]

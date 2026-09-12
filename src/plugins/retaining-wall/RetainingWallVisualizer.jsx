@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import GenericProblemViewer from './GenericProblemViewer';
+import GenericProblemViewer from '../../components/GenericProblemViewer';
 
 const RetainingWallVisualizer = ({ problem }) => {
   const [height, setHeight] = useState(problem?.height || 8); // ft

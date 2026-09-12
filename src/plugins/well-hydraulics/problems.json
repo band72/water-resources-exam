@@ -1,0 +1,13 @@
+[
+  {
+    "id": 52,
+    "category": "PE Exam Topic",
+    "title": "Problem 62",
+    "description": "A horizontal confined aquifer is made up of three layers with the following properties: me [TE] fa Lower 210 03 | \u2018The aquifer transmissivity (*/day) is most nearly: Fe er oe SE \u201c oe",
+    "implemented": true,
+    "component": "WellVisualizer",
+    "hint": "Use the Thiem equation for steady state or Theis equation for transient. Transmissivity (T) = Hydraulic Conductivity (K) * Aquifer Thickness (b).",
+    "shortcut": "If Transmissivity is very high, drawdown will be very low. If the multiple choice answers show a massive drop in water level for a gravel aquifer, eliminate them.",
+    "fifthGrader": "Imagine an underground sponge full of water. If you stick a straw in and suck really fast, the water around the straw dips down like a funnel. We are measuring that dip!"
+  }
+]

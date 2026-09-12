@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getProblemCategory } from '../App';
 
-const Dashboard = ({ problems, onSelectProblem, onFilterCategory }) => {
+const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
   const [activeTab, setActiveTab] = useState('All');
 
   // Group problems by standardized PE Exam Category
@@ -22,7 +22,7 @@ const Dashboard = ({ problems, onSelectProblem, onFilterCategory }) => {
     'General Engineering': '⚙️'
   };
 
-  const simulatorTools = [
+  const defaultTools = [
     {
       id: 1,
       title: "Open Channel Hydraulics",
@@ -121,8 +121,20 @@ const Dashboard = ({ problems, onSelectProblem, onFilterCategory }) => {
       borderColor: "rgba(6, 182, 212, 0.3)",
       formula: "FS_OT = ΣM_R / M_OT · Ka = tan²(45° - φ/2)",
       description: "Rankine active lateral pressure, concrete gravity wall weight decomposition, and overturning factor of safety."
+    },
+    {
+      id: 97,
+      title: "Submerged Wall & Pore Pressure",
+      badge: "Soil Mechanics",
+      icon: "💧",
+      color: "#38bdf8",
+      bgGlow: "rgba(56, 189, 248, 0.12)",
+      borderColor: "rgba(56, 189, 248, 0.3)",
+      formula: "P_w = ½ · γ_w · h_w² · σ'_a = Ka · σ'_v",
+      description: "Partially submerged backfill with hydrostatic pore water pressure, buoyant unit weight, and overturning stability."
     }
   ];
+  const simulatorTools = tools && tools.length > 0 ? tools : defaultTools;
 
   const categoryKeys = Object.keys(categories);
   const displayedCategories = activeTab === 'All' ? categoryKeys : [activeTab];

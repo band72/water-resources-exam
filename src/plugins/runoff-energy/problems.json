@@ -1,0 +1,13 @@
+[
+  {
+    "id": 82,
+    "category": "Hydraulics & Hydrology",
+    "title": "Driveway Runoff Energy",
+    "description": "Using the Energy Equation, determine how far horizontally stormwater runoff from the road will travel up a driveway. Evaluate whether the initial kinetic energy of the water will overcome the driveway slope and cause the runoff to enter the garage.",
+    "implemented": true,
+    "component": "EnergyRunoffVisualizer",
+    "hint": "Use Conservation of Energy: Kinetic Energy (Velocity Head) converts to Potential Energy (Elevation Head). V^2 / 2g = Elevation change.",
+    "shortcut": "Max Distance = (V^2 / 2g) / Driveway Slope.",
+    "fifthGrader": "Think of rolling a ball up a hill. If you roll it really fast (high velocity), it rolls further up the hill before stopping and rolling back down. If the hill is steep, it stops sooner!"
+  }
+]

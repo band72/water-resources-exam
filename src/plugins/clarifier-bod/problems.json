@@ -1,0 +1,13 @@
+[
+  {
+    "id": 77,
+    "category": "Water & Wastewater Systems",
+    "title": "BOD5 Removal Efficiency",
+    "description": "A primary clarifier receives a flow of 2.5 MGD with an influent BOD5 of 220 mg/L. If the effluent BOD5 is 140 mg/L, the daily mass of BOD5 removed (lb/day) is most nearly:",
+    "implemented": true,
+    "component": "EnviroVisualizer",
+    "hint": "Mass (lb/day) = Flow (MGD) \u00d7 Concentration (mg/L) \u00d7 8.34 lb/gal.",
+    "shortcut": "Calculate the difference in concentration first (220 - 140 = 80 mg/L), then multiply by flow and 8.34.",
+    "fifthGrader": "If you have 220 pieces of trash in the water, and 140 make it out, you caught 80 pieces! Multiply that by how much water flows each day to find total trash caught."
+  }
+]

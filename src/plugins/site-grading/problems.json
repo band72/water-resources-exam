@@ -1,0 +1,13 @@
+[
+  {
+    "id": 81,
+    "category": "Site Development",
+    "title": "Driveway Grading & FFE",
+    "description": "Determine the required Finished Floor Elevation (FFE) of the main house and garage, distance from the road, and road centerline elevation to ensure positive drainage (rain will not enter the garage). The garage slab is exactly 0.55 ft below the FFE of the house.",
+    "implemented": true,
+    "component": "GradingVisualizer",
+    "hint": "Sketch a profile view. Start at the road centerline, subtract the cross slope to the curb, add the curb height, and then calculate the rise along the driveway using its slope and length.",
+    "shortcut": "Elevation = Starting Elevation + (Slope * Distance). Make sure your slopes are converted from percentages to decimals (e.g., 2% = 0.02).",
+    "fifthGrader": "Think of this like building a ramp for your toy cars. If the road is the bottom of the ramp, we need to make sure the driveway goes UP to the garage so that water rolls down to the street, not into the house!"
+  }
+]
