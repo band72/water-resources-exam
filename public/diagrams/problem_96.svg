@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="100%" height="100%">
+  <defs>
+    <linearGradient id="wallConcrete" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#334155" />
+      <stop offset="100%" stopColor="#1e293b" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background subtle panel -->
+  <rect width="420" height="260" rx="12" fill="#0b1120" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+
+  <!-- Backfill Soil Ground Area -->
+  <rect x="220" y="45" width="190" height="160" fill="rgba(245, 158, 11, 0.05)" />
+  <line x1="220" y1="45" x2="410" y2="45" stroke="#f59e0b" strokeWidth="2" />
+  
+  <!-- Soil Surface Hatch Marks -->
+  {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(i => `
+    <line x1="${235 + i * 20}" y1="45" x2="${225 + i * 20}" y2="33" stroke="#f59e0b" stroke-width="1.5" />
+  `).join('')}
+
+  <!-- Subgrade Ground at Toe -->
+  <line x1="15" y1="205" x2="120" y2="205" stroke="#94a3b8" strokeWidth="2" />
+  <line x1="30" y1="205" x2="22" y2="215" stroke="#64748b" strokeWidth="1.5" />
+  <line x1="50" y1="205" x2="42" y2="215" stroke="#64748b" strokeWidth="1.5" />
+  <line x1="70" y1="205" x2="62" y2="215" stroke="#64748b" strokeWidth="1.5" />
+  <line x1="90" y1="205" x2="82" y2="215" stroke="#64748b" strokeWidth="1.5" />
+  <line x1="110" y1="205" x2="102" y2="215" stroke="#64748b" strokeWidth="1.5" />
+
+  <!-- Concrete Gravity Wall Body -->
+  <!-- Toe at (120, 205), Top-Toe at (170, 45), Top-Back at (220, 45), Base-Back at (220, 205) -->
+  <polygon points="120,205 170,45 220,45 220,205" fill="url(#wallConcrete)" stroke="#38bdf8" strokeWidth="2" />
+
+  <!-- Internal Decomposition Dashed Line -->
+  <line x1="170" y1="45" x2="170" y2="205" stroke="rgba(56, 189, 248, 0.3)" strokeWidth="1.5" strokeDasharray="3,3" />
+
+  <!-- Gravity Wall Label Arrow -->
+  <line x1="45" y1="115" x2="140" y2="125" stroke="#94a3b8" strokeWidth="1.5" />
+  <polygon points="142,125 132,121 134,128" fill="#94a3b8" />
+  <text x="18" y="105" fill="#e2e8f0" fontSize="10.5" fontWeight="700" fontFamily="sans-serif">GRAVITY WALL</text>
+  <text x="18" y="119" fill="#94a3b8" fontSize="9" fontFamily="sans-serif">γconc = 150 pcf</text>
+
+  <!-- Granular Backfill Labels -->
+  <text x="235" y="75" fill="#f59e0b" fontSize="11" fontWeight="700" fontFamily="sans-serif">GRANULAR BACKFILL</text>
+  <text x="235" y="94" fill="#cbd5e1" fontSize="11" fontFamily="monospace">φ = 32°</text>
+  <text x="235" y="111" fill="#cbd5e1" fontSize="11" fontFamily="monospace">c = 0</text>
+  <text x="235" y="128" fill="#cbd5e1" fontSize="11" fontFamily="monospace">γt = 110 pcf</text>
+
+  <!-- Toe Point O -->
+  <circle cx="120" cy="205" r="5" fill="#06b6d4" stroke="#ffffff" strokeWidth="2" />
+  <text x="113" y="225" fill="#06b6d4" fontSize="14" fontWeight="800" fontFamily="sans-serif">O</text>
+
+  <!-- Dimension 1: Top Width = 2 ft -->
+  <line x1="170" y1="28" x2="220" y2="28" stroke="#38bdf8" strokeWidth="1.2" />
+  <line x1="170" y1="22" x2="170" y2="45" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2,2" />
+  <line x1="220" y1="22" x2="220" y2="45" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2,2" />
+  <polygon points="170,28 177,25 177,31" fill="#38bdf8" />
+  <polygon points="220,28 213,25 213,31" fill="#38bdf8" />
+  <text x="186" y="22" fill="#38bdf8" fontSize="11" fontWeight="700" fontFamily="monospace">2 ft</text>
+
+  <!-- Dimension 2: Height = 8 ft -->
+  <line x1="200" y1="55" x2="200" y2="195" stroke="#38bdf8" strokeWidth="1.2" />
+  <polygon points="200,48 197,56 203,56" fill="#38bdf8" />
+  <polygon points="200,202 197,194 203,194" fill="#38bdf8" />
+  <rect x="190" y="115" width="22" height="16" fill="#0f172a" rx="3" />
+  <text x="193" y="127" fill="#38bdf8" fontSize="11" fontWeight="700" fontFamily="monospace">8 ft</text>
+
+  <!-- Dimension 3: Base Width = 4 ft -->
+  <line x1="120" y1="235" x2="220" y2="235" stroke="#38bdf8" strokeWidth="1.2" />
+  <line x1="120" y1="205" x2="120" y2="242" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2,2" />
+  <line x1="220" y1="205" x2="220" y2="242" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2,2" />
+  <polygon points="120,235 127,232 127,238" fill="#38bdf8" />
+  <polygon points="220,235 213,232 213,238" fill="#38bdf8" />
+  <text x="160" y="250" fill="#38bdf8" fontSize="11" fontWeight="700" fontFamily="monospace">4 ft</text>
+</svg>
