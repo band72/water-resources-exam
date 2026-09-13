@@ -1,0 +1,178 @@
+[
+  {
+    "id": 98,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Planar Slope Stability (c-φ Soil Failure Surface)",
+    "description": "A cutting in a hillside exposes an assumed planar slip surface inclined at an angle αs = 28° to the horizontal with an assumed slip length Ls = 36 ft. The total weight of the active sliding soil wedge above the slip plane is WM = 85,000 lb/ft (85 kips/ft).\n\nThe soil possesses an apparent cohesion c = 250 psf and an angle of internal friction φ = 24°. Neglect pore water pressure.\n\nUsing limit equilibrium analysis along a planar failure surface, the factor of safety (FS) against slope instability is most nearly:",
+    "implemented": true,
+    "component": "SlopeVisualizer",
+    "alpha": 28,
+    "weight": 85000,
+    "length": 36,
+    "cohesion": 250,
+    "phi": 24,
+    "uplift": 0,
+    "diagramUrl": "/diagrams/problem_98.svg",
+    "hint": "1. Mobilized Shear Force (Driving Force TMOB):\nTMOB = WM × sin(αs) = 85,000 × sin(28°) = 85,000 × 0.4695 = 39,905 lb/ft\n\n2. Normal Force on Slip Surface (N):\nN = WM × cos(αs) = 85,000 × cos(28°) = 85,000 × 0.8829 = 75,051 lb/ft\n\n3. Available Shearing Resistance (TFF):\nTFF = c × Ls + N × tan(φ)\n• Cohesive force = 250 psf × 36 ft = 9,000 lb/ft\n• Frictional force = 75,051 × tan(24°) = 75,051 × 0.4452 = 33,415 lb/ft\n• TFF = 9,000 + 33,415 = 42,415 lb/ft\n\n4. Factor of Safety (FS):\nFS = TFF / TMOB = 42,415 / 39,905 = 1.0629 ≈ 1.06",
+    "shortcut": "Remember the fundamental force balance:\n• Driving downslope: WM × sin(α)\n• Normal clamping: WM × cos(α)\n• Resistance: c × Ls + (WM × cos(α)) × tan(φ)\nFS = [c·Ls + WM·cos(α)·tan(φ)] / [WM·sin(α)]\nWith FS = 1.06, this slope is in a state of marginal equilibrium near impending failure (FS ~ 1.0).",
+    "fifthGrader": "Imagine you build a giant pile of wet sand at the beach. If you pile it up way too steeply, a big chunk of it suddenly slides down onto your feet.\n\nThat slide happens because gravity is pulling the sand downward like a playground slide, while the sand particles sticking together are trying to hold hands and stay put. Engineers use a score called the Factor of Safety to measure this. It compares the forces fighting to keep the hill stable against the forces trying to make it slide. If the 'staying put' forces win by a lot, the hill is safe. If gravity wins, down comes the dirt!",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.84",
+        "correct": false,
+        "feedback": "Incorrect: 0.84 is the inverse ratio TMOB / TFF. Factor of safety is resisting capacity divided by mobilized demand: FS = TFF / TMOB."
+      },
+      {
+        "label": "B",
+        "text": "1.06",
+        "correct": true,
+        "feedback": "✓ Correct! Driving force TMOB = 85,000 × sin(28°) = 39,905 lb/ft. Resisting force TFF = (250 × 36) + (85,000 × cos(28°) × tan(24°)) = 42,415 lb/ft. Yielding FS = 42,415 / 39,905 = 1.06."
+      },
+      {
+        "label": "C",
+        "text": "1.25",
+        "correct": false,
+        "feedback": "Incorrect: Be sure not to invert sin(α) and cos(α). Normal force is WM·cos(α) and driving shear is WM·sin(α)."
+      },
+      {
+        "label": "D",
+        "text": "1.52",
+        "correct": false,
+        "feedback": "Incorrect: Check your cohesive resistance term. Cohesion c must be integrated across the entire slip surface length Ls (c × Ls = 250 × 36 = 9,000 lb/ft)."
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Cohesionless Granular Slope & Angle of Repose (c = 0)",
+    "description": "An infinite slope constructed of clean granular gravelly sand has an internal friction angle φ = 34° and zero cohesion (c = 0). The slope is inclined at an angle αs = 25° to the horizontal. An assumed planar failure surface runs parallel to the ground surface at length Ls = 50 ft with a total soil wedge weight WM = 140,000 lb/ft.\n\nUnder dry conditions, the factor of safety (FS) against slope instability is most nearly:",
+    "implemented": true,
+    "component": "SlopeVisualizer",
+    "alpha": 25,
+    "weight": 140000,
+    "length": 50,
+    "cohesion": 0,
+    "phi": 34,
+    "uplift": 0,
+    "diagramUrl": "/diagrams/problem_98.svg",
+    "hint": "1. For a purely cohesionless soil (c = 0):\nTFF = 0 + WM × cos(αs) × tan(φ)\nTMOB = WM × sin(αs)\n\n2. Compute Factor of Safety:\nFS = TFF / TMOB = [WM × cos(αs) × tan(φ)] / [WM × sin(αs)]\nFS = tan(φ) / tan(αs)\n\n3. Evaluate with φ = 34° and αs = 25°:\ntan(34°) = 0.6745\ntan(25°) = 0.4663\nFS = 0.6745 / 0.4663 = 1.4465 ≈ 1.45",
+    "shortcut": "⚡ NCEES Exam Golden Shortcut for Cohesionless Slopes (c = 0):\nNeither the soil weight WM, slip length Ls, nor thickness matter!\nFS = tan(φ) / tan(αs)\nIf αs < φ, the slope is stable (FS > 1.0). The maximum angle the slope can sustain before sliding is called the angle of repose (αs = φ).",
+    "fifthGrader": "Think of pouring dry sand out of a bucket into a cone. You can only make the cone so steep before extra sand just tumbles down the sides. That's because dry sand has no glue (cohesion) between the grains—only the rough friction of rocks rubbing together holds it up. If the hill is flatter than the sand's natural friction angle, it stays put with a great safety score of 1.45!",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.69",
+        "correct": false,
+        "feedback": "Incorrect: 0.69 is tan(25°) / tan(34°). FS is friction capacity over slope demand: FS = tan(φ) / tan(αs)."
+      },
+      {
+        "label": "B",
+        "text": "1.15",
+        "correct": false,
+        "feedback": "Incorrect: Don't take the direct angle ratio (34° / 25° = 1.36) or subtract angles. The trigonometric tangents must be evaluated: tan(34°) / tan(25°) = 1.45."
+      },
+      {
+        "label": "C",
+        "text": "1.45",
+        "correct": true,
+        "feedback": "✓ Correct! For any cohesionless slope (c = 0), soil weight cancels out: FS = tan(φ) / tan(αs) = tan(34°) / tan(25°) = 0.6745 / 0.4663 = 1.45."
+      },
+      {
+        "label": "D",
+        "text": "1.82",
+        "correct": false,
+        "feedback": "Incorrect: Review the ratio of available friction to mobilized driving shear."
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Planar Slope Stability with Seepage & Pore Water Pressure",
+    "description": "A hillside slope has a planar slip surface inclined at αs = 30° to the horizontal with a slip length Ls = 40 ft. The sliding soil wedge weight is WM = 120,000 lb/ft. The soil has cohesion c = 200 psf and friction angle φ = 30°.\n\nFollowing a severe torrential rainstorm, groundwater seepage develops along the slip surface, generating an upward pore water force (hydraulic uplift) U = 35,000 lb/ft acting normal to the slip surface.\n\nThe factor of safety (FS) against slope instability during this storm event is most nearly:",
+    "implemented": true,
+    "component": "SlopeVisualizer",
+    "alpha": 30,
+    "weight": 120000,
+    "length": 40,
+    "cohesion": 200,
+    "phi": 30,
+    "uplift": 35000,
+    "diagramUrl": "/diagrams/problem_98.svg",
+    "hint": "1. Mobilized Shear Force (Driving):\nTMOB = WM × sin(αs) = 120,000 × sin(30°) = 120,000 × 0.50 = 60,000 lb/ft\n\n2. Effective Normal Force with Pore Water Uplift (N'):\nTotal normal force N = WM × cos(αs) = 120,000 × cos(30°) = 103,923 lb/ft\nEffective normal force N' = N - U = 103,923 - 35,000 = 68,923 lb/ft\n\n3. Available Shearing Resistance (TFF):\n• Cohesion force = c × Ls = 200 psf × 40 ft = 8,000 lb/ft\n• Frictional force = N' × tan(φ) = 68,923 × tan(30°) = 68,923 × 0.57735 = 39,793 lb/ft\n• TFF = 8,000 + 39,793 = 47,793 lb/ft\n\n4. Factor of Safety (FS):\nFS = TFF / TMOB = 47,793 / 60,000 = 0.7966 ≈ 0.80\n(Since FS < 1.0, active slope failure occurs!)",
+    "shortcut": "Notice the dangerous power of pore water pressure! Under dry conditions, N was 103,923 lb/ft giving FS = 68,000 / 60,000 = 1.13. But seepage pore pressure acts like hydraulic jacks pushing upward along the slip plane, lowering clamping pressure to 68,923 lb/ft. This causes FS to plummet from 1.13 down to 0.80—causing a landslide!",
+    "fifthGrader": "Think of sliding down a plastic slip-and-slide! When it's dry, you stick to the plastic because of friction. But when someone turns on the garden hose, the water gets between you and the ground and lifts you up just enough that you go zooming down fast!\n\nThat's exactly what rainwater does inside a hill: the water pushes upward along the crack, reduces the friction holding the dirt, and causes a landslide!",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.80",
+        "correct": true,
+        "feedback": "✓ Correct! Hydraulic uplift reduces effective normal force to N' = 120,000·cos(30°) - 35,000 = 68,923 lb/ft. Available resistance TFF = (200 × 40) + 68,923·tan(30°) = 47,793 lb/ft. FS = 47,793 / 60,000 = 0.80 (Slope failure)."
+      },
+      {
+        "label": "B",
+        "text": "1.00",
+        "correct": false,
+        "feedback": "Incorrect: 1.00 represents critical equilibrium. With U = 35,000 lb/ft, the driving force exceeds resisting strength."
+      },
+      {
+        "label": "C",
+        "text": "1.13",
+        "correct": false,
+        "feedback": "Incorrect: 1.13 is the dry slope factor of safety without pore water pressure (U = 0). Always subtract pore water uplift U from normal force N."
+      },
+      {
+        "label": "D",
+        "text": "1.35",
+        "correct": false,
+        "feedback": "Incorrect: Do not add pore water force to normal force. Pore water pressure acts as an uplift that reduces effective stress."
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Slope Remediation: Required Cohesion for Design FS = 1.50",
+    "description": "An embankment excavation requires a factor of safety FS = 1.50 against planar slope failure to meet DOT highway specifications. The assumed planar slip surface is inclined at αs = 32° to the horizontal with length Ls = 45 ft. The sliding soil wedge weight is WM = 110,000 lb/ft. The soil has an internal friction angle φ = 22°. Neglect pore water pressure.\n\nTo achieve the target factor of safety of 1.50 (for example via soil bio-reinforcement or cement grouting), the required apparent soil cohesion (creq) is most nearly:",
+    "implemented": true,
+    "component": "SlopeVisualizer",
+    "alpha": 32,
+    "weight": 110000,
+    "length": 45,
+    "cohesion": 1110,
+    "phi": 22,
+    "uplift": 0,
+    "diagramUrl": "/diagrams/problem_98.svg",
+    "hint": "1. Driving Mobilized Shear Force (TMOB):\nTMOB = WM × sin(αs) = 110,000 × sin(32°) = 110,000 × 0.5299 = 58,291 lb/ft\n\n2. Required Available Shear Resistance for FS = 1.50:\nFS = TFF,req / TMOB  →  TFF,req = 1.50 × 58,291 = 87,437 lb/ft\n\n3. Frictional Resistance Provided by Soil (Tfric):\nN = WM × cos(αs) = 110,000 × cos(32°) = 110,000 × 0.8480 = 93,285 lb/ft\nTfric = N × tan(φ) = 93,285 × tan(22°) = 93,285 × 0.4040 = 37,690 lb/ft\n\n4. Required Cohesive Resistance (Tcoh,req):\nTFF,req = Tcoh,req + Tfric\nTcoh,req = 87,437 - 37,690 = 49,747 lb/ft\n\n5. Solve for Required Cohesion creq:\nTcoh,req = creq × Ls\ncreq = 49,747 lb/ft / 45 ft = 1,105.5 psf ≈ 1,110 psf",
+    "shortcut": "Back-calculation formula:\ncreq = [FS × WM·sin(αs) - WM·cos(αs)·tan(φ)] / Ls\ncreq = [1.50 × 58,291 - 37,690] / 45 = 49,747 / 45 = 1,105.5 psf (Rounds to 1,110 psf).",
+    "fifthGrader": "Imagine you have a sandcastle that's just a little bit too loose, so it wants to crumble. The building inspector says: 'You need this hill to be 1.5 times stronger than gravity so nobody gets hurt!'\n\nYou know how much friction the sand already has, so you calculate how much 'glue' or plant roots (cohesion) you need to add to reach that safety score: exactly 1,110 pounds of stickiness per square foot!",
+    "options": [
+      {
+        "label": "A",
+        "text": "680 psf",
+        "correct": false,
+        "feedback": "Incorrect: 680 psf is the cohesion needed merely for impending equilibrium (FS = 1.0), not the required design target FS = 1.50."
+      },
+      {
+        "label": "B",
+        "text": "840 psf",
+        "correct": false,
+        "feedback": "Incorrect: Be sure to account for the frictional resistance contribution (37,690 lb/ft) before dividing by length Ls."
+      },
+      {
+        "label": "C",
+        "text": "1,110 psf",
+        "correct": true,
+        "feedback": "✓ Correct! TMOB = 58,291 lb/ft. Required TFF = 1.50 × 58,291 = 87,437 lb/ft. Frictional capacity = 93,285 × tan(22°) = 37,690 lb/ft. Required cohesive force = 87,437 - 37,690 = 49,747 lb/ft. Thus creq = 49,747 / 45 = 1,105.5 psf ≈ 1,110 psf."
+      },
+      {
+        "label": "D",
+        "text": "1,450 psf",
+        "correct": false,
+        "feedback": "Incorrect: Check your algebra when subtracting frictional resistance from the required total shear capacity."
+      }
+    ]
+  }
+]
