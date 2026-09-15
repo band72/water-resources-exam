@@ -244,5 +244,57 @@
         "feedback": "Incorrect: Check your active earth pressure coefficient Ka. For φ = 34°, Ka = 0.2827, not 0.40."
       }
     ]
+  },
+  {
+    "id": 107,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Shallow Dig Depth Engineering: Sizing an Augered Concrete Pier (Broms & IBC)",
+    "description": "A cantilever wood post-and-lagging retaining wall retains granular sand to an exposed height H = 6.0 ft. Vertical square 8×8 timber posts (dressed 7.5\" × 7.5\") are installed at center-to-center spacing S = 4.0 ft. The retained backfill has internal friction angle φ = 32°, cohesion c = 0, and unit weight γ = 115 pcf. Surcharge q = 100 psf acts on the surface.\n\nThe total active earth thrust per post is P_post = 3,282 lb, acting at lever arm h = 2.23 ft above the ground line (base moment M_grade = 7,301 ft-lb). The passive earth pressure coefficient of the foundation sand is Kp = tan²(45° + 32°/2) = 3.255.\n\nDue to shallow underground fiber-optic and electrical utilities at the property line, the maximum allowable excavation depth for post foundations is strictly capped at D_max = 4.5 ft. Direct burial of an isolated timber post (b = 7.5 in. = 0.625 ft) requires an embedment depth D ≈ 6.5 ft, violating the 4.5 ft site restriction.\n\nTo safely satisfy the shallow 4.5 ft excavation limit without deadman tiebacks, the engineer specifies augering a cylindrical hole and encasing the post in a 3,000 psi concrete pier.\n\nUsing Broms' limit equilibrium method for a short rigid pier in cohesionless sand (where allowable lateral moment resistance with safety factor is M_all = 0.5 · Kp · γ · b · D³), determine the minimum standard auger diameter b (from 12-inch, 16-inch, 20-inch, 24-inch) required to achieve full stability at D = 4.5 ft:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "8x8",
+    "height": 6,
+    "embedment": 4.5,
+    "spacing": 4,
+    "soilType": "sand",
+    "phi": 32,
+    "cohesion": 0,
+    "gammaSoil": 115,
+    "gammaSat": 125,
+    "surcharge": 100,
+    "waterTable": 0,
+    "laggingThickness": 3,
+    "hasDrainage": true,
+    "foundationMethod": "concrete_pier",
+    "pierDiameter": 16,
+    "hint": "1. Understand the Shallow Dig Constraint:\n• Maximum allowable excavation depth: D_max = 4.5 ft\n• Applied lateral load per post: P_post = 3,282 lb\n• Load lever arm above grade: h = 2.23 ft\n\n2. Overturning Moment about Base of Pier (D = 4.5 ft):\n• Total moment lever arm from top of thrust to base of pier: L_arm = h + D = 2.23 + 4.5 = 6.73 ft\n• Total overturning moment: M_OT = P_post × (h + D) = 3,282 × 6.73 = 22,088 ft-lb\n\n3. Broms' Allowable Passive Moment Resistance Capacity:\n• Kp = tan²(45° + 32°/2) = (1 + sin 32°) / (1 - sin 32°) = 1.5299 / 0.4701 = 3.255\n• M_all = 0.5 × Kp × γ × b × D³\n• For D = 4.5 ft, D³ = (4.5)³ = 91.125 ft³\n• M_all = 0.5 × 3.255 × 115 × b × 91.125 = 17,055 × b ft-lb (where b is pier diameter in feet)\n\n4. Solve for Required Pier Diameter b:\n• Equating M_all ≥ M_OT:\n  17,055 × b ≥ 22,088\n  b_min = 22,088 / 17,055 = 1.295 ft\n• In inches: b_min = 1.295 × 12 = 15.54 inches\n\n5. Compare Standard Auger Sizes:\n• 12-inch auger (b = 1.0 ft): M_all = 17,055 ft-lb < 22,088 ft-lb → FAILS (Requires D = 5.0 ft > 4.5 ft)\n• 16-inch auger (b = 1.333 ft): M_all = 17,055 × 1.333 = 22,740 ft-lb > 22,088 ft-lb → PASSES! (Requires D = 4.4 ft ≤ 4.5 ft)\n• 20-inch auger (b = 1.667 ft): M_all = 28,425 ft-lb (Comfortably safe, requires D = 4.0 ft)\n\n• Conclusion: A 16-inch diameter drilled concrete pier is the minimum standard size to satisfy the shallow 4.5 ft depth limit.",
+    "shortcut": "How Concrete Slashes Dig Depth:\n1. Width Multiplier: Passive soil resistance is directly proportional to foundation width b. Increasing b from 0.625 ft (bare post) to 1.333 ft (16\" concrete pier) increases passive resistance by 2.13×!\n2. Depth Reduction: Because moment resistance scales with D³, doubling the diameter cuts required depth by a factor of (2)^(1/3) ≈ 1.26 (a 25% to 40% reduction in digging depth).\n3. Field Application: When encountering shallow utilities, never abandon the project—specifying a 16\" to 20\" drilled concrete pier reduces required hole depth from over 7 ft down to 4.5 ft!",
+    "fifthGrader": "If you try to bury a skinny wooden stick only 4.5 feet in the dirt, 3,280 pounds of soil push will easily yank it right out of the ground (it needs over 7 feet of dirt to hold!).\n\nBut if you drill a wide 16-inch round hole and fill it with solid concrete around the post, the concrete acts like a giant cement boot! The dirt now has a huge 16-inch-wide cylinder pushing against it, holding the wall rock-solid at only 4.5 feet deep!",
+    "options": [
+      {
+        "label": "A",
+        "text": "12-inch diameter (b = 1.0 ft)",
+        "correct": false,
+        "feedback": "Incorrect: A 12-inch pier only provides M_all = 17,055 ft-lb < 22,088 ft-lb. It requires D = 5.0 ft, violating the 4.5 ft site limit."
+      },
+      {
+        "label": "B",
+        "text": "16-inch diameter (b = 1.33 ft)",
+        "correct": true,
+        "feedback": "✓ Correct! b_min = 22,088 / 17,055 = 1.295 ft (15.54 in.). The next standard auger size is 16 inches, which provides M_all = 22,740 ft-lb > 22,088 ft-lb and requires D = 4.4 ft ≤ 4.5 ft."
+      },
+      {
+        "label": "C",
+        "text": "24-inch diameter (b = 2.0 ft)",
+        "correct": false,
+        "feedback": "Incorrect: While a 24-inch pier is safe (D_req = 3.7 ft), it is not the minimum standard size. A 16-inch pier already satisfies the 4.5 ft requirement."
+      },
+      {
+        "label": "D",
+        "text": "Concrete pier cannot achieve D ≤ 4.5 ft; Tiebacks required",
+        "correct": false,
+        "feedback": "Incorrect: A 16-inch or 20-inch concrete pier easily achieves D ≤ 4.5 ft without expensive tiebacks."
+      }
+    ]
   }
 ]

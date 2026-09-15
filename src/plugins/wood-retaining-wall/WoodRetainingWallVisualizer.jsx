@@ -89,6 +89,12 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const [waterTable, setWaterTable] = useState(problem?.waterTable ?? 0); // ft from base (hw)
   const [laggingThick, setLaggingThick] = useState(problem?.laggingThickness ?? 3); // nominal inches
   const [hasDrainage, setHasDrainage] = useState(problem?.hasDrainage ?? false); // drainage system toggle
+  
+  // Shallow Dig Engineering Add-on State:
+  // 'direct' = Direct soil burial | 'concrete_pier' = Augered drilled pier | 'concrete_collar' = Ground kick collar | 'tieback' = Deadman anchor
+  const [foundationMethod, setFoundationMethod] = useState(problem?.foundationMethod || 'direct');
+  const [pierDiameter, setPierDiameter] = useState(problem?.pierDiameter ?? 20); // inches (12 to 30)
+
   const [viewMode, setViewMode] = useState(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
@@ -111,6 +117,8 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     if (problem.waterTable !== undefined) setWaterTable(problem.waterTable);
     if (problem.laggingThickness !== undefined) setLaggingThick(problem.laggingThickness);
     if (problem.hasDrainage !== undefined) setHasDrainage(problem.hasDrainage);
+    if (problem.foundationMethod) setFoundationMethod(problem.foundationMethod);
+    if (problem.pierDiameter !== undefined) setPierDiameter(problem.pierDiameter);
   }
 
   // Active configurations
@@ -193,37 +201,76 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const mTotalPerFt = motSoilTotal + motSurcharge + motPw;
 
   // 4. Tributary Load on an Individual Post (Spacing S):
-  const pPost = pTotalPerFt * spacing; // lbs base shear
-  const mGrade = mTotalPerFt * spacing; // ft-lbs base moment
-  const hResultant = pPost > 0 ? (mGrade / pPost) : (height / 3); // ft above grade
+  const rawPPost = pTotalPerFt * spacing; // lbs base shear (cantilever)
+  const rawMGrade = mTotalPerFt * spacing; // ft-lbs base moment (cantilever)
+  const hResultant = rawPPost > 0 ? (rawMGrade / rawPPost) : (height / 3); // ft above grade
 
-  // 5. How Deep to Dig: Embedment Depth Calculation (D_req)
-  // Evaluates IBC Section 1807.3 non-constrained pole formula & geotechnical limit equilibrium
+  // 5. Shallow Dig Engineering Add-on Impact on Loads:
+  // If Tieback is active, tie rod at 0.67*H carries ~58% of load, reducing moment by ~75%
+  let tAnchor = 0;
+  let pPost = rawPPost;
+  let mGrade = rawMGrade;
+  if (foundationMethod === 'tieback') {
+    tAnchor = 0.58 * rawPPost;
+    pPost = Math.max(rawPPost - tAnchor, rawPPost * 0.4);
+    mGrade = Math.max(rawMGrade * 0.25, 500); // 75% reduction in overturning moment
+  }
+
+  // 6. How Deep to Dig: Embedment Depth Calculation (D_req)
+  // Evaluates based on selected Foundation Engineering Add-on:
   let dReq = 0;
   let ibcAParam = 0;
-  let dIbc = 0;
+  const bPierFt = pierDiameter / 12; // concrete pier diameter in ft
+  const bPostFt = Math.max(post.d / 12, 0.46); // bare post width in ft
+
   if (soilTypeKey === 'rock') {
     // Bedrock socketing
     dReq = Math.max(2.5, 0.42 * height);
+  } else if (foundationMethod === 'tieback') {
+    // Tieback propped cantilever: anchor carries primary thrust, requiring minimal embedment
+    dReq = Math.max(height * 0.35, 2.0);
+  } else if (foundationMethod === 'concrete_collar') {
+    // Ground-line restraint collar / kick slab (IBC 1807.3.2.2 "Constrained" Condition)
+    // d = sqrt(4.25 * M / (S3 * b))
+    const s3Eff = soil.s1 * 2.0;
+    const bEffCollar = Math.max(bPostFt, 1.25);
+    const dConstrained = Math.sqrt((4.25 * mGrade) / (s3Eff * bEffCollar));
+    dReq = Math.max(dConstrained, 2.5);
+  } else if (foundationMethod === 'concrete_pier') {
+    // Augered Drilled Concrete Pier (IBC 1807.3 & Broms method with diameter b = bPierFt)
+    // S1 doubled for isolated pole per IBC 1806.3.4
+    const s1Eff = soil.s1 * 2.0;
+    ibcAParam = (2.34 * pPost) / Math.max(s1Eff * bPierFt, 1);
+    const dIbc = (ibcAParam / 2) * (1 + Math.sqrt(1 + (4.36 * hResultant) / Math.max(ibcAParam, 0.01)));
+    
+    // Broms limit equilibrium in sand/silt/clay:
+    const bromsCapCoeff = 0.5 * kp * soil.gammaSoil * bPierFt;
+    // solve for D where bromsCapCoeff * D^3 >= pPost * (hResultant + D)
+    let dBroms = 3.0;
+    for (let testD = 2.0; testD <= 10.0; testD += 0.1) {
+      if (bromsCapCoeff * Math.pow(testD, 3) >= pPost * (hResultant + testD)) {
+        dBroms = testD;
+        break;
+      }
+    }
+    dReq = Math.max(Math.min(dIbc * 0.85, dBroms), 2.5);
   } else {
-    // IBC Pole formula: A = 2.34 * P / (S1_eff * b)
-    const bHole = Math.max(post.d / 12, 1.0);
-    const s1Eff = soil.s1 * 2.0; // psf/ft with pole doubler
-    ibcAParam = (2.34 * pPost) / Math.max(s1Eff * bHole, 1);
-    dIbc = (ibcAParam / 2) * (1 + Math.sqrt(1 + (4.36 * hResultant) / Math.max(ibcAParam, 0.01)));
-
-    // Broms limit equilibrium multiplier for soil type
-    let bromsRatio = 1.05;
-    if (soilTypeKey === 'clay') bromsRatio = 1.15;
-    if (soilTypeKey === 'silt') bromsRatio = 1.35;
+    // Direct soil burial (bare timber post in dirt hole)
+    const s1Eff = soil.s1 * 1.5;
+    ibcAParam = (2.34 * pPost) / Math.max(s1Eff * bPostFt, 1);
+    const dIbc = (ibcAParam / 2) * (1 + Math.sqrt(1 + (4.36 * hResultant) / Math.max(ibcAParam, 0.01)));
+    
+    let bromsRatio = 1.15;
+    if (soilTypeKey === 'clay') bromsRatio = 1.25;
+    if (soilTypeKey === 'silt') bromsRatio = 1.40;
     if (hw > 0) bromsRatio += (hw / height) * 0.25;
     if (surcharge > 150) bromsRatio += 0.10;
-
+    
     const dBroms = height * bromsRatio;
-    dReq = Math.max(dBroms * 0.95, Math.min(dIbc, dBroms * 1.25), 3.0);
+    dReq = Math.max(dBroms * 0.95, Math.min(dIbc, dBroms * 1.25), 3.5);
   }
 
-  // 6. Structural Wood Post Flexural Check:
+  // 7. Structural Wood Post Flexural Check:
   const fbActual = (mGrade * 12) / post.sx; // psi
   const fbAllowable = post.fbAllowable; // psi
   const postRatio = fbActual / fbAllowable;
@@ -233,7 +280,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const postStatusBg = isPostFail ? BG_FAIL : (isPostWarn ? BG_WARN : BG_SAFE);
   const postStatusBorder = isPostFail ? BORDER_FAIL : (isPostWarn ? BORDER_WARN : BORDER_SAFE);
 
-  // 7. Geotechnical Embedment Safety Factor:
+  // 8. Geotechnical Embedment Safety Factor:
   const fsEmbed = dReq > 0 ? (embedment / dReq) : 1.0;
   const isEmbedFail = fsEmbed < 1.0;
   const isEmbedWarn = !isEmbedFail && fsEmbed < 1.15;
@@ -241,7 +288,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const embedStatusBg = isEmbedFail ? BG_FAIL : (isEmbedWarn ? BG_WARN : BG_SAFE);
   const embedStatusBorder = isEmbedFail ? BORDER_FAIL : (isEmbedWarn ? BORDER_WARN : BORDER_SAFE);
 
-  // 8. Timber Lagging Flexure Check across Spacing S (with AASHTO/FHWA soil arching M = p*S^2 / 10):
+  // 9. Timber Lagging Flexure Check across Spacing S (with AASHTO/FHWA soil arching M = p*S^2 / 10):
   const sigmaHMax = (ka * (soil.gammaSoil * hDry + gammaPrime * hw + surcharge)) + uBase; // psf at base
   const mPlank = (sigmaHMax * Math.pow(spacing, 2)) / 10; // ft-lb per ft height
   const sxPlank = (12 * Math.pow(lagging.actual, 2)) / 6; // in^3 per ft height
@@ -254,7 +301,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const plankStatusBg = isPlankFail ? BG_FAIL : (isPlankWarn ? BG_WARN : BG_SAFE);
   const plankStatusBorder = isPlankFail ? BORDER_FAIL : (isPlankWarn ? BORDER_WARN : BORDER_SAFE);
 
-  // 9. Deflection at top of post (cantilever point load approximation)
+  // 10. Deflection at top of post
   const woodE = 1400000;
   const deltaTopInches = (pPost * Math.pow(height * 12, 3)) / (3 * woodE * post.ix);
   const deltaAllowableInches = (height * 12) / 150; // L/150 limit
@@ -263,7 +310,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const isDeflWarn = !isDeflFail && deflRatio > 0.85;
   const deflStatusColor = isDeflFail ? COLOR_FAIL : (isDeflWarn ? COLOR_WARN : COLOR_SAFE);
 
-  // 10. Comprehensive Overall System Compliance:
+  // 11. Comprehensive Overall System Compliance:
   const failList = [];
   if (isPostFail) failList.push(`Post flexure fb (${fbActual.toFixed(0)} > ${fbAllowable} psi)`);
   if (isEmbedFail) failList.push(`Embedment depth D (${embedment.toFixed(1)}' < Req ${dReq.toFixed(1)}')`);
@@ -316,6 +363,9 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   const sHw = hw * scale;
   const postWidthPx = Math.max(post.d * 1.4, 8); // visual width of post
 
+  // Rendered pier pixel width for concrete pier
+  const pierPx = Math.max(bPierFt * 26, postWidthPx + 16);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', width: '100%' }}>
       {/* Workbench Glass Card */}
@@ -331,7 +381,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 <h3 style={{ fontSize: '1.35rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>🪵</span> Wood Retaining Wall Simulator
                 </h3>
-                <p className="text-xs text-muted">Cantilever Post-and-Lagging Wall: Embedment Depth & Flexural Stability</p>
+                <p className="text-xs text-muted">Cantilever Post-and-Lagging Wall: Embedment Depth & Shallow Dig Engineering</p>
               </div>
               <span 
                 className="glass-badge" 
@@ -396,7 +446,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
               </div>
             )}
 
-            {/* Quick Scenario Preset Buttons (Problems 102 - 106) */}
+            {/* Quick Scenario Preset Buttons (Problems 102 - 107) */}
             <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
               <button 
                 className="btn-secondary" 
@@ -411,6 +461,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   setWaterTable(0);
                   setLaggingThick(3);
                   setHasDrainage(false);
+                  setFoundationMethod('direct');
                 }}
               >
                 🏖️ Prob 102: 6ft Sand (6×6)
@@ -428,6 +479,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   setWaterTable(4);
                   setLaggingThick(3);
                   setHasDrainage(false);
+                  setFoundationMethod('direct');
                 }}
               >
                 💧 Prob 103: Wet Silt (8×8)
@@ -445,6 +497,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   setWaterTable(0);
                   setLaggingThick(2);
                   setHasDrainage(false);
+                  setFoundationMethod('direct');
                 }}
               >
                 🧱 Prob 104: 4ft Clay (4×4)
@@ -462,6 +515,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   setWaterTable(0);
                   setLaggingThick(4);
                   setHasDrainage(false);
+                  setFoundationMethod('direct');
                 }}
               >
                 🪨 Prob 105: 8ft Rock Socket (10×10)
@@ -479,10 +533,156 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   setWaterTable(0);
                   setLaggingThick(3);
                   setHasDrainage(true);
+                  setFoundationMethod('direct');
                 }}
               >
                 🪵 Prob 106: 8ft Lagging (3" Planks)
               </button>
+              <button 
+                className="btn-secondary" 
+                style={{ fontSize: '0.72rem', padding: '0.3rem 0.55rem', background: 'rgba(56, 189, 248, 0.15)', borderColor: 'var(--accent-blue)', color: 'var(--accent-blue)' }}
+                onClick={() => {
+                  setPostSizeKey('8x8');
+                  setHeight(6);
+                  setEmbedment(4.5);
+                  setSpacing(4);
+                  setSoilTypeKey('sand');
+                  setSurcharge(100);
+                  setWaterTable(0);
+                  setLaggingThick(3);
+                  setHasDrainage(true);
+                  setFoundationMethod('concrete_pier');
+                  setPierDiameter(16);
+                }}
+              >
+                🎯 Prob 107: 4.5ft Shallow Dig (16" Pier)
+              </button>
+            </div>
+
+            {/* SHALLOW DIG ENGINEERING ADD-ONS SECTION */}
+            <div 
+              style={{ 
+                padding: '0.85rem', 
+                borderRadius: '10px', 
+                background: 'rgba(15, 23, 42, 0.65)', 
+                border: '1px solid var(--accent-blue)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.65rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ fontSize: '1.1rem' }}>⚙️</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--accent-blue)' }}>
+                    Shallow Dig Engineering Add-on
+                  </span>
+                </div>
+                <span className="glass-badge" style={{ fontSize: '0.68rem', color: 'var(--accent-emerald)' }}>
+                  Req D: {dReq.toFixed(1)}'
+                </span>
+              </div>
+
+              {/* Addon Selector Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.3rem' }}>
+                <button
+                  className={`btn-secondary ${foundationMethod === 'direct' ? 'active' : ''}`}
+                  style={{
+                    padding: '0.4rem 0.2rem',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                    background: foundationMethod === 'direct' ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.03)',
+                    borderColor: foundationMethod === 'direct' ? 'var(--accent-amber)' : 'var(--border-color)',
+                    color: foundationMethod === 'direct' ? 'var(--accent-amber)' : 'var(--text-dim)'
+                  }}
+                  onClick={() => setFoundationMethod('direct')}
+                >
+                  Direct Soil
+                </button>
+                <button
+                  className={`btn-secondary ${foundationMethod === 'concrete_pier' ? 'active' : ''}`}
+                  style={{
+                    padding: '0.4rem 0.2rem',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                    background: foundationMethod === 'concrete_pier' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255,255,255,0.03)',
+                    borderColor: foundationMethod === 'concrete_pier' ? 'var(--accent-blue)' : 'var(--border-color)',
+                    color: foundationMethod === 'concrete_pier' ? 'var(--accent-blue)' : 'var(--text-dim)'
+                  }}
+                  onClick={() => setFoundationMethod('concrete_pier')}
+                >
+                  Concrete Pier
+                </button>
+                <button
+                  className={`btn-secondary ${foundationMethod === 'concrete_collar' ? 'active' : ''}`}
+                  style={{
+                    padding: '0.4rem 0.2rem',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                    background: foundationMethod === 'concrete_collar' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255,255,255,0.03)',
+                    borderColor: foundationMethod === 'concrete_collar' ? 'var(--accent-purple)' : 'var(--border-color)',
+                    color: foundationMethod === 'concrete_collar' ? 'var(--accent-purple)' : 'var(--text-dim)'
+                  }}
+                  onClick={() => setFoundationMethod('concrete_collar')}
+                >
+                  Grade Collar
+                </button>
+                <button
+                  className={`btn-secondary ${foundationMethod === 'tieback' ? 'active' : ''}`}
+                  style={{
+                    padding: '0.4rem 0.2rem',
+                    fontSize: '0.68rem',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                    background: foundationMethod === 'tieback' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255,255,255,0.03)',
+                    borderColor: foundationMethod === 'tieback' ? 'var(--accent-emerald)' : 'var(--border-color)',
+                    color: foundationMethod === 'tieback' ? 'var(--accent-emerald)' : 'var(--text-dim)'
+                  }}
+                  onClick={() => setFoundationMethod('tieback')}
+                >
+                  Deadman Anchor
+                </button>
+              </div>
+
+              {/* Concrete Pier Diameter Slider (Shown when Concrete Pier is chosen) */}
+              {foundationMethod === 'concrete_pier' && (
+                <div style={{ background: 'rgba(56, 189, 248, 0.08)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--accent-blue)' }}>
+                      Augered Pier Diameter (∅ b)
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '0.88rem', color: 'var(--accent-blue)' }}>
+                      {pierDiameter}" ({bPierFt.toFixed(2)} ft)
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="12"
+                    max="30"
+                    step="2"
+                    value={pierDiameter}
+                    onChange={(e) => setPierDiameter(parseInt(e.target.value, 10))}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.68rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+                    <span>12" (Tight)</span>
+                    <span style={{ color: 'var(--accent-emerald)', fontWeight: 700 }}>
+                      Slashes Dig Depth by {Math.round((1 - dReq / (height * 1.15)) * 100)}%!
+                    </span>
+                    <span>30" (Massive)</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Description of active addon */}
+              <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
+                {foundationMethod === 'direct' && '• Direct Soil: Skinny wooden post pushes directly on soil. Requires deepest hole (D ≥ 1.15 H).'}
+                {foundationMethod === 'concrete_pier' && `• ${pierDiameter}" Concrete Pier: Cylindrical concrete encasement quadruples passive bearing area b, slashing dig depth down to ${dReq.toFixed(1)} ft.`}
+                {foundationMethod === 'concrete_collar' && '• Grade Restraint Collar: Concrete kick collar at surface prevents toe kickout, using IBC 1807.3.2.2 Constrained formula.'}
+                {foundationMethod === 'tieback' && `• Deadman Tieback Anchor: Horizontal galvanized rod to concrete deadman carries ${(tAnchor / 1000).toFixed(1)} kips, slashing moment by 75% and depth to ${dReq.toFixed(1)} ft!`}
+              </div>
             </div>
 
             {/* Post Size Selector (4x4 to 12x12) with Real-Time Red/Yellow/Green Badges */}
@@ -919,6 +1119,13 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     <circle cx="8" cy="2" r="1.5" fill="#cbd5e1" opacity="0.5" />
                   </pattern>
 
+                  {/* Concrete Stippling Pattern */}
+                  <pattern id="concrete-stipple-pattern" width="12" height="12" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="3" r="0.8" fill="#cbd5e1" opacity="0.5" />
+                    <circle cx="7" cy="8" r="1" fill="#94a3b8" opacity="0.6" />
+                    <circle cx="10" cy="2" r="0.7" fill="#64748b" opacity="0.5" />
+                  </pattern>
+
                   {/* Wood Grain Gradient */}
                   <linearGradient id="wood-post-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#92400e" />
@@ -1070,41 +1277,202 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                       </g>
                     )}
 
-                    {/* Underground Foundation Shaft / Embedment Hole with Failure Border */}
-                    <rect 
-                      x={wallFaceX - postWidthPx - 6} 
-                      y={groundY} 
-                      width={postWidthPx + 12} 
-                      height={sEmbed} 
-                      fill="url(#concrete-shaft-grad)" 
-                      stroke={isEmbedFail ? COLOR_FAIL : (isEmbedWarn ? COLOR_WARN : '#475569')} 
-                      strokeWidth={isEmbedFail ? "2.5" : "1.5"} 
-                      strokeDasharray={isEmbedFail ? "4,2" : "none"} 
-                      rx="3"
-                    />
-                    <rect 
-                      x={wallFaceX - postWidthPx / 2 - 95} 
-                      y={groundY + sEmbed + 6} 
-                      width="190" 
-                      height="20" 
-                      rx="4" 
-                      fill="rgba(15,23,42,0.92)" 
-                      stroke={embedStatusBorder} 
-                      strokeWidth="1" 
-                    />
-                    <text 
-                      x={wallFaceX - postWidthPx / 2} 
-                      y={groundY + sEmbed + 20} 
-                      fill={embedStatusColor} 
-                      fontSize="9" 
-                      fontWeight="700" 
-                      textAnchor="middle" 
-                      fontFamily="var(--font-mono)"
-                    >
-                      {isEmbedFail 
-                        ? `✗ EMBEDMENT FAILS (D < Req ${dReq.toFixed(1)}')` 
-                        : (soilTypeKey === 'rock' ? 'Rock Socket' : `Embedment OK (FS = ${fsEmbed.toFixed(2)})`)}
-                    </text>
+                    {/* TIEBACK SYSTEM GRAPHIC (if foundationMethod === 'tieback') */}
+                    {foundationMethod === 'tieback' && (
+                      <g>
+                        {/* Horizontal Galvanized Steel Tie Rod at 0.67*H */}
+                        <line
+                          x1={wallFaceX - postWidthPx - 6}
+                          y1={groundY - sHeight * 0.67}
+                          x2={wallFaceX + 170}
+                          y2={groundY - sHeight * 0.67}
+                          stroke="#38bdf8"
+                          strokeWidth="3.5"
+                        />
+                        {/* Washer Bearing Plate on Front of Post */}
+                        <rect
+                          x={wallFaceX - postWidthPx - 10}
+                          y={groundY - sHeight * 0.67 - 10}
+                          width="6"
+                          height="20"
+                          fill="#e2e8f0"
+                          stroke="#0f172a"
+                          strokeWidth="1"
+                          rx="1"
+                        />
+                        {/* Buried Concrete Deadman Anchor Block */}
+                        <rect
+                          x={wallFaceX + 170}
+                          y={groundY - sHeight * 0.67 - 24}
+                          width="38"
+                          height="48"
+                          fill="url(#concrete-shaft-grad)"
+                          stroke="#38bdf8"
+                          strokeWidth="2"
+                          rx="3"
+                        />
+                        <rect
+                          x={wallFaceX + 170}
+                          y={groundY - sHeight * 0.67 - 24}
+                          width="38"
+                          height="48"
+                          fill="url(#concrete-stipple-pattern)"
+                          opacity="0.6"
+                        />
+                        {/* Tension Force Arrow T_anchor */}
+                        <line
+                          x1={wallFaceX + 60}
+                          y1={groundY - sHeight * 0.67 - 14}
+                          x2={wallFaceX + 130}
+                          y2={groundY - sHeight * 0.67 - 14}
+                          stroke="#38bdf8"
+                          strokeWidth="2"
+                          markerEnd="url(#arrow-blue)"
+                        />
+                        <rect x={wallFaceX + 50} y={groundY - sHeight * 0.67 - 36} width="145" height="18" rx="3" fill="rgba(15,23,42,0.92)" stroke="#38bdf8" strokeWidth="0.8" />
+                        <text
+                          x={wallFaceX + 122}
+                          y={groundY - sHeight * 0.67 - 24}
+                          fill="#38bdf8"
+                          fontSize="9"
+                          fontWeight="700"
+                          textAnchor="middle"
+                          fontFamily="var(--font-mono)"
+                        >
+                          ⚓ Tie Rod T = {(tAnchor / 1000).toFixed(1)}k (Propped)
+                        </text>
+                      </g>
+                    )}
+
+                    {/* CONCRETE RESTRAINT COLLAR AT GRADE (if foundationMethod === 'concrete_collar') */}
+                    {foundationMethod === 'concrete_collar' && (
+                      <g>
+                        <rect
+                          x={wallFaceX - postWidthPx - 35}
+                          y={groundY}
+                          width={postWidthPx + 55}
+                          height="28"
+                          fill="url(#concrete-shaft-grad)"
+                          stroke="var(--accent-purple)"
+                          strokeWidth="2"
+                          rx="2"
+                        />
+                        <rect
+                          x={wallFaceX - postWidthPx - 35}
+                          y={groundY}
+                          width={postWidthPx + 55}
+                          height="28"
+                          fill="url(#concrete-stipple-pattern)"
+                          opacity="0.7"
+                        />
+                        <rect x={wallFaceX - 110} y={groundY + 34} width="155" height="18" rx="3" fill="rgba(15,23,42,0.92)" stroke="var(--accent-purple)" strokeWidth="0.8" />
+                        <text
+                          x={wallFaceX - 32}
+                          y={groundY + 46}
+                          fill="var(--accent-purple)"
+                          fontSize="9"
+                          fontWeight="700"
+                          textAnchor="middle"
+                          fontFamily="var(--font-mono)"
+                        >
+                          🛡️ Grade Collar (IBC Constrained)
+                        </text>
+                      </g>
+                    )}
+
+                    {/* AUGERED CONCRETE PIER / FOUNDATION SHAFT */}
+                    {foundationMethod === 'concrete_pier' ? (
+                      <g>
+                        {/* Drilled Cylindrical Pier Encasement */}
+                        <rect 
+                          x={wallFaceX - postWidthPx / 2 - pierPx / 2} 
+                          y={groundY} 
+                          width={pierPx} 
+                          height={sEmbed} 
+                          fill="url(#concrete-shaft-grad)" 
+                          stroke={isEmbedFail ? COLOR_FAIL : (isEmbedWarn ? COLOR_WARN : 'var(--accent-blue)')} 
+                          strokeWidth={isEmbedFail ? "2.5" : "2"} 
+                          strokeDasharray={isEmbedFail ? "4,2" : "none"} 
+                          rx="4"
+                        />
+                        <rect 
+                          x={wallFaceX - postWidthPx / 2 - pierPx / 2} 
+                          y={groundY} 
+                          width={pierPx} 
+                          height={sEmbed} 
+                          fill="url(#concrete-stipple-pattern)" 
+                          opacity="0.75" 
+                        />
+                        {/* Pier Diameter Dimension Line */}
+                        <line
+                          x1={wallFaceX - postWidthPx / 2 - pierPx / 2}
+                          y1={groundY + 12}
+                          x2={wallFaceX - postWidthPx / 2 + pierPx / 2}
+                          y2={groundY + 12}
+                          stroke="var(--accent-blue)"
+                          strokeWidth="1.5"
+                        />
+                        <rect 
+                          x={wallFaceX - postWidthPx / 2 - 60} 
+                          y={groundY + sEmbed + 6} 
+                          width="120" 
+                          height="20" 
+                          rx="4" 
+                          fill="rgba(15,23,42,0.92)" 
+                          stroke={embedStatusBorder} 
+                          strokeWidth="1" 
+                        />
+                        <text 
+                          x={wallFaceX - postWidthPx / 2} 
+                          y={groundY + sEmbed + 20} 
+                          fill={embedStatusColor} 
+                          fontSize="9" 
+                          fontWeight="700" 
+                          textAnchor="middle" 
+                          fontFamily="var(--font-mono)"
+                        >
+                          {pierDiameter}" Pier ∅ (b={bPierFt.toFixed(2)}')
+                        </text>
+                      </g>
+                    ) : (
+                      /* Standard Direct Soil Burial Shaft */
+                      <g>
+                        <rect 
+                          x={wallFaceX - postWidthPx - 6} 
+                          y={groundY} 
+                          width={postWidthPx + 12} 
+                          height={sEmbed} 
+                          fill="url(#concrete-shaft-grad)" 
+                          stroke={isEmbedFail ? COLOR_FAIL : (isEmbedWarn ? COLOR_WARN : '#475569')} 
+                          strokeWidth={isEmbedFail ? "2.5" : "1.5"} 
+                          strokeDasharray={isEmbedFail ? "4,2" : "none"} 
+                          rx="3"
+                        />
+                        <rect 
+                          x={wallFaceX - postWidthPx / 2 - 95} 
+                          y={groundY + sEmbed + 6} 
+                          width="190" 
+                          height="20" 
+                          rx="4" 
+                          fill="rgba(15,23,42,0.92)" 
+                          stroke={embedStatusBorder} 
+                          strokeWidth="1" 
+                        />
+                        <text 
+                          x={wallFaceX - postWidthPx / 2} 
+                          y={groundY + sEmbed + 20} 
+                          fill={embedStatusColor} 
+                          fontSize="9" 
+                          fontWeight="700" 
+                          textAnchor="middle" 
+                          fontFamily="var(--font-mono)"
+                        >
+                          {isEmbedFail 
+                            ? `✗ EMBEDMENT FAILS (D < Req ${dReq.toFixed(1)}')` 
+                            : (soilTypeKey === 'rock' ? 'Rock Socket' : `Embedment OK (FS = ${fsEmbed.toFixed(2)})`)}
+                        </text>
+                      </g>
+                    )}
 
                     {/* Vertical Wood Timber Post (Total Length L = H + D) */}
                     <rect 
@@ -1274,17 +1642,17 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     {/* Passive Soil Resistance Bulb Below Grade */}
                     <g>
                       <line 
-                        x1={wallFaceX - postWidthPx - 70} 
+                        x1={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 50 : postWidthPx + 70)} 
                         y1={groundY + sEmbed * 0.4} 
-                        x2={wallFaceX - postWidthPx - 8} 
+                        x2={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 : postWidthPx + 8)} 
                         y2={groundY + sEmbed * 0.4} 
                         stroke="#10b981" 
                         strokeWidth="2.5" 
                         markerEnd="url(#arrow-emerald)" 
                       />
-                      <rect x={wallFaceX - postWidthPx - 150} y={groundY + sEmbed * 0.4 - 10} width="140" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="#10b981" strokeWidth="1" />
+                      <rect x={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 145 : postWidthPx + 150)} y={groundY + sEmbed * 0.4 - 10} width="140" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="#10b981" strokeWidth="1" />
                       <text 
-                        x={wallFaceX - postWidthPx - 80} 
+                        x={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 75 : postWidthPx + 80)} 
                         y={groundY + sEmbed * 0.4 + 3} 
                         fill="#10b981" 
                         fontSize="9" 
@@ -1292,7 +1660,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                         textAnchor="middle" 
                         fontFamily="var(--font-mono)"
                       >
-                        Passive Pp ({soil.s1} psf/ft)
+                        Passive Pp ({soil.s1 * (foundationMethod === 'concrete_pier' ? 2 : 1)} psf/ft)
                       </text>
                     </g>
 
@@ -1338,17 +1706,17 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     <rect 
                       x="40" 
                       y="18" 
-                      width="210" 
+                      width="230" 
                       height="38" 
                       fill="rgba(15,23,42,0.85)" 
                       stroke="var(--border-color)" 
                       rx="6" 
                     />
                     <text x="50" y="34" fill="var(--text-muted)" fontSize="9" fontWeight="600" style={{ textTransform: 'uppercase' }}>
-                      Total Timber Post Length
+                      Foundation: {foundationMethod.replace('_', ' ').toUpperCase()}
                     </text>
                     <text x="50" y="50" fill="var(--accent-amber)" fontSize="13" fontWeight="800" fontFamily="var(--font-mono)">
-                      L = H + D = {totalLength.toFixed(1)} ft ({post.name})
+                      L = H + D = {totalLength.toFixed(1)}' ({post.name})
                     </text>
                   </g>
                 )}
@@ -1365,10 +1733,11 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                       const pw = Math.max(post.d * 2.2, 14);
                       return (
                         <g key={idx}>
+                          {/* Encasement or Shaft */}
                           <rect 
-                            x={cx - pw / 2} 
+                            x={cx - (foundationMethod === 'concrete_pier' ? pierPx / 2 : pw / 2)} 
                             y={groundY} 
-                            width={pw} 
+                            width={foundationMethod === 'concrete_pier' ? pierPx : pw} 
                             height={Math.min(sEmbed * 0.9, 130)} 
                             fill="url(#concrete-shaft-grad)" 
                             stroke={embedStatusColor} 
@@ -1620,7 +1989,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
         </div>
       </div>
 
-      {/* Embedded Generic Problem Viewer (for Exam Problems 102 - 106) */}
+      {/* Embedded Generic Problem Viewer (for Exam Problems 102 - 107) */}
       {problem && (
         <GenericProblemViewer problem={problem} />
       )}
@@ -1661,7 +2030,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 <h3 style={{ fontSize: '1.4rem', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>📐</span> Complete Wood Retaining Wall Engineering Derivation
                 </h3>
-                <p className="text-xs text-muted">Geotechnical Earth Pressures, IBC 1807.3 Pole Embedment, NDS Adjustments & Timber Lagging Arching</p>
+                <p className="text-xs text-muted">Earth Pressures, Shallow Dig Engineering, IBC 1807.3 Pole Embedment & NDS Specifications</p>
               </div>
               <button 
                 className="btn-secondary" 
@@ -1737,28 +2106,67 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   Step 3: Individual Post Tributary Load & Overturning Moment (Spacing S = {spacing} ft)
                 </h4>
                 <div className="math-block">
-                  P_post = P_total × S = {pTotalPerFt.toFixed(1)} × {spacing} = {pPost.toFixed(1)} lb ({(pPost / 1000).toFixed(2)} kips)
+                  Raw Cantilever Load: P_post = {rawPPost.toFixed(1)} lb ({(rawPPost / 1000).toFixed(2)} kips)
                   <br />
-                  M_grade = M_base × S = {mTotalPerFt.toFixed(1)} × {spacing} = {mGrade.toFixed(1)} ft-lb ({(mGrade / 1000).toFixed(2)} kip-ft)
+                  Raw Cantilever Moment: M_grade = {rawMGrade.toFixed(1)} ft-lb ({(rawMGrade / 1000).toFixed(2)} kip-ft)
+                  {foundationMethod === 'tieback' && (
+                    <>
+                      <br />
+                      • <strong>Tieback Anchor Reduction:</strong> Tie rod carries T_anchor = {tAnchor.toFixed(0)} lb.
+                      <br />
+                      • Reduced Base Shear: P_post = {pPost.toFixed(0)} lb • Reduced Moment: M_grade = {mGrade.toFixed(0)} ft-lb (75% drop)
+                    </>
+                  )}
                   <br />
                   Resultant Height: h_o = M_grade / P_post = {hResultant.toFixed(2)} ft above grade
                 </div>
               </div>
 
-              {/* Step 4: IBC Section 1807.3 Pole Embedment Formula */}
+              {/* Step 4: Shallow Dig Depth Engineering (Method Comparison) */}
               <div>
                 <h4 style={{ color: embedStatusColor, marginBottom: '0.4rem', fontSize: '1.05rem' }}>
-                  Step 4: IBC Section 1807.3 Pole Embedment & Geotechnical Depth ("How Deep to Dig")
+                  Step 4: Shallow Dig Depth Engineering ({foundationMethod.replace('_', ' ').toUpperCase()})
                 </h4>
                 <p className="text-sm">
-                  Per IBC Section 1807.3.2.1 for non-constrained cantilever poles / soldier piles:
+                  Geotechnical embedment calculation to resist lateral overturning:
                 </p>
                 <div className="math-block">
-                  Formula: d = 0.5 · A · [ 1 + √( 1 + 4.36 · h / A ) ]
-                  <br />
-                  where A = (2.34 · P) / (S1 · b) = (2.34 × {pPost.toFixed(0)}) / ({soil.s1 * 2} × {Math.max(post.d / 12, 1.0).toFixed(2)}) = {ibcAParam.toFixed(2)} ft
-                  <br />
-                  Resulting Code Embedment: D_req = {dReq.toFixed(1)} ft
+                  {foundationMethod === 'direct' && (
+                    <>
+                      • <strong>Direct Soil Burial:</strong> Narrow wood post (b = {bPostFt.toFixed(2)} ft) bears on loose soil.
+                      <br />
+                      Required Dig Depth: D_req = {dReq.toFixed(1)} ft (Deepest excavation required)
+                    </>
+                  )}
+                  {foundationMethod === 'concrete_pier' && (
+                    <>
+                      • <strong>Augered Concrete Pier (∅ = {pierDiameter}" = {bPierFt.toFixed(2)} ft):</strong>
+                      <br />
+                      Increasing width b from {bPostFt.toFixed(2)}' to {bPierFt.toFixed(2)}' quadruples passive resistance!
+                      <br />
+                      IBC Parameter: A = (2.34 · P) / (S1_eff · b) = (2.34 × {pPost.toFixed(0)}) / ({soil.s1 * 2} × {bPierFt.toFixed(2)}) = {ibcAParam.toFixed(2)} ft
+                      <br />
+                      Required Dig Depth: D_req = {dReq.toFixed(1)} ft (Slashes dig depth by {Math.round((1 - dReq / (height * 1.15)) * 100)}%!)
+                    </>
+                  )}
+                  {foundationMethod === 'concrete_collar' && (
+                    <>
+                      • <strong>Ground-Line Restraint Collar (IBC 1807.3.2.2 Constrained):</strong>
+                      <br />
+                      Formula: d = √[ 4.25 · M_grade / (S3 · b) ] = √[ 4.25 × {mGrade.toFixed(0)} / ({soil.s1 * 2} × {Math.max(bPostFt, 1.25).toFixed(2)}) ]
+                      <br />
+                      Required Dig Depth: D_req = {dReq.toFixed(1)} ft (Prevents toe translation at surface)
+                    </>
+                  )}
+                  {foundationMethod === 'tieback' && (
+                    <>
+                      • <strong>Deadman Tieback Anchor:</strong>
+                      <br />
+                      Post converts from cantilever to propped beam. Base moment drops by 75%.
+                      <br />
+                      Required Dig Depth: D_req = {dReq.toFixed(1)} ft (Ultra-shallow excavation)
+                    </>
+                  )}
                   <br />
                   Current Excavated Depth: D = {embedment.toFixed(1)} ft
                   <br />
@@ -1771,17 +2179,12 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 <h4 style={{ color: 'var(--accent-emerald)', marginBottom: '0.4rem', fontSize: '1.05rem' }}>
                   Step 5: NDS Allowable Bending Design Value Adjustments (F'b)
                 </h4>
-                <p className="text-sm">
-                  Per National Design Specification for Wood Construction (NDS Section 4.3):
-                </p>
                 <div className="math-block">
                   F'b = Fb · CD · CM · CL · CF · Ci · Cr
                   <br />
-                  • Wet Service Factor (CM): CM = 0.85 (for wood in contact with moist soil when Fb·CF &gt; 1,150 psi)
+                  • Wet Service Factor (CM): CM = 0.85 (ground contact moist backfill)
                   <br />
-                  • Load Duration Factor (CD): CD = 0.90 (for permanent continuous earth pressure) or 1.0 (normal)
-                  <br />
-                  • Size Factor (CF) & Beam Stability Factor (CL): CL = 1.0 (continuously braced by soil/lagging)
+                  • Load Duration Factor (CD): CD = 0.90 (permanent continuous earth pressure)
                   <br />
                   Adjusted Allowable Bending Stress: F'b = {fbAllowable} psi
                 </div>
@@ -1808,9 +2211,6 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 <h4 style={{ color: plankStatusColor, marginBottom: '0.4rem', fontSize: '1.05rem' }}>
                   Step 7: Horizontal Timber Lagging Thickness & Soil Arching (AASHTO / FHWA)
                 </h4>
-                <p className="text-sm">
-                  Due to soil arching behind flexible timber planks between soldier posts:
-                </p>
                 <div className="math-block">
                   Max Lateral Pressure at Base: p_max = {sigmaHMax.toFixed(1)} psf
                   <br />
