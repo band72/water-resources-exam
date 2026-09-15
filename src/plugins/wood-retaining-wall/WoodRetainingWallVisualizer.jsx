@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
 
@@ -102,6 +102,8 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     }
     return problem?.viewMode || 'profile';
   });
+  const [showProfileDiagramOverlay, setShowProfileDiagramOverlay] = useState(false);
+  const [diagramProbeDepth, setDiagramProbeDepth] = useState(problem?.height ?? 6);
   const [showDerivation, setShowDerivation] = useState(false);
 
   // Sync state if selected problem changes
@@ -109,7 +111,10 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
   if (problem && problem !== prevProblem) {
     setPrevProblem(problem);
     if (problem.postSize) setPostSizeKey(problem.postSize);
-    if (problem.height !== undefined) setHeight(problem.height);
+    if (problem.height !== undefined) {
+      setHeight(problem.height);
+      setDiagramProbeDepth(problem.height);
+    }
     if (problem.embedment !== undefined) setEmbedment(problem.embedment);
     if (problem.spacing !== undefined) setSpacing(problem.spacing);
     if (problem.soilType) setSoilTypeKey(problem.soilType);
@@ -350,6 +355,219 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
 
   // Total timber post length
   const totalLength = height + embedment;
+
+  // Dynamic Continuous Shear & Moment Diagram Profile along the Entire Post Length (H + D)
+  const diagramData = useMemo(() => {
+    const H = height;
+    const D = embedment;
+    const L = Math.max(H + D, 1);
+    const S = spacing;
+    const q = surcharge;
+    const hw_val = hw;
+    const hDry_val = Math.max(0, H - hw_val);
+    const gamma = soil.gammaSoil;
+    const gammaPrime_val = soil.gammaSat - gammaW;
+
+    // Anchor geometry & force
+    const hasTieback = foundationMethod === 'tieback';
+    const hasCollar = foundationMethod === 'concrete_collar';
+    const yAnchor = H * 0.33; // 0.67*H above grade, 0.33*H from top
+    const tAnc = hasTieback ? (0.58 * rawPPost) : 0;
+
+    // Calculate distributed active load w(y) at depth y from top (plf)
+    const getWActive = (y) => {
+      if (y > H) return 0;
+      const w_q = ka * q * S;
+      let w_soil = 0;
+      let w_water = 0;
+      if (y <= hDry_val) {
+        w_soil = ka * gamma * y * S;
+      } else {
+        const yw = y - hDry_val;
+        w_soil = ka * (gamma * hDry_val + gammaPrime_val * yw) * S;
+        w_water = hasDrainage ? 0 : (gammaW * yw * S);
+      }
+      return w_q + w_soil + w_water;
+    };
+
+    // Integrate above grade to get raw active shear and moment
+    const getAboveGradeForces = (y) => {
+      const yClamped = Math.min(y, H);
+      let V = ka * q * yClamped * S;
+      let M = 0.5 * ka * q * Math.pow(yClamped, 2) * S;
+
+      if (yClamped <= hDry_val) {
+        const V_soil = 0.5 * ka * gamma * Math.pow(yClamped, 2) * S;
+        const M_soil = (1 / 6) * ka * gamma * Math.pow(yClamped, 3) * S;
+        V += V_soil;
+        M += M_soil;
+      } else {
+        const V_dry = 0.5 * ka * gamma * Math.pow(hDry_val, 2) * S;
+        const armDryFromY = yClamped - (2 / 3) * hDry_val;
+        const M_dry = V_dry * armDryFromY;
+
+        const yw = yClamped - hDry_val;
+        const V_overburden = ka * (gamma * hDry_val) * yw * S;
+        const M_overburden = 0.5 * ka * (gamma * hDry_val) * Math.pow(yw, 2) * S;
+
+        const V_sub = 0.5 * ka * gammaPrime_val * Math.pow(yw, 2) * S;
+        const M_sub = (1 / 6) * ka * gammaPrime_val * Math.pow(yw, 3) * S;
+
+        let V_wat = 0;
+        let M_wat = 0;
+        if (!hasDrainage) {
+          V_wat = 0.5 * gammaW * Math.pow(yw, 2) * S;
+          M_wat = (1 / 6) * gammaW * Math.pow(yw, 3) * S;
+        }
+
+        V += V_dry + V_overburden + V_sub + V_wat;
+        M += M_dry + M_overburden + M_sub + M_wat;
+      }
+
+      if (hasTieback && yClamped >= yAnchor) {
+        V -= tAnc;
+        M -= tAnc * (yClamped - yAnchor);
+      }
+
+      return { V, M };
+    };
+
+    const gradeForces = getAboveGradeForces(H);
+    const V_grade = gradeForces.V;
+    const M_grade = gradeForces.M;
+
+    // Soil passive reaction parameters below grade
+    const R_collar = hasCollar ? (V_grade + (2 * M_grade) / Math.max(D, 1)) : 0;
+    const V_grade_eff = hasCollar ? (V_grade - R_collar) : V_grade;
+    const C_broms = (4 * V_grade) + (12 * M_grade) / Math.max(D, 1);
+
+    const numStations = 80;
+    const stations = [];
+
+    for (let i = 0; i <= numStations; i++) {
+      const y = (i / numStations) * L;
+      let V = 0;
+      let M = 0;
+      let w = 0;
+
+      if (y <= H) {
+        const forces = getAboveGradeForces(y);
+        V = forces.V;
+        M = forces.M;
+        w = getWActive(y);
+      } else {
+        const z = y - H;
+        const u = Math.min(Math.max(z / Math.max(D, 0.1), 0), 1);
+
+        if (hasCollar) {
+          V = V_grade_eff * Math.pow(1 - u, 2);
+          M = M_grade * Math.pow(1 - u, 2);
+          w = (2 * Math.abs(V_grade_eff) / Math.max(D, 1)) * (1 - u);
+        } else {
+          V = Math.pow(1 - u, 2) * (V_grade - C_broms * u);
+          M = M_grade + D * (
+            V_grade * (u - Math.pow(u, 2) + Math.pow(u, 3) / 3) -
+            C_broms * (Math.pow(u, 2) / 2 - (2 * Math.pow(u, 3)) / 3 + Math.pow(u, 4) / 4)
+          );
+          w = ((1 - u) / Math.max(D, 1)) * ((2 * V_grade + C_broms) - 3 * C_broms * u);
+        }
+      }
+
+      const fb = Math.abs(M * 12) / post.sx;
+      const fv = (1.5 * Math.abs(V)) / post.area;
+
+      stations.push({
+        y,
+        z: y > H ? y - H : 0,
+        isAboveGrade: y <= H,
+        w,
+        V,
+        M,
+        fb,
+        fv
+      });
+    }
+
+    let maxV = 0;
+    let maxM = 0;
+    let yCritM = H;
+    let yZeroV = H;
+
+    stations.forEach(s => {
+      if (Math.abs(s.V) > maxV) maxV = Math.abs(s.V);
+      if (Math.abs(s.M) > maxM) {
+        maxM = Math.abs(s.M);
+        yCritM = s.y;
+      }
+    });
+
+    for (let i = 1; i < stations.length; i++) {
+      if ((stations[i - 1].V >= 0 && stations[i].V <= 0) || (stations[i - 1].V <= 0 && stations[i].V >= 0)) {
+        if (stations[i].y > yAnchor) {
+          yZeroV = stations[i].y;
+          break;
+        }
+      }
+    }
+
+    const fvAllowable = 83; // psi (95 * CD * CM)
+    const fvMax = (1.5 * maxV) / post.area;
+    const isShearFail = fvMax > fvAllowable;
+    const isShearWarn = !isShearFail && fvMax > 0.85 * fvAllowable;
+    const shearStatusColor = isShearFail ? COLOR_FAIL : (isShearWarn ? COLOR_WARN : COLOR_SAFE);
+
+    const fbMax = (maxM * 12) / post.sx;
+    const isFbFail = fbMax > post.fbAllowable;
+    const isFbWarn = !isFbFail && fbMax > 0.85 * post.fbAllowable;
+    const momentStatusColor = isFbFail ? COLOR_FAIL : (isFbWarn ? COLOR_WARN : COLOR_SAFE);
+    const momentStatusBg = isFbFail ? BG_FAIL : (isFbWarn ? BG_WARN : BG_SAFE);
+    const momentStatusBorder = isFbFail ? BORDER_FAIL : (isFbWarn ? BORDER_WARN : BORDER_SAFE);
+
+    const zPivot = H + D * (hasCollar ? 0.9 : 0.7);
+
+    return {
+      stations,
+      maxV,
+      maxM,
+      yCritM,
+      yZeroV,
+      zPivot,
+      V_grade,
+      M_grade,
+      yAnchor: hasTieback ? yAnchor : null,
+      tAnc,
+      R_collar,
+      fvMax,
+      fvAllowable,
+      isShearFail,
+      isShearWarn,
+      shearStatusColor,
+      fbMax,
+      isFbFail,
+      isFbWarn,
+      momentStatusColor,
+      momentStatusBg,
+      momentStatusBorder
+    };
+  }, [height, embedment, spacing, surcharge, hw, soil, hasDrainage, foundationMethod, pierDiameter, rawPPost, post, ka]);
+
+  // Station lookup for interactive depth probe
+  const probeDepthClamped = Math.min(Math.max(diagramProbeDepth, 0), totalLength);
+  const probeData = useMemo(() => {
+    if (!diagramData.stations || diagramData.stations.length === 0) {
+      return { y: probeDepthClamped, w: 0, V: 0, M: 0, fb: 0, fv: 0 };
+    }
+    let closest = diagramData.stations[0];
+    let minDiff = Math.abs(closest.y - probeDepthClamped);
+    for (let i = 1; i < diagramData.stations.length; i++) {
+      const diff = Math.abs(diagramData.stations[i].y - probeDepthClamped);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closest = diagramData.stations[i];
+      }
+    }
+    return closest;
+  }, [diagramData, probeDepthClamped]);
 
   // SVG Scalings & Coordinates
   const svgWidth = 620;
@@ -1039,7 +1257,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
             {/* View Mode Switcher Header */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(255,255,255,0.03)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
               <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Interactive Retaining System Graphic</span>
-              <div style={{ display: 'flex', gap: '0.3rem' }}>
+              <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <button
                   className="btn-secondary"
                   style={{
@@ -1079,13 +1297,30 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 >
                   Shear & Moment
                 </button>
+
+                {viewMode === 'profile' && (
+                  <button
+                    className="btn-secondary"
+                    style={{
+                      padding: '0.25rem 0.55rem',
+                      fontSize: '0.72rem',
+                      background: showProfileDiagramOverlay ? 'rgba(6, 182, 212, 0.2)' : 'transparent',
+                      borderColor: showProfileDiagramOverlay ? 'var(--accent-cyan)' : 'var(--border-color)',
+                      color: showProfileDiagramOverlay ? 'var(--accent-cyan)' : 'var(--text-dim)'
+                    }}
+                    onClick={() => setShowProfileDiagramOverlay(prev => !prev)}
+                    title="Superimpose Shear & Moment Diagrams directly on the post in Elevation Profile"
+                  >
+                    📈 {showProfileDiagramOverlay ? 'Hide V & M Overlay' : 'Overlay V & M on Post'}
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Dynamic Interactive SVG Canvas */}
             <div style={{ background: 'linear-gradient(180deg, rgba(15,23,42,0.6) 0%, rgba(2,6,23,0.8) 100%)', borderRadius: '12px', border: '1px solid var(--border-color)', padding: '0.75rem', position: 'relative' }}>
               <svg 
-                viewBox={`0 0 ${svgWidth} ${svgHeight}`} 
+                viewBox={`0 0 ${viewMode === 'diagrams' ? 700 : svgWidth} ${viewMode === 'diagrams' ? 460 : svgHeight}`} 
                 style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
               >
                 <defs>
@@ -1161,6 +1396,32 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                     <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
                   </marker>
+                  <marker id="arrow-cyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4" />
+                  </marker>
+                  <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7" />
+                  </marker>
+
+                  {/* Shear Force Cyan Gradient */}
+                  <linearGradient id="shear-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.1" />
+                    <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.4" />
+                  </linearGradient>
+
+                  {/* Bending Moment Status Gradients */}
+                  <linearGradient id="moment-grad-safe" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.1" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0.4" />
+                  </linearGradient>
+                  <linearGradient id="moment-grad-warn" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.12" />
+                    <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.45" />
+                  </linearGradient>
+                  <linearGradient id="moment-grad-fail" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.15" />
+                    <stop offset="100%" stopColor="#f43f5e" stopOpacity="0.5" />
+                  </linearGradient>
                 </defs>
 
                 {/* Profile View Mode */}
@@ -1718,6 +1979,54 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     <text x="50" y="50" fill="var(--accent-amber)" fontSize="13" fontWeight="800" fontFamily="var(--font-mono)">
                       L = H + D = {totalLength.toFixed(1)}' ({post.name})
                     </text>
+                    {/* Optional Post Shear & Moment Diagrams Overlay on Profile */}
+                    {showProfileDiagramOverlay && (
+                      <g>
+                        {(() => {
+                          const baseXV = wallFaceX - postWidthPx - 75;
+                          const scaleVProf = 45 / Math.max(diagramData.maxV, 100);
+                          const ptsV = [[baseXV, groundY - sHeight]];
+                          diagramData.stations.forEach(s => {
+                            const yPx = groundY - sHeight + (s.y / totalLength) * (sHeight + sEmbed);
+                            const xPx = baseXV - s.V * scaleVProf;
+                            ptsV.push([xPx, yPx]);
+                          });
+                          ptsV.push([baseXV, groundY + sEmbed]);
+                          const polyStrV = ptsV.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+
+                          const baseXM = wallFaceX - postWidthPx - 150;
+                          const scaleMProf = 45 / Math.max(diagramData.maxM, 500);
+                          const ptsM = [[baseXM, groundY - sHeight]];
+                          diagramData.stations.forEach(s => {
+                            const yPx = groundY - sHeight + (s.y / totalLength) * (sHeight + sEmbed);
+                            const xPx = baseXM - s.M * scaleMProf;
+                            ptsM.push([xPx, yPx]);
+                          });
+                          ptsM.push([baseXM, groundY + sEmbed]);
+                          const polyStrM = ptsM.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+
+                          return (
+                            <g>
+                              {/* Shear Axis & Curve */}
+                              <line x1={baseXV} y1={groundY - sHeight} x2={baseXV} y2={groundY + sEmbed} stroke="#06b6d4" strokeWidth="1" strokeDasharray="3,3" opacity="0.6" />
+                              <polygon points={polyStrV} fill="url(#shear-grad)" stroke="#06b6d4" strokeWidth="1.5" />
+                              <rect x={baseXV - 70} y={groundY - sHeight - 2} width="70" height="14" rx="2" fill="rgba(15,23,42,0.9)" stroke="#06b6d4" strokeWidth="0.6" />
+                              <text x={baseXV - 35} y={groundY - sHeight + 8} fill="#06b6d4" fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                                Vmax {(diagramData.maxV / 1000).toFixed(1)}k
+                              </text>
+
+                              {/* Moment Axis & Curve */}
+                              <line x1={baseXM} y1={groundY - sHeight} x2={baseXM} y2={groundY + sEmbed} stroke={postStatusColor} strokeWidth="1" strokeDasharray="3,3" opacity="0.6" />
+                              <polygon points={polyStrM} fill={diagramData.isFbFail ? 'url(#moment-grad-fail)' : 'url(#moment-grad-safe)'} stroke={postStatusColor} strokeWidth="1.5" />
+                              <rect x={baseXM - 75} y={groundY - sHeight - 2} width="75" height="14" rx="2" fill="rgba(15,23,42,0.9)" stroke={postStatusColor} strokeWidth="0.6" />
+                              <text x={baseXM - 37} y={groundY - sHeight + 8} fill={postStatusColor} fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                                Mmax {(diagramData.maxM / 1000).toFixed(1)}k-ft
+                              </text>
+                            </g>
+                          );
+                        })()}
+                      </g>
+                    )}
                   </g>
                 )}
 
@@ -1823,147 +2132,482 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 )}
 
                 {/* Shear & Moment Diagrams View Mode */}
-                {viewMode === 'diagrams' && (
-                  <g>
-                    <rect x="180" y="40" width="12" height={svgHeight - 80} fill="#78350f" rx="2" />
-                    <line x1="100" y1={groundY} x2="550" y2={groundY} stroke="#94a3b8" strokeWidth="1.5" strokeDasharray="4,4" />
-                    <text x="105" y={groundY - 6} fill="#94a3b8" fontSize="10" fontFamily="var(--font-mono)">Ground Line (z = 0)</text>
+                {viewMode === 'diagrams' && (() => {
+                  const diagTopY = 55;
+                  const diagBotY = 405;
+                  const diagSpanY = diagBotY - diagTopY;
+                  const yPxPerFt = diagSpanY / Math.max(totalLength, 1);
+                  const getYPix = (y) => diagTopY + y * yPxPerFt;
 
-                    {/* Shear Force Diagram V(z) */}
-                    <g transform="translate(240, 0)">
-                      <text x="50" y="30" fill="var(--accent-cyan)" fontSize="12" fontWeight="700">
-                        Shear Force V(z)
-                      </text>
-                      <line x1="50" y1="40" x2="50" y2={svgHeight - 40} stroke="#475569" strokeWidth="1" />
-                      <path 
-                        d={`M 50 40 Q 55 ${groundY - 40}, ${50 + Math.min(pPost * 0.007, 70)} ${groundY} L 50 ${groundY} Z`} 
-                        fill="rgba(6, 182, 212, 0.2)" 
-                        stroke="var(--accent-cyan)" 
-                        strokeWidth="2" 
-                      />
-                      <rect x={50 + Math.min(pPost * 0.007, 70) + 6} y={groundY - 8} width="110" height="18" rx="3" fill="rgba(15,23,42,0.92)" stroke="var(--accent-cyan)" strokeWidth="0.8" />
-                      <text 
-                        x={50 + Math.min(pPost * 0.007, 70) + 61} 
-                        y={groundY + 4} 
-                        fill="var(--accent-cyan)" 
-                        fontSize="9" 
-                        fontWeight="700" 
-                        textAnchor="middle"
-                        fontFamily="var(--font-mono)"
-                      >
-                        V_max = {(pPost / 1000).toFixed(2)} kips
-                      </text>
-                    </g>
+                  const diagGroundY = getYPix(height);
+                  const diagTipY = getYPix(totalLength);
+                  const diagZeroY = getYPix(diagramData.yZeroV);
+                  const diagCritMY = getYPix(diagramData.yCritM);
+                  const diagPivotY = getYPix(diagramData.zPivot);
+                  const yProbePix = getYPix(probeDepthClamped);
 
-                    {/* Bending Moment Diagram M(z) */}
-                    <g transform="translate(420, 0)">
-                      <text x="50" y="30" fill={postStatusColor} fontSize="12" fontWeight="700">
-                        Bending Moment M(z)
-                      </text>
-                      <line x1="50" y1="40" x2="50" y2={svgHeight - 40} stroke="#475569" strokeWidth="1" />
-                      <path 
-                        d={`M 50 40 Q 52 ${groundY - 50}, ${50 + Math.min(mGrade * 0.0025, 80)} ${groundY} L 50 ${groundY} Z`} 
-                        fill={postStatusBg} 
-                        stroke={postStatusColor} 
-                        strokeWidth="2" 
-                      />
-                      <rect x={50 + Math.min(mGrade * 0.0025, 80) + 6} y={groundY - 8} width="115" height="18" rx="3" fill="rgba(15,23,42,0.92)" stroke={postStatusColor} strokeWidth="0.8" />
-                      <text 
-                        x={50 + Math.min(mGrade * 0.0025, 80) + 63} 
-                        y={groundY + 4} 
-                        fill={postStatusColor} 
-                        fontSize="9" 
-                        fontWeight="700" 
-                        textAnchor="middle"
-                        fontFamily="var(--font-mono)"
-                      >
-                        M_max = {(mGrade / 1000).toFixed(2)} k-ft
-                      </text>
-                      <rect x="50" y={groundY + 12} width="135" height="18" rx="3" fill="rgba(15,23,42,0.92)" stroke={postStatusBorder} strokeWidth="0.8" />
-                      <text 
-                        x="117" 
-                        y={groundY + 24} 
-                        fill={postStatusColor} 
-                        fontSize="9" 
-                        fontFamily="var(--font-mono)" 
-                        fontWeight="700"
-                        textAnchor="middle"
-                      >
-                        fb = {fbActual.toFixed(0)} psi ({isPostFail ? '✗ FAIL' : (isPostWarn ? '⚠ WARN' : '✓ OK')})
-                      </text>
+                  // Col 1: FBD
+                  const col1X = 115;
+                  // Col 2: Shear V(z)
+                  const col2X = 330;
+                  const scaleV = 70 / Math.max(diagramData.maxV, 100);
+                  const xShear = (v) => col2X + (v * scaleV);
+                  const shearPts = [[col2X, diagTopY], ...diagramData.stations.map(s => [xShear(s.V), getYPix(s.y)]), [col2X, diagTipY]];
+                  const shearPolyStr = shearPts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+
+                  // Col 3: Moment M(z)
+                  const col3X = 545;
+                  const scaleM = 75 / Math.max(diagramData.maxM, 500);
+                  const xMoment = (m) => col3X + (m * scaleM);
+                  const momentPts = [[col3X, diagTopY], ...diagramData.stations.map(s => [xMoment(s.M), getYPix(s.y)]), [col3X, diagTipY]];
+                  const momentPolyStr = momentPts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+
+                  return (
+                    <g>
+                      {/* Ground Line Guideline Across All 3 Panes */}
+                      <line x1="25" y1={diagGroundY} x2="675" y2={diagGroundY} stroke="#94a3b8" strokeWidth="1.2" strokeDasharray="4,4" />
+                      <text x="28" y={diagGroundY - 4} fill="#94a3b8" fontSize="8.5" fontFamily="var(--font-mono)">Ground Line (z = 0)</text>
+
+                      {/* ================= COLUMN 1: POST FREE BODY DIAGRAM & LOADING w(z) ================= */}
+                      <g>
+                        <text x={col1X} y={diagTopY - 18} fill="var(--text-main)" fontSize="12" fontWeight="800" textAnchor="middle">
+                          1. Post Free Body
+                        </text>
+                        <text x={col1X} y={diagTopY - 5} fill="var(--text-dim)" fontSize="8.5" textAnchor="middle" fontFamily="var(--font-mono)">
+                          Loading w(z) & Soil
+                        </text>
+
+                        {/* Concrete Pier Encasement if active */}
+                        {foundationMethod === 'concrete_pier' && (
+                          <g>
+                            <rect 
+                              x={col1X - 22} 
+                              y={diagGroundY} 
+                              width="44" 
+                              height={diagTipY - diagGroundY} 
+                              fill="url(#concrete-shaft-grad)" 
+                              stroke="var(--accent-blue)" 
+                              strokeWidth="1" 
+                              strokeDasharray="3,3" 
+                              rx="3" 
+                              opacity="0.6" 
+                            />
+                            <rect 
+                              x={col1X - 22} 
+                              y={diagGroundY} 
+                              width="44" 
+                              height={diagTipY - diagGroundY} 
+                              fill="url(#concrete-stipple-pattern)" 
+                              opacity="0.5" 
+                            />
+                            <text x={col1X} y={diagTipY + 14} fill="var(--accent-blue)" fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                              Ø {pierDiameter}" Pier Encasement
+                            </text>
+                          </g>
+                        )}
+
+                        {/* Wood Timber Post Column */}
+                        <rect 
+                          x={col1X - 7} 
+                          y={diagTopY} 
+                          width="14" 
+                          height={diagSpanY} 
+                          fill="url(#wood-post-grad)" 
+                          stroke="#78350f" 
+                          strokeWidth="1.5" 
+                          rx="2" 
+                        />
+
+                        {/* Surcharge load strip */}
+                        {surcharge > 0 && (
+                          <g>
+                            <rect x={col1X + 9} y={diagTopY} width="40" height="14" fill="rgba(245, 158, 11, 0.25)" stroke="#f59e0b" strokeWidth="0.8" />
+                            <text x={col1X + 29} y={diagTopY + 10} fill="#f59e0b" fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                              q = {surcharge} psf
+                            </text>
+                          </g>
+                        )}
+
+                        {/* Active Earth Pressure Arrows pointing left into post */}
+                        {[0.25, 0.5, 0.75, 0.95].map((frac, idx) => {
+                          const yArr = diagTopY + (diagGroundY - diagTopY) * frac;
+                          const arrLen = 14 + frac * 32;
+                          return (
+                            <line 
+                              key={idx}
+                              x1={col1X + 8 + arrLen} 
+                              y1={yArr} 
+                              x2={col1X + 8} 
+                              y2={yArr} 
+                              stroke="#f59e0b" 
+                              strokeWidth="1.8" 
+                              markerEnd="url(#arrow-amber)" 
+                            />
+                          );
+                        })}
+
+                        {/* Water Pressure Arrows if undrained */}
+                        {!hasDrainage && hw > 0 && (
+                          <g>
+                            {[0.5, 0.85].map((frac, idx) => {
+                              const yArr = diagGroundY - (hw * yPxPerFt) * (1 - frac);
+                              return (
+                                <line 
+                                  key={`w-${idx}`}
+                                  x1={col1X + 8 + 26 * frac} 
+                                  y1={yArr} 
+                                  x2={col1X + 8} 
+                                  y2={yArr} 
+                                  stroke="#38bdf8" 
+                                  strokeWidth="1.8" 
+                                  markerEnd="url(#arrow-blue)" 
+                                />
+                              );
+                            })}
+                          </g>
+                        )}
+
+                        {/* Tieback Anchor Reaction Arrow */}
+                        {foundationMethod === 'tieback' && (
+                          <g>
+                            <line 
+                              x1={col1X + 7} 
+                              y1={getYPix(height * 0.33)} 
+                              x2={col1X + 60} 
+                              y2={getYPix(height * 0.33)} 
+                              stroke="#38bdf8" 
+                              strokeWidth="2.5" 
+                              markerEnd="url(#arrow-blue)" 
+                            />
+                            <rect x={col1X + 50} y={getYPix(height * 0.33) - 8} width="58" height="15" rx="2" fill="rgba(15,23,42,0.92)" stroke="#38bdf8" strokeWidth="0.8" />
+                            <text x={col1X + 79} y={getYPix(height * 0.33) + 3} fill="#38bdf8" fontSize="7.5" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                              T = {(diagramData.tAnc / 1000).toFixed(1)}k
+                            </text>
+                          </g>
+                        )}
+
+                        {/* Ground Collar Restraint Arrow */}
+                        {foundationMethod === 'concrete_collar' && (
+                          <g>
+                            <rect x={col1X - 20} y={diagGroundY - 5} width="40" height="10" fill="url(#concrete-shaft-grad)" stroke="var(--accent-purple)" strokeWidth="1.2" rx="2" />
+                            <line x1={col1X - 20} y1={diagGroundY} x2={col1X - 52} y2={diagGroundY} stroke="var(--accent-purple)" strokeWidth="2" markerEnd="url(#arrow-purple)" />
+                            <text x={col1X - 56} y={diagGroundY + 3} fill="var(--accent-purple)" fontSize="7.5" fontWeight="700" textAnchor="end" fontFamily="var(--font-mono)">
+                              R_collar
+                            </text>
+                          </g>
+                        )}
+
+                        {/* Below Grade Passive Soil Reaction Arrows */}
+                        <g>
+                          {/* Front Passive (pushing right against wall) */}
+                          <line x1={col1X - 35} y1={diagGroundY + (diagPivotY - diagGroundY) * 0.5} x2={col1X - 8} y2={diagGroundY + (diagPivotY - diagGroundY) * 0.5} stroke="#10b981" strokeWidth="1.8" markerEnd="url(#arrow-emerald)" />
+                          <text x={col1X - 40} y={diagGroundY + (diagPivotY - diagGroundY) * 0.5 + 3} fill="#10b981" fontSize="7.5" fontWeight="700" textAnchor="end" fontFamily="var(--font-mono)">+Passive Pp</text>
+
+                          {/* Back Kickback (pushing left below pivot) */}
+                          <line x1={col1X + 35} y1={diagPivotY + (diagTipY - diagPivotY) * 0.6} x2={col1X + 8} y2={diagPivotY + (diagTipY - diagPivotY) * 0.6} stroke="#10b981" strokeWidth="1.8" markerEnd="url(#arrow-emerald)" />
+                          <text x={col1X + 40} y={diagPivotY + (diagTipY - diagPivotY) * 0.6 + 3} fill="#10b981" fontSize="7.5" fontWeight="700" textAnchor="start" fontFamily="var(--font-mono)">Kickback</text>
+                        </g>
+
+                        {/* Depth Station Ticks on Left */}
+                        <g opacity="0.8">
+                          <text x="35" y={diagTopY + 3} fill="var(--text-dim)" fontSize="8" fontFamily="var(--font-mono)">0.0' Top</text>
+                          <line x1="68" y1={diagTopY} x2="78" y2={diagTopY} stroke="#475569" strokeWidth="0.8" />
+
+                          <text x="35" y={diagGroundY + 3} fill="#94a3b8" fontSize="8" fontFamily="var(--font-mono)">{height.toFixed(1)}' Grade</text>
+                          <line x1="68" y1={diagGroundY} x2="78" y2={diagGroundY} stroke="#94a3b8" strokeWidth="0.8" />
+
+                          <text x="35" y={diagTipY + 3} fill="var(--text-dim)" fontSize="8" fontFamily="var(--font-mono)">{totalLength.toFixed(1)}' Tip</text>
+                          <line x1="68" y1={diagTipY} x2="78" y2={diagTipY} stroke="#475569" strokeWidth="0.8" />
+                        </g>
+                      </g>
+
+                      {/* ================= COLUMN 2: SHEAR FORCE DIAGRAM V(z) ================= */}
+                      <g>
+                        <text x={col2X} y={diagTopY - 18} fill="var(--accent-cyan)" fontSize="12" fontWeight="800" textAnchor="middle">
+                          2. Shear Force V(z)
+                        </text>
+                        <text x={col2X} y={diagTopY - 5} fill="var(--text-dim)" fontSize="8.5" textAnchor="middle" fontFamily="var(--font-mono)">
+                          Baseline V = 0 [kips]
+                        </text>
+
+                        {/* Baseline Axis */}
+                        <line x1={col2X} y1={diagTopY} x2={col2X} y2={diagTipY} stroke="#475569" strokeWidth="1.2" />
+
+                        {/* Shaded Shear Diagram Polygon */}
+                        <polygon points={shearPolyStr} fill="url(#shear-grad)" stroke="var(--accent-cyan)" strokeWidth="2" />
+
+                        {/* Zero Shear Crossing Marker (where V = 0) */}
+                        <g>
+                          <line x1={col2X - 55} y1={diagZeroY} x2={col2X + 55} y2={diagZeroY} stroke="#06b6d4" strokeWidth="0.8" strokeDasharray="2,2" opacity="0.8" />
+                          <polygon points={`${col2X},${diagZeroY - 4} ${col2X + 4},${diagZeroY} ${col2X},${diagZeroY + 4} ${col2X - 4},${diagZeroY}`} fill="#06b6d4" />
+                          <text x={col2X + 6} y={diagZeroY + 3} fill="#06b6d4" fontSize="8" fontFamily="var(--font-mono)">
+                            V=0 (z={(diagramData.yZeroV - height).toFixed(1)}')
+                          </text>
+                        </g>
+
+                        {/* Groundline Shear Point */}
+                        <circle cx={xShear(diagramData.V_grade)} cy={diagGroundY} r="3.5" fill="var(--accent-cyan)" />
+                        <rect x={xShear(diagramData.V_grade) + 5} y={diagGroundY - 8} width="85" height="16" rx="3" fill="rgba(15,23,42,0.92)" stroke="var(--accent-cyan)" strokeWidth="0.8" />
+                        <text x={xShear(diagramData.V_grade) + 47} y={diagGroundY + 3} fill="var(--accent-cyan)" fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                          V_gr = {(diagramData.V_grade / 1000).toFixed(2)}k
+                        </text>
+
+                        {/* Peak Shear Badge at Bottom */}
+                        <rect x={col2X - 70} y={diagTipY + 8} width="140" height="28" rx="4" fill="rgba(15,23,42,0.94)" stroke="var(--accent-cyan)" strokeWidth="0.8" />
+                        <text x={col2X} y={diagTipY + 20} fill="var(--accent-cyan)" fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="var(--font-mono)">
+                          V_max = {(diagramData.maxV / 1000).toFixed(2)} kips
+                        </text>
+                        <text x={col2X} y={diagTipY + 31} fill={diagramData.shearStatusColor} fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                          fv = {diagramData.fvMax.toFixed(0)} psi ({diagramData.isShearFail ? '✗ FAIL' : '✓ OK'})
+                        </text>
+                      </g>
+
+                      {/* ================= COLUMN 3: BENDING MOMENT DIAGRAM M(z) ================= */}
+                      <g>
+                        <text x={col3X} y={diagTopY - 18} fill={diagramData.momentStatusColor} fontSize="12" fontWeight="800" textAnchor="middle">
+                          3. Bending Moment M(z)
+                        </text>
+                        <text x={col3X} y={diagTopY - 5} fill="var(--text-dim)" fontSize="8.5" textAnchor="middle" fontFamily="var(--font-mono)">
+                          Moment Envelope [k-ft]
+                        </text>
+
+                        {/* Baseline Axis */}
+                        <line x1={col3X} y1={diagTopY} x2={col3X} y2={diagTipY} stroke="#475569" strokeWidth="1.2" />
+
+                        {/* Shaded Moment Diagram Polygon */}
+                        <polygon 
+                          points={momentPolyStr} 
+                          fill={diagramData.isFbFail ? 'url(#moment-grad-fail)' : (diagramData.isFbWarn ? 'url(#moment-grad-warn)' : 'url(#moment-grad-safe)')} 
+                          stroke={diagramData.momentStatusColor} 
+                          strokeWidth="2" 
+                        />
+
+                        {/* Groundline Moment Point */}
+                        <circle cx={xMoment(diagramData.M_grade)} cy={diagGroundY} r="3.5" fill={diagramData.momentStatusColor} />
+                        <rect x={xMoment(diagramData.M_grade) + 5} y={diagGroundY - 8} width="88" height="16" rx="3" fill="rgba(15,23,42,0.92)" stroke={diagramData.momentStatusBorder} strokeWidth="0.8" />
+                        <text x={xMoment(diagramData.M_grade) + 49} y={diagGroundY + 3} fill={diagramData.momentStatusColor} fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                          M_gr = {(diagramData.M_grade / 1000).toFixed(2)}k-ft
+                        </text>
+
+                        {/* Peak Moment Marker at Critical Station */}
+                        <circle cx={xMoment(diagramData.maxM)} cy={diagCritMY} r="4" fill={diagramData.momentStatusColor} stroke="#fff" strokeWidth="1" />
+                        <rect x={xMoment(diagramData.maxM) + 6} y={diagCritMY - 9} width="92" height="17" rx="3" fill="rgba(15,23,42,0.92)" stroke={diagramData.momentStatusBorder} strokeWidth="0.8" />
+                        <text x={xMoment(diagramData.maxM) + 52} y={diagCritMY + 3} fill={diagramData.momentStatusColor} fontSize="8.5" fontWeight="800" textAnchor="middle" fontFamily="var(--font-mono)">
+                          M_max = {(diagramData.maxM / 1000).toFixed(2)}k-ft
+                        </text>
+
+                        {/* Timber Flexural Stress Badge at Bottom */}
+                        <rect x={col3X - 75} y={diagTipY + 8} width="150" height="28" rx="4" fill="rgba(15,23,42,0.94)" stroke={diagramData.momentStatusBorder} strokeWidth="0.8" />
+                        <text x={col3X} y={diagTipY + 20} fill={diagramData.momentStatusColor} fontSize="9" fontWeight="800" textAnchor="middle" fontFamily="var(--font-mono)">
+                          fb = {diagramData.fbMax.toFixed(0)} / {post.fbAllowable} psi
+                        </text>
+                        <text x={col3X} y={diagTipY + 31} fill={diagramData.momentStatusColor} fontSize="8" fontWeight="700" textAnchor="middle" fontFamily="var(--font-mono)">
+                          {diagramData.isFbFail ? '✗ OVERSTRESSED' : (diagramData.isFbWarn ? '⚠ MARGINAL' : '✓ FLEXURE SAFE')}
+                        </text>
+                      </g>
+
+                      {/* ================= INTERACTIVE HORIZONTAL PROBE GUIDELINE ================= */}
+                      <g>
+                        <line x1="25" y1={yProbePix} x2="675" y2={yProbePix} stroke="#f43f5e" strokeWidth="1.2" strokeDasharray="3,3" opacity="0.85" />
+                        <circle cx={col1X} cy={yProbePix} r="3.5" fill="#f43f5e" />
+                        <circle cx={xShear(probeData.V)} cy={yProbePix} r="3.5" fill="#06b6d4" stroke="#fff" strokeWidth="1" />
+                        <circle cx={xMoment(probeData.M)} cy={yProbePix} r="3.5" fill={diagramData.momentStatusColor} stroke="#fff" strokeWidth="1" />
+
+                        {/* Floating HUD Tooltip */}
+                        <rect x="170" y={Math.min(yProbePix - 20, diagTipY - 14)} width="360" height="18" rx="3" fill="rgba(15,23,42,0.95)" stroke="#f43f5e" strokeWidth="0.8" />
+                        <text x="350" y={Math.min(yProbePix - 7, diagTipY - 1)} fill="#f1f5f9" fontSize="8" fontFamily="var(--font-mono)" textAnchor="middle" fontWeight="600">
+                          📍 Depth: {probeDepthClamped.toFixed(1)}' ({probeDepthClamped <= height ? 'Above Grade' : `z=${(probeDepthClamped - height).toFixed(1)}' Soil`}) | V={(probeData.V / 1000).toFixed(2)}k | M={(probeData.M / 1000).toFixed(2)}k-ft | fb={probeData.fb.toFixed(0)}psi
+                        </text>
+                      </g>
                     </g>
-                  </g>
-                )}
+                  );
+                })()}
               </svg>
             </div>
 
+            {/* Interactive Station Depth Probe Control (shown when in diagrams mode) */}
+            {viewMode === 'diagrams' && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.85rem', background: 'rgba(255,255,255,0.03)', padding: '0.65rem 1rem', borderRadius: '8px', border: '1px solid var(--border-color)', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-main)', whiteSpace: 'nowrap' }}>
+                  📍 Probe Station:
+                </span>
+                <input 
+                  type="range" 
+                  min="0" 
+                  max={totalLength.toFixed(1)} 
+                  step="0.1" 
+                  value={probeDepthClamped} 
+                  onChange={(e) => setDiagramProbeDepth(parseFloat(e.target.value))} 
+                  style={{ flex: 1, minWidth: '140px' }}
+                />
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-purple)', minWidth: '45px' }}>
+                  {probeDepthClamped.toFixed(1)}'
+                </span>
+                <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+                  <button className="btn-secondary" style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }} onClick={() => setDiagramProbeDepth(0)}>Top (0')</button>
+                  <button className="btn-secondary" style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }} onClick={() => setDiagramProbeDepth(height)}>Grade ({height}')</button>
+                  <button className="btn-secondary" style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }} onClick={() => setDiagramProbeDepth(parseFloat(diagramData.yCritM.toFixed(1)))}>M_max ({diagramData.yCritM.toFixed(1)}')</button>
+                  <button className="btn-secondary" style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }} onClick={() => setDiagramProbeDepth(parseFloat(diagramData.zPivot.toFixed(1)))}>Pivot ({diagramData.zPivot.toFixed(1)}')</button>
+                  <button className="btn-secondary" style={{ padding: '0.15rem 0.45rem', fontSize: '0.7rem' }} onClick={() => setDiagramProbeDepth(totalLength)}>Tip ({totalLength.toFixed(1)}')</button>
+                </div>
+              </div>
+            )}
+
             {/* Performance Indicators & Checks Grid (Red/Yellow/Green for every card) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.85rem' }}>
-              
-              {/* Embedment Depth Check Card */}
-              <div 
-                className="glass-card" 
-                style={{ 
-                  padding: '0.85rem', 
-                  borderColor: embedStatusBorder,
-                  background: embedStatusBg,
-                  boxShadow: isEmbedFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
-                }}
-              >
-                <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
-                  Dig Depth (D)
+            {viewMode === 'diagrams' ? (
+              /* Structural Analysis Cards for Shear & Moment Mode */
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.75rem', marginTop: '0.5rem' }}>
+                {/* Max Shear Force Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: diagramData.isShearFail ? BORDER_FAIL : (diagramData.isShearWarn ? BORDER_WARN : 'rgba(6, 182, 212, 0.4)'),
+                    background: diagramData.isShearFail ? BG_FAIL : (diagramData.isShearWarn ? BG_WARN : 'rgba(6, 182, 212, 0.08)'),
+                    boxShadow: diagramData.isShearFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Peak Shear (Vmax)
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {(diagramData.maxV / 1000).toFixed(2)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>kips</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: diagramData.shearStatusColor, fontWeight: 600 }}>
+                    fv = {diagramData.fvMax.toFixed(0)} psi / {diagramData.fvAllowable} psi • {diagramData.isShearFail ? '✗ SHEAR FAIL' : '✓ OK'}
+                  </div>
                 </div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: embedStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
-                  {embedment.toFixed(1)}' <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ Req {dReq.toFixed(1)}'</span>
+
+                {/* Peak Bending Moment Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: diagramData.momentStatusBorder,
+                    background: diagramData.momentStatusBg,
+                    boxShadow: diagramData.isFbFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Peak Moment (Mmax)
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: diagramData.momentStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {(diagramData.maxM / 1000).toFixed(2)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>k-ft</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: diagramData.momentStatusColor, fontWeight: 600 }}>
+                    fb = {diagramData.fbMax.toFixed(0)} / {post.fbAllowable} psi • {diagramData.isFbFail ? '✗ FAIL' : (diagramData.isFbWarn ? '⚠ WARN' : '✓ OK')}
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.72rem', color: embedStatusColor, fontWeight: 600 }}>
-                  FS = {fsEmbed.toFixed(2)} • {isEmbedFail ? '✗ TOO SHALLOW (FAIL)' : (isEmbedWarn ? '⚠ MARGINAL' : '✓ CODE ADEQUATE')}
+
+                {/* Critical Moment Station Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: 'rgba(245, 158, 11, 0.4)',
+                    background: 'rgba(245, 158, 11, 0.08)'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Critical Station
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-amber)', fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {diagramData.yCritM.toFixed(1)}' <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>from top</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--accent-amber)', fontWeight: 600 }}>
+                    Zero Shear (V = 0) Point
+                  </div>
+                </div>
+
+                {/* Soil Embedment Pivot Point Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: 'rgba(16, 185, 129, 0.4)',
+                    background: 'rgba(16, 185, 129, 0.08)'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Rotation Pivot
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--accent-emerald)', fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    z = {(diagramData.zPivot - height).toFixed(1)}' <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>soil</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--accent-emerald)', fontWeight: 600 }}>
+                    Broms Kickback Axis (~0.7 D)
+                  </div>
                 </div>
               </div>
+            ) : (
+              /* Standard Geotechnical & Code Compliance Cards for Profile / Facade */
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.85rem' }}>
+                
+                {/* Embedment Depth Check Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: embedStatusBorder,
+                    background: embedStatusBg,
+                    boxShadow: isEmbedFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Dig Depth (D)
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: embedStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {embedment.toFixed(1)}' <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ Req {dReq.toFixed(1)}'</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: embedStatusColor, fontWeight: 600 }}>
+                    FS = {fsEmbed.toFixed(2)} • {isEmbedFail ? '✗ TOO SHALLOW (FAIL)' : (isEmbedWarn ? '⚠ MARGINAL' : '✓ CODE ADEQUATE')}
+                  </div>
+                </div>
 
-              {/* Timber Post Bending Stress Card */}
-              <div 
-                className="glass-card" 
-                style={{ 
-                  padding: '0.85rem', 
-                  borderColor: postStatusBorder,
-                  background: postStatusBg,
-                  boxShadow: isPostFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
-                }}
-              >
-                <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
-                  Post Flexure (fb)
+                {/* Timber Post Bending Stress Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: postStatusBorder,
+                    background: postStatusBg,
+                    boxShadow: isPostFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Post Flexure (fb)
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: postStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {fbActual.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {fbAllowable} psi</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: postStatusColor, fontWeight: 600 }}>
+                    Utilization: {(postRatio * 100).toFixed(0)}% • {isPostFail ? '✗ OVERSTRESSED' : (isPostWarn ? '⚠ WARN' : '✓ PASS')}
+                  </div>
                 </div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: postStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
-                  {fbActual.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {fbAllowable} psi</span>
+
+                {/* Timber Lagging Thickness Flexural Card */}
+                <div 
+                  className="glass-card" 
+                  style={{ 
+                    padding: '0.85rem', 
+                    borderColor: plankStatusBorder,
+                    background: plankStatusBg,
+                    boxShadow: isPlankFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
+                  }}
+                >
+                  <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
+                    Lagging Planks ({lagging.nominal})
+                  </div>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: plankStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
+                    {fbPlank.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {fbPlankAllowable} psi</span>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: plankStatusColor, fontWeight: 600 }}>
+                    Utilization: {(plankRatio * 100).toFixed(0)}% • {isPlankFail ? '✗ PLANK FAILS' : (isPlankWarn ? '⚠ MARGINAL' : '✓ PLANK OK')}
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.72rem', color: postStatusColor, fontWeight: 600 }}>
-                  Utilization: {(postRatio * 100).toFixed(0)}% • {isPostFail ? '✗ OVERSTRESSED' : (isPostWarn ? '⚠ WARN' : '✓ PASS')}
-                </div>
+
               </div>
-
-              {/* Timber Lagging Plank Flexure Card */}
-              <div 
-                className="glass-card" 
-                style={{ 
-                  padding: '0.85rem', 
-                  borderColor: plankStatusBorder,
-                  background: plankStatusBg,
-                  boxShadow: isPlankFail ? '0 0 12px rgba(244, 63, 94, 0.25)' : 'none'
-                }}
-              >
-                <div className="text-xs text-muted" style={{ textTransform: 'uppercase', fontWeight: 600 }}>
-                  Lagging Planks ({lagging.nominal})
-                </div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: plankStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
-                  {fbPlank.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {plankAllowable} psi</span>
-                </div>
-                <div style={{ fontSize: '0.72rem', color: plankStatusColor, fontWeight: 600 }}>
-                  Utilization: {(plankRatio * 100).toFixed(0)}% • {isPlankFail ? '✗ PLANK FAILS' : (isPlankWarn ? '⚠ MARGINAL' : '✓ PLANK OK')}
-                </div>
-              </div>
-
-            </div>
+            )}
 
             {/* Base Moment & Deflection Strip */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.6rem 1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '0.75rem' }}>
@@ -2221,6 +2865,38 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   Actual Plank Bending Stress: fb = {fbPlank.toFixed(0)} psi / Allowable {plankAllowable} psi
                   <br />
                   Lagging Compliance: {(plankRatio * 100).toFixed(0)}% → {isPlankFail ? '✗ FAILS (BOARDS WILL BOW & SNAP)' : (isPlankWarn ? '⚠ MARGINAL' : '✓ LAGGING PASSES')}
+                </div>
+              </div>
+
+              {/* Step 8: Post Internal Shear Force & Bending Moment Equilibrium */}
+              <div>
+                <h4 style={{ color: 'var(--accent-cyan)', marginBottom: '0.4rem', fontSize: '1.05rem' }}>
+                  Step 8: Post Internal Shear Force V(z) & Bending Moment M(z) Equilibrium (Broms & NDS)
+                </h4>
+                <div className="math-block">
+                  <strong>1. Above Grade Differential Equilibrium:</strong>
+                  <br />
+                  dV/dz = -w(z), &nbsp; dM/dz = V(z)
+                  <br />
+                  • Base Shear at Grade: V_grade = {diagramData.V_grade.toFixed(0)} lb ({(diagramData.V_grade / 1000).toFixed(2)} kips)
+                  <br />
+                  • Base Moment at Grade: M_grade = {diagramData.M_grade.toFixed(0)} ft-lb ({(diagramData.M_grade / 1000).toFixed(2)} k-ft)
+                  <br /><br />
+                  <strong>2. Below Grade Limit Equilibrium (Broms Rigid Embedment):</strong>
+                  <br />
+                  • Rotation Pivot Station: z_pivot ≈ {(diagramData.zPivot - height).toFixed(1)} ft below grade (~0.7 D)
+                  <br />
+                  • Zero Shear Station (Max Moment): y_crit = {diagramData.yCritM.toFixed(1)} ft (V = 0, M_max = {(diagramData.maxM / 1000).toFixed(2)} k-ft)
+                  <br />
+                  • Boundary Conditions at Base Tip (z = D): V(D) = 0, M(D) = 0 (Free tip equilibrium)
+                  <br /><br />
+                  <strong>3. Timber Horizontal Shear Stress Check (NDS Section 3.4.1):</strong>
+                  <br />
+                  fv = (3 · V_max) / (2 · A_post) = (3 × {diagramData.maxV.toFixed(0)}) / (2 × {post.area}) = {diagramData.fvMax.toFixed(1)} psi
+                  <br />
+                  Adjusted Allowable Shear: F'v = {diagramData.fvAllowable} psi
+                  <br />
+                  Shear Stress Status: {diagramData.isShearFail ? '✗ OVERSTRESSED IN SHEAR (FAIL)' : (diagramData.isShearWarn ? '⚠ MARGINAL SHEAR' : '✓ ADEQUATE SHEAR CAPACITY')}
                 </div>
               </div>
 
