@@ -1,11 +1,9 @@
-import React from 'react';
-
 /**
  * FormattedEngineeringGuide
  * Transforms engineering hints, exam shortcuts, and intuition explanations
  * into beautifully structured, modern step cards with equation highlights.
  */
-const FormattedEngineeringGuide = ({ text, type = 'hint' }) => {
+const FormattedEngineeringGuide = ({ text }) => {
   if (!text) return null;
 
   // Normalize text symbols and line breaks
@@ -18,7 +16,7 @@ const FormattedEngineeringGuide = ({ text, type = 'hint' }) => {
   const parseSteps = (raw) => {
     // Check if text has numbered items like "1. ", "2. ", or "Step 1:"
     // Supports both multiline ("\n1. ") and inline ("... 2. Compute...")
-    const stepRegex = /(?:^|\n|(?<=[.!?])\s+)(?:Step\s+)?(\d+)[\.\):]\s+/gi;
+    const stepRegex = /(?:^|\n|(?<=[.!?])\s+)(?:Step\s+)?(\d+)[.):]\s+/gi;
     const matches = [...raw.matchAll(stepRegex)];
 
     if (matches.length >= 2 || (matches.length === 1 && matches[0][1] === '1' && raw.includes('='))) {
@@ -52,7 +50,7 @@ const FormattedEngineeringGuide = ({ text, type = 'hint' }) => {
 
           rawLines.forEach((line) => {
             // Check if line is an equation or bulleted calculation
-            const isMath = /^(W\d|Σ|Ka|Pa|MOT|FS|MR\d|arm|Area|Volume|Slope|Drawdown|Pounds|Total|Annual|Book|\•|\-|\d+\s*[\*×])/.test(line) ||
+            const isMath = /^(W\d|Σ|Ka|Pa|MOT|FS|MR\d|arm|Area|Volume|Slope|Drawdown|Pounds|Total|Annual|Book|•|-|\d+\s*[*×])/.test(line) ||
                            (line.includes('=') && !line.startsWith('Divide') && !line.startsWith('Sum') && !line.startsWith('Calculate'));
             
             if (isMath) {
@@ -127,7 +125,7 @@ const FormattedEngineeringGuide = ({ text, type = 'hint' }) => {
             <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               {lines.map((line, lIdx) => {
                 const isBullet = line.startsWith('•') || line.startsWith('- ') || line.startsWith('* ');
-                const cleanLine = isBullet ? line.replace(/^[•\-\*]\s*/, '') : line;
+                const cleanLine = isBullet ? line.replace(/^[•\-*]\s*/, '') : line;
                 
                 return (
                   <div 

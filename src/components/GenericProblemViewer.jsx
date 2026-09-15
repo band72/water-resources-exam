@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import FormattedEngineeringGuide from './FormattedEngineeringGuide';
 
 const GenericProblemViewer = ({ problem }) => {
   const [activeTab, setActiveTab] = useState('hint'); // 'hint' | 'shortcut' | 'intuition' | 'scratchpad'
-  const [userNotes, setUserNotes] = useState('');
-  const [isMastered, setIsMastered] = useState(false);
-  const [isFlagged, setIsFlagged] = useState(false);
-  const [answerInput, setAnswerInput] = useState('');
-  const [checkStatus, setCheckStatus] = useState(null); // 'correct' | 'attempted' | null
-
-  // Load saved state from localStorage for problem persistence
-  useEffect(() => {
+  const [userNotes, setUserNotes] = useState(() => {
     try {
-      const savedNotes = localStorage.getItem(`pe_notes_${problem.id}`);
-      if (savedNotes) setUserNotes(savedNotes);
-
-      const masteredList = JSON.parse(localStorage.getItem('pe_mastered_problems') || '[]');
-      setIsMastered(masteredList.includes(problem.id));
-
-      const flaggedList = JSON.parse(localStorage.getItem('pe_flagged_problems') || '[]');
-      setIsFlagged(flaggedList.includes(problem.id));
-
-      setAnswerInput('');
-      setCheckStatus(null);
-    } catch (e) {
-      console.warn("Storage access issue", e);
+      return localStorage.getItem(`pe_notes_${problem.id}`) || '';
+    } catch {
+      return '';
     }
-  }, [problem.id]);
+  });
+  const [isMastered, setIsMastered] = useState(() => {
+    try {
+      const masteredList = JSON.parse(localStorage.getItem('pe_mastered_problems') || '[]');
+      return masteredList.includes(problem.id);
+    } catch {
+      return false;
+    }
+  });
+  const [isFlagged, setIsFlagged] = useState(() => {
+    try {
+      const flaggedList = JSON.parse(localStorage.getItem('pe_flagged_problems') || '[]');
+      return flaggedList.includes(problem.id);
+    } catch {
+      return false;
+    }
+  });
 
   // Save notes
   const handleNoteChange = (text) => {

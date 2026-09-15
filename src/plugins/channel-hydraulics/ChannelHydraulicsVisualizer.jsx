@@ -167,7 +167,7 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
     const yc = solveCriticalDepth(Q, bEff, zEff);
     const Sc = solveNormalDepth(Q, bEff, zEff, n, 1e-6) > 0
       ? (() => { // Critical slope: S0 where yn=yc
-          const { A, R, T } = channelGeometry(yc, bEff, zEff);
+          const { A, R } = channelGeometry(yc, bEff, zEff);
           return Math.pow((Q * n) / (1.49 * A * Math.pow(R, 2 / 3)), 2);
         })()
       : 0;
@@ -175,7 +175,6 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
     const geoN = channelGeometry(yn, bEff, zEff);
     const Vn = Q / Math.max(geoN.A, 0.001);
     const Frn = Vn / Math.sqrt(G * Math.max(geoN.Dh, 0.001));
-    const En = yn + Vn * Vn / (2 * G);
 
     const geo1 = channelGeometry(y1, bEff, zEff);
     const V1val = Q / Math.max(geo1.A, 0.001);
@@ -188,7 +187,7 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
 
     // ── Jump Length — 4 Empirical Formulas (rectangular-based; best-effort for trapezoid)
     const jumpLengths = hasJump ? (() => {
-      const { y2, Fr1: Fr1j = Fr1 } = jumpData;
+      const { y2 } = jumpData;
       // USBR / Peterka (1958): Lj ≈ 6.1·y₂  (Fr₁ > 4.5, most conservative for design)
       const Lpeterka = 6.1 * y2;
       // Chow (1959): Lj = 6.9·(y₂ - y₁)
@@ -221,14 +220,14 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
 
     return {
       yn, yc, Sc, slopeClass,
-      geoN, Vn, Frn, En, regimeN,
+      geoN, Vn, Frn, regimeN,
       geo1, V1: V1val, Fr1, E1, Emin, regime1,
       hasJump, jumpData, jumpLengths,
       yCurve, yCurveMax
     };
   }, [Q, bEff, zEff, n, S0, y1]);
 
-  const { yn, yc, Frn, En, regimeN, Fr1, E1, Emin, hasJump, jumpData, yCurve } = calcs;
+  const { yn, yc, Frn, regimeN, Fr1, E1, Emin, hasJump, jumpData, yCurve } = calcs;
 
   // Status colors
   const frColor = Frn < 0.95 ? COLOR_SUB : Frn > 1.05 ? COLOR_SUPER : COLOR_WARN;
@@ -254,20 +253,6 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
   // Jump geometry in profile (jump placed at x=20 ft)
   const jumpX = 20;
   const jumpLen = hasJump ? Math.min(6.1 * (jumpData?.y2 || 1), 20) : 0;
-
-  // ── Cross-Section Helpers ─────────────────────────────────────────────────
-  const csW = 300, csH = 220, csCX = 340 + 170;
-  const csScale = Math.min(csW / (bEff + 2 * zEff * yn * 1.5 + 4), 30);
-  const csBotPx = bEff * csScale;
-  const csDepPx = Math.min(yn * csScale, csH * 0.7);
-  const csSlopePx = zEff * csScale;
-  const csGroundY = padT + plotH - 20;
-  const csCenterX = padL + plotW * 0.5 + 20;
-  const csBL = csCenterX - csBotPx / 2 - csSlopePx * csDepPx / csScale;
-  const csBR = csCenterX + csBotPx / 2 + csSlopePx * csDepPx / csScale;
-  const csYc = Math.min(yc * csScale, csH * 0.65);
-  const waterLeft  = csCenterX - csBotPx / 2 - csSlopePx * csDepPx / csScale;
-  const waterRight = csCenterX + csBotPx / 2 + csSlopePx * csDepPx / csScale;
 
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
@@ -504,16 +489,8 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                 const ynY  = waterSurfaceY(yn);
                 const ycY  = waterSurfaceY(yc);
                 const y1Y  = waterSurfaceY(y1);
-                const y2Y  = hasJump ? waterSurfaceY(jumpData.y2) : ynY;
                 const jumpXpx = channelX(jumpX);
                 const jumpEndXpx = channelX(jumpX + jumpLen);
-                const eglElev = (depth, xFt) => {
-                  const { A } = channelGeometry(depth, bEff, zEff);
-                  const V = Q / Math.max(A, 0.001);
-                  const E = depth + V * V / (2 * G);
-                  // EGL = z_bed + depth + V²/2g; slope the bed
-                  return waterSurfaceY(E + xFt * S0 * 0);
-                };
 
                 return (
                   <g>
@@ -586,7 +563,6 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                     {(() => {
                       const eglPoints = [];
                       for (let xi = 0; xi <= plotW; xi += 8) {
-                        const xFt = xi / pxPerFtX;
                         const depth = hasJump && xi < jumpXpx - padL ? y1
                           : hasJump && xi < jumpEndXpx - padL ? (y1 + jumpData.y2) / 2
                           : hasJump ? jumpData.y2 : yn;
@@ -701,8 +677,6 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
 
                     {/* Water fill to normal depth */}
                     {(() => {
-                      const waterTopY = groundY2 - depPx;
-                      const waterBL = cx - halfBot - zEff * scale2 * (depPx / scale2 * 0);
                       // Water shape: matches channel cross-section
                       return (
                         <path
@@ -799,7 +773,6 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                 // Current operating point at yn
                 const EnOp = yn + calcs.Vn * calcs.Vn / (2 * G);
                 const E1op = y1 + calcs.V1 * calcs.V1 / (2 * G);
-                const E2op = hasJump ? jumpData.E2 : 0;
 
                 return (
                   <g>
@@ -1058,7 +1031,7 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
         )}
       </div>
 
-      <GenericProblemViewer problem={problem} />
+      <GenericProblemViewer problem={problem} key={problem.id} />
     </div>
   );
 };

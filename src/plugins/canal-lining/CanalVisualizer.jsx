@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
-const CanalVisualizer = ({ 
-  initialLength = 227, 
-  initialWaste = 12, 
-  initialThickness = 7, 
-  initialBottomWidth = 9, 
-  initialDepth = 14 
+const CanalVisualizer = ({
+  initialLength = 227,
+  initialWaste = 12,
+  initialThickness = 7,
+  initialBottomWidth = 9,
+  initialDepth = 14
 }) => {
-  const [length, setLength] = useState(initialLength);
+  const length = initialLength;
   const [waste, setWaste] = useState(initialWaste);
   const [thickness, setThickness] = useState(initialThickness);
   const [bottomWidth, setBottomWidth] = useState(initialBottomWidth);

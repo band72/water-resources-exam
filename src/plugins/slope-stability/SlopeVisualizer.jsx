@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
 
@@ -460,7 +460,7 @@ const SlopeVisualizer = ({ problem }) => {
 
       {/* Embedded Generic Guidance Drawer */}
       {problem && (
-        <GenericProblemViewer problem={problem} />
+        <GenericProblemViewer problem={problem} key={problem.id} />
       )}
 
       {/* Step-by-Step Derivation Modal */}
@@ -559,7 +559,7 @@ const SlopeVisualizer = ({ problem }) => {
                   FS = T_FF / T_MOB = {tFF.toFixed(1)} / {tMob.toFixed(1)} = {fs.toFixed(2)}
                 </div>
                 <p className="text-xs text-muted" style={{ marginTop: '0.5rem' }}>
-                  ✦ Engineering Criterion: Standard civil engineering cut and embankment slopes typically require a minimum design $\text{FS} \ge 1.30 \text{ to } 1.50$. An $\text{FS} \le 1.0$ indicates impending or active slope failure.
+                  ✦ Engineering Criterion: Standard civil engineering cut and embankment slopes typically require a minimum design FS ≥ 1.30 to 1.50. An FS ≤ 1.0 indicates impending or active slope failure.
                 </p>
               </div>
             </div>

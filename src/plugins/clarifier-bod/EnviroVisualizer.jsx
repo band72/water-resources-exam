@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const EnviroVisualizer = ({ initialFlow = 2.5, initialBODIn = 220, initialBODOut = 140 }) => {

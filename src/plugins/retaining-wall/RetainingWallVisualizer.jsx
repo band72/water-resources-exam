@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
 
@@ -73,22 +73,20 @@ const RetainingWallVisualizer = ({ problem }) => {
 
   // (b) Surcharge effect on lower submerged layer from dry soil overburden
   let pa2Rect = 0;
-  let armPa2Rect = 0;
   let motPa2Rect = 0;
   if (hw > 0 && hDry > 0) {
     const qDry = gammaSoil * hDry; // effective vertical stress at water table
     pa2Rect = ka * qDry * hw;
-    armPa2Rect = hw / 2;
+    const armPa2Rect = hw / 2;
     motPa2Rect = pa2Rect * armPa2Rect;
   }
 
   // (c) Triangular effective soil thrust from submerged soil (buoyant unit weight)
   let pa2Tri = 0;
-  let armPa2Tri = 0;
   let motPa2Tri = 0;
   if (hw > 0) {
     pa2Tri = 0.5 * ka * gammaPrime * Math.pow(hw, 2);
-    armPa2Tri = hw / 3;
+    const armPa2Tri = hw / 3;
     motPa2Tri = pa2Tri * armPa2Tri;
   }
 
@@ -731,7 +729,7 @@ const RetainingWallVisualizer = ({ problem }) => {
 
       {/* Embedded Generic Guidance Drawer */}
       {problem && (
-        <GenericProblemViewer problem={problem} />
+        <GenericProblemViewer problem={problem} key={problem.id} />
       )}
 
       {/* Step-by-Step Derivation Modal */}

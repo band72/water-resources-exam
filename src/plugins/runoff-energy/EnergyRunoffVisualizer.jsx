@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const EnergyRunoffVisualizer = () => {
   const [velocity, setVelocity] = useState(10.0); // ft/s
   const [clElev, setClElev] = useState(100.00); // Z for centerline
   const [roadSlope, setRoadSlope] = useState(-2.0); // %
-  const [clToCurb, setClToCurb] = useState(12.0); // ft
+  const clToCurb = 12.0; // ft
   const [drivewaySlope, setDrivewaySlope] = useState(2.0); // %
   const [drivewayLength, setDrivewayLength] = useState(30.0); // ft
   const [frictionCoeff, setFrictionCoeff] = useState(0.04); // unitless head loss per ft
   const [safetyFactor, setSafetyFactor] = useState(1.5); // FS
-  
+
   const [showSolution, setShowSolution] = useState(false);
-  const [showHint, setShowHint] = useState(false);
 
   const g = 32.2; // ft/s^2
 
@@ -34,7 +33,7 @@ const EnergyRunoffVisualizer = () => {
   // Total Resistance (Gravity slope + Friction)
   const totalResistance = (drivewaySlope / 100) + frictionCoeff;
   
-  let travelDistance = 0;
+  let travelDistance;
   let garageHit = false;
 
   if (availableEnergy <= 0) {

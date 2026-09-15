@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const WellVisualizer = ({ initialQ = 500, initialT = 1000, initialR = 50 }) => {

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceDot } from 'recharts';
 
@@ -28,7 +28,7 @@ const EconVisualizer = ({
       });
     }
     return data;
-  }, [cost, salvage, life, annualDepreciation]);
+  }, [cost, life, annualDepreciation]);
 
   return (
     <div className="visualizer-wrapper">

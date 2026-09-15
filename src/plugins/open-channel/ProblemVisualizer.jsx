@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
 
@@ -14,8 +14,8 @@ const OpenChannelVisualizer = ({
   const [diameter, setDiameter] = useState(initialDiameter);
   const [bottomWidth, setBottomWidth] = useState(10);
   const [sideSlope, setSideSlope] = useState(2); // H:1V
-  const [channelSlope, setChannelSlope] = useState(slope);
-  const [manningsN, setManningsN] = useState(n);
+  const channelSlope = slope;
+  const manningsN = n;
   const [showSolutionModal, setShowSolutionModal] = useState(false);
 
   // Geometric Calculations
@@ -58,8 +58,8 @@ const OpenChannelVisualizer = ({
   const bottomY = 260;
 
   const renderShapeSVG = () => {
-    let earthPath = "";
-    let waterPath = "";
+    let earthPath;
+    let waterPath;
     
     const maxDim = Math.max(
       shape === 'circular' ? diameter : 0,
@@ -392,7 +392,7 @@ const OpenChannelVisualizer = ({
 
       {/* Embedded Generic Problem Guidance Drawer */}
       {problem && (
-        <GenericProblemViewer problem={problem} />
+        <GenericProblemViewer problem={problem} key={problem.id} />
       )}
 
       {/* Solution & Derivation Modal */}

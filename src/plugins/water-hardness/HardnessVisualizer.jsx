@@ -1,4 +1,3 @@
-import React from 'react';
 
 const HardnessVisualizer = ({ cations, anions }) => {
   if (!cations || !anions) return null;

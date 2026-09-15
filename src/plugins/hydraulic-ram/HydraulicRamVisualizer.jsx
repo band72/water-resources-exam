@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const HydraulicRamVisualizer = ({ problem }) => {
+const HydraulicRamVisualizer = () => {
   // Input parameters
   const [bridgeLoadKn, setBridgeLoadKn] = useState(1000); // Required lift capacity of bridge
   const [ramCapacityTons, setRamCapacityTons] = useState(120); // Ordered ram capacity
@@ -71,13 +71,12 @@ const HydraulicRamVisualizer = ({ problem }) => {
           
           if (next >= 120) {
             setIsAutoPumping(false);
+            setHoseFlowing(false);
             return 120;
           }
           return next;
         });
       }, 40);
-    } else {
-      setHoseFlowing(false);
     }
     return () => clearInterval(intervalId);
   }, [isAutoPumping, isUndersized]);
@@ -242,8 +241,10 @@ const HydraulicRamVisualizer = ({ problem }) => {
                 color: isAutoPumping ? '#000' : '#fff'
               }}
               onClick={() => {
-                setIsAutoPumping(!isAutoPumping);
+                const next = !isAutoPumping;
+                setIsAutoPumping(next);
                 setReliefValveTripped(false);
+                if (!next) setHoseFlowing(false);
               }}
             >
               {isAutoPumping ? '⏸️ Stop' : '▶️ Auto'}

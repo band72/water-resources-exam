@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { getProblemCategory } from '../App';
+import { useState } from 'react';
+import { getProblemCategory } from '../utils/categorize';
 
 const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
   const [activeTab, setActiveTab] = useState('All');
@@ -260,9 +260,9 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
 
           {/* Category Tabs */}
           <div className="tabs-container" style={{ overflowX: 'auto', maxWidth: '100%' }}>
-            <button 
+            <button
               className={`tab-btn ${activeTab === 'All' ? 'active' : ''}`}
-              onClick={() => setActiveTab('All')}
+              onClick={() => { setActiveTab('All'); onFilterCategory('All'); }}
             >
               All Topics ({problems.length})
             </button>
@@ -270,7 +270,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
               <button
                 key={cat}
                 className={`tab-btn ${activeTab === cat ? 'active' : ''}`}
-                onClick={() => setActiveTab(cat)}
+                onClick={() => { setActiveTab(cat); onFilterCategory(cat); }}
               >
                 {categoryIcons[cat] || '📘'} {cat} ({categories[cat].length})
               </button>

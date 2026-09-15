@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, initialWorkers = 2 }) => {
+const LaborVisualizer = ({ initialBudget = 4000, initialHourly = 50, initialWorkers = 2 }) => {
   const [budget, setBudget] = useState(initialBudget);
   const [hourlyRate, setHourlyRate] = useState(initialHourly);
   const [workers, setWorkers] = useState(initialWorkers);
@@ -33,11 +33,10 @@ const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, in
     return () => clearInterval(intervalId);
   }, [isSimulating, daysAvailable]);
 
-  // Handle parameters change
-  useEffect(() => {
+  const resetSimulation = () => {
     setCurrentDay(0);
     setIsSimulating(false);
-  }, [budget, hourlyRate, workers]);
+  };
 
   const progressPercent = daysAvailable > 0 ? (currentDay / daysAvailable) * 100 : 0;
 
@@ -72,8 +71,8 @@ const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, in
               min="1000" 
               max="10000" 
               step="500" 
-              value={budget} 
-              onChange={(e) => setBudget(Number(e.target.value))} 
+              value={budget}
+              onChange={(e) => { setBudget(Number(e.target.value)); resetSimulation(); }}
               className="w-full" 
             />
           </div>
@@ -87,8 +86,8 @@ const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, in
               min="20" 
               max="100" 
               step="5" 
-              value={hourlyRate} 
-              onChange={(e) => setHourlyRate(Number(e.target.value))} 
+              value={hourlyRate}
+              onChange={(e) => { setHourlyRate(Number(e.target.value)); resetSimulation(); }}
               className="w-full" 
             />
           </div>
@@ -102,8 +101,8 @@ const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, in
               min="1" 
               max="8" 
               step="1" 
-              value={workers} 
-              onChange={(e) => setWorkers(Number(e.target.value))} 
+              value={workers}
+              onChange={(e) => { setWorkers(Number(e.target.value)); resetSimulation(); }}
               className="w-full" 
             />
           </div>

@@ -378,7 +378,6 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     // Anchor geometry & force
     const hasTieback = foundationMethod === 'tieback';
     const hasCollar = foundationMethod === 'concrete_collar' || foundationMethod === 'pier_and_collar';
-    const hasPier = foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar';
     const yAnchor = H * 0.33; // 0.67*H above grade, 0.33*H from top
     const tAnc = hasTieback ? (0.58 * rawPPost) : 0;
 
@@ -386,7 +385,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     const getWActive = (y) => {
       if (y > H) return 0;
       const w_q = ka * q * S;
-      let w_soil = 0;
+      let w_soil;
       let w_water = 0;
       if (y <= hDry_val) {
         w_soil = ka * gamma * y * S;
@@ -454,9 +453,9 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
 
     for (let i = 0; i <= numStations; i++) {
       const y = (i / numStations) * L;
-      let V = 0;
-      let M = 0;
-      let w = 0;
+      let V;
+      let M;
+      let w;
 
       if (y <= H) {
         const forces = getAboveGradeForces(y);
@@ -557,7 +556,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
       momentStatusBg,
       momentStatusBorder
     };
-  }, [height, embedment, spacing, surcharge, hw, soil, hasDrainage, foundationMethod, pierDiameter, rawPPost, post, ka]);
+  }, [height, embedment, spacing, surcharge, hw, soil, hasDrainage, foundationMethod, rawPPost, post, ka]);
 
   // Station lookup for interactive depth probe
   const probeDepthClamped = Math.min(Math.max(diagramProbeDepth, 0), totalLength);
@@ -2672,7 +2671,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
 
       {/* Embedded Generic Problem Viewer (for Exam Problems 102 - 107) */}
       {problem && (
-        <GenericProblemViewer problem={problem} />
+        <GenericProblemViewer problem={problem} key={problem.id} />
       )}
 
       {/* Engineering Derivation Modal */}
