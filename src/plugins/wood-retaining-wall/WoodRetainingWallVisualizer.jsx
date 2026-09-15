@@ -241,6 +241,13 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     const bEffCollar = Math.max(bPostFt, 1.25);
     const dConstrained = Math.sqrt((4.25 * mGrade) / (s3Eff * bEffCollar));
     dReq = Math.max(dConstrained, 2.5);
+  } else if (foundationMethod === 'pier_and_collar') {
+    // Combined Drilled Concrete Pier + Ground-Line Collar Tie (IBC 1807.3.2.2 "Constrained Pier")
+    // Synergistic formula: d = sqrt(4.25 * M / (S3 * b_pier))
+    // Takes advantage of locked surface translation AND large auger width b_pier
+    const s3Eff = soil.s1 * 2.0;
+    const dConstrained = Math.sqrt((4.25 * mGrade) / (s3Eff * bPierFt));
+    dReq = Math.max(dConstrained, 2.2);
   } else if (foundationMethod === 'concrete_pier') {
     // Augered Drilled Concrete Pier (IBC 1807.3 & Broms method with diameter b = bPierFt)
     // S1 doubled for isolated pole per IBC 1806.3.4
@@ -370,7 +377,8 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
 
     // Anchor geometry & force
     const hasTieback = foundationMethod === 'tieback';
-    const hasCollar = foundationMethod === 'concrete_collar';
+    const hasCollar = foundationMethod === 'concrete_collar' || foundationMethod === 'pier_and_collar';
+    const hasPier = foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar';
     const yAnchor = H * 0.33; // 0.67*H above grade, 0.33*H from top
     const tAnc = hasTieback ? (0.58 * rawPPost) : 0;
 
@@ -802,12 +810,12 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
               </div>
 
               {/* Addon Selector Grid */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.3rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '0.25rem' }}>
                 <button
                   className={`btn-secondary ${foundationMethod === 'direct' ? 'active' : ''}`}
                   style={{
-                    padding: '0.4rem 0.2rem',
-                    fontSize: '0.68rem',
+                    padding: '0.4rem 0.15rem',
+                    fontSize: '0.66rem',
                     fontWeight: 700,
                     textAlign: 'center',
                     background: foundationMethod === 'direct' ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.03)',
@@ -821,8 +829,8 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 <button
                   className={`btn-secondary ${foundationMethod === 'concrete_pier' ? 'active' : ''}`}
                   style={{
-                    padding: '0.4rem 0.2rem',
-                    fontSize: '0.68rem',
+                    padding: '0.4rem 0.15rem',
+                    fontSize: '0.66rem',
                     fontWeight: 700,
                     textAlign: 'center',
                     background: foundationMethod === 'concrete_pier' ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255,255,255,0.03)',
@@ -831,13 +839,13 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   }}
                   onClick={() => setFoundationMethod('concrete_pier')}
                 >
-                  Concrete Pier
+                  Pier
                 </button>
                 <button
                   className={`btn-secondary ${foundationMethod === 'concrete_collar' ? 'active' : ''}`}
                   style={{
-                    padding: '0.4rem 0.2rem',
-                    fontSize: '0.68rem',
+                    padding: '0.4rem 0.15rem',
+                    fontSize: '0.66rem',
                     fontWeight: 700,
                     textAlign: 'center',
                     background: foundationMethod === 'concrete_collar' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255,255,255,0.03)',
@@ -846,13 +854,28 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   }}
                   onClick={() => setFoundationMethod('concrete_collar')}
                 >
-                  Grade Collar
+                  Collar
+                </button>
+                <button
+                  className={`btn-secondary ${foundationMethod === 'pier_and_collar' ? 'active' : ''}`}
+                  style={{
+                    padding: '0.4rem 0.15rem',
+                    fontSize: '0.66rem',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                    background: foundationMethod === 'pier_and_collar' ? 'rgba(236, 72, 153, 0.25)' : 'rgba(255,255,255,0.03)',
+                    borderColor: foundationMethod === 'pier_and_collar' ? '#ec4899' : 'var(--border-color)',
+                    color: foundationMethod === 'pier_and_collar' ? '#ec4899' : 'var(--text-dim)'
+                  }}
+                  onClick={() => setFoundationMethod('pier_and_collar')}
+                >
+                  🛡️ Pier+Collar
                 </button>
                 <button
                   className={`btn-secondary ${foundationMethod === 'tieback' ? 'active' : ''}`}
                   style={{
-                    padding: '0.4rem 0.2rem',
-                    fontSize: '0.68rem',
+                    padding: '0.4rem 0.15rem',
+                    fontSize: '0.66rem',
                     fontWeight: 700,
                     textAlign: 'center',
                     background: foundationMethod === 'tieback' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255,255,255,0.03)',
@@ -861,18 +884,18 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                   }}
                   onClick={() => setFoundationMethod('tieback')}
                 >
-                  Deadman Anchor
+                  Anchor
                 </button>
               </div>
 
-              {/* Concrete Pier Diameter Slider (Shown when Concrete Pier is chosen) */}
-              {foundationMethod === 'concrete_pier' && (
-                <div style={{ background: 'rgba(56, 189, 248, 0.08)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+              {/* Concrete Pier Diameter Slider (Shown when Concrete Pier or Pier+Collar is chosen) */}
+              {(foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') && (
+                <div style={{ background: foundationMethod === 'pier_and_collar' ? 'rgba(236, 72, 153, 0.08)' : 'rgba(56, 189, 248, 0.08)', padding: '0.5rem 0.75rem', borderRadius: '6px', border: `1px solid ${foundationMethod === 'pier_and_collar' ? 'rgba(236, 72, 153, 0.3)' : 'rgba(56, 189, 248, 0.25)'}` }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.2rem' }}>
-                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--accent-blue)' }}>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 700, color: foundationMethod === 'pier_and_collar' ? '#ec4899' : 'var(--accent-blue)' }}>
                       Augered Pier Diameter (∅ b)
                     </span>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '0.88rem', color: 'var(--accent-blue)' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '0.88rem', color: foundationMethod === 'pier_and_collar' ? '#ec4899' : 'var(--accent-blue)' }}>
                       {pierDiameter}" ({bPierFt.toFixed(2)} ft)
                     </span>
                   </div>
@@ -899,6 +922,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                 {foundationMethod === 'direct' && '• Direct Soil: Skinny wooden post pushes directly on soil. Requires deepest hole (D ≥ 1.15 H).'}
                 {foundationMethod === 'concrete_pier' && `• ${pierDiameter}" Concrete Pier: Cylindrical concrete encasement quadruples passive bearing area b, slashing dig depth down to ${dReq.toFixed(1)} ft.`}
                 {foundationMethod === 'concrete_collar' && '• Grade Restraint Collar: Concrete kick collar at surface prevents toe kickout, using IBC 1807.3.2.2 Constrained formula.'}
+                {foundationMethod === 'pier_and_collar' && `• Combined Pier + Collar: Monolithic augered shaft (b = ${pierDiameter}") + ground restraint collar. Locked translation at grade + massive subgrade bearing width cuts required dig depth to just ${dReq.toFixed(1)} ft with zero groundline gouging.`}
                 {foundationMethod === 'tieback' && `• Deadman Tieback Anchor: Horizontal galvanized rod to concrete deadman carries ${(tAnchor / 1000).toFixed(1)} kips, slashing moment by 75% and depth to ${dReq.toFixed(1)} ft!`}
               </div>
             </div>
@@ -1605,8 +1629,8 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                       </g>
                     )}
 
-                    {/* CONCRETE RESTRAINT COLLAR AT GRADE (if foundationMethod === 'concrete_collar') */}
-                    {foundationMethod === 'concrete_collar' && (
+                    {/* CONCRETE RESTRAINT COLLAR AT GRADE (if foundationMethod === 'concrete_collar' or 'pier_and_collar') */}
+                    {(foundationMethod === 'concrete_collar' || foundationMethod === 'pier_and_collar') && (
                       <g>
                         <rect
                           x={wallFaceX - postWidthPx - 35}
@@ -1642,7 +1666,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     )}
 
                     {/* AUGERED CONCRETE PIER / FOUNDATION SHAFT */}
-                    {foundationMethod === 'concrete_pier' ? (
+                    {(foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? (
                       <g>
                         {/* Drilled Cylindrical Pier Encasement */}
                         <rect 
@@ -1903,17 +1927,17 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     {/* Passive Soil Resistance Bulb Below Grade */}
                     <g>
                       <line 
-                        x1={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 50 : postWidthPx + 70)} 
+                        x1={wallFaceX - ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx / 2 + 50 : postWidthPx + 70)} 
                         y1={groundY + sEmbed * 0.4} 
-                        x2={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 : postWidthPx + 8)} 
+                        x2={wallFaceX - ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx / 2 : postWidthPx + 8)} 
                         y2={groundY + sEmbed * 0.4} 
                         stroke="#10b981" 
                         strokeWidth="2.5" 
                         markerEnd="url(#arrow-emerald)" 
                       />
-                      <rect x={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 145 : postWidthPx + 150)} y={groundY + sEmbed * 0.4 - 10} width="140" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="#10b981" strokeWidth="1" />
+                      <rect x={wallFaceX - ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx / 2 + 145 : postWidthPx + 150)} y={groundY + sEmbed * 0.4 - 10} width="140" height="18" rx="4" fill="rgba(15,23,42,0.92)" stroke="#10b981" strokeWidth="1" />
                       <text 
-                        x={wallFaceX - (foundationMethod === 'concrete_pier' ? pierPx / 2 + 75 : postWidthPx + 80)} 
+                        x={wallFaceX - ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx / 2 + 75 : postWidthPx + 80)} 
                         y={groundY + sEmbed * 0.4 + 3} 
                         fill="#10b981" 
                         fontSize="9" 
@@ -1921,7 +1945,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                         textAnchor="middle" 
                         fontFamily="var(--font-mono)"
                       >
-                        Passive Pp ({soil.s1 * (foundationMethod === 'concrete_pier' ? 2 : 1)} psf/ft)
+                        Passive Pp ({soil.s1 * ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? 2 : 1)} psf/ft)
                       </text>
                     </g>
 
@@ -2044,15 +2068,28 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                         <g key={idx}>
                           {/* Encasement or Shaft */}
                           <rect 
-                            x={cx - (foundationMethod === 'concrete_pier' ? pierPx / 2 : pw / 2)} 
+                            x={cx - ((foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx / 2 : pw / 2)} 
                             y={groundY} 
-                            width={foundationMethod === 'concrete_pier' ? pierPx : pw} 
+                            width={(foundationMethod === 'concrete_pier' || foundationMethod === 'pier_and_collar') ? pierPx : pw} 
                             height={Math.min(sEmbed * 0.9, 130)} 
                             fill="url(#concrete-shaft-grad)" 
                             stroke={embedStatusColor} 
                             strokeWidth={isEmbedFail ? "2" : "1.2"} 
                             strokeDasharray="3,2" 
                           />
+                          {/* Collar block in facade view for pier_and_collar */}
+                          {foundationMethod === 'pier_and_collar' && (
+                            <rect
+                              x={cx - pierPx / 2 - 10}
+                              y={groundY}
+                              width={pierPx + 20}
+                              height={18}
+                              fill="url(#concrete-shaft-grad)"
+                              stroke="var(--accent-purple)"
+                              strokeWidth="1.5"
+                              rx="2"
+                            />
+                          )}
                           <rect 
                             x={cx - pw / 2} 
                             y={groundY - sHeight} 
@@ -2800,6 +2837,18 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                       Formula: d = √[ 4.25 · M_grade / (S3 · b) ] = √[ 4.25 × {mGrade.toFixed(0)} / ({soil.s1 * 2} × {Math.max(bPostFt, 1.25).toFixed(2)}) ]
                       <br />
                       Required Dig Depth: D_req = {dReq.toFixed(1)} ft (Prevents toe translation at surface)
+                    </>
+                  )}
+                  {foundationMethod === 'pier_and_collar' && (
+                    <>
+                      • <strong>🛡️ Combined Pier + Collar (IBC 1807.3.2.2 Constrained Pier):</strong>
+                      <br />
+                      Ground collar locks surface translation (u(0)=0), converting the quadratic equation to a
+                      square-root form. Augered pier widens the bearing face (S₃ = 2·S₁).
+                      <br />
+                      Formula: D_req = √[ 4.25·M_grade / (S₃·b_pier) ] = √[ 4.25 × {mGrade.toFixed(0)} / ({(soil.s1 * 2).toFixed(0)} × {bPierFt.toFixed(2)}) ]
+                      <br />
+                      Required Dig Depth: D_req = {dReq.toFixed(1)} ft — <strong>saves {Math.max(0, Math.round((1 - dReq / Math.sqrt((4.25 * mGrade) / (soil.s1 * bPostFt))) * 100))}% vs unconstrained pier</strong>
                     </>
                   )}
                   {foundationMethod === 'tieback' && (
