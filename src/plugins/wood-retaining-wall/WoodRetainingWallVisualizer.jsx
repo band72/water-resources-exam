@@ -2636,7 +2636,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                     Lagging Planks ({lagging.nominal})
                   </div>
                   <div style={{ fontSize: '1.25rem', fontWeight: 800, color: plankStatusColor, fontFamily: 'var(--font-mono)', margin: '0.2rem 0' }}>
-                    {fbPlank.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {fbPlankAllowable} psi</span>
+                    {fbPlank.toFixed(0)} <span style={{ fontSize: '0.75rem', fontWeight: 500 }}>/ {plankAllowable} psi</span>
                   </div>
                   <div style={{ fontSize: '0.72rem', color: plankStatusColor, fontWeight: 600 }}>
                     Utilization: {(plankRatio * 100).toFixed(0)}% • {isPlankFail ? '✗ PLANK FAILS' : (isPlankWarn ? '⚠ MARGINAL' : '✓ PLANK OK')}
