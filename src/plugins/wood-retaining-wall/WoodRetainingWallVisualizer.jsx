@@ -239,14 +239,14 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
     // d = sqrt(4.25 * M / (S3 * b))
     const s3Eff = soil.s1 * 2.0;
     const bEffCollar = Math.max(bPostFt, 1.25);
-    const dConstrained = Math.sqrt((4.25 * mGrade) / (s3Eff * bEffCollar));
+    const dConstrained = Math.sqrt(Math.max(0, (4.25 * mGrade) / (s3Eff * bEffCollar)));
     dReq = Math.max(dConstrained, 2.5);
   } else if (foundationMethod === 'pier_and_collar') {
     // Combined Drilled Concrete Pier + Ground-Line Collar Tie (IBC 1807.3.2.2 "Constrained Pier")
     // Synergistic formula: d = sqrt(4.25 * M / (S3 * b_pier))
     // Takes advantage of locked surface translation AND large auger width b_pier
     const s3Eff = soil.s1 * 2.0;
-    const dConstrained = Math.sqrt((4.25 * mGrade) / (s3Eff * bPierFt));
+    const dConstrained = Math.sqrt(Math.max(0, (4.25 * mGrade) / (s3Eff * bPierFt)));
     dReq = Math.max(dConstrained, 2.2);
   } else if (foundationMethod === 'concrete_pier') {
     // Augered Drilled Concrete Pier (IBC 1807.3 & Broms method with diameter b = bPierFt)

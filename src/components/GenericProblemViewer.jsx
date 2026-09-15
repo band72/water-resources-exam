@@ -33,8 +33,8 @@ const GenericProblemViewer = ({ problem }) => {
     setUserNotes(text);
     try {
       localStorage.setItem(`pe_notes_${problem.id}`, text);
-    } catch (e) {
-      // ignore
+    } catch {
+      // ignore storage errors
     }
   };
 
@@ -51,8 +51,8 @@ const GenericProblemViewer = ({ problem }) => {
         setIsMastered(true);
       }
       localStorage.setItem('pe_mastered_problems', JSON.stringify(updated));
-    } catch (e) {
-      // ignore
+    } catch {
+      // ignore storage errors
     }
   };
 
@@ -69,8 +69,8 @@ const GenericProblemViewer = ({ problem }) => {
         setIsFlagged(true);
       }
       localStorage.setItem('pe_flagged_problems', JSON.stringify(updated));
-    } catch (e) {
-      // ignore
+    } catch {
+      // ignore storage errors
     }
   };
 

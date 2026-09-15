@@ -1,4 +1,4 @@
-import React from 'react';
+// Pure display component — no hooks needed
 
 const HardnessVisualizer = ({ cations, anions }) => {
   if (!cations || !anions) return null;

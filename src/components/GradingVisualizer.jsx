@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
 const GradingVisualizer = () => {
@@ -10,7 +10,6 @@ const GradingVisualizer = () => {
   const [drivewayLength, setDrivewayLength] = useState(30.0); // ft
   
   const [showSolution, setShowSolution] = useState(false);
-  const [showHint, setShowHint] = useState(false);
 
   // --- MATH CALCULATIONS ---
   // 1. Edge of Pavement (EOP) or Gutter Elevation

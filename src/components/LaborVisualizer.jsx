@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, initialWorkers = 2 }) => {
   const [budget, setBudget] = useState(initialBudget);
@@ -33,7 +33,8 @@ const LaborVisualizer = ({ problem, initialBudget = 4000, initialHourly = 50, in
     return () => clearInterval(intervalId);
   }, [isSimulating, daysAvailable]);
 
-  // Handle parameters change
+  // Handle parameters change — reset animation when inputs change (intentional reset pattern)
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
     setCurrentDay(0);
     setIsSimulating(false);

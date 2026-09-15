@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const HydraulicRamVisualizer = ({ problem }) => {
   // Input parameters
@@ -77,9 +77,12 @@ const HydraulicRamVisualizer = ({ problem }) => {
         });
       }, 40);
     } else {
-      setHoseFlowing(false);
+      // Not auto-pumping: schedule hose-stop via cleanup to avoid sync setState in effect
     }
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      if (!isAutoPumping) setHoseFlowing(false);
+    };
   }, [isAutoPumping, isUndersized]);
 
   // Handle spray particles tick
