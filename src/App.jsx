@@ -30,8 +30,22 @@ export function getProblemCategory(prob) {
 }
 
 function App() {
-  const [activeView, setActiveView] = useState('dashboard'); // 'dashboard' | 'problem'
-  const [activeProblem, setActiveProblem] = useState(1);
+  const [activeView, setActiveView] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('problem')) return 'problem';
+      if (params.get('view')) return params.get('view');
+    }
+    return 'dashboard';
+  });
+  const [activeProblem, setActiveProblem] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const p = parseInt(params.get('problem'), 10);
+      if (!isNaN(p)) return p;
+    }
+    return 1;
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -70,6 +84,12 @@ function App() {
     setActiveProblem(id);
     setActiveView('problem');
     setSelectedOption(null);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location);
+      url.searchParams.set('problem', id);
+      url.searchParams.set('view', 'problem');
+      window.history.pushState({}, '', url);
+    }
   };
 
   const handlePrev = () => {
@@ -89,12 +109,22 @@ function App() {
     handleSelectProblem(rand.id);
   };
 
+  const handleGoDashboard = () => {
+    setActiveView('dashboard');
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location);
+      url.searchParams.delete('problem');
+      url.searchParams.set('view', 'dashboard');
+      window.history.pushState({}, '', url);
+    }
+  };
+
   return (
     <div className="app-container" style={{ gridTemplateColumns: sidebarOpen ? '360px 1fr' : '0px 1fr' }}>
       {/* Sidebar */}
       <aside className="sidebar" style={{ display: sidebarOpen ? 'flex' : 'none' }}>
         <div className="sidebar-header">
-          <div className="sidebar-brand" onClick={() => setActiveView('dashboard')}>
+          <div className="sidebar-brand" onClick={handleGoDashboard}>
             <div className="brand-icon">🌊</div>
             <div>
               <h1 style={{ fontSize: '1.25rem', lineHeight: 1.2 }}>Water Resources</h1>
@@ -111,7 +141,7 @@ function App() {
               borderColor: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--border-color)',
               color: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--text-main)'
             }}
-            onClick={() => setActiveView('dashboard')}
+            onClick={handleGoDashboard}
           >
             <span>🧭</span> Examination Dashboard
           </button>

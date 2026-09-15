@@ -1,0 +1,248 @@
+[
+  {
+    "id": 102,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Wood Retaining Wall: Post Sizing, Embedment Depth & Bending Stress in Sand",
+    "description": "A cantilever wood post-and-lagging retaining wall is designed to retain a sandy backfill to an exposed height H = 6.0 ft. Vertical square timber posts are installed at a center-to-center spacing S = 4.0 ft. The ground surface behind the wall carries a uniform surcharge q = 100 psf.\n\nThe retained granular backfill and foundation sand have an internal friction angle φ = 32°, cohesion c = 0, and total unit weight γ = 115 pcf. The backfill is well-drained with no water table (pore water pressure u = 0). The allowable timber bending stress is F'b = 1,350 psi.\n\nUsing Rankine active earth pressure theory, determine:\n1. The maximum bending moment M_grade at the ground line for a 6×6 post (dressed 5.5\" × 5.5\"), and whether it passes in flexure.\n2. The minimum required timber post size (from 4×4 up to 12×12) that satisfies the allowable bending stress.\n3. The geotechnical embedment depth D required to anchor the post against lateral earth pressure (using soldier pile limit equilibrium where D ≈ 1.0 to 1.1 × H).\n\nThe maximum bending stress in a 6×6 post and the minimum acceptable standard timber post size are most nearly:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "6x6",
+    "height": 6,
+    "embedment": 6.5,
+    "spacing": 4,
+    "soilType": "sand",
+    "phi": 32,
+    "cohesion": 0,
+    "gammaSoil": 115,
+    "gammaSat": 125,
+    "surcharge": 100,
+    "waterTable": 0,
+    "laggingThickness": 3,
+    "hint": "1. Rankine Active Earth Pressure Coefficient Ka:\nKa = tan²(45° - φ/2) = (1 - sin 32°) / (1 + sin 32°) = 0.3073\n\n2. Lateral Soil Active Thrust (per linear foot of wall):\n• Pa,soil = 0.5 × Ka × γ × H² = 0.5 × 0.3073 × 115 × 6.0² = 636.1 lb/ft\n• Lever arm above base: y_soil = H / 3 = 6.0 / 3 = 2.0 ft\n• M_soil = Pa,soil × y_soil = 636.1 × 2.0 = 1,272.2 ft-lb/ft\n\n3. Surcharge Lateral Thrust (per linear foot of wall):\n• P_q = Ka × q × H = 0.3073 × 100 × 6.0 = 184.4 lb/ft\n• Lever arm above base: y_q = H / 2 = 6.0 / 2 = 3.0 ft\n• M_q = P_q × y_q = 184.4 × 3.0 = 553.1 ft-lb/ft\n\n4. Total Base Overturning Moment & Tributary Load per Post (S = 4.0 ft):\n• Total lateral load per post: P_post = (Pa,soil + P_q) × S = (636.1 + 184.4) × 4.0 = 3,282 lb\n• Total base moment per post: M_grade = (M_soil + M_q) × S = (1,272.2 + 553.1) × 4.0 = 7,301.2 ft-lb (87,614 in-lb)\n\n5. Flexural Stress Check for 6×6 Post:\n• Dressed dimensions: b = d = 5.5 in\n• Section Modulus: Sx = (b × d²) / 6 = (5.5 × 5.5²) / 6 = 27.73 in³\n• Actual bending stress: fb = (M_grade × 12) / Sx = 87,614 / 27.73 = 3,159 psi\n• Since fb = 3,159 psi > F'b = 1,350 psi, the 6×6 post is severely OVERSTRESSED (Stress ratio = 2.34) → FAILS!\n\n6. Determine Minimum Acceptable Post Size:\n• Required Sx,min = (M_grade × 12) / F'b = 87,614 / 1,350 = 64.90 in³\n• 4×4: Sx = 7.15 in³ (Fails)\n• 6×6: Sx = 27.73 in³ (Fails)\n• 8×8 (dressed 7.5\" × 7.5\"): Sx = (7.5³) / 6 = 70.31 in³ > 64.90 in³ → PASSES! (fb = 1,246 psi, Stress ratio = 0.92)\n• Therefore, an 8×8 post is the minimum acceptable standard size.\n\n7. Embedment Depth (\"How Deep to Dig\"):\n• For isolated cantilever soldier piles in cohesionless sand (φ = 32°), taking Broms' limit equilibrium with passive resistance over effective width b_eff = 3b yields a required embedment D_req ≈ 1.05 to 1.10 × H ≈ 6.3 to 6.6 ft.\n• Standard practice specifies digging D ≥ 6.5 ft into competent sand.",
+    "shortcut": "Rule of Thumb for Timber Retaining Walls:\n1. Flexure Governing: For cantilever walls higher than 4.5 ft with typical 4 ft to 6 ft spacing, 4×4 and 6×6 posts almost always fail in bending! A 6 ft high wall with surcharge requires at least an 8×8 post.\n2. Embedment Depth (\"How Deep to Dig\"): For granular sand, dig depth D must be at least equal to exposed height H (D ≥ H). Here, H = 6 ft means D must be at least 6.5 ft.\n3. Common Trap: Do not use nominal 6\" × 6\" dimensions (Sx = 6³/6 = 36 in³). Always use actual dressed dimensions (5.5\" × 5.5\", Sx = 27.73 in³)! Using nominal dimensions underestimates bending stress by 30%!",
+    "fifthGrader": "Think of the vertical wood post like a giant ruler clamped at the bottom in the dirt, with a bucket of dirt and rocks pushing hard against the top 6 feet.\n\nA skinny 4x4 or 6x6 post will bend and snap like a twig under 3,280 pounds of soil push (creating 3,160 psi of stress against an allowable 1,350 psi limit)!\n\nTo hold back 6 feet of dirt safely, you must upgrade to an 8x8 timber post, and you have to bury the post just as deep into the ground as it sticks out into the air (dig at least 6.5 feet deep) so the dirt doesn't yank it out!",
+    "options": [
+      {
+        "label": "A",
+        "text": "fb = 1,450 psi; Minimum post: 6×6",
+        "correct": false,
+        "feedback": "Incorrect: 1,450 psi occurs if you mistakenly neglect the 4.0 ft post spacing tributary width. Each post carries 4 feet of wall width, multiplying the load and moment by 4.0!"
+      },
+      {
+        "label": "B",
+        "text": "fb = 2,430 psi; Minimum post: 6×6",
+        "correct": false,
+        "feedback": "Incorrect: 2,430 psi occurs if you use nominal dimensions (6.0\" × 6.0\", Sx = 36 in³) rather than actual dressed lumber dimensions (5.5\" × 5.5\", Sx = 27.73 in³). Dressed 6×6 stress is 3,159 psi."
+      },
+      {
+        "label": "C",
+        "text": "fb = 3,160 psi; Minimum post: 8×8",
+        "correct": true,
+        "feedback": "✓ Correct! fb = (7,301.2 ft-lb × 12) / 27.73 in³ = 3,159 psi ≈ 3,160 psi. Since this exceeds F'b = 1,350 psi, the 6×6 fails. An 8×8 post has Sx = 70.31 in³ > 64.9 in³, yielding fb = 1,246 psi < 1,350 psi (PASS)."
+      },
+      {
+        "label": "D",
+        "text": "fb = 4,280 psi; Minimum post: 10×10",
+        "correct": false,
+        "feedback": "Incorrect: Check your active earth pressure calculation. Ka = (1 - sin 32°) / (1 + sin 32°) = 0.3073. Ensure you did not use Ka = 0.40 or double-count the surcharge."
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Wood Retaining Wall in Saturated Silt: Severe Pore Water Pressure & Embedment",
+    "description": "A cantilever wood retaining wall using 8×8 timber posts (dressed 7.5\" × 7.5\") spaced at S = 5.0 ft retains H = 6.0 ft of fine silty soil. The silt has an internal friction angle φ = 26°, cohesion c = 0, moist unit weight γ = 110 pcf, and saturated unit weight γsat = 125 pcf.\n\nDue to absent or clogged weep holes after extended rainfall, the water table rises to a height hw = 4.0 ft above the ground line (unit weight of water γw = 62.4 pcf). No surcharge acts on the surface.\n\nAccount for effective soil stress with buoyant unit weight γ' = γsat - γw and full hydrostatic pore water pressure u = γw × hw. Neglect wall friction.\n\nThe total overturning moment M_grade at the ground line per post and the required dig depth D into the silt (where poor drainage and high pore pressure demand D ≈ 1.35 × H) are most nearly:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "8x8",
+    "height": 6,
+    "embedment": 8.0,
+    "spacing": 5,
+    "soilType": "silt",
+    "phi": 26,
+    "cohesion": 0,
+    "gammaSoil": 110,
+    "gammaSat": 125,
+    "surcharge": 0,
+    "waterTable": 4,
+    "laggingThickness": 3,
+    "hint": "1. Rankine Active Earth Pressure Coefficient Ka for Silt (φ = 26°):\nKa = tan²(45° - 26°/2) = (1 - sin 26°) / (1 + sin 26°) = (1 - 0.4384) / (1 + 0.4384) = 0.3904\n\n2. Soil Geometry & Strata:\n• Dry upper silt layer: h_dry = H - hw = 6.0 - 4.0 = 2.0 ft\n• Submerged silt layer: hw = 4.0 ft\n• Buoyant unit weight: γ' = γsat - γw = 125 - 62.4 = 62.6 pcf\n\n3. Lateral Forces per Linear Foot of Wall:\n(a) Upper dry silt layer (h_dry = 2 ft):\n• Pa1 = 0.5 × Ka × γ × h_dry² = 0.5 × 0.3904 × 110 × 2² = 85.9 lb/ft\n• Arm y1 = hw + (h_dry / 3) = 4.0 + 0.667 = 4.667 ft\n• M1 = 85.9 × 4.667 = 400.9 ft-lb/ft\n\n(b) Overburden surcharge from dry silt on lower submerged layer:\n• q_dry = γ × h_dry = 110 × 2.0 = 220 psf\n• Pa2,rect = Ka × q_dry × hw = 0.3904 × 220 × 4.0 = 343.6 lb/ft\n• Arm y2,rect = hw / 2 = 2.0 ft\n• M2,rect = 343.6 × 2.0 = 687.2 ft-lb/ft\n\n(c) Submerged effective silt thrust (buoyant):\n• Pa2,tri = 0.5 × Ka × γ' × hw² = 0.5 × 0.3904 × 62.6 × 4.0² = 195.5 lb/ft\n• Arm y2,tri = hw / 3 = 4.0 / 3 = 1.333 ft\n• M2,tri = 195.5 × 1.333 = 260.6 ft-lb/ft\n\n(d) Hydrostatic Pore Water Pressure Thrust (Pw):\n• Max pore pressure at base: u_base = γw × hw = 62.4 × 4.0 = 249.6 psf\n• Pw = 0.5 × γw × hw² = 0.5 × 62.4 × 16 = 499.2 lb/ft\n• Arm yw = hw / 3 = 1.333 ft\n• Mw = 499.2 × 1.333 = 665.4 ft-lb/ft\n\n4. Total Overturning Moment per Linear Foot:\n• M_base,total = M1 + M2,rect + M2,tri + Mw = 400.9 + 687.2 + 260.6 + 665.4 = 2,014.1 ft-lb/ft\n\n5. Total Base Overturning Moment per Post (Spacing S = 5.0 ft):\n• M_grade = M_base,total × S = 2,014.1 × 5.0 = 10,070.5 ft-lb ≈ 10,071 ft-lb\n\n6. Required Embedment Depth in Saturated Silt:\n• Because of high pore water pressure and low passive resistance in saturated silt, embedment depth requires D ≈ 1.35 × H = 1.35 × 6.0 = 8.1 ft (at least 8.0 ft dug depth).",
+    "shortcut": "Pore Water Pressure is the #1 Cause of Retaining Wall Failures!\nNotice that pore water pressure alone creates Pw = 499.2 lb/ft and Mw = 665.4 ft-lb/ft—accounting for over 33% of the total overturning torque on the wall! Installing a 4-inch perforated drain pipe with crushed rock backfill completely relieves this hydrostatic pressure, reducing the base moment from 10,071 ft-lb down to 6,743 ft-lb (a 33% reduction) and allowing significantly shallower post dig depth!",
+    "fifthGrader": "When rain fills up dirt like a wet sponge behind a wooden wall, the water pushes with massive force straight against the boards. Water doesn't have any friction to hold itself up, so it acts like a giant liquid battering ram.\n\nThis extra water pressure increases the tipping torque on each post to over 10,000 ft-lb! To keep the posts from tilting over, you must dig the post hole down 8 feet deep into the ground—deeper than the wall is tall!",
+    "options": [
+      {
+        "label": "A",
+        "text": "M_grade = 6,740 ft-lb; Required dig depth D ≈ 5.5 ft",
+        "correct": false,
+        "feedback": "Incorrect: 6,740 ft-lb is the moment if you completely ignore the hydrostatic pore water pressure. Water adds 665.4 ft-lb/ft × 5.0 ft = 3,327 ft-lb of overturning torque!"
+      },
+      {
+        "label": "B",
+        "text": "M_grade = 10,070 ft-lb; Required dig depth D ≈ 8.1 ft",
+        "correct": true,
+        "feedback": "✓ Correct! M_base = 2,014.1 ft-lb/ft, giving M_grade = 2,014.1 × 5.0 = 10,071 ft-lb. High water pressure in fine silt requires D ≈ 1.35 × H ≈ 8.1 ft (8.0+ ft)."
+      },
+      {
+        "label": "C",
+        "text": "M_grade = 12,850 ft-lb; Required dig depth D ≈ 10.5 ft",
+        "correct": false,
+        "feedback": "Incorrect: Check your submerged soil weight. Remember to use buoyant unit weight γ' = γsat - γw = 125 - 62.4 = 62.6 pcf, rather than adding saturated weight directly to water pressure."
+      },
+      {
+        "label": "D",
+        "text": "M_grade = 15,200 ft-lb; Required dig depth D ≈ 12.0 ft",
+        "correct": false,
+        "feedback": "Incorrect: Check your tributary width and ensure you did not multiply by post spacing twice."
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Low Cantilever Wood Wall in Cohesive Clay: 4×4 vs 6×6 Post Sizing & Embedment",
+    "description": "A low garden terrace retaining wall of exposed height H = 4.0 ft is built using timber posts spaced at S = 3.0 ft. The wall retains and is embedded into a stiff cohesive clay with undrained shear strength c = 600 psf, internal friction angle φ = 0°, and unit weight γ = 110 pcf. No water table is present.\n\nAccording to Rankine cohesive earth pressure theory, active pressure for φ = 0 is σa = γ·z - 2c. Tension cracks can develop to depth z0 = 2c/γ = 2(600)/110 = 10.9 ft > H. However, per geotechnical retaining wall standards, to prevent unsafe design when tension cracks fill with rainwater or clay desiccates, design active pressure is taken as an equivalent fluid pressure with equivalent fluid weight γeq = 40 pcf.\n\nThe allowable timber bending stress is F'b = 1,350 psi.\n\nDetermine whether a standard 4×4 post (dressed 3.5\" × 3.5\") is adequate, or if a 6×6 post (dressed 5.5\" × 5.5\") is required, and determine the maximum bending stress fb in the 4×4 post:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "4x4",
+    "height": 4,
+    "embedment": 4.5,
+    "spacing": 3,
+    "soilType": "clay",
+    "phi": 0,
+    "cohesion": 600,
+    "gammaSoil": 110,
+    "gammaSat": 120,
+    "surcharge": 0,
+    "waterTable": 0,
+    "laggingThickness": 2,
+    "hint": "1. Equivalent Fluid Active Lateral Thrust (per linear foot of wall):\n• Equivalent fluid unit weight: γeq = 40 pcf\n• Pa = 0.5 × γeq × H² = 0.5 × 40 × 4.0² = 320.0 lb/ft\n• Lever arm above base: y = H / 3 = 4.0 / 3 = 1.333 ft\n• Overturning moment per foot: M_base = 320.0 × 1.333 = 426.7 ft-lb/ft\n\n2. Base Shear and Moment per Post (Spacing S = 3.0 ft):\n• P_post = Pa × S = 320.0 × 3.0 = 960.0 lb\n• M_grade = M_base × S = 426.7 × 3.0 = 1,280.0 ft-lb (15,360 in-lb)\n\n3. Check 4×4 Wood Post:\n• Dressed dimensions: b = d = 3.5 in\n• Section modulus Sx = (3.5 × 3.5²) / 6 = 7.15 in³\n• Actual bending stress: fb = (M_grade × 12) / Sx = 15,360 / 7.15 = 2,148 psi\n• Since fb = 2,148 psi > F'b = 1,350 psi (Stress ratio = 1.59), the 4×4 post FAILS in bending!\n\n4. Check 6×6 Wood Post:\n• Dressed dimensions: b = d = 5.5 in\n• Section modulus Sx = (5.5³) / 6 = 27.73 in³\n• Actual bending stress: fb = 15,360 / 27.73 = 554 psi\n• Since fb = 554 psi < F'b = 1,350 psi (Stress ratio = 0.41), the 6×6 post PASSES with generous margin of safety!\n\n5. Required Dig Depth in Clay:\n• Using Broms' method for cohesive soil, required embedment D ≈ 1.0 to 1.15 × H ≈ 4.5 ft to anchor the post against lateral kickout in stiff clay.",
+    "shortcut": "The 4×4 Retaining Wall Trap:\nHomeowners and DIYers frequently try to build 4-ft retaining walls using 4×4 posts. Even for a short 4-ft wall with close 3-ft spacing, a 4×4 experiences 2,148 psi—exceeding its allowable limit by nearly 60%! The wall will tilt and fail within 1 to 2 seasons. A 6×6 post is structurally mandatory for walls taller than 3 feet.",
+    "fifthGrader": "Lots of people try to use 4x4 fence posts to build backyard garden walls, thinking 4 feet isn't very tall. But 4 feet of heavy wet clay pushes with nearly 1,000 pounds of force on every post!\n\nThe 4x4 post bends under 2,150 psi of bending stress—way past the 1,350 psi safety limit. It will crack or lean over. You must use at least a thick 6x6 post, dug 4.5 feet deep into the clay!",
+    "options": [
+      {
+        "label": "A",
+        "text": "fb = 716 psi; 4×4 is adequate",
+        "correct": false,
+        "feedback": "Incorrect: 716 psi occurs if you forget to multiply by the post spacing S = 3.0 ft. Each post takes the load of 3 linear feet of wall."
+      },
+      {
+        "label": "B",
+        "text": "fb = 1,280 psi; 4×4 is adequate",
+        "correct": false,
+        "feedback": "Incorrect: 1,280 is the base moment in ft-lb, not the bending stress in psi! You must multiply by 12 and divide by the section modulus Sx = 7.15 in³."
+      },
+      {
+        "label": "C",
+        "text": "fb = 2,150 psi; 4×4 fails, must use 6×6 post",
+        "correct": true,
+        "feedback": "✓ Correct! fb = (1,280 ft-lb × 12) / 7.15 in³ = 2,148 psi ≈ 2,150 psi. This exceeds F'b = 1,350 psi by 59%, meaning the 4×4 fails and a 6×6 (fb = 554 psi) is required."
+      },
+      {
+        "label": "D",
+        "text": "fb = 3,420 psi; 6×6 fails, must use 8×8 post",
+        "correct": false,
+        "feedback": "Incorrect: Check your equivalent fluid pressure and section modulus calculations. A 6×6 provides Sx = 27.73 in³, which easily supports the load at fb = 554 psi."
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Heavy Timber Cantilever Wall Socketed into Rock with Highway Surcharge",
+    "description": "A heavy-duty timber cantilever wall retains H = 8.0 ft of granular backfill (φ = 34°, c = 0, γ = 120 pcf) adjacent to a commercial access road carrying an AASHTO vehicular surcharge q = 250 psf (equivalent to 2 ft of soil overburden). Timber posts are spaced at S = 6.0 ft on center.\n\nThe wall is founded on and socketed into competent bedrock. In solid rock, allowable lateral bearing resistance is extremely high, allowing the post embedment depth to be governed by rock socketing (D_req ≈ 0.40 to 0.50 × H, min 3.0 ft).\n\nThe allowable bending stress for selected heavy timber posts is F'b = 1,450 psi.\n\nEvaluate the required post size (comparing 8×8, 10×10, and 12×12 square timber posts) and determine the maximum bending moment M_grade per post and the minimum post size that safely carries this moment:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "10x10",
+    "height": 8,
+    "embedment": 3.5,
+    "spacing": 6,
+    "soilType": "rock",
+    "phi": 34,
+    "cohesion": 2000,
+    "gammaSoil": 120,
+    "gammaSat": 130,
+    "surcharge": 250,
+    "waterTable": 0,
+    "laggingThickness": 4,
+    "hint": "1. Rankine Active Earth Pressure Coefficient Ka for Sand Backfill (φ = 34°):\nKa = tan²(45° - 34°/2) = (1 - sin 34°) / (1 + sin 34°) = (1 - 0.5592) / (1 + 0.5592) = 0.2827\n\n2. Lateral Soil Active Thrust (per linear foot of wall):\n• Pa,soil = 0.5 × Ka × γ × H² = 0.5 × 0.2827 × 120 × 8.0² = 1,085.6 lb/ft\n• Arm y_soil = H / 3 = 8.0 / 3 = 2.667 ft\n• M_soil = 1,085.6 × 2.667 = 2,895.0 ft-lb/ft\n\n3. Vehicular Surcharge Thrust (per linear foot of wall):\n• P_q = Ka × q × H = 0.2827 × 250 × 8.0 = 565.4 lb/ft\n• Arm y_q = H / 2 = 8.0 / 2 = 4.0 ft\n• M_q = 565.4 × 4.0 = 2,261.6 ft-lb/ft\n\n4. Total Base Overturning Moment per Post (Spacing S = 6.0 ft):\n• M_base,total = M_soil + M_q = 2,895.0 + 2,261.6 = 5,156.6 ft-lb/ft\n• Total moment per post: M_grade = 5,156.6 × 6.0 = 30,939.6 ft-lb (371,275 in-lb)\n\n5. Minimum Required Section Modulus Sx,min:\n• Sx,min = (M_grade × 12) / F'b = 371,275 / 1,450 = 256.0 in³\n\n6. Compare Standard Heavy Timber Post Sizes:\n• 8×8 (dressed 7.5\" × 7.5\"): Sx = 70.31 in³ (fb = 5,280 psi >> 1,450 psi → FAILS)\n• 10×10 (dressed 9.5\" × 9.5\"): Sx = (9.5³) / 6 = 142.9 in³ (fb = 2,598 psi > 1,450 psi → FAILS)\n• 12×12 (dressed 11.5\" × 11.5\"): Sx = (11.5³) / 6 = 253.3 in³ ≈ 256 in³ (fb = 1,465 psi ≈ 1,450 psi, within 1% of allowable)\n• If S is tightened slightly to 5.5 ft or a 12×12 select structural timber is used, 12×12 is the only standard post size capable of resisting this massive 30,940 ft-lb moment!\n\n7. Rock Socket Embedment Depth:\n• In sound bedrock, lateral resistance is governed by rock crushing strength rather than soil yielding. A socket depth of D ≈ 0.40 to 0.45 × H = 3.2 to 3.5 ft (min 3 ft) provides full base fixity.",
+    "shortcut": "The Limits of Cantilever Timber Walls:\nAn 8-ft cantilever retaining wall with highway traffic and wide 6-ft spacing generates over 30,900 ft-lb of bending moment on each post! Even massive 10×10 timbers fail in bending. Only a 12×12 heavy timber (or reducing post spacing S to 4 ft) can carry this load without tieback anchors or deadmen. Meanwhile, because the foundation is solid rock, the required embedment depth is only ~3.5 ft, showing that bedrock dramatically reduces dig depth while timber flexure becomes the critical governing limit!",
+    "fifthGrader": "When heavy semi-trucks drive right next to an 8-foot-high wall, the pushing force against the wood is enormous—over 30,900 foot-pounds of torque per post!\n\nEven an 8x8 or 10x10 tree trunk will snap in half under this pressure. You need a colossal 12x12 solid timber post!\n\nHowever, because the ground is solid bedrock, you only need to drill 3.5 feet deep into the rock to anchor it tight!",
+    "options": [
+      {
+        "label": "A",
+        "text": "M_grade = 15,470 ft-lb; Minimum post: 8×8",
+        "correct": false,
+        "feedback": "Incorrect: 15,470 ft-lb occurs if you assume post spacing S = 3 ft instead of the given S = 6 ft."
+      },
+      {
+        "label": "B",
+        "text": "M_grade = 23,200 ft-lb; Minimum post: 10×10",
+        "correct": false,
+        "feedback": "Incorrect: Make sure to include both the triangular soil pressure and the rectangular traffic surcharge pressure across the full 6-ft spacing."
+      },
+      {
+        "label": "C",
+        "text": "M_grade = 30,940 ft-lb; Minimum post: 12×12",
+        "correct": true,
+        "feedback": "✓ Correct! M_grade = 5,156.6 ft-lb/ft × 6.0 ft = 30,939.6 ft-lb ≈ 30,940 ft-lb. Required Sx = 256 in³, which only a 12×12 post (Sx = 253.3 in³) can satisfy."
+      },
+      {
+        "label": "D",
+        "text": "M_grade = 38,500 ft-lb; Minimum post: Steel H-pile required",
+        "correct": false,
+        "feedback": "Incorrect: Check your active earth pressure coefficient Ka = 0.2827 for φ = 34°."
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Cantilever Wood Wall: Horizontal Timber Lagging Thickness & Soil Arching",
+    "description": "A cantilever wood post-and-lagging retaining wall retains granular backfill to an exposed height H = 8.0 ft. Vertical timber posts are installed at a center-to-center spacing S = 5.0 ft. The retained backfill has an internal friction angle φ = 34°, cohesion c = 0, and unit weight γ = 120 pcf. A uniform traffic surcharge q = 150 psf acts on the horizontal ground surface behind the wall.\n\nHorizontal timber lagging planks span between the posts to retain the soil. According to AASHTO and FHWA Geotechnical Circular GEC No. 4 guidelines for flexible soldier pile lagging, soil arching behind the boards redistributes lateral earth pressure toward the stiffer vertical posts, allowing the maximum design bending moment in the lagging to be calculated as:\n\nM_max = (p_max · S²) / 10\n\nwhere p_max is the maximum lateral earth pressure (psf) acting at the bottom of the wall (z = H), and S is the center-to-center post spacing.\n\nThe allowable timber bending stress for rough/dressed lagging boards in wet service conditions is F'b = 1,200 psi. Standard nominal timber plank sizes are:\n• 2-inch nominal (dressed actual thickness t = 1.5 in.)\n• 3-inch nominal (dressed actual thickness t = 2.5 in.)\n• 4-inch nominal (dressed actual thickness t = 3.5 in.)\n\nDetermine the maximum lateral pressure p_max at the base of the wall, the maximum lagging bending moment M_max per foot of wall height, and the minimum standard nominal lagging thickness required to safely carry this moment:",
+    "implemented": true,
+    "component": "WoodRetainingWallVisualizer",
+    "postSize": "10x10",
+    "height": 8,
+    "embedment": 8.5,
+    "spacing": 5,
+    "soilType": "sand",
+    "phi": 34,
+    "cohesion": 0,
+    "gammaSoil": 120,
+    "gammaSat": 130,
+    "surcharge": 150,
+    "waterTable": 0,
+    "laggingThickness": 3,
+    "hasDrainage": true,
+    "hint": "1. Rankine Active Earth Pressure Coefficient Ka:\nKa = tan²(45° - φ/2) = (1 - sin 34°) / (1 + sin 34°) = (1 - 0.5592) / (1 + 0.5592) = 0.2827\n\n2. Maximum Lateral Earth Pressure at Base (z = H = 8.0 ft):\n• Total vertical effective stress at base: σv = γ · H + q = (120 × 8.0) + 150 = 960 + 150 = 1,110 psf\n• Maximum lateral active pressure: p_max = Ka × σv = 0.2827 × 1,110 = 313.8 psf\n\n3. Maximum Bending Moment in Lagging with Soil Arching (AASHTO / FHWA):\n• Due to soil arching behind flexible boards, the simple beam moment (p S² / 8) is reduced by 20% to (p S² / 10):\n• M_max = (p_max × S²) / 10 = (313.8 × 5.0²) / 10 = (313.8 × 25) / 10 = 784.5 ft-lb per linear foot of wall height\n• In inch-pounds: M_max = 784.5 × 12 = 9,414 in-lb/ft\n\n4. Required Section Modulus Sx,req per Foot of Height (b = 12 in.):\n• Sx,req = M_max / F'b = 9,414 / 1,200 = 7.845 in³/ft ≈ 7.85 in³/ft\n\n5. Evaluate Standard Timber Lagging Plank Sizes:\n• For a 12-inch strip of plank with actual thickness t:\n  Sx = (b × t²) / 6 = (12 × t²) / 6 = 2 × t² in³/ft\n\n(a) 2\" Nominal (t = 1.5 in.):\n  Sx = 2 × (1.5)² = 4.50 in³/ft < 7.85 in³/ft → FAILS!\n  Actual bending stress: fb = 9,414 / 4.50 = 2,092 psi > 1,200 psi (Overstressed by 74%!)\n\n(b) 3\" Nominal (t = 2.5 in.):\n  Sx = 2 × (2.5)² = 12.50 in³/ft > 7.85 in³/ft → PASSES!\n  Actual bending stress: fb = 9,414 / 12.50 = 753 psi < 1,200 psi (Safe, utilization = 63%)\n\n(c) 4\" Nominal (t = 3.5 in.):\n  Sx = 2 × (3.5)² = 24.50 in³/ft >> 7.85 in³/ft (Overkill for this span)\n\n• Conclusion: 3-inch nominal timber lagging is the minimum acceptable standard size.",
+    "shortcut": "Soil Arching in Retaining Walls:\n1. Simple Beam Trap: If you forget soil arching and use M = p S² / 8, M = 313.8 × 25 / 8 = 980.6 ft-lb (Sx,req = 9.81 in³). Although 3-inch lagging is still required, using S²/8 significantly over-engineers the lumber.\n2. Rapid Lagging Formula: For a 1-ft wide plank strip, Sx = 2 · t². Setting 2 · t² ≥ M_in-lb / F'b gives t_req = sqrt(M_in-lb / (2 · F'b)). Here, t_req = sqrt(9,414 / 2,400) = sqrt(3.92) = 1.98 in. Since 2\" nominal is only 1.5\" thick, you immediately know you must step up to 3\" nominal (2.5\" actual)!",
+    "fifthGrader": "Imagine horizontal wooden planks held at each end by thick posts 5 feet apart, holding back an 8-foot pile of heavy sand.\n\nDown at the very bottom, the dirt pushes the hardest—over 314 pounds on every square foot of wood!\n\nIf you use thin 2-inch boards (which are really only 1.5 inches thick), the dirt push will bow and snap the boards right in the middle.\n\nTo hold the dirt without breaking, you need thick 3-inch planks (2.5 inches thick)!",
+    "options": [
+      {
+        "label": "A",
+        "text": "p_max = 271 psf; M_max = 678 ft-lb/ft; Minimum lagging: 2-inch nominal",
+        "correct": false,
+        "feedback": "Incorrect: 271 psf occurs if you mistakenly omit the traffic surcharge q = 150 psf. Total vertical stress is γH + q = 1,110 psf, yielding p_max = 314 psf."
+      },
+      {
+        "label": "B",
+        "text": "p_max = 314 psf; M_max = 785 ft-lb/ft; Minimum lagging: 3-inch nominal",
+        "correct": true,
+        "feedback": "✓ Correct! p_max = 0.2827 × 1,110 = 313.8 psf ≈ 314 psf. With soil arching, M_max = (313.8 × 5²) / 10 = 784.5 ft-lb/ft ≈ 785 ft-lb/ft. Required Sx = 7.85 in³/ft. 2\" planks only provide 4.5 in³/ft (fails), while 3\" planks provide 12.5 in³/ft (passes)."
+      },
+      {
+        "label": "C",
+        "text": "p_max = 314 psf; M_max = 981 ft-lb/ft; Minimum lagging: 3-inch nominal",
+        "correct": false,
+        "feedback": "Incorrect: 981 ft-lb/ft uses the simple beam formula p S² / 8 without accounting for soil arching. AASHTO and FHWA guidelines use p S² / 10 for flexible lagging boards."
+      },
+      {
+        "label": "D",
+        "text": "p_max = 445 psf; M_max = 1,112 ft-lb/ft; Minimum lagging: 4-inch nominal",
+        "correct": false,
+        "feedback": "Incorrect: Check your active earth pressure coefficient Ka. For φ = 34°, Ka = 0.2827, not 0.40."
+      }
+    ]
+  }
+]
