@@ -186,6 +186,28 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
     const hasJump = Fr1 > 1.0 && y1 < yc * 0.99;
     const jumpData = hasJump ? conjugateDepth(y1, Q, bEff, zEff) : null;
 
+    // ── Jump Length — 4 Empirical Formulas (rectangular-based; best-effort for trapezoid)
+    const jumpLengths = hasJump ? (() => {
+      const { y2, Fr1: Fr1j = Fr1 } = jumpData;
+      // USBR / Peterka (1958): Lj ≈ 6.1·y₂  (Fr₁ > 4.5, most conservative for design)
+      const Lpeterka = 6.1 * y2;
+      // Chow (1959): Lj = 6.9·(y₂ - y₁)
+      const Lchow = 6.9 * (y2 - y1);
+      // Silvester (1964): Lj = 9.75·y₁·(Fr₁ - 1)^1.01
+      const Lsilvester = 9.75 * y1 * Math.pow(Math.max(Fr1 - 1, 0.01), 1.01);
+      // Hager, Bremen & Kawagoshi (1990): Lj/y₁ = 8·Fr₁ - 12  (valid Fr₁ = 1.7–18)
+      const Lhager = y1 * (8 * Fr1 - 12);
+      // Jump efficiency η = E₂/E₁ (closed-form for rectangular channel)
+      const efficiency = (jumpData.E2 / Math.max(jumpData.E1, 0.001)) * 100;
+      // Jump type classification (USBR Peterka)
+      const jumpType = Fr1 < 1.7 ? 'Undular (Fr<1.7)'
+        : Fr1 < 2.5 ? 'Weak (1.7–2.5)'
+        : Fr1 < 4.5 ? 'Oscillating (2.5–4.5)'
+        : Fr1 < 9.0 ? 'Steady (4.5–9.0)'
+        : 'Strong (Fr>9)';
+      return { Lpeterka, Lchow, Lsilvester, Lhager, efficiency, jumpType };
+    })() : null;
+
     const slopeClass = S0 < Sc * 0.99 ? 'Mild' : S0 > Sc * 1.01 ? 'Steep' : 'Critical';
     const regimeN = Frn < 0.95 ? 'Subcritical' : Frn > 1.05 ? 'Supercritical' : 'Critical';
     const regime1 = Fr1 < 0.95 ? 'Subcritical' : Fr1 > 1.05 ? 'Supercritical' : 'Critical';
@@ -201,7 +223,7 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
       yn, yc, Sc, slopeClass,
       geoN, Vn, Frn, En, regimeN,
       geo1, V1: V1val, Fr1, E1, Emin, regime1,
-      hasJump, jumpData,
+      hasJump, jumpData, jumpLengths,
       yCurve, yCurveMax
     };
   }, [Q, bEff, zEff, n, S0, y1]);
@@ -253,14 +275,15 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
       <div className="glass-panel visualizer-panel" style={{ width: '100%' }}>
 
         {/* ── KPI Cards Row ─────────────────────────────────────────────── */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
           {[
             { label: 'Normal Depth yₙ', val: `${yn.toFixed(2)} ft`, sub: yn > yc ? '(Mild Slope ✓)' : '(Steep Slope)', color: isMild ? COLOR_SAFE : COLOR_WARN },
             { label: 'Critical Depth yc', val: `${yc.toFixed(2)} ft`, sub: `Emin = ${Emin.toFixed(2)} ft`, color: COLOR_CRIT },
             { label: 'Froude No. (yn)', val: Frn.toFixed(3), sub: regimeN, color: frColor },
             { label: 'Velocity V', val: `${calcs.Vn.toFixed(2)} ft/s`, sub: `Q = ${Q} cfs`, color: 'var(--accent-cyan)' },
             { label: 'Slope Class', val: calcs.slopeClass, sub: `Sc = ${(calcs.Sc * 1000).toFixed(2)}‰`, color: isMild ? COLOR_SAFE : COLOR_WARN },
-            { label: 'Jump ΔE', val: hasJump ? `${jumpData.dE.toFixed(2)} ft` : 'No Jump', sub: hasJump ? `${((jumpData.dE / jumpData.E1) * 100).toFixed(0)}% loss` : `Fr₁ = ${Fr1.toFixed(2)}`, color: hasJump ? COLOR_FAIL : COLOR_SAFE },
+            { label: 'Jump ΔE', val: hasJump ? `${jumpData.dE.toFixed(2)} ft` : 'No Jump', sub: hasJump ? `${calcs.jumpLengths.efficiency.toFixed(0)}% η · ${((jumpData.dE / jumpData.E1) * 100).toFixed(0)}% dissip.` : `Fr₁ = ${Fr1.toFixed(2)}`, color: hasJump ? COLOR_FAIL : COLOR_SAFE },
+            { label: 'Jump Length Lⱼ', val: hasJump ? `${calcs.jumpLengths.Lpeterka.toFixed(1)} ft` : '—', sub: hasJump ? `6.1·y₂ (USBR) · ${calcs.jumpLengths.jumpType}` : 'No supercritical flow', color: hasJump ? '#f97316' : '#475569' },
           ].map((k, i) => (
             <div key={i} style={{
               background: `rgba(15,23,42,0.7)`,
@@ -983,8 +1006,34 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                       <strong>Conjugate (Sequent) Depth: y₂ = {jumpData.y2.toFixed(3)} ft</strong><br /><br />
                       Upstream specific energy: E₁ = y₁ + V₁²/2g = {jumpData.E1.toFixed(3)} ft<br />
                       Downstream specific energy: E₂ = y₂ + V₂²/2g = {jumpData.E2.toFixed(3)} ft<br />
-                      <strong>Head Loss: ΔE = E₁ - E₂ = {jumpData.dE.toFixed(3)} ft ({((jumpData.dE / jumpData.E1) * 100).toFixed(1)}% of E₁ dissipated)</strong><br />
-                      Jump Length: Lⱼ ≈ 6.1·y₂ = 6.1·{jumpData.y2.toFixed(2)} = {(6.1 * jumpData.y2).toFixed(1)} ft (USBR empirical)
+                      <strong>Head Loss: ΔE = E₁ − E₂ = {jumpData.dE.toFixed(3)} ft ({((jumpData.dE / jumpData.E1) * 100).toFixed(1)}% of E₁ dissipated)</strong><br />
+                      Jump Efficiency: η = E₂/E₁ = {jumpData.E2.toFixed(3)}/{jumpData.E1.toFixed(3)} = <strong>{calcs.jumpLengths.efficiency.toFixed(1)}%</strong><br />
+                      Jump Classification: <strong>{calcs.jumpLengths.jumpType}</strong><br /><br />
+
+                      ── Jump Length Formulas (4 Empirical Methods) ──<br /><br />
+
+                      1) <strong>USBR / Peterka (1958)</strong> — Standard design formula:<br />
+                      &nbsp;&nbsp;Lⱼ = 6.1·y₂ = 6.1 × {jumpData.y2.toFixed(3)} = <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lpeterka.toFixed(2)} ft</strong><br />
+                      &nbsp;&nbsp;(Conservative; recommended for Fr₁ &gt; 4.5. Used in USBR stilling basin design.)<br /><br />
+
+                      2) <strong>Chow (1959)</strong> — Based on depth difference:<br />
+                      &nbsp;&nbsp;Lⱼ = 6.9·(y₂ − y₁) = 6.9 × ({jumpData.y2.toFixed(3)} − {y1.toFixed(3)}) = 6.9 × {(jumpData.y2 - y1).toFixed(3)}<br />
+                      &nbsp;&nbsp;= <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lchow.toFixed(2)} ft</strong> (Chow, Open Channel Hydraulics)<br /><br />
+
+                      3) <strong>Silvester (1964)</strong> — Fr₁-based power law:<br />
+                      &nbsp;&nbsp;Lⱼ = 9.75·y₁·(Fr₁ − 1)^1.01<br />
+                      &nbsp;&nbsp;= 9.75 × {y1.toFixed(3)} × ({Fr1.toFixed(4)} − 1)^1.01<br />
+                      &nbsp;&nbsp;= 9.75 × {y1.toFixed(3)} × {Math.pow(Math.max(Fr1 - 1, 0.01), 1.01).toFixed(4)}<br />
+                      &nbsp;&nbsp;= <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lsilvester.toFixed(2)} ft</strong> (good for 1.7 &lt; Fr₁ &lt; 20)<br /><br />
+
+                      4) <strong>Hager, Bremen &amp; Kawagoshi (1990)</strong> — Modern fitted:<br />
+                      &nbsp;&nbsp;Lⱼ/y₁ = 8·Fr₁ − 12 → Lⱼ = y₁·(8·Fr₁ − 12)<br />
+                      &nbsp;&nbsp;= {y1.toFixed(3)} × (8 × {Fr1.toFixed(4)} − 12) = {y1.toFixed(3)} × {(8 * Fr1 - 12).toFixed(4)}<br />
+                      &nbsp;&nbsp;= <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lhager > 0 ? calcs.jumpLengths.Lhager.toFixed(2) : 'N/A (Fr₁ < 1.7)'} ft</strong> (valid Fr₁ = 1.7–18)<br /><br />
+
+                      ── Summary Table ──<br />
+                      Peterka: {calcs.jumpLengths.Lpeterka.toFixed(1)} ft · Chow: {calcs.jumpLengths.Lchow.toFixed(1)} ft · Silvester: {calcs.jumpLengths.Lsilvester.toFixed(1)} ft · Hager: {calcs.jumpLengths.Lhager > 0 ? calcs.jumpLengths.Lhager.toFixed(1) : 'N/A'} ft<br />
+                      <strong>Design Lⱼ (conservative, USBR): {calcs.jumpLengths.Lpeterka.toFixed(1)} ft</strong>
                     </>
                   )
                 } : {
