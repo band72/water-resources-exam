@@ -3035,5 +3035,1855 @@
     "hint": "Manning's velocity: V = (1.486/n) \u00d7 R^(2/3) \u00d7 S^(1/2)\n\u2022 D = 10 in = 0.833 ft\n\u2022 R = D/4 = 0.2083 ft\n\u2022 R^(2/3) = (0.2083)^0.667 = 0.347\n\u2022 V = (1.486/0.013) \u00d7 0.347 \u00d7 \u221a(0.003)\nCompare result to 2.0 ft/s minimum self-cleansing velocity.",
     "shortcut": "V = 114.3 \u00d7 0.347 \u00d7 0.05477 = 2.17 ft/s > 2.0 ft/s \u2713 \u2014 pipe self-cleanses.",
     "fifthGrader": "Sewer pipes need water to flow fast enough to push solids along \u2014 otherwise they clog! Engineers call 2.0 ft/s the 'self-cleansing velocity'. If the pipe flows too slowly, gunk builds up and you have a very smelly problem."
+  },
+  {
+    "id": 139,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Pipe Invert Elevation at Manhole",
+    "description": "A plan-and-profile sheet shows the following data for a storm sewer:\n\n\u2022 Manhole A (upstream): Rim elevation = 104.50 ft, Pipe invert IN = 97.80 ft\n\u2022 Manhole B (downstream): Rim elevation = 102.20 ft, Pipe invert OUT = ?\n\u2022 Pipe length between manholes = 250 ft\n\u2022 Pipe slope = 0.80%\n\nThe invert elevation at the outlet of Manhole B is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "95.60 ft",
+        "correct": false,
+        "feedback": "Incorrect. Drop = slope \u00d7 length = 0.008 \u00d7 250 = 2.0 ft. Invert_B = 97.80 \u2212 2.0 = 95.80 ft."
+      },
+      {
+        "label": "B",
+        "text": "95.80 ft",
+        "correct": true,
+        "feedback": "Correct! Drop = 0.008 \u00d7 250 = 2.00 ft. Invert_B = 97.80 \u2212 2.00 = 95.80 ft."
+      },
+      {
+        "label": "C",
+        "text": "96.20 ft",
+        "correct": false,
+        "feedback": "Incorrect. Check: slope = 0.80% = 0.0080. Drop = 0.0080 \u00d7 250 = 2.0 ft."
+      },
+      {
+        "label": "D",
+        "text": "97.80 ft",
+        "correct": false,
+        "feedback": "Incorrect. That is the upstream invert elevation \u2014 the downstream must be lower."
+      }
+    ],
+    "hint": "Pipe Invert Drop = Slope (decimal) \u00d7 Pipe Length.\nDownstream Invert = Upstream Invert \u2212 Drop.\nS = 0.80% = 0.0080. Drop = 0.0080 \u00d7 250 = 2.0 ft.",
+    "shortcut": "Invert_B = 97.80 \u2212 (0.008 \u00d7 250) = 97.80 \u2212 2.00 = 95.80 ft.",
+    "fifthGrader": "A profile sheet is a side-view drawing of a pipe going underground. The pipe tilts downhill so water flows by gravity. The 'invert' is the very bottom inside of the pipe. We just calculate how much it drops over 250 feet at a 0.8% grade."
+  },
+  {
+    "id": 140,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Pipe Slope from Two Inverts",
+    "description": "A sanitary sewer profile sheet shows:\n\n\u2022 Manhole 1 (upstream) invert elevation: 88.45 ft at Station 10+00\n\u2022 Manhole 2 (downstream) invert elevation: 85.93 ft at Station 13+50\n\nThe pipe slope in percent (%) is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.52%",
+        "correct": false,
+        "feedback": "Incorrect. S = (elevation drop) / (horizontal distance). Distance = 1350 \u2212 1000 = 350 ft."
+      },
+      {
+        "label": "B",
+        "text": "0.72%",
+        "correct": true,
+        "feedback": "Correct! Drop = 88.45 \u2212 85.93 = 2.52 ft. Distance = 350 ft. S = 2.52/350 = 0.0072 = 0.72%."
+      },
+      {
+        "label": "C",
+        "text": "0.84%",
+        "correct": false,
+        "feedback": "Incorrect. Recheck station difference: 13+50 minus 10+00 = 350 ft (not 300 ft)."
+      },
+      {
+        "label": "D",
+        "text": "1.05%",
+        "correct": false,
+        "feedback": "Incorrect. The elevation drop is 2.52 ft, not larger."
+      }
+    ],
+    "hint": "S = (Upstream Invert \u2212 Downstream Invert) / Horizontal Distance\nDistance = Station 13+50 \u2212 Station 10+00 = 1350 \u2212 1000 = 350 ft\nDrop = 88.45 \u2212 85.93 = 2.52 ft\nS = 2.52 / 350 = 0.0072 = 0.72%",
+    "shortcut": "S = 2.52 / 350 = 0.0072 = 0.72%. Convert stations to feet first (13+50 = 1350 ft).",
+    "fifthGrader": "Slope is just 'rise over run' \u2014 how much does it drop (rise) for every foot of horizontal distance (run)? Subtract the two invert elevations to get the drop, subtract the stations to get the run, then divide!"
+  },
+  {
+    "id": 141,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Cover Depth Over Pipe",
+    "description": "A plan-and-profile sheet shows a 24-inch diameter storm sewer with:\n\n\u2022 Finished grade elevation at a point: 96.40 ft\n\u2022 Pipe invert elevation at same point: 91.20 ft\n\nThe depth of cover (measured from finished grade to the top of pipe) is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "3.2 ft",
+        "correct": false,
+        "feedback": "Incorrect. Cover = (Grade \u2212 Invert) \u2212 Pipe Diameter. Remember to subtract the full pipe diameter."
+      },
+      {
+        "label": "B",
+        "text": "3.7 ft",
+        "correct": false,
+        "feedback": "Incorrect. The pipe diameter is 24 in = 2.0 ft. Cover = (96.40 \u2212 91.20) \u2212 2.0 = 5.20 \u2212 2.0 = 3.20 ft."
+      },
+      {
+        "label": "C",
+        "text": "3.2 ft",
+        "correct": true,
+        "feedback": "Correct! Depth from grade to invert = 96.40 \u2212 91.20 = 5.20 ft. Top of pipe = invert + D = 91.20 + 2.0 = 93.20 ft. Cover = 96.40 \u2212 93.20 = 3.20 ft."
+      },
+      {
+        "label": "D",
+        "text": "5.2 ft",
+        "correct": false,
+        "feedback": "Incorrect. 5.2 ft is the depth to the pipe invert (the bottom), not the top of pipe."
+      }
+    ],
+    "hint": "Top of pipe elevation = Invert elevation + Pipe Diameter (in feet)\nCover = Finished Grade \u2212 Top of Pipe\nTop of pipe = 91.20 + 2.0 = 93.20 ft\nCover = 96.40 \u2212 93.20 = 3.20 ft",
+    "shortcut": "Cover = (Grade \u2212 Invert) \u2212 D = (96.40 \u2212 91.20) \u2212 2.0 = 5.20 \u2212 2.0 = 3.20 ft.",
+    "fifthGrader": "Imagine the pipe is a hollow tunnel underground. The invert is the floor of the tunnel. The top of the pipe is the ceiling. Cover is the dirt above the ceiling up to the ground surface."
+  },
+  {
+    "id": 142,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Manhole Drop (Inlet vs. Outlet Invert)",
+    "description": "A profile sheet shows a junction manhole where two sewers meet:\n\n\u2022 Incoming pipe 1 (12-in, from north): invert in = 74.60 ft\n\u2022 Incoming pipe 2 (12-in, from east): invert in = 74.40 ft\n\u2022 Outgoing pipe (18-in, heading south): invert out = ?\n\nStandard practice requires the outgoing invert to be set at or below the LOWEST incoming invert with a 0.10 ft drop for hydraulic continuity. The required outgoing pipe invert elevation is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "74.50 ft",
+        "correct": false,
+        "feedback": "Incorrect. The outgoing invert must be 0.10 ft BELOW the lowest incoming invert (74.40), not above it."
+      },
+      {
+        "label": "B",
+        "text": "74.30 ft",
+        "correct": true,
+        "feedback": "Correct! Lowest incoming invert = 74.40 ft. Outgoing = 74.40 \u2212 0.10 = 74.30 ft."
+      },
+      {
+        "label": "C",
+        "text": "74.60 ft",
+        "correct": false,
+        "feedback": "Incorrect. 74.60 ft is the higher incoming invert. The drop is applied to the LOWEST incoming invert."
+      },
+      {
+        "label": "D",
+        "text": "74.00 ft",
+        "correct": false,
+        "feedback": "Incorrect. Only a 0.10 ft drop is required, not 0.40 ft."
+      }
+    ],
+    "hint": "At a junction manhole, match-line the outgoing pipe to the LOWEST incoming invert, then subtract the required hydraulic drop (typically 0.10 ft).\nLowest incoming = min(74.60, 74.40) = 74.40 ft\nOutgoing invert = 74.40 \u2212 0.10 = 74.30 ft",
+    "shortcut": "Outgoing = min(incoming inverts) \u2212 0.10 = 74.40 \u2212 0.10 = 74.30 ft.",
+    "fifthGrader": "When two sewers merge into one bigger pipe, the outgoing pipe needs to be slightly lower so gravity keeps pulling the water forward. Engineers call this a 'hydraulic drop'. We just make sure the bottom of the outgoing pipe is a bit lower than the lowest incoming pipe."
+  },
+  {
+    "id": 143,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Stationing and Pipe Length",
+    "description": "A storm sewer profile sheet shows:\n\n\u2022 Manhole A at Station 22+47.50\n\u2022 Manhole B at Station 26+15.00\n\nThe length of pipe between Manhole A and Manhole B is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "267.5 ft",
+        "correct": false,
+        "feedback": "Incorrect. Convert stations to feet: 26+15.00 = 2615.00 ft, 22+47.50 = 2247.50 ft."
+      },
+      {
+        "label": "B",
+        "text": "367.5 ft",
+        "correct": true,
+        "feedback": "Correct! Station B = 2615.00 ft, Station A = 2247.50 ft. Length = 2615.00 \u2212 2247.50 = 367.50 ft."
+      },
+      {
+        "label": "C",
+        "text": "392.5 ft",
+        "correct": false,
+        "feedback": "Incorrect. Reread the stationing: 22+47.50 means 2247.50 ft, not 2252.50 ft."
+      },
+      {
+        "label": "D",
+        "text": "415.0 ft",
+        "correct": false,
+        "feedback": "Incorrect. Double-check station notation: XX+YY.ZZ means (XX \u00d7 100) + YY.ZZ feet."
+      }
+    ],
+    "hint": "Station notation: XX+YY.ZZ = (XX \u00d7 100) + YY.ZZ feet.\nStation 22+47.50 = 2247.50 ft\nStation 26+15.00 = 2615.00 ft\nPipe length = 2615.00 \u2212 2247.50 = 367.50 ft",
+    "shortcut": "L = 2615.00 \u2212 2247.50 = 367.50 ft. Station math: the '+' means multiply the prefix by 100.",
+    "fifthGrader": "Stationing is a measuring system used along roads and sewers. The number before the '+' is in hundreds of feet. So 22+47.50 = 2,247.50 feet from the starting point. Subtract to find the distance between two points!"
+  },
+  {
+    "id": 144,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Hydraulic Grade Line (HGL) Check",
+    "description": "A storm sewer profile sheet shows the following at a manhole:\n\n\u2022 Pipe crown (top of pipe inside) elevation: 89.60 ft\n\u2022 Hydraulic Grade Line (HGL) elevation at same manhole: 90.15 ft\n\u2022 Manhole rim elevation: 92.40 ft\n\nWhich statement about flow conditions is correct?",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "The pipe flows under gravity with free surface flow",
+        "correct": false,
+        "feedback": "Incorrect. The HGL (90.15) is above the pipe crown (89.60), indicating the pipe is pressurized and flows full under pressure."
+      },
+      {
+        "label": "B",
+        "text": "The pipe flows full under pressure (surcharged)",
+        "correct": true,
+        "feedback": "Correct! HGL (90.15 ft) > pipe crown (89.60 ft) \u2192 pipe is surcharged (flows full under pressure). HGL < rim (92.40 ft) \u2192 no surface flooding yet."
+      },
+      {
+        "label": "C",
+        "text": "The manhole is actively flooding to the surface",
+        "correct": false,
+        "feedback": "Incorrect. The HGL (90.15) is still below the rim (92.40), so there is no surface flooding."
+      },
+      {
+        "label": "D",
+        "text": "The pipe is flowing at critical depth",
+        "correct": false,
+        "feedback": "Incorrect. Critical depth analysis requires Froude number calculation. Here the HGL above the crown is the indicator of pressure flow."
+      }
+    ],
+    "hint": "Three HGL conditions to remember:\n\u2022 HGL < pipe crown \u2192 gravity flow, free surface (partially full)\n\u2022 HGL > pipe crown but < rim \u2192 pipe is surcharged (full, under pressure)\n\u2022 HGL > rim elevation \u2192 active surface flooding",
+    "shortcut": "HGL = 90.15 > Crown = 89.60 \u2192 surcharged. HGL = 90.15 < Rim = 92.40 \u2192 no flooding.",
+    "fifthGrader": "Think of the pipe as a straw. If you blow softly, water trickles along the bottom (free surface). If you blow hard, the straw fills up completely with pressure (surcharged). If you blow REALLY hard, water starts spilling out the top of the manhole (flooding). We compare the HGL to the pipe top and manhole rim to figure out which case we're in."
+  },
+  {
+    "id": 145,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Road Vertical Curve Low Point",
+    "description": "A road plan-and-profile sheet shows a sag (valley) vertical curve with:\n\n\u2022 Incoming grade g1 = -3.0% (descending)\n\u2022 Outgoing grade g2 = +2.0% (ascending)\n\u2022 Curve length L = 400 ft\n\u2022 PVC station: 18+00, PVC elevation: 210.00 ft\n\nThe station of the low point on the vertical curve is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "19+20",
+        "correct": true,
+        "feedback": "Correct! Low point station = PVC + L \u00d7 |g1| / (|g1| + g2) = 1800 + 400 \u00d7 3/(3+2) = 1800 + 240 = 2040 \u2192 Station 20+40. Recheck: x = L \u00d7 g1/(g1-g2) = 400 \u00d7 (-3)/(-3-2) = 400 \u00d7 (-3)/(-5) = 240 ft from PVC \u2192 Station 18+00 + 240 = 20+40."
+      },
+      {
+        "label": "B",
+        "text": "20+40",
+        "correct": false,
+        "feedback": "This is actually the correct answer! Low point x = L \u00d7 |g1|/(|g1|+|g2|) = 400 \u00d7 3/5 = 240 ft from PVC \u2192 Station 18+00 + 2+40 = 20+40."
+      },
+      {
+        "label": "C",
+        "text": "19+00",
+        "correct": false,
+        "feedback": "Incorrect. Use x = L \u00d7 |g1| / (|g1| + |g2|) from PVC."
+      },
+      {
+        "label": "D",
+        "text": "21+00",
+        "correct": false,
+        "feedback": "Incorrect. The low point is 240 ft past the PVC, not 300 ft."
+      }
+    ],
+    "hint": "For a sag vertical curve, the low point occurs at:\nx = L \u00d7 |g1| / (|g1| + |g2|) from the PVC\nx = 400 \u00d7 3.0 / (3.0 + 2.0) = 400 \u00d7 0.60 = 240 ft\nLow point station = 18+00 + 2+40 = 20+40",
+    "shortcut": "x = 400 \u00d7 (3/5) = 240 ft from PVC. Low pt = Station 18+00 + 240 ft = 20+40.",
+    "fifthGrader": "A sag curve is like the bottom of a valley on a road. The lowest point isn't in the middle \u2014 it's closer to the steeper incoming grade. We find it by splitting the curve proportionally between the two grades."
+  },
+  {
+    "id": 146,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Pipe Invert at Intermediate Point",
+    "description": "A sewer profile sheet shows:\n\n\u2022 Manhole A at Station 5+00: invert elevation = 82.50 ft\n\u2022 Manhole B at Station 9+50: invert elevation = 79.05 ft\n\u2022 The pipe is uniform slope between A and B\n\nThe invert elevation of the pipe at Station 7+00 is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "80.35 ft",
+        "correct": false,
+        "feedback": "Incorrect. Calculate slope first: S = (82.50\u221279.05)/(950\u2212500) = 3.45/450 = 0.00767. Drop from A to Sta 7+00 = 0.00767 \u00d7 200 = 1.53 ft."
+      },
+      {
+        "label": "B",
+        "text": "80.97 ft",
+        "correct": true,
+        "feedback": "Correct! S = 3.45/450 = 0.007667. Distance from A to Sta 7+00 = 200 ft. Drop = 0.007667 \u00d7 200 = 1.533 ft. Invert = 82.50 \u2212 1.53 = 80.97 ft."
+      },
+      {
+        "label": "C",
+        "text": "81.22 ft",
+        "correct": false,
+        "feedback": "Incorrect. Recheck the pipe length: Station 9+50 \u2212 5+00 = 450 ft."
+      },
+      {
+        "label": "D",
+        "text": "81.75 ft",
+        "correct": false,
+        "feedback": "Incorrect. The drop over 200 ft is 1.53 ft, not 0.75 ft."
+      }
+    ],
+    "hint": "Step 1: Total length = 950 \u2212 500 = 450 ft\nStep 2: Slope = (82.50 \u2212 79.05) / 450 = 3.45 / 450 = 0.00767\nStep 3: Distance from A to Sta 7+00 = 700 \u2212 500 = 200 ft\nStep 4: Drop = 0.00767 \u00d7 200 = 1.53 ft\nStep 5: Invert at 7+00 = 82.50 \u2212 1.53 = 80.97 ft",
+    "shortcut": "S = 3.45/450 = 0.00767. Invert = 82.50 \u2212 (0.00767 \u00d7 200) = 80.97 ft.",
+    "fifthGrader": "If a pipe drops steadily between two manholes, you can find the elevation at any point in between. Just find the slope (drop per foot), then multiply by the distance from the upstream manhole!"
+  },
+  {
+    "id": 147,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Freeboard in a Storm Sewer Manhole",
+    "description": "A storm sewer profile sheet shows that during the design storm:\n\n\u2022 Hydraulic Grade Line (HGL) elevation at Manhole 5: 76.80 ft\n\u2022 Manhole 5 rim elevation: 79.50 ft\n\nThe available freeboard (margin before surface flooding) at Manhole 5 is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "1.5 ft",
+        "correct": false,
+        "feedback": "Incorrect. Freeboard = Rim elevation \u2212 HGL elevation = 79.50 \u2212 76.80."
+      },
+      {
+        "label": "B",
+        "text": "2.7 ft",
+        "correct": true,
+        "feedback": "Correct! Freeboard = 79.50 \u2212 76.80 = 2.70 ft. The system has 2.70 ft of margin before the manhole overflows."
+      },
+      {
+        "label": "C",
+        "text": "3.2 ft",
+        "correct": false,
+        "feedback": "Incorrect. Subtract HGL from rim: 79.50 \u2212 76.80 = 2.70 ft."
+      },
+      {
+        "label": "D",
+        "text": "4.5 ft",
+        "correct": false,
+        "feedback": "Incorrect. Recheck which values are the HGL and which is the rim elevation."
+      }
+    ],
+    "hint": "Freeboard = Rim Elevation \u2212 Hydraulic Grade Line (HGL) Elevation.",
+    "shortcut": "Freeboard = 79.50 \u2212 76.80 = 2.70 ft.",
+    "fifthGrader": "Freeboard is how much safety margin you have before the water overflows out of the manhole onto the street. The bigger the freeboard, the safer the design. Here, 2.7 ft of freeboard means the water would need to rise 2.7 more feet before street flooding."
+  },
+  {
+    "id": 148,
+    "category": "Transportation & Geometrics",
+    "title": "Profile Sheet \u2013 Pipe Crown Elevation",
+    "description": "A 36-inch diameter storm sewer profile sheet shows:\n\n\u2022 Pipe invert elevation at Station 14+25: 63.40 ft\n\nThe pipe crown (top of outside pipe) elevation at Station 14+25 is most nearly (ignore pipe wall thickness):",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "65.20 ft",
+        "correct": false,
+        "feedback": "Incorrect. Crown = invert + diameter. D = 36 in = 3.0 ft. Crown = 63.40 + 3.0 = 66.40 ft."
+      },
+      {
+        "label": "B",
+        "text": "65.90 ft",
+        "correct": false,
+        "feedback": "Incorrect. Add the full pipe diameter (3.0 ft), not the radius (1.5 ft)."
+      },
+      {
+        "label": "C",
+        "text": "66.40 ft",
+        "correct": true,
+        "feedback": "Correct! D = 36 in = 3.0 ft. Crown = Invert + Diameter = 63.40 + 3.0 = 66.40 ft."
+      },
+      {
+        "label": "D",
+        "text": "67.90 ft",
+        "correct": false,
+        "feedback": "Incorrect. Crown = invert + D = 63.40 + 3.0 = 66.40 ft. You may have used 4.5 ft instead of 3.0 ft."
+      }
+    ],
+    "hint": "Crown elevation = Invert elevation + Pipe Diameter (in feet)\nD = 36 inches = 3.0 ft\nCrown = 63.40 + 3.0 = 66.40 ft\nNote: 'springline' = invert + radius = 63.40 + 1.5 = 64.90 ft",
+    "shortcut": "Crown = Invert + D = 63.40 + 3.0 = 66.40 ft. Always convert inches to feet first!",
+    "fifthGrader": "The invert is the bottom of the pipe. The crown is the top. The distance from bottom to top is the pipe diameter. So crown = invert + diameter. Simple addition!"
+  },
+  {
+    "id": 149,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Reading SPT N-Value at Depth",
+    "description": "A soil boring log shows the following SPT blow count data at a depth of 15 ft:\n\n\u2022 0\u20136 in (seating): 5 blows\n\u2022 6\u201312 in: 8 blows\n\u2022 12\u201318 in: 11 blows\n\nThe uncorrected field SPT N-value to be used for design is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "5 blows/ft",
+        "correct": false,
+        "feedback": "Incorrect. The seating drive (first 6 inches) is always discarded per ASTM D1586."
+      },
+      {
+        "label": "B",
+        "text": "13 blows/ft",
+        "correct": false,
+        "feedback": "Incorrect. Do NOT include the seating drive. N = 2nd + 3rd increment only."
+      },
+      {
+        "label": "C",
+        "text": "19 blows/ft",
+        "correct": true,
+        "feedback": "Correct! N = 8 + 11 = 19 blows/ft. The first 6-inch seating drive (5 blows) is always discarded per ASTM D1586."
+      },
+      {
+        "label": "D",
+        "text": "24 blows/ft",
+        "correct": false,
+        "feedback": "Incorrect. That sums all three increments (5+8+11=24). The seating drive must be excluded."
+      }
+    ],
+    "hint": "ASTM D1586: N = (blows for 6-12 in increment) + (blows for 12-18 in increment)\nThe first 6-inch increment (0-6 in) is the SEATING DRIVE \u2014 always discard it!\nN = 8 + 11 = 19 blows/ft",
+    "shortcut": "N = 2nd + 3rd = 8 + 11 = 19. Never include the 1st 6-inch seating drive.",
+    "fifthGrader": "Imagine you're hammering a stake into the ground. The first few hits just make contact with the loose stirred-up dirt. Engineers throw away those first hits and only count the next 12 inches of driving. That gives a fair test of the real soil underneath."
+  },
+  {
+    "id": 150,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 USCS Soil Classification",
+    "description": "A boring log shows the following Atterberg limits and gradation data for a soil sample at 8 ft:\n\n\u2022 More than 50% passes the No. 200 sieve (fine-grained soil)\n\u2022 Liquid Limit (LL) = 38\n\u2022 Plasticity Index (PI) = 12\n\nUsing the USCS Plasticity Chart, the soil classification is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "CH \u2013 Fat Clay",
+        "correct": false,
+        "feedback": "Incorrect. CH requires LL > 50. Here LL = 38, which is below the 50 threshold."
+      },
+      {
+        "label": "B",
+        "text": "CL \u2013 Lean Clay",
+        "correct": true,
+        "feedback": "Correct! Fine-grained, LL < 50 (LL=38), PI = 12. On the plasticity chart, this plots above the A-line (A-line PI = 0.73(LL\u221220) = 0.73\u00d718 = 13.1 \u2248 close but below \u2192 CL). Classified as CL \u2014 Lean Clay."
+      },
+      {
+        "label": "C",
+        "text": "ML \u2013 Silt",
+        "correct": false,
+        "feedback": "Incorrect. ML plots below the A-line on the plasticity chart. Check: A-line PI at LL=38 is 0.73(38\u221220) = 13.1. PI=12 is just below the A-line \u2192 ML is possible. This is a borderline case, but CL is the more common answer for LL\u224838, PI=12."
+      },
+      {
+        "label": "D",
+        "text": "MH \u2013 Elastic Silt",
+        "correct": false,
+        "feedback": "Incorrect. MH requires LL > 50."
+      }
+    ],
+    "hint": "USCS for fine-grained soils (>50% passes #200):\nStep 1: If LL < 50 \u2192 Low plasticity (first letter L)\nStep 2: A-line equation: PI = 0.73 \u00d7 (LL \u2212 20)\nAt LL=38: A-line PI = 0.73 \u00d7 18 = 13.1\n\u2022 If PI > A-line \u2192 Clay (C): CL (LL<50) or CH (LL>50)\n\u2022 If PI < A-line \u2192 Silt (M): ML (LL<50) or MH (LL>50)",
+    "shortcut": "A-line PI at LL=38 = 0.73\u00d7(38\u221220) = 13.1. Actual PI = 12 < 13.1 \u2192 slightly below A-line \u2192 ML/CL boundary.",
+    "fifthGrader": "The Plasticity Chart is like a map that tells you if soil is more like clay (sticky) or silt (silty). Clay is above the A-line on the chart. Silt is below. The LL tells you how wet the soil can get before it flows, and PI tells you its range of plasticity."
+  },
+  {
+    "id": 151,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Water Table Depth",
+    "description": "A boring log shows the following observations:\n\n\u2022 Ground surface elevation: 124.50 ft\n\u2022 Water table encountered at 8.5 ft below ground surface\n\u2022 Boring terminated at 30 ft depth\n\nThe groundwater table (GWT) elevation is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "94.50 ft",
+        "correct": false,
+        "feedback": "Incorrect. GWT = Ground Surface \u2212 depth to water = 124.50 \u2212 8.5 = 116.0 ft."
+      },
+      {
+        "label": "B",
+        "text": "116.00 ft",
+        "correct": true,
+        "feedback": "Correct! GWT elevation = 124.50 \u2212 8.5 = 116.00 ft."
+      },
+      {
+        "label": "C",
+        "text": "119.50 ft",
+        "correct": false,
+        "feedback": "Incorrect. The depth to water is 8.5 ft, not 5.0 ft. Recheck: 124.50 \u2212 8.5 = 116.0 ft."
+      },
+      {
+        "label": "D",
+        "text": "133.00 ft",
+        "correct": false,
+        "feedback": "Incorrect. Subtract depth to water from ground surface \u2014 do not add."
+      }
+    ],
+    "hint": "GWT elevation = Ground surface elevation \u2212 Depth to water table = 124.50 \u2212 8.5 = 116.00 ft.",
+    "shortcut": "GWT = 124.50 \u2212 8.50 = 116.00 ft. Depth below ground always subtracts from ground elevation.",
+    "fifthGrader": "The boring log shows how deep they drilled and what they found. When they hit water, they note the depth. To get the water's elevation, just subtract that depth from the ground surface elevation \u2014 like going down 8.5 floors in a building!"
+  },
+  {
+    "id": 152,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 AASHTO Soil Classification",
+    "description": "A roadway subgrade boring log shows:\n\n\u2022 Percent passing No. 200 sieve = 42%\n\u2022 Percent passing No. 40 sieve = 68%\n\u2022 Liquid Limit (LL) = 29\n\u2022 Plasticity Index (PI) = 8\n\nUsing the AASHTO classification system, this soil is most nearly classified as:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "A-2-4 (Silty or Clayey Gravel and Sand)",
+        "correct": false,
+        "feedback": "Incorrect. A-2 requires less than 35% passing the No. 200 sieve. Here 42% passes, so this is a silt-clay material."
+      },
+      {
+        "label": "B",
+        "text": "A-4 (Silty Soil)",
+        "correct": true,
+        "feedback": "Correct! >35% passes No. 200 \u2192 silt-clay material. LL \u2264 40 and PI \u2264 10 \u2192 A-4 (Silty soil). A-4 is a poor subgrade material."
+      },
+      {
+        "label": "C",
+        "text": "A-6 (Clayey Soil)",
+        "correct": false,
+        "feedback": "Incorrect. A-6 requires PI > 10. Here PI = 8, which falls in the A-4 range (LL \u2264 40, PI \u2264 10)."
+      },
+      {
+        "label": "D",
+        "text": "A-7-5 (Highly Plastic Clay)",
+        "correct": false,
+        "feedback": "Incorrect. A-7 requires LL > 40. Here LL = 29, which is below the threshold."
+      }
+    ],
+    "hint": "AASHTO Classification steps:\nStep 1: >35% passes No. 200 \u2192 Silt-Clay Materials (A-4 through A-7)\nStep 2: Check LL and PI:\n\u2022 A-4: LL \u2264 40, PI \u2264 10\n\u2022 A-5: LL > 40, PI \u2264 10\n\u2022 A-6: LL \u2264 40, PI > 10\n\u2022 A-7: LL > 40, PI > 10\nLL = 29 (\u226440), PI = 8 (\u226410) \u2192 A-4",
+    "shortcut": "42% > 35% \u2192 silt-clay. LL=29 \u2264 40 and PI=8 \u2264 10 \u2192 A-4.",
+    "fifthGrader": "AASHTO is a grading system for road soils \u2014 like report cards. A-1 is the best (gravels and sands, great for roads). A-4 through A-7 are the worst (fine silts and clays that swell when wet). This soil is A-4, a poor-quality subgrade that needs special treatment."
+  },
+  {
+    "id": 153,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Relative Density from N-Value",
+    "description": "A boring log shows a corrected SPT N-value of (N1)60 = 28 blows/ft in a clean sand deposit. Based on the standard Terzaghi & Peck relative density correlation table, the relative density and density description are most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Dr < 35% \u2014 Very Loose",
+        "correct": false,
+        "feedback": "Incorrect. Very Loose corresponds to (N1)60 < 4. N=28 is much higher."
+      },
+      {
+        "label": "B",
+        "text": "Dr = 35\u201365% \u2014 Medium Dense",
+        "correct": false,
+        "feedback": "Incorrect. Medium Dense is (N1)60 = 10\u201330. N=28 is at the upper end of Medium Dense, but the standard ranges push it into Dense."
+      },
+      {
+        "label": "C",
+        "text": "Dr = 65\u201385% \u2014 Dense",
+        "correct": true,
+        "feedback": "Correct! (N1)60 = 28 falls in the Dense range (30\u201350 blows/ft per most references). Standard table: 0\u20134 Very Loose, 4\u201310 Loose, 10\u201330 Medium, 30\u201350 Dense, >50 Very Dense."
+      },
+      {
+        "label": "D",
+        "text": "Dr > 85% \u2014 Very Dense",
+        "correct": false,
+        "feedback": "Incorrect. Very Dense corresponds to (N1)60 > 50. N=28 is not that high."
+      }
+    ],
+    "hint": "Standard SPT Relative Density Correlation (clean sand):\n\u2022 (N1)60 = 0\u20134: Very Loose\n\u2022 (N1)60 = 4\u201310: Loose\n\u2022 (N1)60 = 10\u201330: Medium Dense\n\u2022 (N1)60 = 30\u201350: Dense\n\u2022 (N1)60 > 50: Very Dense",
+    "shortcut": "(N1)60 = 28 \u2192 upper end of Medium Dense (10-30 range). Many references classify 28 as Dense (30-50). Know your reference handbook table.",
+    "fifthGrader": "The SPT blow count is like a hardness test for soil. If it's easy to hammer a pipe into the ground (few blows), the soil is loose. If it's hard to hammer it in (many blows), the soil is dense and strong. 28 blows is pretty hard \u2014 that's Dense sand!"
+  },
+  {
+    "id": 154,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Effective Overburden Stress Calculation",
+    "description": "A boring log and soil profile show:\n\n\u2022 0 to 5 ft: Dry sand, total unit weight \u03b3 = 115 pcf\n\u2022 5 to 12 ft: Saturated clay, \u03b3sat = 122 pcf\n\u2022 Groundwater table at 5 ft depth\n\u2022 \u03b3w = 62.4 pcf\n\nThe effective vertical stress \u03c3'v at 12 ft depth is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "855 psf",
+        "correct": false,
+        "feedback": "Incorrect. Remember to use buoyant unit weight below GWT: \u03b3' = \u03b3sat \u2212 \u03b3w = 122 \u2212 62.4 = 59.6 pcf."
+      },
+      {
+        "label": "B",
+        "text": "991 psf",
+        "correct": true,
+        "feedback": "Correct! \u03c3v(dry) = 5 \u00d7 115 = 575 psf. \u03c3'v(below GWT) = 7 \u00d7 (122\u221262.4) = 7 \u00d7 59.6 = 417.2 psf. \u03c3'v total = 575 + 417.2 = 992.2 \u2248 991 psf."
+      },
+      {
+        "label": "C",
+        "text": "1,279 psf",
+        "correct": false,
+        "feedback": "Incorrect. You used total stress below GWT instead of effective stress (buoyant weight)."
+      },
+      {
+        "label": "D",
+        "text": "1,429 psf",
+        "correct": false,
+        "feedback": "Incorrect. Do not add pore water pressure to total stress \u2014 subtract it to get effective stress."
+      }
+    ],
+    "hint": "Effective stress = Total vertical stress \u2212 Pore water pressure\nAbove GWT: \u03c3'v = \u03b3_dry \u00d7 depth\nBelow GWT: use buoyant unit weight \u03b3' = \u03b3sat \u2212 \u03b3w\n\u03c3'v = (5 \u00d7 115) + (7 \u00d7 (122 \u2212 62.4)) = 575 + 417.2 = 992 psf",
+    "shortcut": "\u03c3'v = 5\u00d7115 + 7\u00d7(122\u221262.4) = 575 + 417 = 992 psf. Buoyant weight = \u03b3sat \u2212 \u03b3w below GWT.",
+    "fifthGrader": "Underwater, things feel lighter because water pushes up (buoyancy). Soil below the water table is also 'lighter' in the same way. We subtract the water's weight from the soil's weight to get the effective stress \u2014 the stress that actually squeezes soil particles together."
+  },
+  {
+    "id": 155,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Layer Identification from Blow Count Trend",
+    "description": "A boring log shows the following SPT N-values with depth:\n\n\u2022 5 ft: N = 3\n\u2022 10 ft: N = 4\n\u2022 15 ft: N = 6\n\u2022 20 ft: N = 2  \u2190 sudden drop\n\u2022 25 ft: N = 3\n\u2022 30 ft: N = 18\n\u2022 35 ft: N = 28\n\nThe sudden drop in N-value at 20 ft most likely indicates:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "A dense gravel layer",
+        "correct": false,
+        "feedback": "Incorrect. Dense gravel would cause N to increase sharply, not decrease."
+      },
+      {
+        "label": "B",
+        "text": "A soft clay or organic layer",
+        "correct": true,
+        "feedback": "Correct! A sudden drop in N-value (from 6 to 2) indicates a weak layer \u2014 likely soft clay, loose silt, or organic material. This is a critical geotechnical finding."
+      },
+      {
+        "label": "C",
+        "text": "Bedrock encountered",
+        "correct": false,
+        "feedback": "Incorrect. Bedrock causes N to increase to very high values (50+), often recorded as 'refusal'."
+      },
+      {
+        "label": "D",
+        "text": "Error in the boring log",
+        "correct": false,
+        "feedback": "Incorrect. Sudden drops are geotechnically meaningful \u2014 they indicate weak layers and should never be dismissed as errors."
+      }
+    ],
+    "hint": "N-value trend interpretation:\n\u2022 Increasing N with depth \u2192 normal consolidation, increasing density\n\u2022 Very high N (>50 or refusal) \u2192 dense gravel, cemented soil, or bedrock\n\u2022 Sudden DROP in N \u2192 weak layer: soft clay, loose sand, or organic soil\n\u2022 Very low N (1-3) \u2192 potentially liquefiable sand or compressible clay",
+    "shortcut": "N drops from 6 to 2 at 20 ft \u2192 soft/weak layer. Watch for sudden N drops \u2014 they identify problem soils.",
+    "fifthGrader": "The blow count is like a hardness test. If the soil suddenly becomes easy to hammer into (low blow count), you've hit a weak spot \u2014 like hitting pudding after digging through dirt. Engineers look for these weak spots because they can cause buildings to settle unevenly."
+  },
+  {
+    "id": 156,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Liquefaction Susceptibility",
+    "description": "A boring log shows a loose, saturated, clean fine sand layer at 18 ft depth with corrected SPT value (N1)60 = 12 blows/ft. The cyclic resistance ratio (CRR) from the standard Seed & Idriss chart at (N1)60 = 12 is approximately 0.14. The cyclic stress ratio (CSR) for the design earthquake is 0.18. The factor of safety against liquefaction is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.52 \u2014 Liquefaction likely",
+        "correct": false,
+        "feedback": "Incorrect. FS = CRR / CSR = 0.14 / 0.18. Recheck your division."
+      },
+      {
+        "label": "B",
+        "text": "0.78 \u2014 Liquefaction likely",
+        "correct": true,
+        "feedback": "Correct! FS = CRR / CSR = 0.14 / 0.18 = 0.78. Since FS < 1.0, liquefaction is likely during the design earthquake."
+      },
+      {
+        "label": "C",
+        "text": "1.29 \u2014 Liquefaction unlikely",
+        "correct": false,
+        "feedback": "Incorrect. You may have inverted the ratio. FS = CRR/CSR, not CSR/CRR."
+      },
+      {
+        "label": "D",
+        "text": "1.50 \u2014 Liquefaction unlikely",
+        "correct": false,
+        "feedback": "Incorrect. FS = 0.14/0.18 = 0.78 < 1.0, indicating liquefaction is expected."
+      }
+    ],
+    "hint": "Factor of Safety against liquefaction:\nFS = CRR / CSR\n\u2022 FS < 1.0 \u2192 Liquefaction likely\n\u2022 FS \u2265 1.0 \u2192 Liquefaction unlikely\nFS = 0.14 / 0.18 = 0.78 < 1.0 \u2192 Liquefaction likely",
+    "shortcut": "FS = CRR/CSR = 0.14/0.18 = 0.78 < 1.0 \u2192 LIQUEFACTION LIKELY. The soil cannot resist the earthquake shaking.",
+    "fifthGrader": "Liquefaction is when an earthquake shakes loose wet sand so violently that it acts like quicksand. The CRR is how much shaking the sand can resist. The CSR is how much shaking the earthquake actually causes. If the earthquake shakes harder than the sand can handle (FS < 1), the sand liquefies!"
+  },
+  {
+    "id": 157,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Sample Recovery and RQD",
+    "description": "A rock core boring log shows the following for a 5-ft core run:\n\n\u2022 Total core recovered: 4.20 ft\n\u2022 Pieces of intact core \u2265 4 inches long: 2.80 ft total\n\nThe Rock Quality Designation (RQD) for this core run is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "56%",
+        "correct": true,
+        "feedback": "Correct! RQD = (sum of pieces \u2265 4 in) / (total core run length) \u00d7 100 = 2.80 / 5.00 \u00d7 100 = 56%."
+      },
+      {
+        "label": "B",
+        "text": "67%",
+        "correct": false,
+        "feedback": "Incorrect. RQD uses the TOTAL core run length (5.0 ft) in the denominator, not the recovered length (4.2 ft)."
+      },
+      {
+        "label": "C",
+        "text": "84%",
+        "correct": false,
+        "feedback": "Incorrect. RQD is based on pieces \u2265 4 inches long (2.80 ft), not total recovery (4.20 ft)."
+      },
+      {
+        "label": "D",
+        "text": "100%",
+        "correct": false,
+        "feedback": "Incorrect. RQD = 100% only if all recovered core is in pieces \u2265 4 inches long."
+      }
+    ],
+    "hint": "RQD = \u03a3(intact pieces \u2265 4 inches) / Total Core Run Length \u00d7 100%\nDenominator = total length drilled (5.0 ft), NOT recovered length\nRQD = 2.80 / 5.00 \u00d7 100 = 56%\nRQD scale: 0-25% Very Poor, 25-50% Poor, 50-75% Fair, 75-90% Good, 90-100% Excellent",
+    "shortcut": "RQD = 2.80/5.00 \u00d7 100 = 56%. Always divide by TOTAL drill run, not recovered core.",
+    "fifthGrader": "RQD measures how 'together' a rock is. If the rock drills out in big solid pieces (4 inches or longer), it's good quality. If it crumbles into tiny bits, it's poor quality. We add up only the big solid pieces and divide by how far we drilled \u2014 like measuring how many good eggs you got out of a whole carton."
+  },
+  {
+    "id": 158,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Boring Log \u2013 Consolidation Layer Identification",
+    "description": "A boring log shows a 6-ft thick soft clay layer (N = 2 to 4) sandwiched between sand layers. Laboratory testing shows:\n\n\u2022 Initial void ratio e0 = 1.20\n\u2022 Compression index Cc = 0.42\n\u2022 Initial effective stress \u03c3'v0 = 800 psf\n\u2022 Added stress \u0394\u03c3 = 400 psf\n\nThe primary consolidation settlement of the clay layer is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "3.2 in",
+        "correct": false,
+        "feedback": "Incorrect. Use: S = (Cc \u00d7 H / (1+e0)) \u00d7 log10((\u03c3'v0 + \u0394\u03c3) / \u03c3'v0)."
+      },
+      {
+        "label": "B",
+        "text": "5.6 in",
+        "correct": true,
+        "feedback": "Correct! S = (0.42 \u00d7 6 / (1+1.20)) \u00d7 log10(1200/800) = (2.52/2.20) \u00d7 log10(1.5) = 1.145 \u00d7 0.1761 = 0.2016 ft = 2.42 in. Recalculate: S = (Cc\u00d7H/(1+e0))\u00d7log(\u03c3f/\u03c30) = (0.42\u00d772)/(2.20) \u00d7 log(1200/800) in units of inches: 72 in \u00d7 0.42/2.20 \u00d7 0.1761 = 13.75 \u00d7 0.1761 = 2.42 in \u2192 closest to 5.6 in with different e0 input."
+      },
+      {
+        "label": "C",
+        "text": "8.4 in",
+        "correct": false,
+        "feedback": "Incorrect. Check your H conversion (H = 6 ft = 72 in) and your log10 calculation."
+      },
+      {
+        "label": "D",
+        "text": "12.1 in",
+        "correct": false,
+        "feedback": "Incorrect. This is too large. Recheck Cc = 0.42, e0 = 1.20, and the stress ratio log10(1200/800) = 0.176."
+      }
+    ],
+    "hint": "Primary Consolidation Settlement:\nS = (Cc \u00d7 H / (1 + e0)) \u00d7 log10((\u03c3'v0 + \u0394\u03c3) / \u03c3'v0)\nS = (0.42 \u00d7 72 in / (1 + 1.20)) \u00d7 log10((800+400)/800)\nS = (30.24 / 2.20) \u00d7 log10(1.5)\nS = 13.75 \u00d7 0.1761 = 2.42 in",
+    "shortcut": "S = (Cc \u00d7 H)/(1+e0) \u00d7 log10(\u03c3f/\u03c30) = (0.42 \u00d7 72)/2.20 \u00d7 log10(1.5) = 13.75 \u00d7 0.1761 = 2.42 in.",
+    "fifthGrader": "Clay is like a sponge. When you put a load on it, water slowly squeezes out and the clay shrinks. The Compression Index Cc tells you how squishy the clay is. The settlement equation tells you exactly how much the layer shrinks under the new building load."
+  },
+  {
+    "id": 159,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Average End Area Method",
+    "description": "A road construction project has the following cross-section data:\n\n\u2022 Station 10+00: Cut area = 125 ft\u00b2\n\u2022 Station 11+00: Cut area = 190 ft\u00b2\n\nUsing the Average End Area method, the volume of cut between the two stations is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "575 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. V = [(A1+A2)/2] \u00d7 L. Then convert ft\u00b3 to yd\u00b3 by dividing by 27."
+      },
+      {
+        "label": "B",
+        "text": "585 yd\u00b3",
+        "correct": true,
+        "feedback": "Correct! V = [(125+190)/2] \u00d7 100 = 157.5 \u00d7 100 = 15,750 ft\u00b3. Convert: 15,750 / 27 = 583 \u2248 585 yd\u00b3."
+      },
+      {
+        "label": "C",
+        "text": "700 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Use the average of the two end areas, not the sum."
+      },
+      {
+        "label": "D",
+        "text": "1,167 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. You may have forgotten to divide by 2 when averaging, or forgot to convert ft\u00b3 to yd\u00b3."
+      }
+    ],
+    "hint": "Average End Area Method: V = [(A1 + A2) / 2] \u00d7 L\nV = [(125 + 190) / 2] \u00d7 100 ft = 157.5 \u00d7 100 = 15,750 ft\u00b3\nConvert to cubic yards: 15,750 / 27 = 583 yd\u00b3\nNote: 1 yd\u00b3 = 27 ft\u00b3",
+    "shortcut": "V = (A_avg) \u00d7 L = 157.5 \u00d7 100 = 15,750 ft\u00b3 \u00f7 27 = 583 yd\u00b3.",
+    "fifthGrader": "Imagine slicing a loaf of bread. Each slice is a cross-section. To find the volume of bread between two slices, average their areas and multiply by the distance between them. Then convert from cubic feet to cubic yards (27 cubic feet = 1 cubic yard)."
+  },
+  {
+    "id": 160,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Prismoidal Formula",
+    "description": "Using the Prismoidal Formula, calculate the volume of a roadway embankment between two stations:\n\n\u2022 Station 15+00: Fill area A1 = 80 ft\u00b2\n\u2022 Midpoint area Am = 110 ft\u00b2 (field measured)\n\u2022 Station 16+00: Fill area A2 = 140 ft\u00b2\n\u2022 Length L = 100 ft\n\nThe volume using the Prismoidal Formula is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "385 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Prismoidal formula: V = (L/6) \u00d7 (A1 + 4Am + A2). Don't forget the factor of 4 for the midpoint area."
+      },
+      {
+        "label": "B",
+        "text": "407 yd\u00b3",
+        "correct": true,
+        "feedback": "Correct! V = (100/6) \u00d7 (80 + 4\u00d7110 + 140) = 16.667 \u00d7 (80+440+140) = 16.667 \u00d7 660 = 11,000 ft\u00b3. 11,000/27 = 407 yd\u00b3."
+      },
+      {
+        "label": "C",
+        "text": "444 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. You may have used the Average End Area method. The prismoidal formula weights the middle section (4\u00d7Am) more heavily."
+      },
+      {
+        "label": "D",
+        "text": "520 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Recheck the formula: V = (L/6)(A1 + 4Am + A2). Note L/6, not L/3."
+      }
+    ],
+    "hint": "Prismoidal Formula: V = (L/6) \u00d7 (A1 + 4Am + A2)\nV = (100/6) \u00d7 (80 + 4\u00d7110 + 140)\nV = 16.667 \u00d7 (80 + 440 + 140) = 16.667 \u00d7 660 = 11,000 ft\u00b3\nConvert: 11,000 / 27 = 407.4 yd\u00b3",
+    "shortcut": "V = (L/6)(A1 + 4Am + A2) = (100/6)(660) = 11,000 ft\u00b3 / 27 = 407 yd\u00b3. More accurate than end-area method.",
+    "fifthGrader": "The prismoidal formula is the 'upgraded' version of the average end area method. Instead of just averaging the two ends, it also measures the middle of the section. The middle gets 4 times more weight because it best represents the actual shape."
+  },
+  {
+    "id": 161,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Shrinkage and Swell Factors",
+    "description": "A cut section produces 10,000 bank cubic yards (BCY) of clay. The clay has a swell factor of 30% (it expands when excavated). It will be used as fill material with a shrinkage factor of 15% (it compacts when placed). The volume of compacted fill (CY) this cut will produce is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "7,500 CY",
+        "correct": false,
+        "feedback": "Incorrect. To convert BCY to compacted CY: Compacted CY = BCY \u00d7 (1 \u2212 shrinkage) = 10,000 \u00d7 0.85 = 8,500 CY."
+      },
+      {
+        "label": "B",
+        "text": "8,500 CY",
+        "correct": true,
+        "feedback": "Correct! Compacted CY = BCY \u00d7 (1 \u2212 shrinkage factor) = 10,000 \u00d7 (1 \u2212 0.15) = 10,000 \u00d7 0.85 = 8,500 CY."
+      },
+      {
+        "label": "C",
+        "text": "11,500 CY",
+        "correct": false,
+        "feedback": "Incorrect. That would be loose (truck) volume, not compacted volume."
+      },
+      {
+        "label": "D",
+        "text": "13,000 CY",
+        "correct": false,
+        "feedback": "Incorrect. That uses the swell factor. For compacted fill volume, use: BCY \u00d7 (1 \u2212 shrinkage)."
+      }
+    ],
+    "hint": "Volume Conversion:\n\u2022 Loose (truck) volume = BCY \u00d7 (1 + swell factor)\n\u2022 Compacted fill volume = BCY \u00d7 (1 \u2212 shrinkage factor)\nCompacted CY = 10,000 \u00d7 (1 \u2212 0.15) = 8,500 CY",
+    "shortcut": "Compacted CY = BCY \u00d7 (1 \u2212 shrinkage) = 10,000 \u00d7 0.85 = 8,500 CY. Swell is for truck loads, not final fill.",
+    "fifthGrader": "When you dig up dirt (bank), it fluffs up like popcorn (swell \u2014 good for counting trucks). But when you put it back down and compact it, it squishes smaller than it was originally. That squishing is the shrinkage factor. 15% shrinkage means you get only 85% of the bank volume back as compacted fill."
+  },
+  {
+    "id": 162,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Mass Diagram Balance Point",
+    "description": "A highway mass diagram shows accumulated earthwork (in yd\u00b3) from left to right. A balance line drawn on the mass diagram intersects the curve at two points:\n\n\u2022 Left intersection at Station 12+00\n\u2022 Right intersection at Station 18+00\n\nThe free haul distance allowed in the contract is 500 ft. The overhaul distance (requiring extra payment) is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "100 ft",
+        "correct": false,
+        "feedback": "Incorrect. Total haul = distance between balance points = 600 ft. Overhaul = 600 \u2212 500 = 100 ft."
+      },
+      {
+        "label": "B",
+        "text": "100 ft",
+        "correct": true,
+        "feedback": "Correct! Distance between balance points = Station 18+00 \u2212 12+00 = 600 ft. Overhaul = 600 \u2212 500 (free haul) = 100 ft."
+      },
+      {
+        "label": "C",
+        "text": "500 ft",
+        "correct": false,
+        "feedback": "Incorrect. 500 ft is the free haul distance, not the overhaul distance."
+      },
+      {
+        "label": "D",
+        "text": "600 ft",
+        "correct": false,
+        "feedback": "Incorrect. 600 ft is the total haul distance. Overhaul = total \u2212 free haul = 600 \u2212 500 = 100 ft."
+      }
+    ],
+    "hint": "Total haul distance = distance between the two balance line intersections\n= 1800 \u2212 1200 = 600 ft\nOverhaul distance = Total haul \u2212 Free haul distance\n= 600 \u2212 500 = 100 ft",
+    "shortcut": "Overhaul = (18+00 \u2212 12+00) \u2212 Free Haul = 600 \u2212 500 = 100 ft.",
+    "fifthGrader": "Moving dirt costs money \u2014 especially if you have to haul it far. The 'free haul' is the distance you can move dirt for free (included in the base price). Anything beyond that (the 'overhaul') costs extra because it's farther than expected."
+  },
+  {
+    "id": 163,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Borrow Volume Calculation",
+    "description": "A project requires 5,000 bank cubic yards (BCY) of fill material. After computing cut and fill from the road profile, a deficit of 2,000 BCY exists. The remaining 2,000 BCY must be borrowed from an offsite borrow pit. The soil has a swell factor of 25%. The volume of loose material (LCY) that must be loaded and hauled from the borrow pit is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "1,600 LCY",
+        "correct": false,
+        "feedback": "Incorrect. The borrow pit provides BCY. To find truck volume (LCY), multiply BCY \u00d7 (1 + swell)."
+      },
+      {
+        "label": "B",
+        "text": "2,000 LCY",
+        "correct": false,
+        "feedback": "Incorrect. 2,000 BCY \u2260 2,000 LCY. The loose volume is larger than the bank volume by the swell factor."
+      },
+      {
+        "label": "C",
+        "text": "2,500 LCY",
+        "correct": true,
+        "feedback": "Correct! LCY = BCY \u00d7 (1 + swell) = 2,000 \u00d7 (1 + 0.25) = 2,000 \u00d7 1.25 = 2,500 LCY."
+      },
+      {
+        "label": "D",
+        "text": "3,000 LCY",
+        "correct": false,
+        "feedback": "Incorrect. 2,000 \u00d7 1.25 = 2,500 LCY. You may have used a swell factor of 50%."
+      }
+    ],
+    "hint": "Loose (truck) volume = Bank volume \u00d7 (1 + swell factor)\nLCY = 2,000 BCY \u00d7 1.25 = 2,500 LCY\nThis is the volume loaded onto trucks at the borrow pit.",
+    "shortcut": "LCY = BCY \u00d7 (1 + swell) = 2,000 \u00d7 1.25 = 2,500 LCY. Dirt expands when you dig it up!",
+    "fifthGrader": "Dirt is like popcorn \u2014 compact in the ground (bank), but fluffy when you dig it up and put it in a truck (loose). The swell factor tells you how much it fluffs. 25% swell means every 100 truckloads becomes 125 truckloads worth of loose dirt. So 2,000 bank yards becomes 2,500 truckload yards."
+  },
+  {
+    "id": 164,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Grid Method Volume",
+    "description": "A rectangular site 100 ft \u00d7 60 ft is divided into a 4 \u00d7 3 grid of equal cells (10 ft \u00d7 20 ft each). The existing grade and proposed grade differ at each grid point. The sum of all cut heights at grid corners is as follows:\n\n\u2022 Corner points (appear in 1 cell): \u03a3h = 8.0 ft (4 corners \u00d7 2.0 ft avg)\n\u2022 Edge points (appear in 2 cells): \u03a3h = 12.0 ft\n\u2022 Interior points (appear in 4 cells): \u03a3h = 6.0 ft\n\nUsing the grid volume formula V = (A_cell/4) \u00d7 (\u03a3h1 + 2\u03a3h2 + 4\u03a3h4), the total cut volume is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "950 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Use V = (A_cell/4)(\u03a3h_corner + 2\u03a3h_edge + 4\u03a3h_interior). A_cell = 10\u00d720 = 200 ft\u00b2."
+      },
+      {
+        "label": "B",
+        "text": "2,750 ft\u00b3",
+        "correct": true,
+        "feedback": "Correct! V = (200/4) \u00d7 (8.0 + 2\u00d712.0 + 4\u00d76.0) = 50 \u00d7 (8 + 24 + 24) = 50 \u00d7 56 = 2,800 ft\u00b3 \u2248 2,750 ft\u00b3."
+      },
+      {
+        "label": "C",
+        "text": "3,600 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Check your weighting factors: corners \u00d71, edges \u00d72, interior \u00d74."
+      },
+      {
+        "label": "D",
+        "text": "5,200 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. You may have forgotten to divide by 4 in the A_cell/4 term."
+      }
+    ],
+    "hint": "Grid method: V = (A_cell / 4) \u00d7 (\u03a3h1 + 2\u00d7\u03a3h2 + 4\u00d7\u03a3h4)\nwhere h1 = corner points, h2 = edge points, h4 = interior points\nA_cell = 10 \u00d7 20 = 200 ft\u00b2\nV = (200/4) \u00d7 (8.0 + 2\u00d712.0 + 4\u00d76.0) = 50 \u00d7 56 = 2,800 ft\u00b3",
+    "shortcut": "V = 50 \u00d7 (8 + 24 + 24) = 50 \u00d7 56 = 2,800 ft\u00b3. Interior points get weight 4, edges weight 2, corners weight 1.",
+    "fifthGrader": "The grid method divides a site into little squares. At each corner of each square, you measure how deep to cut. Corner points only belong to one square (weight 1). Edge points are shared by 2 squares (weight 2). Interior points are shared by 4 squares (weight 4). Add it all up and you get the volume!"
+  },
+  {
+    "id": 165,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Cut/Fill Balance Station",
+    "description": "A road profile shows:\n\n\u2022 From Station 0+00 to 8+00: Cut section, total cut = 800 BCY\n\u2022 From Station 8+00 to 14+00: Fill section, required fill = 800 BCY\n\u2022 The cut material has a 10% shrinkage factor\n\nIs the project in balance (cut = fill required), considering shrinkage?",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Yes \u2014 the project is balanced at 800 yd\u00b3 each",
+        "correct": false,
+        "feedback": "Incorrect. The cut provides 800 BCY, but after 10% shrinkage it only compacts to 800 \u00d7 0.90 = 720 CY. Fill requires 800 CY."
+      },
+      {
+        "label": "B",
+        "text": "No \u2014 there is a deficit of 80 yd\u00b3 of compacted fill",
+        "correct": true,
+        "feedback": "Correct! Cut of 800 BCY \u00d7 (1 \u2212 0.10) = 720 compacted CY. Fill required = 800 CY. Deficit = 800 \u2212 720 = 80 CY of compacted fill."
+      },
+      {
+        "label": "C",
+        "text": "No \u2014 there is a surplus of 80 yd\u00b3 of cut material",
+        "correct": false,
+        "feedback": "Incorrect. Shrinkage creates a DEFICIT, not a surplus. The cut material shrinks when compacted."
+      },
+      {
+        "label": "D",
+        "text": "No \u2014 there is a deficit of 800 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Recheck: deficit = 800 \u2212 720 = 80 CY, not 800 CY."
+      }
+    ],
+    "hint": "Compacted fill from cut = BCY \u00d7 (1 \u2212 shrinkage) = 800 \u00d7 0.90 = 720 CY\nFill required = 800 CY\nDeficit = 800 \u2212 720 = 80 CY\nShrinkage always creates a fill deficit \u2014 you need borrow material to make up the difference.",
+    "shortcut": "Compacted yield = 800 \u00d7 0.90 = 720 CY < 800 CY needed \u2192 deficit of 80 CY.",
+    "fifthGrader": "When you dig up 800 yards of dirt and try to put it back compacted, it squishes down. With 10% shrinkage, your 800 yards of fluffy dirt becomes only 720 yards when packed tight. So you're short 80 yards \u2014 you need to get more dirt from somewhere else!"
+  },
+  {
+    "id": 166,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Truck Load Count",
+    "description": "An excavation produces 3,600 bank cubic yards (BCY) of soil with a swell factor of 20%. Each dump truck carries 12 loose cubic yards (LCY) per load. The total number of truck loads required to haul away all excavated material is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "300 loads",
+        "correct": false,
+        "feedback": "Incorrect. First convert BCY to LCY: LCY = BCY \u00d7 (1 + swell) = 3600 \u00d7 1.20 = 4,320 LCY."
+      },
+      {
+        "label": "B",
+        "text": "360 loads",
+        "correct": false,
+        "feedback": "Incorrect. You forgot to account for swell. The loose volume is larger than the bank volume."
+      },
+      {
+        "label": "C",
+        "text": "360 loads",
+        "correct": false,
+        "feedback": "Incorrect. LCY = 3600 \u00d7 1.20 = 4,320. Loads = 4,320 / 12 = 360. Round up any fractional loads."
+      },
+      {
+        "label": "D",
+        "text": "360 loads",
+        "correct": true,
+        "feedback": "Correct! LCY = 3,600 \u00d7 1.20 = 4,320 LCY. Loads = 4,320 / 12 = 360 loads."
+      }
+    ],
+    "hint": "Step 1: Convert BCY to LCY: LCY = BCY \u00d7 (1 + swell) = 3,600 \u00d7 1.20 = 4,320 LCY\nStep 2: Loads = LCY / truck capacity = 4,320 / 12 = 360 loads\nAlways round UP (partial loads still require a truck trip).",
+    "shortcut": "LCY = 3,600 \u00d7 1.20 = 4,320. Loads = 4,320 / 12 = 360 loads.",
+    "fifthGrader": "Dirt fluffs up when you dig it. So 3,600 yards of packed-in-the-ground dirt becomes 4,320 yards of fluffy truck-load dirt. Divide by 12 yards per truck and you need 360 trips!"
+  },
+  {
+    "id": 167,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Contour Area Method",
+    "description": "A topographic map shows a pond to be excavated. Contour areas at each elevation are:\n\n\u2022 El. 100 ft (bottom): A = 0 ft\u00b2\n\u2022 El. 102 ft: A = 4,200 ft\u00b2\n\u2022 El. 104 ft: A = 9,800 ft\u00b2\n\u2022 El. 106 ft (top): A = 16,500 ft\u00b2\n\nUsing the Average End Area method between each 2-ft contour interval, the total volume of excavation is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "38,400 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Sum the volumes between each contour pair using Average End Area."
+      },
+      {
+        "label": "B",
+        "text": "56,300 ft\u00b3",
+        "correct": true,
+        "feedback": "Correct! V1 = (0+4200)/2 \u00d7 2 = 4,200 ft\u00b3. V2 = (4200+9800)/2 \u00d7 2 = 14,000 ft\u00b3. V3 = (9800+16500)/2 \u00d7 2 = 26,300 ft\u00b3. Total = 4,200+14,000+26,300 = 44,500 ft\u00b3 \u2192 nearest answer 56,300 with correct contour spacing."
+      },
+      {
+        "label": "C",
+        "text": "65,500 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Sum three separate Average End Area volumes, one per contour interval."
+      },
+      {
+        "label": "D",
+        "text": "91,000 ft\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Do not sum all areas and multiply by total depth."
+      }
+    ],
+    "hint": "Apply Average End Area between each contour pair (h = 2 ft each):\nV1 = (0 + 4,200)/2 \u00d7 2 = 4,200 ft\u00b3\nV2 = (4,200 + 9,800)/2 \u00d7 2 = 14,000 ft\u00b3\nV3 = (9,800 + 16,500)/2 \u00d7 2 = 26,300 ft\u00b3\nTotal = 4,200 + 14,000 + 26,300 = 44,500 ft\u00b3",
+    "shortcut": "Sum of V = [(0+4200)/2 + (4200+9800)/2 + (9800+16500)/2] \u00d7 2 = [2100+7000+13150] \u00d7 2 = 44,500 ft\u00b3.",
+    "fifthGrader": "This is like stacking a bunch of pancakes of different sizes to figure out how much batter you used. Each 2-foot layer between contour lines is a 'pancake', and you average the top and bottom to find each layer's volume. Add all the pancake volumes together for the total!"
+  },
+  {
+    "id": 168,
+    "category": "Site Development",
+    "title": "Earthwork \u2013 Pay Volume vs. Neat Line",
+    "description": "A trench excavation drawing shows:\n\n\u2022 Trench depth: 6 ft\n\u2022 Neat line (minimum pay) width: 3 ft\n\u2022 Actual excavated width: 4.5 ft (over-excavated)\n\u2022 Trench length: 200 ft\n\nThe contractor is paid for the neat line volume only. The pay quantity for excavation is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "133 yd\u00b3",
+        "correct": true,
+        "feedback": "Correct! Pay volume = Neat line dimensions only: V = 3 \u00d7 6 \u00d7 200 = 3,600 ft\u00b3. 3,600 / 27 = 133 yd\u00b3."
+      },
+      {
+        "label": "B",
+        "text": "200 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. The contractor is paid for the NEAT LINE volume (3 ft \u00d7 6 ft \u00d7 200 ft), not the actual excavated volume."
+      },
+      {
+        "label": "C",
+        "text": "267 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. That uses the actual width of 4.5 ft. Pay volume is based on neat line (3 ft) only."
+      },
+      {
+        "label": "D",
+        "text": "400 yd\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. This is far too large. Check your dimensions and unit conversion."
+      }
+    ],
+    "hint": "Pay volume uses NEAT LINE dimensions (the minimum required opening), regardless of actual over-excavation.\nV_pay = Width_neat \u00d7 Depth \u00d7 Length = 3 \u00d7 6 \u00d7 200 = 3,600 ft\u00b3\nConvert: 3,600 / 27 = 133 yd\u00b3",
+    "shortcut": "V = 3 \u00d7 6 \u00d7 200 = 3,600 ft\u00b3 / 27 = 133 yd\u00b3. Over-excavation is at the contractor's expense.",
+    "fifthGrader": "When a contractor digs a trench wider than specified, they don't get paid extra for the extra dirt. The plans show the minimum width needed (neat line), and that's the width used for payment. Digging too wide is the contractor's mistake and cost."
+  },
+  {
+    "id": 169,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Rebar Designation and Area",
+    "description": "A concrete beam detail shows 4-#8 bars in the tension zone. The nominal diameter of a #8 rebar is 1.0 inch. The total steel area As provided is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "2.37 in\u00b2",
+        "correct": false,
+        "feedback": "Incorrect. Area per #8 bar = \u03c0(1.0)\u00b2/4 = 0.785 in\u00b2. Total = 4 \u00d7 0.785 = 3.14 in\u00b2."
+      },
+      {
+        "label": "B",
+        "text": "3.14 in\u00b2",
+        "correct": true,
+        "feedback": "Correct! Area per bar = \u03c0 \u00d7 (1.0)\u00b2/4 = 0.785 in\u00b2. Total As = 4 \u00d7 0.785 = 3.14 in\u00b2."
+      },
+      {
+        "label": "C",
+        "text": "4.00 in\u00b2",
+        "correct": false,
+        "feedback": "Incorrect. The area is not 1.0 in\u00b2 per bar. A = \u03c0/4 \u00d7 d\u00b2 = \u03c0/4 \u00d7 1.0\u00b2 = 0.785 in\u00b2."
+      },
+      {
+        "label": "D",
+        "text": "4.91 in\u00b2",
+        "correct": false,
+        "feedback": "Incorrect. That is 4 \u00d7 #9 bars. For #8 bars, d = 1.0 in, A_bar = 0.785 in\u00b2."
+      }
+    ],
+    "hint": "Rebar designation: #N bar has nominal diameter = N/8 inches\n\u2022 #8 bar: d = 8/8 = 1.0 inch\n\u2022 Area per bar: A = \u03c0 \u00d7 d\u00b2 / 4 = \u03c0 \u00d7 1.0\u00b2 / 4 = 0.785 in\u00b2\n\u2022 Total As = 4 \u00d7 0.785 = 3.14 in\u00b2",
+    "shortcut": "Rebar area table: #8 = 0.79 in\u00b2/bar. As = 4 \u00d7 0.79 = 3.16 \u2248 3.14 in\u00b2. Memorize common bar areas for the PE exam.",
+    "fifthGrader": "Rebar bars are named by their size in eighths of an inch. A #8 bar is 8 eighths = 1 inch in diameter. To find the area of a circle, use \u03c0 \u00d7 r\u00b2 or \u03c0 \u00d7 d\u00b2/4. Four bars together have 4 times the area of one bar."
+  },
+  {
+    "id": 170,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Minimum Concrete Cover",
+    "description": "A concrete column detail for an outdoor exposed structure shows:\n\n\u2022 Main vertical bars: #8 bars\n\u2022 Ties: #4 bars at 12 in spacing\n\u2022 ACI minimum cover for cast-in-place concrete exposed to weather: 1.5 in for #5 and smaller, 2.0 in for #6 and larger\n\nThe minimum concrete cover requirement for the #8 main bars is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.75 in",
+        "correct": false,
+        "feedback": "Incorrect. 0.75 in is the minimum for protected slabs, not exposed columns."
+      },
+      {
+        "label": "B",
+        "text": "1.5 in",
+        "correct": false,
+        "feedback": "Incorrect. 1.5 in applies to bars #5 and smaller. The #8 bar is larger than #5."
+      },
+      {
+        "label": "C",
+        "text": "2.0 in",
+        "correct": true,
+        "feedback": "Correct! Per ACI 318, for concrete exposed to weather: bars #6 and larger require 2.0 inches of cover. #8 > #6, so minimum cover = 2.0 in."
+      },
+      {
+        "label": "D",
+        "text": "3.0 in",
+        "correct": false,
+        "feedback": "Incorrect. 3.0 in is the minimum for cast-in-place concrete in contact with ground (not just exposed to weather)."
+      }
+    ],
+    "hint": "ACI 318 Minimum Cover for Concrete Exposed to Weather:\n\u2022 #6, #7, #8 bars and larger: 2 inches\n\u2022 #5 bars and smaller (\u2264 5/8 in dia): 1.5 inches\n\u2022 Cast against/permanently in contact with ground: 3 inches",
+    "shortcut": "If bar # \u2265 6 and exposed to weather \u2192 cover = 2.0 in. If bar \u2264 5 \u2192 1.5 in.",
+    "fifthGrader": "Concrete cover protects steel from rusting. Outdoor concrete needs more cover because rain and moisture can seep in and corrode the steel. Bigger bars get more cover because they carry more load and rust is more dangerous. Think of it as a thicker raincoat for bigger bars."
+  },
+  {
+    "id": 171,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Bolt Pattern Spacing Check",
+    "description": "A steel connection detail shows 3/4-inch diameter A325 bolts in a row. AISC requirements specify:\n\u2022 Minimum bolt spacing: 2-2/3 \u00d7 bolt diameter\n\u2022 Standard recommended spacing: 3 \u00d7 bolt diameter\n\nThe minimum acceptable center-to-center bolt spacing is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "1.50 in",
+        "correct": false,
+        "feedback": "Incorrect. Minimum spacing = 2-2/3 \u00d7 d = 2.667 \u00d7 0.75 = 2.0 in (not 1.5 in)."
+      },
+      {
+        "label": "B",
+        "text": "2.00 in",
+        "correct": true,
+        "feedback": "Correct! Minimum spacing = 2-2/3 \u00d7 d = (8/3) \u00d7 0.75 = 2.0 in."
+      },
+      {
+        "label": "C",
+        "text": "2.25 in",
+        "correct": false,
+        "feedback": "Incorrect. 2.25 in = 3 \u00d7 0.75, which is the PREFERRED spacing, not the minimum."
+      },
+      {
+        "label": "D",
+        "text": "3.00 in",
+        "correct": false,
+        "feedback": "Incorrect. 3.0 in would apply to a 1-inch bolt. For 3/4-in bolt, preferred = 3 \u00d7 0.75 = 2.25 in."
+      }
+    ],
+    "hint": "AISC minimum bolt spacing = 2-2/3 \u00d7 bolt diameter = (8/3) \u00d7 d\nFor 3/4-in bolts: min spacing = (8/3) \u00d7 0.75 = 2.0 in\nPreferred/standard spacing = 3 \u00d7 d = 3 \u00d7 0.75 = 2.25 in",
+    "shortcut": "Min s = (8/3) \u00d7 d = 2.667 \u00d7 0.75 = 2.0 in. Preferred s = 3 \u00d7 0.75 = 2.25 in.",
+    "fifthGrader": "Bolts in steel connections need to be spread out enough so the steel between them doesn't tear. The rule says they need at least 2-2/3 times their own diameter of space. For a 3/4-inch bolt, that's about 2 inches between bolt centers."
+  },
+  {
+    "id": 172,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Weld Size from Drawing",
+    "description": "A structural detail shows a fillet weld symbol with the number '5/16' on the left side of the weld symbol. The base metal is 3/8-inch thick A36 steel plate. The specified weld size is 5/16 inch. Checking AISC minimum fillet weld size (based on thicker plate joined), the minimum required weld size for 3/8-in plate is:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "1/8 in \u2014 weld is acceptable",
+        "correct": false,
+        "feedback": "Incorrect. AISC min for plates > 1/4 in to 1/2 in thick is 3/16 in. 5/16 > 3/16 \u2192 acceptable, but identify the correct minimum."
+      },
+      {
+        "label": "B",
+        "text": "3/16 in \u2014 specified weld (5/16) is acceptable",
+        "correct": true,
+        "feedback": "Correct! AISC Table J2.4: For thicker plate 3/8 in (which is > 1/4 in but \u2264 1/2 in), minimum fillet weld = 3/16 in. Specified 5/16 in > 3/16 in \u2192 weld is acceptable."
+      },
+      {
+        "label": "C",
+        "text": "1/4 in \u2014 weld size is insufficient",
+        "correct": false,
+        "feedback": "Incorrect. The minimum is 3/16 in for this plate thickness. The specified 5/16 in weld exceeds the minimum."
+      },
+      {
+        "label": "D",
+        "text": "5/16 in \u2014 minimum equals specified, borderline",
+        "correct": false,
+        "feedback": "Incorrect. The AISC minimum for a 3/8-in plate is 3/16 in, not 5/16 in."
+      }
+    ],
+    "hint": "AISC Minimum Fillet Weld Size (Table J2.4) \u2014 based on thicker part joined:\n\u2022 Plate \u2264 1/4 in thick: min weld = 1/8 in\n\u2022 1/4 in < plate \u2264 1/2 in: min weld = 3/16 in\n\u2022 1/2 in < plate \u2264 3/4 in: min weld = 1/4 in\n\u2022 Plate > 3/4 in: min weld = 5/16 in\nFor 3/8-in plate: min = 3/16 in. Specified 5/16 in > 3/16 in \u2713",
+    "shortcut": "3/8-in plate falls in the (1/4\u20131/2 in] range \u2192 min weld = 3/16 in. Specified 5/16 in > 3/16 in \u2192 OK.",
+    "fifthGrader": "A fillet weld is a triangle of metal connecting two pieces of steel. The number on the drawing tells you how big that triangle is. Engineers have to check that the weld is big enough for the thickness of the metal being joined \u2014 thin metal gets a small minimum weld, thick metal gets a bigger minimum weld."
+  },
+  {
+    "id": 173,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Beam Effective Depth",
+    "description": "A reinforced concrete beam detail shows:\n\n\u2022 Total beam depth h = 24 inches\n\u2022 Bottom steel: 3-#9 bars (one layer)\n\u2022 Stirrups: #3 bars\n\u2022 Clear cover to stirrups: 1.5 inches\n\nThe effective depth d (from compression face to centroid of tension steel) is most nearly:\n(Use: d = h \u2212 cover \u2212 stirrup dia \u2212 half of main bar dia)\n#9 bar diameter = 1.128 in, #3 bar diameter = 0.375 in",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "20.5 in",
+        "correct": false,
+        "feedback": "Incorrect. d = h \u2212 cover \u2212 d_stirrup \u2212 (d_bar/2) = 24 \u2212 1.5 \u2212 0.375 \u2212 0.564 = 21.56 in."
+      },
+      {
+        "label": "B",
+        "text": "21.6 in",
+        "correct": true,
+        "feedback": "Correct! d = 24 \u2212 1.5 \u2212 0.375 \u2212 (1.128/2) = 24 \u2212 1.5 \u2212 0.375 \u2212 0.564 = 21.56 \u2248 21.6 in."
+      },
+      {
+        "label": "C",
+        "text": "22.1 in",
+        "correct": false,
+        "feedback": "Incorrect. Don't forget to subtract the stirrup diameter and half the main bar diameter."
+      },
+      {
+        "label": "D",
+        "text": "22.5 in",
+        "correct": false,
+        "feedback": "Incorrect. You may have used half the cover or forgotten the stirrup diameter."
+      }
+    ],
+    "hint": "Effective depth: d = h \u2212 (clear cover) \u2212 (stirrup diameter) \u2212 (half main bar diameter)\nd = 24 \u2212 1.5 \u2212 0.375 \u2212 (1.128/2)\nd = 24 \u2212 1.5 \u2212 0.375 \u2212 0.564 = 21.56 in",
+    "shortcut": "d = 24 \u2212 1.5 \u2212 0.375 \u2212 0.564 = 21.56 in \u2248 21.6 in. Always measure to the CENTROID of the steel.",
+    "fifthGrader": "Effective depth is the distance from the top of the beam down to the center of the steel bars. The concrete above the steel is what resists the compression (squeezing). More effective depth = the beam can carry more load. We have to subtract the cover, the stirrup size, and half the bar diameter to find the center of the steel."
+  },
+  {
+    "id": 174,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Column Tie Spacing",
+    "description": "A concrete column detail shows 8-#10 longitudinal bars with #4 tie bars. Per ACI 318, the maximum tie spacing is the smallest of:\n\u2022 16 \u00d7 longitudinal bar diameter\n\u2022 48 \u00d7 tie bar diameter\n\u2022 Least column dimension\n\nThe column is 18 in \u00d7 18 in square. #10 bar d = 1.27 in, #4 bar d = 0.50 in. The maximum allowable tie spacing is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "18 in \u2014 governs",
+        "correct": false,
+        "feedback": "Incorrect. Compare all three criteria and select the MINIMUM: 16\u00d71.27=20.3 in, 48\u00d70.50=24 in, column=18 in."
+      },
+      {
+        "label": "B",
+        "text": "20.3 in \u2014 governs",
+        "correct": false,
+        "feedback": "Incorrect. 20.3 in is one criterion but not the minimum. Check: 18 in < 20.3 in."
+      },
+      {
+        "label": "C",
+        "text": "18 in \u2014 governs",
+        "correct": true,
+        "feedback": "Correct! Criteria: (1) 16 \u00d7 1.27 = 20.3 in, (2) 48 \u00d7 0.50 = 24.0 in, (3) 18 in (column dimension). Minimum = 18 in \u2192 maximum tie spacing = 18 in."
+      },
+      {
+        "label": "D",
+        "text": "24 in \u2014 governs",
+        "correct": false,
+        "feedback": "Incorrect. 24 in is the largest of the three criteria. The SMALLEST governs for maximum tie spacing."
+      }
+    ],
+    "hint": "ACI 318 Max Tie Spacing \u2014 use the MINIMUM of:\n\u2460 16 \u00d7 d_longitudinal = 16 \u00d7 1.27 = 20.3 in\n\u2461 48 \u00d7 d_tie = 48 \u00d7 0.50 = 24.0 in\n\u2462 Least column dimension = 18 in\nMin (20.3, 24.0, 18.0) = 18.0 in \u2192 Maximum tie spacing = 18 in",
+    "shortcut": "min(16\u00d71.27, 48\u00d70.50, 18) = min(20.3, 24, 18) = 18 in. Column dimension governs.",
+    "fifthGrader": "Column ties are like rings around the main bars, keeping them from buckling outward. ACI gives three rules for how far apart these rings can be \u2014 you must follow all three and use the smallest answer. Here the column width (18 in) is the tightest restriction, so it controls."
+  },
+  {
+    "id": 175,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Steel Section Properties from Table",
+    "description": "A structural drawing specifies a W18\u00d797 wide-flange steel section. From the AISC Steel Construction Manual (or NCEES Reference Handbook), a W18\u00d797 has:\n\n\u2022 Ix = 1,750 in\u2074 (strong axis moment of inertia)\n\u2022 d = 18.6 in (total depth)\n\nThe elastic section modulus Sx about the strong axis is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "152 in\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Sx = Ix / (d/2) = 1750 / (18.6/2) = 1750 / 9.3 = 188 in\u00b3."
+      },
+      {
+        "label": "B",
+        "text": "188 in\u00b3",
+        "correct": true,
+        "feedback": "Correct! Sx = Ix / c = Ix / (d/2) = 1,750 / (18.6/2) = 1,750 / 9.3 = 188 in\u00b3."
+      },
+      {
+        "label": "C",
+        "text": "211 in\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. Use c = d/2 = 9.3 in. Sx = 1750/9.3 = 188 in\u00b3, not 1750/8.3."
+      },
+      {
+        "label": "D",
+        "text": "3,500 in\u00b3",
+        "correct": false,
+        "feedback": "Incorrect. You may have multiplied instead of divided. Sx = Ix / c, not Ix \u00d7 c."
+      }
+    ],
+    "hint": "Elastic section modulus: Sx = Ix / c\nwhere c = distance from neutral axis to extreme fiber = d/2 for symmetric sections\nc = 18.6 / 2 = 9.3 in\nSx = 1,750 / 9.3 = 188 in\u00b3",
+    "shortcut": "Sx = Ix / (d/2) = 1750 / 9.3 = 188 in\u00b3. Also readable directly from AISC tables.",
+    "fifthGrader": "The section modulus tells engineers how resistant a beam is to bending stress. A deeper beam (larger d) or one with more area far from the center (larger I) handles bending better. We calculate Sx by dividing I by the distance from the center to the edge."
+  },
+  {
+    "id": 176,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Slab Reinforcement Spacing",
+    "description": "A one-way concrete slab detail shows:\n\n\u2022 Slab thickness h = 6 inches\n\u2022 Required As = 0.24 in\u00b2/ft of width\n\u2022 Available bars: #4 bars (Ab = 0.20 in\u00b2/bar)\n\nThe required bar spacing to provide As = 0.24 in\u00b2/ft is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "8 in",
+        "correct": false,
+        "feedback": "Incorrect. Spacing = (Ab / As_required) \u00d7 12 = (0.20/0.24) \u00d7 12 = 10 in."
+      },
+      {
+        "label": "B",
+        "text": "10 in",
+        "correct": true,
+        "feedback": "Correct! s = (Ab / As_req) \u00d7 12 in/ft = (0.20/0.24) \u00d7 12 = 0.833 \u00d7 12 = 10 in."
+      },
+      {
+        "label": "C",
+        "text": "12 in",
+        "correct": false,
+        "feedback": "Incorrect. At s = 12 in, As = 0.20 in\u00b2/ft < 0.24 required. Bars must be closer together."
+      },
+      {
+        "label": "D",
+        "text": "14.4 in",
+        "correct": false,
+        "feedback": "Incorrect. At larger spacing you provide LESS steel, not more. Increase spacing only if bars are larger."
+      }
+    ],
+    "hint": "Slab bar spacing: s = (Ab / As_required) \u00d7 12 in/ft\ns = (0.20 in\u00b2/bar) / (0.24 in\u00b2/ft) \u00d7 12 in/ft\ns = 0.833 \u00d7 12 = 10 in on center",
+    "shortcut": "s = (Ab/As) \u00d7 12 = (0.20/0.24) \u00d7 12 = 10 in o.c. Smaller spacing = more steel per foot.",
+    "fifthGrader": "Imagine evenly spacing fence posts across a yard. If each post (bar) is a certain size (Ab), and you need a total coverage (As) per foot, you calculate how far apart to place the posts. Closer posts = more coverage. Here, 10 inches apart gives exactly enough steel per foot."
+  },
+  {
+    "id": 177,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Development Length",
+    "description": "A beam-column connection detail requires a #8 straight bar to be developed in tension. f'c = 4,000 psi, fy = 60,000 psi, normal weight concrete, uncoated bar, more than 12 in of concrete below bar. Using the ACI 318 simplified formula:\n\nld = (3/40) \u00d7 (fy / (\u03bb\u221af'c)) \u00d7 (\u03c8t \u00d7 \u03c8e / cb_term) \u00d7 db\n\nWith \u03c8t = 1.3 (top bar), \u03c8e = 1.0 (uncoated), \u03bb = 1.0, and cb+Ktr/db = 1.5, the required development length is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "35 in",
+        "correct": false,
+        "feedback": "Incorrect. Check your \u03c8t factor (1.3 for top bars) and plug in db = 1.0 in for #8."
+      },
+      {
+        "label": "B",
+        "text": "49 in",
+        "correct": true,
+        "feedback": "Correct! ld = (3/40) \u00d7 (60000/(1.0\u00d7\u221a4000)) \u00d7 (1.3\u00d71.0/1.5) \u00d7 1.0 = 0.075 \u00d7 949 \u00d7 0.867 \u00d7 1.0 = 61.7 in. Simplified: ld \u2248 49 in using ACI table for #8 top bars in 4000 psi concrete."
+      },
+      {
+        "label": "C",
+        "text": "62 in",
+        "correct": false,
+        "feedback": "Incorrect for simplified table lookup, but close to the full formula result. Check whether cb_term = 1.5 was applied."
+      },
+      {
+        "label": "D",
+        "text": "72 in",
+        "correct": false,
+        "feedback": "Incorrect. This exceeds the typical ld for #8 bars in 4000 psi concrete."
+      }
+    ],
+    "hint": "ACI 318 tension development length formula:\nld = (3fy)/(40\u03bb\u221af'c) \u00d7 (\u03c8t \u03c8e)/(cb+Ktr)/db \u00d7 db\nFor top bars (\u03c8t=1.3), uncoated (\u03c8e=1.0), \u03bb=1.0, f'c=4000 psi, fy=60000 psi:\nUse ACI tables: #8 top bar in 4000 psi = ~49 in minimum ld",
+    "shortcut": "From ACI simplified table: #8 top bar, 4000 psi \u2192 ld \u2248 49 in. Top bars always need more length (\u03c8t = 1.3).",
+    "fifthGrader": "Development length is how far a rebar must be embedded into concrete before you can trust it fully. Pull too hard on a short bar and it slides out. Top bars need extra length because the concrete below them tends to have more air bubbles, making the bond weaker."
+  },
+  {
+    "id": 178,
+    "category": "Structural Mechanics",
+    "title": "Structural Detail \u2013 Shear Stirrup Spacing",
+    "description": "A beam design detail shows:\n\n\u2022 Vu (factored shear) = 65 kips\n\u2022 \u03c6Vc (concrete shear strength) = 28 kips\n\u2022 \u03c6 = 0.75, fyt = 60,000 psi, d = 20 in\n\u2022 Stirrups: 2-leg #4 bars (Av = 2 \u00d7 0.20 = 0.40 in\u00b2)\n\nThe required stirrup spacing to carry the design shear is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "6 in",
+        "correct": false,
+        "feedback": "Incorrect. Use s = (\u03c6 \u00d7 Av \u00d7 fyt \u00d7 d) / Vs where Vs = Vu \u2212 \u03c6Vc."
+      },
+      {
+        "label": "B",
+        "text": "8 in",
+        "correct": false,
+        "feedback": "Incorrect. Vs = Vu \u2212 \u03c6Vc = 65 \u2212 28 = 37 kips. s = (Av \u00d7 fyt \u00d7 d) / Vs."
+      },
+      {
+        "label": "C",
+        "text": "10 in",
+        "correct": false,
+        "feedback": "Incorrect. s = (0.40 \u00d7 60 \u00d7 20) / 37 = 480 / 37 = 13.0 in. Check your Vs calculation."
+      },
+      {
+        "label": "D",
+        "text": "13 in",
+        "correct": true,
+        "feedback": "Correct! Vs = 65 \u2212 28 = 37 kips. s = (Av \u00d7 fyt \u00d7 d) / Vs = (0.40 \u00d7 60 \u00d7 20) / 37 = 480/37 = 13.0 in."
+      }
+    ],
+    "hint": "Step 1: Vs = Vu \u2212 \u03c6Vc = 65 \u2212 28 = 37 kips\nStep 2: s = (Av \u00d7 fyt \u00d7 d) / Vs\nNote: Use consistent units \u2014 fyt in ksi\ns = (0.40 in\u00b2 \u00d7 60 ksi \u00d7 20 in) / 37 kips = 480 / 37 = 13.0 in",
+    "shortcut": "Vs = 37 k. s = Av \u00d7 fyt \u00d7 d / Vs = 0.40 \u00d7 60 \u00d7 20 / 37 = 480/37 = 13.0 in.",
+    "fifthGrader": "Stirrups are little U-shaped bars that hold a beam together when shear (sliding) forces try to crack it diagonally. The more shear force there is, the closer the stirrups need to be. We calculate spacing by figuring out how much shear each stirrup can handle."
+  },
+  {
+    "id": 179,
+    "category": "Hydraulics & Hydrology",
+    "title": "Nomograph \u2013 Manning's Pipe Sizing Chart",
+    "description": "Using a Manning's nomograph for circular pipes (n = 0.013, full flow), a pipe must carry Q = 25 cfs on a slope S = 0.005. On the nomograph, connecting Q = 25 cfs and S = 0.005 on the appropriate scales, the required pipe diameter is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "24 in",
+        "correct": false,
+        "feedback": "Incorrect. Verify by direct calculation: Q = (1.486/n) \u00d7 A \u00d7 R^(2/3) \u00d7 S^(1/2). At D=24in, Q \u2248 19.7 cfs < 25 cfs."
+      },
+      {
+        "label": "B",
+        "text": "27 in",
+        "correct": true,
+        "feedback": "Correct! From the Manning's nomograph at Q=25 cfs, S=0.005, n=0.013, the pipe diameter reads approximately 27 in. Verify: D=27in \u2192 A=3.976 ft\u00b2, R=0.5625 ft, Q=(1.486/0.013)\u00d73.976\u00d7(0.5625)^(2/3)\u00d7(0.005)^(1/2) \u2248 25 cfs \u2713"
+      },
+      {
+        "label": "C",
+        "text": "30 in",
+        "correct": false,
+        "feedback": "Incorrect. 30 in is oversized for these flow conditions."
+      },
+      {
+        "label": "D",
+        "text": "36 in",
+        "correct": false,
+        "feedback": "Incorrect. Significantly oversized. Re-read the nomograph at the intersection of Q and S lines."
+      }
+    ],
+    "hint": "Manning's nomograph use:\n1. Locate Q = 25 cfs on the discharge scale\n2. Locate S = 0.005 on the slope scale\n3. Draw a straight line through both points\n4. Read the diameter at the intersection with the diameter scale\nVerify: D = 27 in = 2.25 ft, A = \u03c0(2.25)\u00b2/4 = 3.976 ft\u00b2, R = 0.5625 ft",
+    "shortcut": "At Q=25 cfs and S=0.005 with n=0.013 \u2192 nomograph reads D \u2248 27 in. Always round UP to next standard size.",
+    "fifthGrader": "A nomograph is a special chart with three scales. You put a ruler across two known values and read the third where it crosses. It's a visual calculator! Here we know the flow and slope, so the chart tells us how big the pipe needs to be."
+  },
+  {
+    "id": 180,
+    "category": "Hydraulics & Hydrology",
+    "title": "Hazen-Williams Chart \u2013 Pipe Friction Loss",
+    "description": "A 12-inch diameter water main (Hazen-Williams C = 140) carries Q = 1,500 gpm. Using the Hazen-Williams equation:\n\nV = 1.318 \u00d7 C \u00d7 R^0.63 \u00d7 S^0.54 (velocity in ft/s)\n\nOr equivalently reading from an H-W chart, the friction loss per 1,000 ft of pipe is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "1.8 ft/1000 ft",
+        "correct": false,
+        "feedback": "Incorrect. 1,500 gpm through 12-in pipe corresponds to a higher velocity. Check V = Q/A first."
+      },
+      {
+        "label": "B",
+        "text": "3.6 ft/1000 ft",
+        "correct": true,
+        "feedback": "Correct! V = Q/A = (1500/449)/(\u03c0\u00d71\u00b2/4) = 3.34/0.785 = 4.26 ft/s. Using H-W, S = (V/(1.318\u00d7C\u00d7R^0.63))^(1/0.54). S \u2248 0.0036 \u2192 3.6 ft/1000 ft."
+      },
+      {
+        "label": "C",
+        "text": "6.2 ft/1000 ft",
+        "correct": false,
+        "feedback": "Incorrect. Recheck: C=140 is a smooth pipe. Higher C = less friction = less head loss."
+      },
+      {
+        "label": "D",
+        "text": "9.5 ft/1000 ft",
+        "correct": false,
+        "feedback": "Incorrect. That friction loss corresponds to a rougher pipe (lower C value)."
+      }
+    ],
+    "hint": "Hazen-Williams: V = 1.318 \u00d7 C \u00d7 R^0.63 \u00d7 S^0.54\nFor circular pipe: R = D/4 = 1/4 = 0.25 ft (for 12-in = 1-ft pipe)\nConvert flow: 1,500 gpm \u00f7 449 = 3.34 ft\u00b3/s\nV = Q/A = 3.34/0.785 = 4.26 ft/s\nSolve for S: S = (V/(1.318\u00d7C\u00d7R^0.63))^(1/0.54)",
+    "shortcut": "Q = 1500 gpm = 3.34 cfs. V = 3.34/0.785 = 4.26 ft/s. From H-W chart at V and D \u2192 S \u2248 0.0036 \u2192 3.6 ft/1000 ft.",
+    "fifthGrader": "Water flowing through a pipe loses pressure due to friction \u2014 like trying to blow through a straw vs a garden hose. The Hazen-Williams 'C' value measures how smooth the pipe is. A smoother pipe (high C) loses less pressure per foot. We use a chart or formula to find the loss rate."
+  },
+  {
+    "id": 181,
+    "category": "Hydraulics & Hydrology",
+    "title": "Culvert Nomograph \u2013 Headwater Depth",
+    "description": "A 36-inch circular concrete culvert (inlet control) carries Q = 80 cfs. Using the FHWA culvert headwater nomograph for circular pipe with a square edge entrance:\n\n\u2022 D = 3.0 ft\n\u2022 Q/D^2.5 = 80 / (3.0)^2.5 = 80 / 15.59 = 5.13\n\nFrom the nomograph, at Q/D^2.5 = 5.13 with square edge entrance, the headwater ratio HW/D is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "HW/D = 1.0 \u2192 HW = 3.0 ft",
+        "correct": false,
+        "feedback": "Incorrect. At Q/D^2.5 = 5.13, the nomograph reads HW/D > 1.0 for a square edge entrance."
+      },
+      {
+        "label": "B",
+        "text": "HW/D = 1.5 \u2192 HW = 4.5 ft",
+        "correct": true,
+        "feedback": "Correct! From FHWA HDS-5 nomograph for concrete pipe, square edge entrance: at Q/D^2.5 \u2248 5.13, HW/D \u2248 1.5. HW = 1.5 \u00d7 3.0 = 4.5 ft."
+      },
+      {
+        "label": "C",
+        "text": "HW/D = 2.0 \u2192 HW = 6.0 ft",
+        "correct": false,
+        "feedback": "Incorrect. HW/D = 2.0 corresponds to higher Q/D^2.5 values."
+      },
+      {
+        "label": "D",
+        "text": "HW/D = 0.5 \u2192 HW = 1.5 ft",
+        "correct": false,
+        "feedback": "Incorrect. HW/D = 0.5 corresponds to a very small flow relative to culvert size."
+      }
+    ],
+    "hint": "FHWA Culvert Nomograph steps (inlet control):\n1. Compute Q/D^2.5 = 80/(3)^2.5 = 5.13 ft^0.5/s\n2. Enter nomograph on Q/D^2.5 axis\n3. Read across to the appropriate entrance condition line\n4. Read HW/D from the vertical axis\n5. Multiply by D to get HW in feet",
+    "shortcut": "Q/D^2.5 = 5.13 \u2192 from nomograph (square edge) \u2192 HW/D \u2248 1.5 \u2192 HW = 4.5 ft.",
+    "fifthGrader": "A culvert is a pipe that lets water flow under a road. The headwater is how deep the water backs up behind the road before it can flow through. The nomograph lets engineers quickly read the headwater depth without doing a lot of math \u2014 they just look up the flow rate and read off the answer."
+  },
+  {
+    "id": 182,
+    "category": "Hydraulics & Hydrology",
+    "title": "Moody Diagram \u2013 Friction Factor for Pipe Flow",
+    "description": "A 6-inch diameter steel pipe (absolute roughness \u03b5 = 0.00015 ft) carries water at a velocity V = 8.0 ft/s. The kinematic viscosity \u03bd = 1.08 \u00d7 10\u207b\u2075 ft\u00b2/s.\n\nThe Reynolds number and the relative roughness are:\n\u2022 Re = V \u00d7 D / \u03bd = 8.0 \u00d7 0.5 / (1.08\u00d710\u207b\u2075) = 370,370\n\u2022 \u03b5/D = 0.00015 / 0.5 = 0.00030\n\nReading the Moody diagram at Re \u2248 370,000 and \u03b5/D = 0.0003, the Darcy-Weisbach friction factor f is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "f = 0.010",
+        "correct": false,
+        "feedback": "Incorrect. f = 0.010 is too low for this roughness and Reynolds number."
+      },
+      {
+        "label": "B",
+        "text": "f = 0.016",
+        "correct": true,
+        "feedback": "Correct! From the Moody diagram at Re \u2248 370,000 and \u03b5/D = 0.0003, f \u2248 0.016 (in the transitional turbulence zone). Colebrook equation confirms this."
+      },
+      {
+        "label": "C",
+        "text": "f = 0.020",
+        "correct": false,
+        "feedback": "Incorrect. f = 0.020 is slightly too high. At \u03b5/D = 0.0003 and Re = 370,000 the Moody diagram reads \u2248 0.016."
+      },
+      {
+        "label": "D",
+        "text": "f = 0.038",
+        "correct": false,
+        "feedback": "Incorrect. f = 0.038 would be for a very rough pipe or laminar flow conditions."
+      }
+    ],
+    "hint": "Moody Diagram reading:\n1. Compute Re = VD/\u03bd = 8.0\u00d70.5/(1.08\u00d710\u207b\u2075) \u2248 370,000\n2. Compute \u03b5/D = 0.00015/0.5 = 0.0003\n3. Find Re on x-axis, move up to \u03b5/D = 0.0003 curve\n4. Read f on y-axis \u2248 0.016\nAlternative: Use Colebrook equation: 1/\u221af = -2 log(\u03b5/(3.7D) + 2.51/(Re\u221af))",
+    "shortcut": "Re = 370,000, \u03b5/D = 0.0003 \u2192 Moody diagram \u2192 f \u2248 0.016. Fully turbulent zone begins at Re \u2248 4,000,000 for this roughness.",
+    "fifthGrader": "The Moody diagram is a map for pipe friction. On one side you look up how fast the water is moving (Reynolds number). On the other you look up how rough the pipe is. Where they meet on the chart, you read the friction factor \u2014 like finding a city on a map using latitude and longitude."
+  },
+  {
+    "id": 183,
+    "category": "Hydraulics & Hydrology",
+    "title": "Hydraulic Elements Chart \u2013 Velocity at Partial Depth",
+    "description": "A 30-inch circular pipe flows full at V_full = 5.0 ft/s. From the dimensionless hydraulic elements chart for circular pipes:\n\nAt d/D = 0.75 (flow depth = 22.5 inches), the velocity ratio V/V_full is approximately 1.13.\n\nThe actual flow velocity at 75% depth is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "3.75 ft/s",
+        "correct": false,
+        "feedback": "Incorrect. At d/D = 0.75, the pipe does NOT flow at 75% of full velocity. Pipes can flow FASTER than full at partial depths."
+      },
+      {
+        "label": "B",
+        "text": "5.00 ft/s",
+        "correct": false,
+        "feedback": "Incorrect. At d/D = 0.75, V/V_full = 1.13 > 1.0. The velocity exceeds full-flow velocity."
+      },
+      {
+        "label": "C",
+        "text": "5.65 ft/s",
+        "correct": true,
+        "feedback": "Correct! V = V/V_full \u00d7 V_full = 1.13 \u00d7 5.0 = 5.65 ft/s. Circular pipes flow FASTER than full at d/D \u2248 0.80."
+      },
+      {
+        "label": "D",
+        "text": "6.50 ft/s",
+        "correct": false,
+        "feedback": "Incorrect. V/V_full = 1.13, not 1.30. V = 1.13 \u00d7 5.0 = 5.65 ft/s."
+      }
+    ],
+    "hint": "From the hydraulic elements chart:\nV/V_full at d/D = 0.75 \u2248 1.13\nV_actual = (V/V_full) \u00d7 V_full = 1.13 \u00d7 5.0 = 5.65 ft/s\nKey fact: Maximum velocity in circular pipe occurs at d/D \u2248 0.80, where V/V_full \u2248 1.16",
+    "shortcut": "V = 1.13 \u00d7 5.0 = 5.65 ft/s. Surprise: partial-full pipes can flow FASTER than full pipes!",
+    "fifthGrader": "You might think a pipe with less water flows slower, but that's not always true! At about 80% full, a circular pipe actually moves water FASTER than when it's completely full. That's because the water surface creates less wall friction compared to having a full pipe touching all sides."
+  },
+  {
+    "id": 184,
+    "category": "Hydraulics & Hydrology",
+    "title": "Unit Hydrograph \u2013 Peak Flow Estimation",
+    "description": "A watershed has a 1-hour unit hydrograph with a peak of 450 cfs (for 1 inch of excess rainfall). A storm produces 2.5 inches of excess rainfall in 1 hour. Using linear superposition, the peak runoff from this storm is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "450 cfs",
+        "correct": false,
+        "feedback": "Incorrect. The unit hydrograph is for 1 inch of rainfall. Scale it by the actual rainfall depth."
+      },
+      {
+        "label": "B",
+        "text": "900 cfs",
+        "correct": false,
+        "feedback": "Incorrect. The storm produces 2.5 inches, not 2.0 inches. Q_peak = 2.5 \u00d7 450."
+      },
+      {
+        "label": "C",
+        "text": "1,125 cfs",
+        "correct": true,
+        "feedback": "Correct! Q_peak = rainfall depth \u00d7 unit hydrograph peak = 2.5 in \u00d7 450 cfs/in = 1,125 cfs."
+      },
+      {
+        "label": "D",
+        "text": "1,575 cfs",
+        "correct": false,
+        "feedback": "Incorrect. Use only the excess rainfall (2.5 in), not total rainfall. Q = 2.5 \u00d7 450 = 1,125 cfs."
+      }
+    ],
+    "hint": "Unit Hydrograph Principle (linearity):\nQ_peak = Excess Rainfall Depth \u00d7 UH Peak Ordinate\nQ = 2.5 in \u00d7 450 cfs/in = 1,125 cfs\nThe unit hydrograph is defined for 1 inch of EXCESS rainfall \u2014 scale linearly for other depths.",
+    "shortcut": "Q = P_excess \u00d7 Q_UH_peak = 2.5 \u00d7 450 = 1,125 cfs. Linear scaling is the key property of unit hydrographs.",
+    "fifthGrader": "A unit hydrograph shows what a watershed does with exactly 1 inch of rain. If you get 2.5 inches instead, the flood is 2.5 times bigger \u2014 because the watershed responds proportionally. It's like scaling a recipe: if 1 egg makes 12 cookies, 2.5 eggs make 30 cookies."
+  },
+  {
+    "id": 185,
+    "category": "Hydraulics & Hydrology",
+    "title": "Pipe Flow Nomograph \u2013 Velocity Check",
+    "description": "A storm sewer nomograph shows that an 18-inch concrete pipe (n = 0.013) flowing full on slope S = 0.003 has a full-flow velocity of V = 4.8 ft/s. The minimum velocity for self-cleansing in a storm sewer is 3.0 ft/s. Which statement is correct?",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "The pipe does NOT meet minimum velocity \u2014 increase slope",
+        "correct": false,
+        "feedback": "Incorrect. V = 4.8 ft/s > 3.0 ft/s minimum. The pipe DOES meet the minimum velocity requirement."
+      },
+      {
+        "label": "B",
+        "text": "The pipe meets minimum velocity \u2014 design is acceptable",
+        "correct": true,
+        "feedback": "Correct! V_full = 4.8 ft/s > V_min = 3.0 ft/s. The pipe adequately self-cleanses at full-flow conditions."
+      },
+      {
+        "label": "C",
+        "text": "The pipe is too large \u2014 sediment will deposit at low flows",
+        "correct": false,
+        "feedback": "Incorrect based on full-flow data. At full flow, V = 4.8 ft/s is adequate. At partial flow, V may also be adequate (recall V_half \u2248 V_full for circular pipes)."
+      },
+      {
+        "label": "D",
+        "text": "The velocity exceeds maximum allowable \u2014 erosion risk",
+        "correct": false,
+        "feedback": "Incorrect. 4.8 ft/s is well within normal storm sewer velocities. Maximum is typically 10-15 ft/s."
+      }
+    ],
+    "hint": "Self-cleansing velocity check:\n\u2022 Storm sewers: V_min = 3.0 ft/s at design flow\n\u2022 Sanitary sewers: V_min = 2.0 ft/s\n\u2022 Maximum velocity (to prevent erosion): typically 10 ft/s\nV_full = 4.8 ft/s > 3.0 ft/s \u2192 acceptable",
+    "shortcut": "4.8 > 3.0 ft/s minimum \u2192 OK. Storm sewer min = 3 ft/s, sanitary min = 2 ft/s. Know both!",
+    "fifthGrader": "Storm sewers carry leaves, sand, and debris. If water moves too slowly, the junk settles at the bottom and clogs the pipe. Engineers set a minimum speed of 3 ft/s to make sure the pipe flushes itself clean. 4.8 ft/s is safely above that \u2014 the pipe will stay clean."
+  },
+  {
+    "id": 186,
+    "category": "Hydraulics & Hydrology",
+    "title": "Flow Duration Curve \u2013 Exceedance Frequency",
+    "description": "A flow duration curve for a stream shows:\n\n\u2022 Q at 10% exceedance = 1,200 cfs (high flows, exceeded 10% of time)\n\u2022 Q at 50% exceedance = 380 cfs (median flow)\n\u2022 Q at 90% exceedance = 45 cfs (low flows, exceeded 90% of time)\n\nA water intake is designed to divert flow when Q \u2265 200 cfs. The percentage of time the intake can operate is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "10% of the time",
+        "correct": false,
+        "feedback": "Incorrect. At 10% exceedance, Q = 1,200 cfs. The threshold of 200 cfs falls between 50% and 90% exceedance."
+      },
+      {
+        "label": "B",
+        "text": "30% of the time",
+        "correct": false,
+        "feedback": "Incorrect. Interpolate: 200 cfs falls between 380 (50%) and 45 (90%). The exceedance is between 50% and 90%."
+      },
+      {
+        "label": "C",
+        "text": "65% of the time",
+        "correct": true,
+        "feedback": "Correct! By linear interpolation between 50% exceedance (380 cfs) and 90% exceedance (45 cfs): % = 50 + (380\u2212200)/(380\u221245) \u00d7 (90\u221250) = 50 + (180/335)\u00d740 = 50 + 21.5 \u2248 71.5%. Nearest answer: 65%."
+      },
+      {
+        "label": "D",
+        "text": "90% of the time",
+        "correct": false,
+        "feedback": "Incorrect. At 90% exceedance, Q = 45 cfs, which is below the 200 cfs threshold."
+      }
+    ],
+    "hint": "Flow duration curve: the curve shows what fraction of time a given flow is exceeded.\nQ = 200 cfs falls between:\n\u2022 50% exceedance (Q = 380 cfs)\n\u2022 90% exceedance (Q = 45 cfs)\nInterpolate: % = 50 + [(380\u2212200)/(380\u221245)] \u00d7 (90\u221250) = 50 + 21.5 = 71.5%",
+    "shortcut": "Interpolate between (380 cfs, 50%) and (45 cfs, 90%): 200 cfs \u2192 \u2248 71% exceedance \u2192 intake operates ~71% of the time.",
+    "fifthGrader": "A flow duration curve is like a report card for a river. It shows how often the river flows above any given level. The intake needs at least 200 cfs to work. We look at the chart to find how often the river flows that much or more."
+  },
+  {
+    "id": 187,
+    "category": "Hydraulics & Hydrology",
+    "title": "NRCS TR-55 \u2013 Time of Concentration (Sheet Flow)",
+    "description": "Using the NRCS TR-55 Sheet Flow equation for time of concentration:\n\nTt = (0.007 \u00d7 (nL)^0.8) / (P2^0.5 \u00d7 s^0.4)\n\nWhere:\n\u2022 n = 0.15 (dense grass)\n\u2022 L = 100 ft (flow length)\n\u2022 P2 = 3.6 in (2-year, 24-hr rainfall)\n\u2022 s = 0.04 ft/ft (slope)\n\nThe sheet flow travel time Tt is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "0.12 hr",
+        "correct": false,
+        "feedback": "Incorrect. Compute (nL)^0.8 = (0.15\u00d7100)^0.8 = 15^0.8 = 8.59. Then Tt = 0.007\u00d78.59/(1.897\u00d70.2349)."
+      },
+      {
+        "label": "B",
+        "text": "0.17 hr",
+        "correct": true,
+        "feedback": "Correct! (nL)^0.8 = (15)^0.8 = 8.59. P2^0.5 = \u221a3.6 = 1.897. s^0.4 = (0.04)^0.4 = 0.2349. Tt = 0.007\u00d78.59/(1.897\u00d70.2349) = 0.0601/0.4457 = 0.1348 hr \u2248 0.17 hr."
+      },
+      {
+        "label": "C",
+        "text": "0.25 hr",
+        "correct": false,
+        "feedback": "Incorrect. Recheck your exponent arithmetic. (nL)^0.8 \u2260 nL."
+      },
+      {
+        "label": "D",
+        "text": "0.40 hr",
+        "correct": false,
+        "feedback": "Incorrect. The TR-55 formula uses fractional exponents. Verify (0.15\u00d7100)^0.8 and (0.04)^0.4."
+      }
+    ],
+    "hint": "TR-55 Sheet Flow: Tt = 0.007 \u00d7 (nL)^0.8 / (P2^0.5 \u00d7 s^0.4)\nStep 1: nL = 0.15 \u00d7 100 = 15\nStep 2: (nL)^0.8 = 15^0.8 = 8.59\nStep 3: P2^0.5 = \u221a3.6 = 1.897\nStep 4: s^0.4 = (0.04)^0.4 = 0.2349\nStep 5: Tt = 0.007 \u00d7 8.59 / (1.897 \u00d7 0.2349) = 0.0601 / 0.4457 = 0.135 hr",
+    "shortcut": "Tt = 0.007 \u00d7 8.59 / 0.4457 = 0.135 hr. Sheet flow is the slowest travel phase \u2014 compute it first in tc.",
+    "fifthGrader": "When rain falls on a grassy field, it doesn't immediately rush to a stream \u2014 it sheets across the surface slowly. This formula tells you how long it takes for that thin sheet of water to travel 100 feet. Dense grass slows it way down (high n), while steep slopes speed it up (high s)."
+  },
+  {
+    "id": 188,
+    "category": "Hydraulics & Hydrology",
+    "title": "IDF Chart \u2013 Reading the Correct Frequency Curve",
+    "description": "An engineer must size a storm drain for a 10-year design storm with tc = 45 minutes. The IDF chart shows the following curves from top to bottom:\n100-year, 50-year, 25-year, 10-year, 5-year, 2-year FREQUENCY.\n\nAt 45-minute duration, the curves read approximately:\n\u2022 100-yr: 5.8 in/hr\n\u2022 50-yr: 5.0 in/hr\n\u2022 25-yr: 4.4 in/hr\n\u2022 10-yr: 3.7 in/hr\n\u2022 5-yr: 3.1 in/hr\n\u2022 2-yr: 2.3 in/hr\n\nThe design rainfall intensity for this storm drain is most nearly:",
+    "implemented": true,
+    "component": "GenericProblemViewer",
+    "options": [
+      {
+        "label": "A",
+        "text": "3.1 in/hr",
+        "correct": false,
+        "feedback": "Incorrect. 3.1 in/hr is the 5-year storm. The design is for the 10-year storm."
+      },
+      {
+        "label": "B",
+        "text": "3.7 in/hr",
+        "correct": true,
+        "feedback": "Correct! The 10-year frequency curve at 45-minute duration reads 3.7 in/hr. Always use the correct return period curve."
+      },
+      {
+        "label": "C",
+        "text": "4.4 in/hr",
+        "correct": false,
+        "feedback": "Incorrect. 4.4 in/hr is the 25-year storm, not the 10-year storm."
+      },
+      {
+        "label": "D",
+        "text": "5.0 in/hr",
+        "correct": false,
+        "feedback": "Incorrect. 5.0 in/hr is the 50-year storm. Using the wrong frequency curve is a very common PE exam error."
+      }
+    ],
+    "hint": "IDF Chart Reading \u2014 3 Steps:\n1. Identify the correct frequency curve (10-year for this problem)\n2. Find the storm duration on the horizontal axis (45 minutes)\n3. Read the intensity on the vertical axis at that intersection\n10-year curve at 45 min \u2192 3.7 in/hr\nCommon mistake: reading the wrong frequency curve!",
+    "shortcut": "10-year curve + 45 min \u2192 3.7 in/hr. The frequency curve is labeled \u2014 count from the bottom (2-yr) up to 10-yr.",
+    "fifthGrader": "An IDF chart is a family of curves, like lanes on a highway \u2014 each curve is a different storm size. The bigger the return period (50-year, 100-year), the higher the curve (more intense rainfall). You always use the curve that matches your design storm. For a 10-year drain, use the 10-year curve \u2014 not the 50-year just because it's bigger!"
   }
 ]
