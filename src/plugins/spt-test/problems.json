@@ -1,0 +1,51 @@
+[
+  {
+    "id": 112,
+    "category": "Soil Mechanics & Foundations",
+    "title": "Standard Penetration Test (SPT) Data Reduction & Overburden Correction (ASTM D1586)",
+    "description": "A Standard Penetration Test (SPT) is conducted in a sand deposit at a depth of z = 20.0 ft (6.1 m) below the ground surface in accordance with ASTM D1586 and AASHTO T206. The groundwater table is measured at a depth of 8.0 ft below the ground surface.\n\nThe soil profile consists of medium-dense to dense clean sand:\n• Total unit weight above GWT: γ = 120 pcf\n• Saturated unit weight below GWT: γsat = 125 pcf\n• Unit weight of water: γw = 62.4 pcf\n\nThe test equipment and borehole parameters are recorded as follows:\n• Hammer system: Automatic trip hammer with measured energy ratio ERm = 75%\n• Borehole diameter: 100 mm (4.0 in) → CB = 1.00\n• Sampler: Standard split-barrel sampler without liner → CS = 1.20\n• Drill rod length: 22 ft (6.7 m) → CR = 0.95\n• Atmospheric reference stress: Pa = 2,000 psf (100 kPa)\n\nDuring driving, the recorded blow counts for the three consecutive 6-inch (150 mm) penetration increments are:\n• 0 to 6 inches: 7 blows\n• 6 to 12 inches: 10 blows\n• 12 to 18 inches: 14 blows\n\nDetermine the uncorrected field SPT N-value, the energy-corrected N60, the effective overburden stress σ'vo at the test depth, and the normalized SPT blow count (N1)60.\n\nThe values of uncorrected N, N60, and (N1)60 are most nearly:",
+    "implemented": true,
+    "component": "SPTVisualizer",
+    "depth": 20,
+    "gwt": 8,
+    "n1": 7,
+    "n2": 10,
+    "n3": 14,
+    "gamma": 120,
+    "gammaSat": 125,
+    "er": 75,
+    "cb": 1.0,
+    "cs": 1.2,
+    "cr": 0.95,
+    "pa": 2000,
+    "hint": "1. Uncorrected Field SPT N-value (ASTM D1586):\n• The blow count for the first 6 inches (0 - 6 in) is the seating drive and must be DISCARDED!\n• N = N(6-12 in) + N(12-18 in) = 10 + 14 = 24 blows/ft.\n\n2. Energy-Corrected SPT Blow Count N60:\n• N60 = N × (ERm / 60) × CB × CS × CR\n• Energy correction factor: CE = 75 / 60 = 1.25\n• N60 = 24 × 1.25 × 1.00 × 1.20 × 0.95 = 24 × 1.425 = 34.2 blows/ft.\n\n3. Effective Overburden Stress σ'vo at Depth z = 20 ft:\n• Layer 1 (Dry sand above GWT, 0 to 8 ft): σv1 = 8 ft × 120 pcf = 960 psf\n• Layer 2 (Submerged sand below GWT, 8 to 20 ft, Δz = 12 ft):\n  Buoyant unit weight γ' = γsat - γw = 125 - 62.4 = 62.6 pcf\n  Δσ'v = 12 ft × 62.6 pcf = 751.2 psf\n• Total effective overburden: σ'vo = 960 + 751.2 = 1,711.2 psf.\n\n4. Overburden Correction Factor CN:\n• CN = (Pa / σ'vo)^0.5 = (2,000 / 1,711.2)^0.5 = (1.1688)^0.5 = 1.0811 (capped at 1.70 - 2.0).\n\n5. Normalized Blow Count (N1)60:\n• (N1)60 = N60 × CN = 34.2 × 1.0811 = 36.97 ≈ 37 blows/ft.\n\n6. Empirical Soil Assessment:\n• (N1)60 = 37 falls in the Dense Sand category (35 - 50).\n• Correlated effective internal friction angle: φ' ≈ 37.5° to 38°.",
+    "shortcut": "The 3 Golden Rules of SPT Corrections on the PE Exam:\n1. Never add the seating drive! N is strictly the sum of the last two 6-inch increments (N = N2 + N3). Summing all three (7 + 10 + 14 = 31) is the #1 NCEES distractor trap!\n2. Always use EFFECTIVE stress σ'vo for CN, never total stress! Subtract pore water pressure below the water table (γ' = γsat - 62.4 pcf).\n3. Automatic hammers deliver higher energy than standard safety hammers (75% vs 60%), which means fewer blows in the field. Correcting to N60 scales the count UP by 75/60 = 1.25!",
+    "fifthGrader": "Imagine driving a giant metal pipe into the beach with a heavy 140-pound weight that drops from 30 inches up.\n\nThe first 6 inches is just pushing the pipe into the loose stirred-up dirt at the bottom of the hole, so we throw those 7 taps in the trash!\n\nWe only count the next 12 inches: 10 blows + 14 blows = 24 blows. Then, because our automatic machine hits harder than an old rope-and-pulley, and because the sand is squeezed by 20 feet of earth, we use math formulas to translate our 24 taps into a standardized score of 37, which tells us the sand is very dense and solid!",
+    "options": [
+      {
+        "label": "A",
+        "text": "N = 31; N60 = 44; (N1)60 = 48",
+        "correct": false,
+        "feedback": "Incorrect: 31 occurs if you mistakenly include the 0-6 inch seating drive (7 + 10 + 14 = 31). Per ASTM D1586, the first 6 inches is seating and must always be excluded!"
+      },
+      {
+        "label": "B",
+        "text": "N = 24; N60 = 34; (N1)60 = 31",
+        "correct": false,
+        "feedback": "Incorrect: (N1)60 = 31 occurs if you mistakenly use total overburden stress (σvo = 2,460 psf) instead of effective overburden stress (σ'vo = 1,711.2 psf). Always subtract hydrostatic pore water pressure!"
+      },
+      {
+        "label": "C",
+        "text": "N = 24; N60 = 34; (N1)60 = 37",
+        "correct": true,
+        "feedback": "✓ Correct! N = 10 + 14 = 24 blows/ft; N60 = 24 × (75/60) × 1.0 × 1.2 × 0.95 = 34.2 ≈ 34; σ'vo = (8 × 120) + (12 × 62.6) = 1,711.2 psf; CN = (2000/1711.2)^0.5 = 1.081; (N1)60 = 34.2 × 1.081 = 36.97 ≈ 37."
+      },
+      {
+        "label": "D",
+        "text": "N = 24; N60 = 28; (N1)60 = 31",
+        "correct": false,
+        "feedback": "Incorrect: N60 = 28 occurs if you omit the sampler liner factor CS = 1.20 for samplers without liners."
+      }
+    ]
+  }
+]
