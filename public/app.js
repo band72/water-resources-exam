@@ -455,6 +455,17 @@ function openProblemModal(problemId) {
     nceesContainer.innerHTML = '<span class="ncees-tag">NCEES Reference Handbook - Water Resources</span>';
   }
 
+  // If Problem #54 (Geotechnical Vertical Stress & House Load), link to the 50x50 Helical Pile Lab
+  if (p.problem_number === 54) {
+    nceesContainer.innerHTML += `
+      <div style="margin-top: 0.75rem; width: 100%;">
+        <button class="btn btn-sm btn-primary" onclick="HelicalCalculator.open();" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, #0284c7, #2563eb); border: none; font-weight: 700; padding: 0.5rem;">
+          🏗️ Launch Interactive 50×50 Slab & Helical Pile Lab (Pore Pressure & SF Matrix)
+        </button>
+      </div>
+    `;
+  }
+
   // Render Steps & Math
   renderModalSolutionSteps(p);
 

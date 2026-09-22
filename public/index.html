@@ -23,6 +23,9 @@
         </div>
       </div>
       <div class="header-actions">
+        <button id="openHelicalCalcBtn" class="btn btn-sm btn-primary" style="display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; background: linear-gradient(135deg, #0284c7, #2563eb); border: none;">
+          🏗️ 50×50 Slab & Helical Piles Lab
+        </button>
         <button id="themeToggleBtn" class="btn btn-sm" title="Toggle Theme">
           <span id="themeIcon">☀️</span> Light / Dark
         </button>
@@ -262,11 +265,225 @@
     </div>
   </div>
 
+  <!-- Interactive 50x50 House Slab & Helical Piles Modal -->
+  <div class="modal-backdrop" id="helicalCalcModal" aria-hidden="true">
+    <div class="modal-container helical-modal-container">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span class="prob-num-badge" style="background: rgba(14, 165, 233, 0.2); color: #38bdf8;">Interactive Engineering Lab</span>
+          <span class="badge category" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Geotechnical & Deep Foundations</span>
+          <h2 style="font-size: 1.2rem; font-weight: 700; margin: 0;">50' × 50' House Slab & Helical Pile Geotechnical Solver</h2>
+        </div>
+        <div class="modal-header-right">
+          <button id="closeHelicalModalBtn" class="btn btn-sm" style="font-size: 1.1rem; line-height: 1;">✕</button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Banner -->
+      <div class="helical-kpi-bar">
+        <div class="kpi-item">
+          <span class="kpi-label">Total Gravity Load (P_total):</span>
+          <strong class="kpi-val" id="kpiTotalHouseLoad">--</strong>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-label">Pore Water Pressure (u):</span>
+          <strong class="kpi-val" id="kpiPorePressure">--</strong>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-label">Effective Vertical Stress (σ'v):</span>
+          <strong class="kpi-val" id="kpiEffectiveStress">--</strong>
+        </div>
+        <div class="kpi-item">
+          <span class="kpi-label">Ultimate Helical Capacity (Q_ult):</span>
+          <strong class="kpi-val" id="kpiUltPileCapacity">--</strong>
+        </div>
+      </div>
+
+      <!-- Modal Body (Two-Pane Responsive Layout) -->
+      <div class="modal-body helical-modal-body">
+        
+        <!-- Left Pane: Interactive Sliders & Parameters -->
+        <div class="helical-controls-pane">
+          
+          <h3 class="pane-section-title">📐 Slab & Superstructure Loads</h3>
+          
+          <!-- Concrete Unit Weight -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="concreteUnitWeight">Concrete Unit Weight (γc):</label>
+              <span class="control-val-badge"><span id="concreteUnitWeightVal">150</span> pcf</span>
+            </div>
+            <input type="range" id="concreteUnitWeight" min="135" max="165" step="1" value="150" class="helical-slider">
+            <div class="preset-pill-row">
+              <button class="preset-chip concrete-preset-btn" data-density="140">140 Lightweight</button>
+              <button class="preset-chip concrete-preset-btn" data-density="145">145 Standard</button>
+              <button class="preset-chip concrete-preset-btn" data-density="150">150 Reinforced</button>
+              <button class="preset-chip concrete-preset-btn" data-density="160">160 High-Density</button>
+            </div>
+          </div>
+
+          <!-- Slab Thickness -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="slabThickness">Slab Thickness (t_slab):</label>
+              <span class="control-val-badge"><span id="slabThicknessVal">8</span> inches</span>
+            </div>
+            <input type="range" id="slabThickness" min="4" max="24" step="1" value="8" class="helical-slider">
+            <div class="control-hint">Fixed 50 ft × 50 ft Footprint (Area = 2,500 sq ft)</div>
+          </div>
+
+          <!-- House Weight -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="houseWeight">House Superstructure Dead Load (W_house):</label>
+              <span class="control-val-badge"><span id="houseWeightVal">150</span> kips</span>
+            </div>
+            <input type="range" id="houseWeight" min="50" max="500" step="10" value="150" class="helical-slider">
+          </div>
+
+          <!-- Distributed Surcharge -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="surchargePsf">Distributed Surcharge / Live Load (q):</label>
+              <span class="control-val-badge"><span id="surchargePsfVal">50</span> PSF</span>
+            </div>
+            <input type="range" id="surchargePsf" min="0" max="300" step="10" value="50" class="helical-slider">
+          </div>
+
+          <h3 class="pane-section-title" style="margin-top: 1.25rem;">🌱 Soil Stratum: Organic → Clay → Rocky</h3>
+
+          <!-- Soil Spectrum Slider (Organic -> Clay -> Rocky) -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="soilSpectrumSlider">Soil Spectrum (Organic ↔ Clay ↔ Rocky):</label>
+              <span class="control-val-badge" id="soilSpectrumBadge">Clay</span>
+            </div>
+            <input type="range" id="soilSpectrumSlider" min="0" max="100" step="1" value="45" class="helical-slider soil-spectrum-track">
+            <div style="display: flex; justify-content: space-between; font-size: 0.725rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <span>🌱 Organic (0)</span>
+              <span>🧱 Clay (40)</span>
+              <span>🏖️ Sand (70)</span>
+              <span>🪨 Rocky (100)</span>
+            </div>
+          </div>
+
+          <!-- Soil Preset Dropdown -->
+          <div class="control-group">
+            <label for="soilPresetSelect" style="display:block; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 600;">Or Select Discrete Soil Class:</label>
+            <select id="soilPresetSelect" class="helical-select">
+              <optgroup label="🌱 Organic Formations">
+                <option value="organic_peat">Organic Peat & Muck (Very Low Capacity, c = 250 psf, ϕ = 0°)</option>
+                <option value="organic_silt">Organic Silt / Soft Marsh (c = 400 psf, ϕ = 6°)</option>
+              </optgroup>
+              <optgroup label="🧱 Clay Formations">
+                <option value="soft_clay">Soft Marine Clay (c = 500 psf, ϕ = 0°)</option>
+                <option value="medium_clay">Medium Stiff Clay (c = 900 psf, ϕ = 8°)</option>
+                <option value="stiff_clay" selected>Stiff Overconsolidated Clay (c = 1,800 psf, ϕ = 15°)</option>
+              </optgroup>
+              <optgroup label="🏖️ Granular Sands">
+                <option value="medium_sand">Medium Dense Sand (c = 0, ϕ = 32°)</option>
+                <option value="dense_sand">Dense Sand & Gravel (c = 0, ϕ = 36°)</option>
+              </optgroup>
+              <optgroup label="🪨 Rocky & Bedrock">
+                <option value="rocky_till">Rocky Glacial Till / Cobbles (c = 2,500 psf, ϕ = 42°)</option>
+                <option value="sound_bedrock">Sound Solid Bedrock (Refusal Bearing, c = 5,000 psf, ϕ = 45°)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Groundwater Table Depth -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="waterTableDepth">Groundwater Table Depth (GWT):</label>
+              <span class="control-val-badge blue"><span id="waterTableDepthVal">8</span> ft</span>
+            </div>
+            <input type="range" id="waterTableDepth" min="0" max="40" step="1" value="8" class="helical-slider">
+            <div class="control-hint">Controls hydrostatic pore water pressure: u = γw · (D - GWT)</div>
+          </div>
+
+          <h3 class="pane-section-title" style="margin-top: 1.25rem;">🔩 Helical Pile Specifications</h3>
+
+          <!-- Helical Pile Depth -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="pileDepth">Pile Embedment Depth (D):</label>
+              <span class="control-val-badge green"><span id="pileDepthVal">25</span> ft</span>
+            </div>
+            <input type="range" id="pileDepth" min="10" max="60" step="1" value="25" class="helical-slider">
+          </div>
+
+          <!-- Helix Plate Diameter -->
+          <div class="control-group">
+            <div class="control-label-row">
+              <label for="helixDiameter">Helix Plate Diameter / Width (D_h):</label>
+              <span class="control-val-badge"><span id="helixDiameterVal">12</span> inches</span>
+            </div>
+            <input type="range" id="helixDiameter" min="8" max="20" step="2" value="12" class="helical-slider">
+          </div>
+
+          <!-- Helix Count -->
+          <div class="control-group">
+            <label for="helixCountSelect" style="display:block; margin-bottom: 0.35rem; font-size: 0.85rem; font-weight: 600;">Helices per Pile:</label>
+            <select id="helixCountSelect" class="helical-select">
+              <option value="1">Single Helix (1 Plate)</option>
+              <option value="2" selected>Double Helix (2 Plates)</option>
+              <option value="3">Triple Helix (3 Plates)</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- Right Pane: Visualization, SF Matrix & KaTeX Derivations -->
+        <div class="helical-display-pane">
+          
+          <!-- Dynamic 2D SVG Schematic -->
+          <div class="helical-diagram-card">
+            <div class="diagram-card-header">
+              <span>📐 Dynamic Geotechnical Soil Profile & Helical Pile Cross-Section</span>
+              <span id="diagramSoilTypeTag" style="font-size: 0.8rem; color: var(--primary); font-weight: 600;">Stiff Clay</span>
+            </div>
+            <div class="svg-wrapper">
+              <svg id="helicalDiagramSvg" viewBox="0 0 640 460" preserveAspectRatio="xMidYMid meet"></svg>
+            </div>
+          </div>
+
+          <!-- Safety Factor Matrix (SF = 1.0, 1.5, 2.0, 3.0) -->
+          <div class="helical-sf-section">
+            <div class="sf-section-header">
+              <h3 style="margin: 0; font-size: 1.05rem;">⚖️ Factor of Safety (SF) Comparison Matrix</h3>
+              <span style="font-size: 0.85rem; color: var(--text-secondary);">Simultaneous evaluation for SF = 1.0, 1.5, 2.0, 3.0</span>
+            </div>
+            <div class="helical-sf-grid" id="helicalSfCards">
+              <!-- Injected dynamically by helical_calculator.js -->
+            </div>
+          </div>
+
+          <!-- Live Step-by-Step KaTeX Derivations -->
+          <div class="helical-derivations-section">
+            <div class="derivations-header">
+              <h3 style="margin: 0; font-size: 1.05rem;">📝 Step-by-Step NCEES Solution Derivations</h3>
+              <span style="font-size: 0.8rem; color: var(--primary);">Live Formula & Value Substitutions</span>
+            </div>
+            <div id="helicalMathContainer" class="helical-steps-container">
+              <!-- Injected dynamically by helical_calculator.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="app-footer">
     SolvedIn6 PE Exam Practice Problem Portal • Water Resources & Environmental Engineering • Built for PE Licensure Preparation
   </footer>
 
+  <script src="helical_calculator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
