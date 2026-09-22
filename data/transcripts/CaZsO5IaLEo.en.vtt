@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.000
+In this problem, a truck stop along an interstate highway wants to replace a section of concrete slab.
+
+00:00:07.000 --> 00:00:12.000
+The work is to be completed during a single overnight shift to minimize traffic impacts,
+
+00:00:12.000 --> 00:00:17.000
+and the nightly minimum temperature is expected to stay above 45 degrees.
+
+00:00:17.000 --> 00:00:23.000
+The compressive strength of the previous slab was 3,400 psi,
+
+00:00:23.000 --> 00:00:28.000
+and the designers want to replace the slab with a mix of equal or greater strength.
+
+00:00:29.000 --> 00:00:34.000
+What are the most likely materials to be included in the concrete mix?
+
+00:00:34.000 --> 00:00:40.000
+Type 2 cement, chemical accelerator, coarse aggregate, and sand,
+
+00:00:40.000 --> 00:00:45.000
+type 3 cement, chemical accelerator, sand and water,
+
+00:00:45.000 --> 00:00:51.000
+type 3 cement, chemical accelerator, coarse aggregate, sand and water,
+
+00:00:51.000 --> 00:00:58.000
+or type 5 cement, chemical accelerator, coarse aggregate, sand and water.
+
+00:00:58.000 --> 00:01:05.000
+So here we have another conceptual problem. In this example, I will walk through how we can narrow down our answers,
+
+00:01:05.000 --> 00:01:09.000
+even if we don't know a lot about construction or concrete.
+
+00:01:09.000 --> 00:01:13.000
+I did not see any information in the reference manual about cement types,
+
+00:01:13.000 --> 00:01:20.000
+so this problem is going to be focused on using a process of elimination to give us our best guess at the correct answer.
+
+00:01:20.000 --> 00:01:28.000
+So the first thing we can see is that every single answer contains the terms chemical accelerator and sand,
+
+00:01:28.000 --> 00:01:36.000
+so we can ignore them.
+
+00:01:36.000 --> 00:01:44.000
+Next, three out of four of our answers contain water.
+
+00:01:44.000 --> 00:01:52.000
+Then, three out of four of our answers contain coarse aggregate.
+
+00:01:52.000 --> 00:01:59.000
+Two of the answers contain type 3 cement, while the others contain type 2 and type 5.
+
+00:01:59.000 --> 00:02:05.000
+Now we can move on to using general knowledge, context clues, and process of elimination.
+
+00:02:05.000 --> 00:02:13.000
+The slab being replaced is along an interstate facility, meaning it is expecting lots of traffic from heavy vehicles such as trucks,
+
+00:02:13.000 --> 00:02:19.000
+as such we can pretty much guarantee that coarse aggregate is going to be required in the design.
+
+00:02:19.000 --> 00:02:28.000
+This eliminates answer B.
+
+00:02:28.000 --> 00:02:35.000
+Since nighttime temperatures are not below freezing, we cannot rule out the use of water in this design.
+
+00:02:35.000 --> 00:02:40.000
+This doesn't completely eliminate A, but certainly helps if you have nothing else to go by.
+
+00:02:40.000 --> 00:02:50.000
+Stopping at this level of guesswork could essentially lead you to a coin toss between two remaining answers.
+
+00:02:50.000 --> 00:03:00.000
+At this point, I would be inclined to guess C, since it was one of two different answers to include a type 3 cement.
+
+00:03:00.000 --> 00:03:09.000
+If we do have access to information about cement types, you will notice right away that type 3 cement has an a high early strength.
+
+00:03:09.000 --> 00:03:18.000
+This would be important if the work needed to be completed during a single overnight shift, as is called out in the problem.
+
+00:03:18.000 --> 00:03:23.000
+This would immediately reduce our answers to B and C.
+
+00:03:23.000 --> 00:03:29.000
+From there, you would need to recognize that coarse aggregate would be a requirement for this type of design.
+
+00:03:29.000 --> 00:03:37.000
+So in a lot of conceptual problems on the PE, there is no substitute for subject matter knowledge.
+
+00:03:37.000 --> 00:03:43.000
+However, we can still narrow down our answers if we apply a process of elimination.

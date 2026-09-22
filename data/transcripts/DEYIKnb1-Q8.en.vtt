@@ -1,0 +1,400 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:01.000 --> 00:00:03.310 align:start position:0%
+ 
+okay<00:00:01.280><c> guys</c><00:00:01.560><c> in</c><00:00:01.760><c> this</c><00:00:02.040><c> problem</c><00:00:02.800><c> the</c><00:00:02.960><c> table</c>
+
+00:00:03.310 --> 00:00:03.320 align:start position:0%
+okay guys in this problem the table
+ 
+
+00:00:03.320 --> 00:00:05.550 align:start position:0%
+okay guys in this problem the table
+below<00:00:03.760><c> gives</c><00:00:04.000><c> us</c><00:00:04.200><c> the</c><00:00:04.400><c> rainfall</c><00:00:05.040><c> recorded</c>
+
+00:00:05.550 --> 00:00:05.560 align:start position:0%
+below gives us the rainfall recorded
+ 
+
+00:00:05.560 --> 00:00:07.990 align:start position:0%
+below gives us the rainfall recorded
+from<00:00:05.720><c> a</c><00:00:05.879><c> number</c><00:00:06.160><c> of</c><00:00:06.319><c> rain</c><00:00:06.600><c> gauges</c><00:00:07.439><c> located</c>
+
+00:00:07.990 --> 00:00:08.000 align:start position:0%
+from a number of rain gauges located
+ 
+
+00:00:08.000 --> 00:00:10.709 align:start position:0%
+from a number of rain gauges located
+within<00:00:08.480><c> and</c><00:00:08.679><c> nearby</c><00:00:09.240><c> a</c><00:00:09.400><c> given</c><00:00:09.679><c> catchment</c><00:00:10.200><c> area</c>
+
+00:00:10.709 --> 00:00:10.719 align:start position:0%
+within and nearby a given catchment area
+ 
+
+00:00:10.719 --> 00:00:13.470 align:start position:0%
+within and nearby a given catchment area
+over<00:00:10.960><c> a</c><00:00:11.160><c> 6-hour</c><00:00:11.960><c> period</c><00:00:12.960><c> using</c><00:00:13.280><c> the</c>
+
+00:00:13.470 --> 00:00:13.480 align:start position:0%
+over a 6-hour period using the
+ 
+
+00:00:13.480 --> 00:00:16.189 align:start position:0%
+over a 6-hour period using the
+arithmetic<00:00:14.040><c> mean</c><00:00:14.400><c> method</c><00:00:15.160><c> find</c><00:00:15.519><c> the</c><00:00:15.719><c> average</c>
+
+00:00:16.189 --> 00:00:16.199 align:start position:0%
+arithmetic mean method find the average
+ 
+
+00:00:16.199 --> 00:00:18.950 align:start position:0%
+arithmetic mean method find the average
+precipitation<00:00:17.039><c> in</c><00:00:17.279><c> inches</c><00:00:18.119><c> for</c><00:00:18.359><c> the</c><00:00:18.480><c> drainage</c>
+
+00:00:18.950 --> 00:00:18.960 align:start position:0%
+precipitation in inches for the drainage
+ 
+
+00:00:18.960 --> 00:00:21.590 align:start position:0%
+precipitation in inches for the drainage
+area<00:00:19.480><c> and</c><00:00:19.680><c> use</c><00:00:19.840><c> it</c><00:00:20.000><c> to</c><00:00:20.240><c> determine</c><00:00:20.800><c> the</c><00:00:21.080><c> average</c>
+
+00:00:21.590 --> 00:00:21.600 align:start position:0%
+area and use it to determine the average
+ 
+
+00:00:21.600 --> 00:00:24.070 align:start position:0%
+area and use it to determine the average
+return<00:00:21.880><c> interval</c><00:00:22.400><c> of</c><00:00:22.519><c> the</c><00:00:22.640><c> storm</c><00:00:23.000><c> event</c><00:00:23.680><c> using</c>
+
+00:00:24.070 --> 00:00:24.080 align:start position:0%
+return interval of the storm event using
+ 
+
+00:00:24.080 --> 00:00:27.470 align:start position:0%
+return interval of the storm event using
+the<00:00:24.240><c> provided</c><00:00:24.800><c> return</c><00:00:25.400><c> table</c><00:00:26.400><c> the</c><00:00:26.640><c> provided</c>
+
+00:00:27.470 --> 00:00:27.480 align:start position:0%
+the provided return table the provided
+ 
+
+00:00:27.480 --> 00:00:30.509 align:start position:0%
+the provided return table the provided
+return<00:00:27.760><c> interval</c><00:00:28.599><c> table</c><00:00:29.599><c> so</c><00:00:29.800><c> this</c><00:00:30.119><c> problems</c>
+
+00:00:30.509 --> 00:00:30.519 align:start position:0%
+return interval table so this problems
+ 
+
+00:00:30.519 --> 00:00:34.270 align:start position:0%
+return interval table so this problems
+very<00:00:31.000><c> easy</c><00:00:32.000><c> we</c><00:00:32.160><c> have</c><00:00:32.320><c> to</c><00:00:32.559><c> Simply</c><00:00:33.000><c> sum</c>
+
+00:00:34.270 --> 00:00:34.280 align:start position:0%
+very easy we have to Simply sum
+ 
+
+00:00:34.280 --> 00:00:38.470 align:start position:0%
+very easy we have to Simply sum
+up<00:00:35.280><c> the</c><00:00:36.640><c> gauges</c>
+
+00:00:38.470 --> 00:00:38.480 align:start position:0%
+up the gauges
+ 
+
+00:00:38.480 --> 00:00:42.830 align:start position:0%
+up the gauges
+volumes<00:00:39.480><c> and</c><00:00:39.960><c> get</c><00:00:40.320><c> the</c><00:00:40.559><c> arithmetic</c>
+
+00:00:42.830 --> 00:00:42.840 align:start position:0%
+volumes and get the arithmetic
+ 
+
+00:00:42.840 --> 00:00:47.189 align:start position:0%
+volumes and get the arithmetic
+mean<00:00:43.840><c> so</c><00:00:44.399><c> we're</c><00:00:44.559><c> going</c><00:00:44.640><c> to</c><00:00:44.879><c> do</c><00:00:45.160><c> that</c>
+
+00:00:47.189 --> 00:00:47.199 align:start position:0%
+mean so we're going to do that
+ 
+
+00:00:47.199 --> 00:00:50.350 align:start position:0%
+mean so we're going to do that
+now<00:00:48.199><c> +</c><00:00:48.600><c> 3</c><00:00:49.320><c> +</c>
+
+00:00:50.350 --> 00:00:50.360 align:start position:0%
+now + 3 +
+ 
+
+00:00:50.360 --> 00:00:54.790 align:start position:0%
+now + 3 +
+1.2<00:00:51.360><c> +</c>
+
+00:00:54.790 --> 00:00:54.800 align:start position:0%
+ 
+ 
+
+00:00:54.800 --> 00:00:57.229 align:start position:0%
+ 
+0.9<00:00:55.800><c> plus</c>
+
+00:00:57.229 --> 00:00:57.239 align:start position:0%
+0.9 plus
+ 
+
+00:00:57.239 --> 00:01:01.110 align:start position:0%
+0.9 plus
+1.4<00:00:58.239><c> Plus</c>
+
+00:01:01.110 --> 00:01:01.120 align:start position:0%
+1.4 Plus
+ 
+
+00:01:01.120 --> 00:01:03.789 align:start position:0%
+1.4 Plus
+2<00:01:02.120><c> +</c>
+
+00:01:03.789 --> 00:01:03.799 align:start position:0%
+2 +
+ 
+
+00:01:03.799 --> 00:01:09.310 align:start position:0%
+2 +
+2.1<00:01:04.799><c> and</c><00:01:05.119><c> all</c><00:01:05.320><c> of</c><00:01:06.080><c> this</c><00:01:07.080><c> is</c><00:01:07.360><c> divided</c><00:01:07.880><c> by</c><00:01:08.360><c> 11</c>
+
+00:01:09.310 --> 00:01:09.320 align:start position:0%
+2.1 and all of this is divided by 11
+ 
+
+00:01:09.320 --> 00:01:13.109 align:start position:0%
+2.1 and all of this is divided by 11
+sorry<00:01:09.720><c> for</c><00:01:09.960><c> the</c><00:01:10.600><c> janky</c><00:01:11.280><c> looking</c><00:01:12.280><c> divisor</c>
+
+00:01:13.109 --> 00:01:13.119 align:start position:0%
+sorry for the janky looking divisor
+ 
+
+00:01:13.119 --> 00:01:20.710 align:start position:0%
+sorry for the janky looking divisor
+symbol<00:01:14.119><c> anyway</c><00:01:15.000><c> the</c><00:01:15.159><c> answer</c><00:01:15.439><c> to</c><00:01:15.720><c> this</c><00:01:16.119><c> is</c><00:01:16.840><c> 1.</c>
+
+00:01:20.710 --> 00:01:20.720 align:start position:0%
+ 
+ 
+
+00:01:20.720 --> 00:01:24.149 align:start position:0%
+ 
+1836
+
+00:01:24.149 --> 00:01:24.159 align:start position:0%
+ 
+ 
+
+00:01:24.159 --> 00:01:29.350 align:start position:0%
+ 
+and<00:01:25.159><c> the</c><00:01:25.600><c> problem</c><00:01:25.960><c> tells</c><00:01:26.280><c> us</c><00:01:26.479><c> to</c><00:01:26.799><c> look</c><00:01:27.360><c> at</c><00:01:28.360><c> the</c>
+
+00:01:29.350 --> 00:01:29.360 align:start position:0%
+and the problem tells us to look at the
+ 
+
+00:01:29.360 --> 00:01:32.270 align:start position:0%
+and the problem tells us to look at the
+six<00:01:29.960><c> hour</c><00:01:30.479><c> period</c><00:01:30.880><c> for</c><00:01:31.040><c> the</c><00:01:31.360><c> return</c><00:01:31.600><c> interval</c>
+
+00:01:32.270 --> 00:01:32.280 align:start position:0%
+six hour period for the return interval
+ 
+
+00:01:32.280 --> 00:01:33.789 align:start position:0%
+six hour period for the return interval
+so<00:01:32.479><c> if</c><00:01:32.600><c> we</c><00:01:32.799><c> look</c>
+
+00:01:33.789 --> 00:01:33.799 align:start position:0%
+so if we look
+ 
+
+00:01:33.799 --> 00:01:38.789 align:start position:0%
+so if we look
+at<00:01:34.920><c> this</c><00:01:35.920><c> precipitation</c><00:01:36.680><c> frequency</c><00:01:37.799><c> estimate</c>
+
+00:01:38.789 --> 00:01:38.799 align:start position:0%
+at this precipitation frequency estimate
+ 
+
+00:01:38.799 --> 00:01:41.590 align:start position:0%
+at this precipitation frequency estimate
+we<00:01:38.920><c> can</c><00:01:39.119><c> see</c><00:01:39.840><c> that</c><00:01:40.119><c> the</c><00:01:40.320><c> duration</c><00:01:40.840><c> of</c><00:01:41.000><c> the</c>
+
+00:01:41.590 --> 00:01:41.600 align:start position:0%
+we can see that the duration of the
+ 
+
+00:01:41.600 --> 00:01:46.550 align:start position:0%
+we can see that the duration of the
+event<00:01:42.600><c> is</c><00:01:43.600><c> along</c><00:01:44.079><c> the</c><00:01:44.399><c> Y</c><00:01:44.759><c> AIS</c><00:01:45.280><c> here</c><00:01:46.159><c> and</c><00:01:46.320><c> we're</c>
+
+00:01:46.550 --> 00:01:46.560 align:start position:0%
+event is along the Y AIS here and we're
+ 
+
+00:01:46.560 --> 00:01:50.990 align:start position:0%
+event is along the Y AIS here and we're
+looking<00:01:46.960><c> for</c><00:01:47.920><c> the</c><00:01:48.159><c> 6h</c><00:01:48.560><c> hour</c><00:01:49.479><c> period</c><00:01:50.280><c> so</c><00:01:50.560><c> that's</c>
+
+00:01:50.990 --> 00:01:51.000 align:start position:0%
+looking for the 6h hour period so that's
+ 
+
+00:01:51.000 --> 00:01:54.830 align:start position:0%
+looking for the 6h hour period so that's
+here<00:01:52.000><c> so</c><00:01:52.200><c> we</c><00:01:52.360><c> will</c><00:01:52.560><c> simply</c><00:01:52.920><c> go</c><00:01:53.159><c> over</c><00:01:53.479><c> until</c><00:01:53.799><c> we</c>
+
+00:01:54.830 --> 00:01:54.840 align:start position:0%
+here so we will simply go over until we
+ 
+
+00:01:54.840 --> 00:02:00.029 align:start position:0%
+here so we will simply go over until we
+find<00:01:55.840><c> in</c><00:01:56.039><c> this</c><00:01:56.280><c> case</c><00:01:56.520><c> it's</c><00:01:56.840><c> right</c><00:01:57.079><c> here</c>
+
+00:02:00.029 --> 00:02:00.039 align:start position:0%
+find in this case it's right here
+ 
+
+00:02:00.039 --> 00:02:03.190 align:start position:0%
+find in this case it's right here
+it's<00:02:00.399><c> 1.83</c><00:02:01.399><c> is</c><00:02:01.560><c> the</c><00:02:01.719><c> volume</c><00:02:01.960><c> of</c><00:02:02.119><c> inches</c><00:02:02.960><c> of</c>
+
+00:02:03.190 --> 00:02:03.200 align:start position:0%
+it's 1.83 is the volume of inches of
+ 
+
+00:02:03.200 --> 00:02:06.029 align:start position:0%
+it's 1.83 is the volume of inches of
+rain<00:02:04.200><c> on</c><00:02:04.439><c> average</c>
+
+00:02:06.029 --> 00:02:06.039 align:start position:0%
+rain on average
+ 
+
+00:02:06.039 --> 00:02:08.630 align:start position:0%
+rain on average
+to<00:02:07.039><c> occur</c><00:02:07.399><c> from</c><00:02:07.600><c> this</c><00:02:07.799><c> event</c><00:02:08.200><c> from</c><00:02:08.399><c> all</c><00:02:08.520><c> the</c>
+
+00:02:08.630 --> 00:02:08.640 align:start position:0%
+to occur from this event from all the
+ 
+
+00:02:08.640 --> 00:02:13.510 align:start position:0%
+to occur from this event from all the
+rain<00:02:09.160><c> gauges</c><00:02:10.160><c> and</c><00:02:10.360><c> we'll</c><00:02:10.599><c> go</c><00:02:10.879><c> up</c><00:02:11.239><c> here</c><00:02:12.160><c> to</c><00:02:13.160><c> this</c>
+
+00:02:13.510 --> 00:02:13.520 align:start position:0%
+rain gauges and we'll go up here to this
+ 
+
+00:02:13.520 --> 00:02:16.990 align:start position:0%
+rain gauges and we'll go up here to this
+return<00:02:14.160><c> interval</c><00:02:15.160><c> so</c><00:02:15.440><c> the</c><00:02:15.599><c> answer</c><00:02:16.120><c> here</c><00:02:16.720><c> is</c>
+
+00:02:16.990 --> 00:02:17.000 align:start position:0%
+return interval so the answer here is
+ 
+
+00:02:17.000 --> 00:02:19.550 align:start position:0%
+return interval so the answer here is
+that<00:02:17.200><c> this</c><00:02:17.360><c> storm</c><00:02:17.879><c> on</c><00:02:18.120><c> average</c><00:02:18.560><c> was</c><00:02:18.720><c> a</c><00:02:18.920><c> 2-year</c>
+
+00:02:19.550 --> 00:02:19.560 align:start position:0%
+that this storm on average was a 2-year
+ 
+
+00:02:19.560 --> 00:02:22.110 align:start position:0%
+that this storm on average was a 2-year
+return<00:02:20.000><c> for</c><00:02:21.000><c> the</c><00:02:21.160><c> drainage</c>
+
+00:02:22.110 --> 00:02:22.120 align:start position:0%
+return for the drainage
+ 
+
+00:02:22.120 --> 00:02:24.790 align:start position:0%
+return for the drainage
+basin<00:02:23.120><c> and</c><00:02:23.400><c> that's</c><00:02:23.599><c> all</c><00:02:23.760><c> it</c><00:02:24.000><c> takes</c><00:02:24.239><c> to</c><00:02:24.440><c> solve</c>
+
+00:02:24.790 --> 00:02:24.800 align:start position:0%
+basin and that's all it takes to solve
+ 
+
+00:02:24.800 --> 00:02:28.190 align:start position:0%
+basin and that's all it takes to solve
+this<00:02:25.319><c> problem</c><00:02:26.319><c> some</c><00:02:26.480><c> of</c><00:02:26.680><c> the</c><00:02:26.879><c> other</c><00:02:27.440><c> answers</c>
+
+00:02:28.190 --> 00:02:28.200 align:start position:0%
+this problem some of the other answers
+ 
+
+00:02:28.200 --> 00:02:31.030 align:start position:0%
+this problem some of the other answers
+given<00:02:29.200><c> were</c><00:02:29.519><c> for</c><00:02:29.920><c> or</c><00:02:30.120><c> if</c><00:02:30.239><c> you</c><00:02:30.360><c> weren't</c><00:02:30.720><c> paying</c>
+
+00:02:31.030 --> 00:02:31.040 align:start position:0%
+given were for or if you weren't paying
+ 
+
+00:02:31.040 --> 00:02:33.949 align:start position:0%
+given were for or if you weren't paying
+close<00:02:31.360><c> enough</c><00:02:32.120><c> attention</c>
+
+00:02:33.949 --> 00:02:33.959 align:start position:0%
+close enough attention
+ 
+
+00:02:33.959 --> 00:02:38.949 align:start position:0%
+close enough attention
+and<00:02:34.959><c> did</c><00:02:35.200><c> the</c><00:02:35.360><c> math</c><00:02:35.800><c> right</c><00:02:36.080><c> but</c><00:02:36.319><c> came</c><00:02:36.519><c> out</c><00:02:36.879><c> with</c>
+
+00:02:38.949 --> 00:02:38.959 align:start position:0%
+and did the math right but came out with
+ 
+
+00:02:38.959 --> 00:02:42.869 align:start position:0%
+and did the math right but came out with
+either<00:02:40.440><c> a</c><00:02:41.440><c> different</c>
+
+00:02:42.869 --> 00:02:42.879 align:start position:0%
+either a different
+ 
+
+00:02:42.879 --> 00:02:45.270 align:start position:0%
+either a different
+day<00:02:43.879><c> or</c><00:02:44.319><c> the</c>
+
+00:02:45.270 --> 00:02:45.280 align:start position:0%
+day or the
+ 
+
+00:02:45.280 --> 00:02:46.990 align:start position:0%
+day or the
+wrong
+
+00:02:46.990 --> 00:02:47.000 align:start position:0%
+wrong
+ 
+
+00:02:47.000 --> 00:02:50.830 align:start position:0%
+wrong
+duration<00:02:48.000><c> or</c><00:02:48.239><c> something</c><00:02:48.640><c> like</c><00:02:49.200><c> that</c><00:02:50.200><c> so</c><00:02:50.440><c> yeah</c>
+
+00:02:50.830 --> 00:02:50.840 align:start position:0%
+duration or something like that so yeah
+ 
+
+00:02:50.840 --> 00:02:54.560 align:start position:0%
+duration or something like that so yeah
+that's<00:02:51.000><c> it</c><00:02:51.159><c> for</c><00:02:51.319><c> this</c><00:02:51.560><c> problem</c>
+

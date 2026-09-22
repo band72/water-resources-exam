@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Video files (over 900MB of binary MP4s; streamable or re-downloadable via scripts/download_videos.py)
+data/videos/
+*.mp4
+
+# Sensitive auth cookies / session data
+firefox_cookies.txt
+*.cookies
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db

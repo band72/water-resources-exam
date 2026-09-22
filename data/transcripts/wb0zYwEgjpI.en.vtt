@@ -1,0 +1,82 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.000
+It is desired to use a crane to deposit an HVAC system onto a roof.
+
+00:00:06.000 --> 00:00:11.900
+The crane is mounted on building B, as shown, and is intended to deposit its load onto
+
+00:00:11.900 --> 00:00:14.000
+building A.
+
+00:00:14.000 --> 00:00:19.800
+A tree stands in between buildings A and B, and its height prevents the crane from lowering
+
+00:00:19.800 --> 00:00:23.559
+its boom arm below 50 degrees.
+
+00:00:23.559 --> 00:00:28.800
+If the crane wishes to deposit the HVAC system, at least 20 feet away from the edge of the
+
+00:00:28.800 --> 00:00:35.160
+building A roof, how long does the boom arm need to be in feet?
+
+00:00:35.160 --> 00:00:38.320
+So this problem is all geometry.
+
+00:00:38.320 --> 00:00:43.159
+We are looking for the length of the boom arm here, and given the other information we have
+
+00:00:43.159 --> 00:00:47.159
+in blue, we can solve for that pretty quickly.
+
+00:00:47.159 --> 00:00:54.480
+The problem also notes that the boom arm is restricted to being lowered to 50 degrees at most.
+
+00:00:54.480 --> 00:00:58.480
+So if we were to draw this out really quickly, this could be our
+
+00:00:58.479 --> 00:01:01.599
+conceptual step one.
+
+00:01:01.599 --> 00:01:06.599
+We have X is what we're trying to solve for right now.
+
+00:01:06.599 --> 00:01:12.159
+We have the distance.
+
+00:01:12.159 --> 00:01:23.519
+We have the degrees that we've been given.
+
+00:01:23.519 --> 00:01:32.039
+And we need to know that we need to cross a span of here to here, and also here to here.
+
+00:01:32.039 --> 00:01:38.439
+So if we sum up 75 and 20 on the bottom, we don't even need the additional information about
+
+00:01:38.439 --> 00:01:46.439
+the height of the building, and we don't need to compare the heights over here to the
+
+00:01:46.439 --> 00:01:48.799
+height of this building.
+
+00:01:48.799 --> 00:01:52.799
+We have enough information to solve this very quickly.
+
+00:01:52.799 --> 00:01:59.359
+So rearranging the triangle, we can say that the cosine of the hypotenuse or the boom arm
+
+00:01:59.359 --> 00:02:10.000
+is going to be equal to the adjacent over the hypotenuse.
+
+00:02:10.000 --> 00:02:17.039
+So filling those in, we have a cosine of 50 degrees equals 95 over the hypotenuse.
+
+00:02:23.800 --> 00:02:32.800
+Solving for that, the hypotenuse is going to be equal to 95 divided by the cosine of 50.
+
+00:02:36.800 --> 00:02:42.800
+And this is going to be 147.5 feet.
+
+00:02:44.800 --> 00:02:50.800
+This would make our closest answer over here 150.

@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.000
+Which of the provided moment diagrams best represents the loading conditions upon the provided beam?
+
+00:00:09.000 --> 00:00:13.000
+We can see the beam in question over here.
+
+00:00:13.000 --> 00:00:25.000
+It's a cantilevered beam attached to one side of the wall and has a moment applied at the other side as well as a distributed load in the section between B and A.
+
+00:00:26.000 --> 00:00:30.000
+So if you're like me and shear and moment diagrams are not your strong point,
+
+00:00:30.000 --> 00:00:34.000
+the first thing to do is go to the reference manual to find some examples.
+
+00:00:34.000 --> 00:00:39.000
+I'm not sure if there are any key words that will lead you to this section first,
+
+00:00:39.000 --> 00:00:50.000
+so it will be helpful to remember that the reference manual does contain a section showing shear and moment deflections of various kinds of beams under various types of loading conditions.
+
+00:00:50.000 --> 00:00:52.000
+So go there first.
+
+00:00:52.000 --> 00:00:55.000
+Now let's look at the problem.
+
+00:00:55.000 --> 00:01:05.000
+We can see that the moment applied to the free end of the cantilevered beam is providing a constant amount of bending until an additional force acts on it starting at section B.
+
+00:01:05.000 --> 00:01:13.000
+This section is also the same for all answers, which means we can focus on what's happening in the other two sections instead.
+
+00:01:13.000 --> 00:01:21.000
+The middle section from B to A looks similar to example 19 in the manual on page 244.
+
+00:01:21.000 --> 00:01:31.000
+We can also see that the distributed load is causing the magnitude of the resulting moment to increase non-linearly over the distance from B to A.
+
+00:01:31.000 --> 00:01:36.000
+So that would eliminate D from the list of possible answers.
+
+00:01:36.000 --> 00:01:42.000
+Finally, there is a section from A to the point where the beam is connected to the wall.
+
+00:01:42.000 --> 00:01:52.000
+The first section closest to the anchor point looks like examples 21 and 22 in the manual in the sense that there is no additional force applied to that section,
+
+00:01:52.000 --> 00:01:59.000
+but the moment is still being impacted linearly from the distributed load in the section next to it.
+
+00:01:59.000 --> 00:02:03.000
+This will instantly narrow down our answer to C.
+
+00:02:03.000 --> 00:02:13.000
+A and D show no additional influence on the moment, and B shows the moment slowly tapering off to the point that there is no additional increase in it.
+
+00:02:13.000 --> 00:02:22.000
+So again, the point of this problem was just to show you a way to use process of elimination and some hints from the manual to get your answer.
+
+00:02:22.000 --> 00:02:26.000
+Even if statics or structures is not your specialty.

@@ -1,0 +1,94 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.360
+Okay guys, in this problem, an engineer is designing a building that requires a simply
+
+00:00:06.360 --> 00:00:10.359
+supported beam to be used in part of the roof design.
+
+00:00:10.359 --> 00:00:15.120
+This beam will receive a uniformly distributed load across its length.
+
+00:00:15.120 --> 00:00:20.160
+The client informs the engineer that the original building plans have been modified, and
+
+00:00:20.160 --> 00:00:25.560
+therefore the beam will need to be 50% longer than the original length.
+
+00:00:25.560 --> 00:00:29.760
+All other characteristics of the beam will remain the same.
+
+00:00:29.760 --> 00:00:34.920
+How much greater will the maximum bending moment be in the new beam than in the original
+
+00:00:34.920 --> 00:00:37.079
+design?
+
+00:00:37.079 --> 00:00:43.800
+So the very first thing we can do here is go to our civil engineering reference handbook.
+
+00:00:43.800 --> 00:00:52.000
+For my version, it's page 34, which brings us to simply supported beam slopes and deflections.
+
+00:00:52.000 --> 00:00:56.920
+So the maximum moment there for the type of beam that is described.
+
+00:00:56.920 --> 00:01:00.520
+So let's draw out the beam real fast.
+
+00:01:00.520 --> 00:01:05.320
+I would just take a screenshot for you, but I don't want the NCES to ever come in here and say
+
+00:01:05.320 --> 00:01:09.240
+that I'm sharing parts of their book without their permission.
+
+00:01:09.240 --> 00:01:15.520
+So instead, you guys have to deal with a really badly drawn beam, and I'm sorry about that.
+
+00:01:15.520 --> 00:01:21.520
+Anyway, so this is what type of beam is being described, and we can see from the image
+
+00:01:21.520 --> 00:01:25.719
+that the maximum deflection is going to be in the middle.
+
+00:01:25.719 --> 00:01:38.200
+And the equation in the PDF as well is even written out.
+
+00:01:38.200 --> 00:01:43.000
+So we have the moment, sorry, that's a bad M moment.
+
+00:01:43.000 --> 00:01:53.719
+The maximum here at the center is going to be equal to W times L squared over eight.
+
+00:01:53.719 --> 00:02:02.519
+Now all we have to do is look at, so this would be the length, and if length L is the
+
+00:02:02.519 --> 00:02:06.480
+length of the original beam here.
+
+00:02:06.480 --> 00:02:11.759
+And then we want to look at a beam that's 50% longer.
+
+00:02:11.759 --> 00:02:21.719
+We can create a new max moment and say W times 1.5 L squared over eight.
+
+00:02:21.719 --> 00:02:28.520
+And if we solve that and expand the equation just a little bit, we get 2.25 L squared
+
+00:02:28.520 --> 00:02:31.400
+also over eight.
+
+00:02:31.400 --> 00:02:37.759
+And we can see by comparing these two equations that all of these terms would cancel out,
+
+00:02:37.759 --> 00:02:41.159
+except for the 2.25.
+
+00:02:41.159 --> 00:02:48.079
+So the maximum bending moment in beam number two would be 2.25 times greater than the maximum
+
+00:02:48.079 --> 00:02:50.960
+bending moment in beam number one.
+
+00:02:50.960 --> 00:02:52.920
+And that is all you need to do to solve this problem.

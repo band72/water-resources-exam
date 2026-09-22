@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.960
+In this problem, a big fancy house is built as shown and in parts 300 pounds per square foot
+
+00:00:08.960 --> 00:00:13.160
+of vertical stress onto the ground beneath it.
+
+00:00:13.160 --> 00:00:18.740
+Find the effective vertical stress in pounds per square foot at the given point in the
+
+00:00:18.740 --> 00:00:22.879
+soil profile depicted.
+
+00:00:22.879 --> 00:00:29.280
+So in the given figure, we can see our big fancy house imparting 300 PSF to the soil beneath
+
+00:00:30.280 --> 00:00:37.640
+that we can see point A located in the clay and we can see all of the respective depths
+
+00:00:37.640 --> 00:00:40.640
+relative to each other item.
+
+00:00:40.640 --> 00:00:46.200
+We also have the groundwater level called out and the respective densities of the sand and
+
+00:00:46.200 --> 00:00:48.680
+the clay.
+
+00:00:48.680 --> 00:00:54.960
+So all we need to do is find the effective vertical stress at point A. So the first thing
+
+00:00:54.960 --> 00:01:03.159
+we can do is note that the stress increases both with the depth and the density or unit
+
+00:01:03.159 --> 00:01:07.560
+weight of whatever soil is above that depth.
+
+00:01:07.560 --> 00:01:13.599
+So the first thing we can do is consider the stress just from the house and this number
+
+00:01:13.599 --> 00:01:18.359
+is given to us directly as 300 PSF.
+
+00:01:18.359 --> 00:01:22.760
+Keep in mind that those are the units we are looking for anyway.
+
+00:01:22.760 --> 00:01:27.640
+Next we need to find the effective stress in just the dry sand.
+
+00:01:27.640 --> 00:01:32.960
+So the section of sand to the depth of the groundwater level will be dry and that's going
+
+00:01:32.960 --> 00:01:35.880
+to be 8 feet.
+
+00:01:35.880 --> 00:01:40.719
+So the effective vertical stress for this layer is going to be the unit weight of the dry
+
+00:01:40.719 --> 00:01:44.600
+sand times the depth of the dry sand.
+
+00:01:44.600 --> 00:01:48.760
+And this is going to give us 880 pounds per square foot.
+
+00:01:53.760 --> 00:02:01.040
+Next we can calculate the effective vertical stress in the saturated sand.
+
+00:02:01.040 --> 00:02:06.280
+So if the total depth of the sand is 10 feet and the total dry depth is 8 feet then the
+
+00:02:06.280 --> 00:02:11.920
+total saturated sand is going to be 2 feet.
+
+00:02:11.920 --> 00:02:16.759
+So when calculating the saturated effective vertical stress it's important to remember that
+
+00:02:16.759 --> 00:02:23.639
+any load carried by the saturated soil is carried by both the grains of soil and also
+
+00:02:23.639 --> 00:02:27.079
+the poor pressure of the water.
+
+00:02:27.079 --> 00:02:32.079
+So in this case we are actually going to be subtracting out the density of water from the
+
+00:02:32.079 --> 00:02:35.479
+density of our saturated sand.
+
+00:02:35.479 --> 00:02:43.959
+So first we are going to subtract 110 pounds per cubic foot by 62.4 pounds per cubic foot
+
+00:02:43.960 --> 00:02:46.840
+which is the unit weight of water.
+
+00:02:46.840 --> 00:02:52.040
+And you can look that up in the reference manual if you don't have that memorized.
+
+00:02:52.040 --> 00:02:56.360
+And we are going to multiply it by the saturated depth of 2 feet.
+
+00:02:56.360 --> 00:03:01.800
+And this is going to give us about 95.2 pounds per foot squared.
+
+00:03:01.800 --> 00:03:07.360
+And finally we can solve for the effective vertical stress in the clay up to the given point
+
+00:03:07.360 --> 00:03:08.719
+here.
+
+00:03:08.719 --> 00:03:13.719
+So if the total depth of clay is 10 feet and we know the point is 5 feet above the
+
+00:03:13.719 --> 00:03:19.199
+bottom of the clay layer then the depth of clay remaining will be 5 feet.
+
+00:03:19.199 --> 00:03:26.879
+So just as we did before with the saturated sand we can subtract 62.4 from the unit weight
+
+00:03:26.879 --> 00:03:39.000
+of the clay.
+
+00:03:39.000 --> 00:03:42.800
+And then multiply by the depth to which we are going.
+
+00:03:42.840 --> 00:03:47.480
+And this will give us 188 pounds per square foot.
+
+00:03:47.480 --> 00:03:54.360
+So if we sum up each of the vertical stresses that we calculated from 1 to 4 we are going
+
+00:03:54.360 --> 00:04:01.560
+to see that our total effect of vertical stress is about 1463 pounds per square foot which
+
+00:04:01.560 --> 00:04:05.680
+we can see is our second answer.
+
+00:04:05.680 --> 00:04:10.640
+A few things to point out for this problem would be to first remember to account for the
+
+00:04:10.679 --> 00:04:16.479
+ground water at the depth that it exists and not to try to solve the problem for a deeper
+
+00:04:16.479 --> 00:04:21.079
+point in the layer than the point being asked for.
+
+00:04:21.079 --> 00:04:28.719
+Finally remember to account for the stress in the house that was given directly.
+
+00:04:28.719 --> 00:04:35.399
+The height of the house does not matter but the height of the soil layers does because
+
+00:04:35.399 --> 00:04:40.159
+we were only given density instead of effective stress.
+
+00:04:40.160 --> 00:04:41.840
+But that is all it takes to solve this problem.

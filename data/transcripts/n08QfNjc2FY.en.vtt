@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.000
+In this problem, to provide temporary support to an excavation, a temporary retaining wall is installed and braced by a diagonal brace.
+
+00:00:09.000 --> 00:00:14.000
+The horizontal pressure acting on the wall is 30 pounds per square foot.
+
+00:00:14.000 --> 00:00:22.000
+The length of the excavation and the wall is 10 feet, and the brace is placed in the center of the wall.
+
+00:00:22.000 --> 00:00:29.000
+The connection of the retaining wall at the ground at point A can be represented as a hinge.
+
+00:00:29.000 --> 00:00:41.000
+Ignoring the weight of the form, what is the axial force in pounds resisted by the brace caused by the horizontal pressure.
+
+00:00:41.000 --> 00:00:49.000
+So the first thing that we can take away from this problem statement is that this part about the hinge actually matters.
+
+00:00:49.000 --> 00:00:59.000
+Representing point A as a hinge converts this from a geotechnical type problem into a simple statics problem instead.
+
+00:00:59.000 --> 00:01:05.000
+So let's draw this wall out in a little more detail just so we can understand it better.
+
+00:01:05.000 --> 00:01:14.000
+On the exam itself, I probably would not spend time drawing this out, but obviously these practice problems are meant for you to learn.
+
+00:01:14.000 --> 00:01:16.000
+So let's do it.
+
+00:01:16.000 --> 00:01:22.000
+So we have the brace here and the height of the wall as 20 feet.
+
+00:01:22.000 --> 00:01:30.000
+Recall that the brace is placed in the center of the wall and it is a 10 foot wall.
+
+00:01:30.000 --> 00:01:35.000
+This means that there's going to be 5 feet on each side of the brace.
+
+00:01:35.000 --> 00:01:43.000
+And as shown in the first drawing, the brace is connected to the wall at a height of 8 feet.
+
+00:01:46.000 --> 00:01:57.000
+And then these arrows here represent the resultant force on the wall from the soil that the wall is holding back.
+
+00:01:57.000 --> 00:02:09.000
+So the first thing we can do here is solve for the pounds per vertical foot of force that is being acted on this wall.
+
+00:02:09.000 --> 00:02:31.000
+So step one will be 30 pounds per square foot times the 10 feet length of the wall, giving us 300 pounds per vertical foot.
+
+00:02:31.000 --> 00:02:46.000
+So if there were 20 of these horizontal lines pushing against the wall, then there would be 300 pounds acting on each line.
+
+00:02:46.000 --> 00:02:52.000
+Step two for us is going to be to set this problem up as a statics problem.
+
+00:02:52.000 --> 00:03:06.000
+Since we know in statics that the resultant answer has to be 0, we can state here that the sum of the moments about point A is also 0.
+
+00:03:06.000 --> 00:03:14.000
+So our first force is the rotational force about point A from the wall.
+
+00:03:14.000 --> 00:03:20.000
+This will be resisted by the counter rotational force of the brace that is supporting the wall.
+
+00:03:20.000 --> 00:03:27.000
+And those are going to cancel out.
+
+00:03:27.000 --> 00:03:42.000
+So we can begin to extend this problem by saying 300 pounds per vertical foot times 20 feet times the force location in the rotational moment.
+
+00:03:43.000 --> 00:03:48.000
+In this case it is going to be half the height of the wall.
+
+00:03:48.000 --> 00:03:57.000
+And as we can see here this will give us units of pound feet.
+
+00:03:58.000 --> 00:04:07.000
+Next we can subtract.
+
+00:04:07.000 --> 00:04:14.000
+The height that the brace is posted to times the resultant force in the x direction provided by the brace.
+
+00:04:27.000 --> 00:04:51.000
+Solving and simplifying this equation, we can see that our sub x is going to be equal to 7500 pounds.
+
+00:04:51.000 --> 00:04:55.000
+For step 3 we need to find the axial load in the brace.
+
+00:04:55.000 --> 00:05:03.000
+So let's look at our force triangle.
+
+00:05:03.000 --> 00:05:10.000
+So in our force triangle we can see that we have 7500 pounds in the x direction.
+
+00:05:21.000 --> 00:05:31.000
+We have a hypotenuse angle of 45 degrees of the brace respective to the ground.
+
+00:05:31.000 --> 00:05:35.000
+And we want to find the total force that is in this brace.
+
+00:05:35.000 --> 00:05:44.000
+So using geometry we can say that the cosine of 45 degrees equals the adjacent over the hypotenuse.
+
+00:05:44.000 --> 00:05:49.000
+To put numbers to this the adjacent will be equal to 7500 pounds.
+
+00:05:49.000 --> 00:05:53.000
+And the hypotenuse we can label as z.
+
+00:05:53.000 --> 00:06:06.000
+If we solve for this we can see that z equals 10,606 pounds.
+
+00:06:06.000 --> 00:06:11.000
+This answer is very close to the third option in our list.
+
+00:06:11.000 --> 00:06:22.000
+It's worth mentioning that the very first answer provided here, 75003, is very close to the resultant force in the x direction.
+
+00:06:22.000 --> 00:06:25.000
+So don't be fooled by that on the exam.
+
+00:06:25.000 --> 00:06:32.000
+On each question it's important to make sure that you're answering the question that's actually being asked.
+
+00:06:32.000 --> 00:06:40.000
+In our case we wanted the axial force as specified by the problem and not just the force in one direction.

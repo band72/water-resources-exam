@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.060
+Okay, in this problem, which if the following criteria are provided by the Standard Penetration
+
+00:00:07.060 --> 00:00:09.679
+Test or SPT?
+
+00:00:09.679 --> 00:00:15.759
+On-drained shear strength directly measured, relative density of cohesionless soils indirectly
+
+00:00:15.759 --> 00:00:23.320
+measured, the soils optimum water content directly measured, the soils maximum dry density
+
+00:00:23.320 --> 00:00:26.160
+directly measured.
+
+00:00:26.160 --> 00:00:30.240
+So again, we have another conceptual problem here.
+
+00:00:30.240 --> 00:00:36.240
+And the following steps are how we can try to solve for the right answer, even if we don't
+
+00:00:36.240 --> 00:00:38.439
+know much about geotech.
+
+00:00:38.439 --> 00:00:42.719
+So obviously the question has asked us about the SPT.
+
+00:00:42.719 --> 00:00:47.679
+The first thing we could do in our reference manual is search SPT.
+
+00:00:47.679 --> 00:00:53.879
+Now that's going to lead to a few different things first.
+
+00:00:53.880 --> 00:01:01.920
+By the time you get to the fifth occurrence in chapter 3, this should take you to section
+
+00:01:01.920 --> 00:01:16.680
+3.8.1.3 titled SPT correlations.
+
+00:01:16.680 --> 00:01:22.640
+Now previous occurrences of the SPT bring us to things that are using the SPT value versus
+
+00:01:22.640 --> 00:01:25.200
+another factor or value.
+
+00:01:25.200 --> 00:01:31.159
+It's also worth noting that the word correlation in the title implies that the results are
+
+00:01:31.159 --> 00:01:41.879
+in-exact, which would lead me to look for answers with the term indirect in it.
+
+00:01:41.879 --> 00:01:50.599
+So this already possibly removes two of our answers from up top.
+
+00:01:50.599 --> 00:01:55.640
+If we were running out of time, we could try to make an educated guess from here.
+
+00:01:55.640 --> 00:02:06.199
+The next thing we could look at is looking at the SPT table on page 131 of the reference
+
+00:02:06.199 --> 00:02:10.479
+manual in section 3.8.1.3.
+
+00:02:10.479 --> 00:02:18.519
+We can see that one of the terms in the field includes the term relative density in the
+
+00:02:18.520 --> 00:02:23.400
+table about SANS.
+
+00:02:23.400 --> 00:02:29.800
+Relative density.
+
+00:02:29.800 --> 00:02:38.600
+And it notes that for SANS this is reliable.
+
+00:02:38.599 --> 00:02:55.319
+And for SILTS and CLASES that it can be unreliable.
+
+00:02:55.319 --> 00:03:00.639
+The one thing you would need to know in this case is that SANS are a cohesionless soil
+
+00:03:00.639 --> 00:03:03.039
+while SILTS and CLASES are not.
+
+00:03:03.039 --> 00:03:05.639
+That is to say they have cohesion.
+
+00:03:05.639 --> 00:03:11.439
+So this is the one piece of information you would need to know to note the difference between
+
+00:03:11.439 --> 00:03:19.599
+a SAND and a SILTS or CLASES as it pertains to this problem.
+
+00:03:19.599 --> 00:03:27.039
+And finally based on points 3 and 4, I would say there's enough information here to strongly
+
+00:03:27.039 --> 00:03:31.399
+suggest that our answer is B.
+
+00:03:31.400 --> 00:03:37.879
+So this is one way in which you can try to solve for the answer in a conceptual problem
+
+00:03:37.879 --> 00:03:43.840
+even if you're not very strong in the particular subject matter, in this case, GOTEC.
+
+00:03:43.840 --> 00:03:50.159
+We were able to look at the word correlation for a HINTS which we found after searching
+
+00:03:50.159 --> 00:03:58.480
+for the exact term that the question was asking about, or in this case the type of test,
+
+00:03:58.479 --> 00:04:07.280
+and between the word correlation, implying an inexact form of measurement, the relative
+
+00:04:07.280 --> 00:04:20.240
+density as one of the parts of the table and understanding that CLASES are reliably
+
+00:04:20.240 --> 00:04:27.519
+SANS are cohesionless and reliable measurements whereas SILTS and CLASES have cohesion
+
+00:04:27.519 --> 00:04:29.759
+and are unreliable.
+
+00:04:29.759 --> 00:04:35.479
+That narrows down the answer to the final one here.
+
+00:04:35.479 --> 00:04:35.839
+And that's it.

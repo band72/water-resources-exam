@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.919
+Okay guys, this is a fictitious critical path method,
+
+00:00:04.919 --> 00:00:09.000
+arrow diagram, for your PE application and study journey.
+
+00:00:09.000 --> 00:00:15.500
+We are being asked to find the minimum time and days that it will take for you to complete the project,
+
+00:00:15.500 --> 00:00:18.000
+aka find the critical path.
+
+00:00:18.000 --> 00:00:27.000
+So a critical path is simply the sequence of stages that are needed to determine what the minimum amount of time is,
+
+00:00:27.000 --> 00:00:31.000
+going to be required to complete the project on schedule.
+
+00:00:31.000 --> 00:00:41.000
+So in this case, it's actually about identifying the longest period of time identified among each of these path options.
+
+00:00:41.000 --> 00:00:48.000
+So all we have to do is trace each of the paths and sum up their days to find the longest,
+
+00:00:48.000 --> 00:00:53.000
+because this will determine what the minimum number of days will be,
+
+00:00:53.000 --> 00:00:56.000
+that would be required to complete the project.
+
+00:00:56.000 --> 00:01:02.000
+So let's get started.
+
+00:01:02.000 --> 00:01:07.000
+First, we can check out the path all the way through.
+
+00:01:07.000 --> 00:01:15.000
+So a to b to c to d to e to f.
+
+00:01:15.000 --> 00:01:18.000
+So from a to b is 10 days.
+
+00:01:18.000 --> 00:01:22.000
+From b to c is also 10 days.
+
+00:01:22.000 --> 00:01:25.000
+c to d, 10 days.
+
+00:01:25.000 --> 00:01:28.000
+d to e, 5 days.
+
+00:01:28.000 --> 00:01:34.000
+And e to f is 1 day.
+
+00:01:34.000 --> 00:01:43.000
+Next, we can look at point a to point c to point d to point e to point f.
+
+00:01:48.000 --> 00:01:51.000
+So this will be 15 days.
+
+00:01:51.000 --> 00:01:54.000
+c to d is 10 days.
+
+00:01:54.000 --> 00:01:57.000
+d to e is 5 days.
+
+00:01:57.000 --> 00:02:04.000
+And e to f is 1 day.
+
+00:02:04.000 --> 00:02:12.000
+Then from point a to point e to point f,
+
+00:02:12.000 --> 00:02:15.000
+this one's very easy to look at.
+
+00:02:15.000 --> 00:02:22.000
+It's 40 days plus 1 day.
+
+00:02:22.000 --> 00:02:27.000
+And finally, we can look at a to d to e to f.
+
+00:02:28.000 --> 00:02:31.000
+So a to d is 25 days.
+
+00:02:31.000 --> 00:02:33.000
+d to e is 5 days.
+
+00:02:33.000 --> 00:02:37.000
+And e to f is 1 day.
+
+00:02:37.000 --> 00:02:41.000
+So if we sum up our different paths here,
+
+00:02:41.000 --> 00:02:45.000
+we can see that the first one is 36 days.
+
+00:02:45.000 --> 00:02:51.000
+So, if we sum up our different paths here,
+
+00:02:51.000 --> 00:02:55.000
+we can see that the first one is 36 days.
+
+00:02:55.000 --> 00:02:57.000
+The first one is 36 days.
+
+00:02:57.000 --> 00:03:00.000
+The second one is 31 days.
+
+00:03:00.000 --> 00:03:03.000
+The third one is 41 days.
+
+00:03:03.000 --> 00:03:09.000
+And the fourth one is 31 days.
+
+00:03:09.000 --> 00:03:13.000
+So our critical path, AKA the shortest amount of time
+
+00:03:13.000 --> 00:03:18.000
+to complete the project will be the longest or the largest number.
+
+00:03:18.000 --> 00:03:23.000
+So option three here of 41 days will be our correct answer.

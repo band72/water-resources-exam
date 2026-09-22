@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.040
+In this problem, an engineer in a lab wants to find the dry unit weight of a soil sample
+
+00:00:06.040 --> 00:00:13.439
+in pounds per cubic feet, within a 0.025 cubic foot mold.
+
+00:00:13.439 --> 00:00:16.120
+The following information are available.
+
+00:00:16.120 --> 00:00:21.080
+The total weight of the soil sample in mold is 8.5 pounds.
+
+00:00:21.080 --> 00:00:24.960
+The water content of the soil sample is 10%.
+
+00:00:24.960 --> 00:00:28.839
+The weight of the mold is 4.4 pounds.
+
+00:00:28.839 --> 00:00:33.920
+And the answer is most likely one of the following.
+
+00:00:33.920 --> 00:00:38.880
+So the first thing we can do in this problem is search for dry unit weight in the reference
+
+00:00:38.880 --> 00:00:40.439
+manual.
+
+00:00:40.439 --> 00:00:46.719
+This can lead you, I think the third occurrence will take you to the geotechnical chapter,
+
+00:00:46.719 --> 00:00:53.640
+chapter 3, to section 3.8.3 weight volume relationships.
+
+00:00:53.640 --> 00:00:58.880
+So the first thing we need to, we can find here looking at this page is that the problem
+
+00:00:58.880 --> 00:01:05.560
+is asking us to find the dry unit weight of a soil sample.
+
+00:01:05.560 --> 00:01:22.079
+The equation provided for dry unit weight on that page is gamma d equals gamma total over 1 plus
+
+00:01:22.079 --> 00:01:24.439
+w.
+
+00:01:24.439 --> 00:01:32.280
+So in order to solve this problem for gamma d, we first need to find gamma total.
+
+00:01:32.280 --> 00:01:48.200
+So our second step here is going to be to find the weight of the soil sample only.
+
+00:01:48.200 --> 00:01:54.000
+Which will be our gamma total.
+
+00:01:54.000 --> 00:01:59.200
+So we have the weight of the sample in mold and weight of the mold.
+
+00:01:59.200 --> 00:02:05.439
+So to get the weight of the soil by itself, we simply need to subtract the two.
+
+00:02:05.439 --> 00:02:16.759
+So 8.5 pounds minus 4.4 pounds will give us 4.1 pounds.
+
+00:02:16.759 --> 00:02:24.199
+And that is the weight of the soil sample by itself.
+
+00:02:24.199 --> 00:02:37.079
+That will enable us to find gamma total, which is going to be the weight of the whole sample
+
+00:02:37.079 --> 00:02:41.120
+divided by the size of the mold.
+
+00:02:41.120 --> 00:02:53.599
+So that is going to be gamma equals w over v, which is going to be the weight of the
+
+00:02:53.599 --> 00:03:13.879
+solids plus the weight of the water over the volume of solids plus the volume of water plus
+
+00:03:13.879 --> 00:03:18.759
+the volume of air.
+
+00:03:18.759 --> 00:03:23.560
+There is no specific equation in the manual that is written out like this in this chapter,
+
+00:03:23.560 --> 00:03:29.240
+but if you look at the image provided on page 139 of the reference manual showing the weight
+
+00:03:29.240 --> 00:03:36.199
+volume relationships, you can see that this is what the total gamma consists of.
+
+00:03:36.199 --> 00:03:43.520
+So our total gamma has been calculated out to 4.1 pounds.
+
+00:03:43.520 --> 00:03:53.640
+And the provided total volume is given up here as 0.025 cubic feet.
+
+00:03:53.640 --> 00:04:01.680
+So this is going to give us 164 pounds per cubic foot.
+
+00:04:01.680 --> 00:04:08.560
+From here, we can use the equation for the dry unit weight that we found in the reference
+
+00:04:08.560 --> 00:04:13.800
+manual here to find gamma d.
+
+00:04:13.800 --> 00:04:21.240
+So gamma d is going to be gamma total, which we've calculated out to be 164 pounds
+
+00:04:21.240 --> 00:04:24.240
+per cubic feet.
+
+00:04:24.240 --> 00:04:32.319
+And 1 plus, in this case, w is going to equal 10% as provided.
+
+00:04:32.319 --> 00:04:42.920
+This is the same thing as writing 10 over 100 or 0.1, which is the way we will describe
+
+00:04:42.920 --> 00:04:45.680
+it in this case.
+
+00:04:45.680 --> 00:04:57.000
+And then finally, gamma d is calculated out to be 149.09 pounds per cubic foot.
+
+00:04:57.000 --> 00:05:00.839
+Our closest answer is going to be answer A.
+
+00:05:00.839 --> 00:05:02.519
+And that's all it takes to solve this problem.

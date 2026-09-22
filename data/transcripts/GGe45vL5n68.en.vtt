@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.200
+Okay guys, in this problem, you are the project manager on a job where the client is requesting
+
+00:00:07.200 --> 00:00:12.080
+that your company perform a wet weather capacity assessment of a group of sewers in the
+
+00:00:12.080 --> 00:00:14.679
+wastewater collection system.
+
+00:00:14.679 --> 00:00:17.440
+The budget is $10,000.
+
+00:00:17.440 --> 00:00:22.839
+Based on the area, you decide that two mid-level engineers, each with an hourly billable
+
+00:00:22.839 --> 00:00:29.839
+rate of $45 per hour and a billing multiplier of 2.5, should work on the task.
+
+00:00:29.879 --> 00:00:33.560
+How many hours will each engineer have to work on this task before they run out of
+
+00:00:33.560 --> 00:00:37.560
+budget assuming they work the same amount of hours?
+
+00:00:37.560 --> 00:00:40.359
+So this question is actually very easy.
+
+00:00:40.359 --> 00:00:43.759
+We don't really care what kind of work the project is.
+
+00:00:43.759 --> 00:00:48.320
+All we need to know is what our total budget is and how many hours we have before we run
+
+00:00:48.320 --> 00:00:49.679
+out.
+
+00:00:49.679 --> 00:00:54.600
+So this question is very easy for us because we have two engineers, their hourly rate
+
+00:00:54.600 --> 00:00:59.320
+is the same and their billing multiplier is the same and they will be working the same
+
+00:00:59.320 --> 00:01:01.160
+amount of hours.
+
+00:01:01.160 --> 00:01:06.280
+So the first step we need to do is simply get the total amount of cost it will take 200
+
+00:01:06.280 --> 00:01:10.480
+engineers to bill per hour, including their multiplier.
+
+00:01:10.480 --> 00:01:18.560
+So we have two engineers here times $45 an hour times the billing multiplier of 2.5 and
+
+00:01:18.560 --> 00:01:28.280
+this will get us a total of $225 per hour for the team to bill.
+
+00:01:28.280 --> 00:01:34.480
+After that all we have to do is take the total amount of budget we have and divide that
+
+00:01:34.480 --> 00:01:44.640
+by $225 per hour and the answer is going to be 44.4 hours which is the second answer in
+
+00:01:44.640 --> 00:01:47.000
+our list here.
+
+00:01:47.000 --> 00:01:53.280
+So we could have also solved for just one engineer per hour if we had wanted to and then
+
+00:01:53.280 --> 00:01:59.439
+at the end divided the total available hours for that single engineer by 2 to account for
+
+00:01:59.439 --> 00:02:03.200
+the fact that there were two engineers.
+
+00:02:03.200 --> 00:02:08.520
+So the PE will sometimes ask you questions like that and if you forget to account for things
+
+00:02:08.520 --> 00:02:13.080
+correctly they'll also give you answers that could have been right.
+
+00:02:13.080 --> 00:02:17.879
+So if we'd solved for only one engineer instead of two we would have had come out with
+
+00:02:17.879 --> 00:02:23.319
+88 hours which we can see was also an answer over here.
+
+00:02:23.319 --> 00:02:27.519
+So just something to keep track of when you're solving these problems is not to get too
+
+00:02:27.519 --> 00:02:31.319
+deep into the weeds on things that don't matter.
+
+00:02:31.319 --> 00:02:36.400
+So it could be in this case what type of project they were working on or getting mixed
+
+00:02:36.400 --> 00:02:41.800
+up in when you accounted for the number of engineers assigned.
+
+00:02:41.800 --> 00:02:46.719
+But if you can keep all of these things straight in your head this is really obviously
+
+00:02:46.719 --> 00:02:49.280
+a very simple and very fast problem to solve.

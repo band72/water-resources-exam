@@ -1,0 +1,196 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.960
+Okay guys, in this problem, a concrete gravity retaining wall is being used to support an
+
+00:00:05.960 --> 00:00:12.599
+elevated section of very dense soil. The concrete has a unit weight of 140 pounds per cubic
+
+00:00:12.599 --> 00:00:19.440
+foot. Knowing that the factor of safety against overturning at 0.A is 3, what is the soil's
+
+00:00:19.440 --> 00:00:24.640
+active force per unit length of the wall? If found according to the Rankine active
+
+00:00:24.640 --> 00:00:30.760
+earth pressure theory. So the first thing we can do in this problem is go to pages 80
+
+00:00:30.760 --> 00:00:35.500
+or 81 of our civil review manual and that's going to give us some equations that we're
+
+00:00:35.500 --> 00:00:45.840
+going to want. The first one is going to be the equation for coefficient of active earth
+
+00:00:45.840 --> 00:01:09.680
+pressure and that's going to be KA equals tan squared 45 minus V over 2. The second equation
+
+00:01:09.680 --> 00:01:22.640
+we're going to pull off of page 80 is going to be the active force within depth Z. So that's
+
+00:01:22.640 --> 00:01:36.980
+going to be PA equals our term found above KA times gamma times the depth Z squared over
+
+00:01:36.980 --> 00:01:55.060
+2. PA is going to be active pressure and that is what we're going to be solving for in this
+
+00:01:55.060 --> 00:02:04.620
+problem. However, we can do that in this case. It notes that V is not given for this problem. So
+
+00:02:04.620 --> 00:02:08.980
+we're not going to be able to calculate it using these two steps. If we had it, we could do
+
+00:02:08.980 --> 00:02:18.099
+that and we'd be done. In this case, we're going to solve for the moments of the wall about
+
+00:02:18.099 --> 00:02:26.099
+0.A. So holding back the soil, the wall is going to want to rotate this way and the soil itself is
+
+00:02:26.099 --> 00:02:36.379
+going to want to rotate this way pushing against the wall about 0.A. And knowing that the factor of safety
+
+00:02:36.379 --> 00:02:51.819
+is going to be the moment of the wall over the moment of the soil and it's going to equal 3. We can
+
+00:02:51.900 --> 00:03:00.780
+calculate the moment of the wall and the soil. Or rather, with the moment of the wall, then find the soil and
+
+00:03:00.780 --> 00:03:13.299
+then from the moment in the soil, we can find the resultant force. So let's do it. The first step we're going to
+
+00:03:13.300 --> 00:03:25.300
+go through here is going to be the rotational force or moment of the footing. Wall footing, same thing in
+
+00:03:25.300 --> 00:03:32.620
+this case. So let's break this into two areas. This is going to be area 1 for the triangle. This will be
+
+00:03:32.620 --> 00:03:49.340
+area 2 for the rectangle. So A1 here is going to be 1 1-1 foot and that's this base here we can see because
+
+00:03:49.340 --> 00:03:59.379
+there's one foot length here, two feet down here. Seven feet is the height of the triangle and then the unit weight
+
+00:03:59.379 --> 00:04:08.859
+is 140 pounds per cubic foot, stated in the problem. So that is the concrete weight per linear foot.
+
+00:04:16.100 --> 00:04:29.060
+Linear foot, just to be clear. And now if we want the distance about the rotational distance, we're going to need
+
+00:04:29.060 --> 00:04:48.060
+to do the total distance which is going to be again 1 about point, about point A times 2-thirds because
+
+00:04:49.060 --> 00:05:03.060
+centroid of the moment here will be 2-thirds away from this length of 1. So it's going to be 1 foot times 2-thirds.
+
+00:05:03.060 --> 00:05:17.060
+And multiplying all of this together gets us 323 pound feet per linear foot of the wall.
+
+00:05:17.060 --> 00:05:29.060
+And now we can calculate area 2. So this is going to be again 1 foot with times 7 foot height,
+
+00:05:32.060 --> 00:05:40.060
+7 feet times 140 pounds per cubic foot.
+
+00:05:41.060 --> 00:05:53.060
+And again we need our distance which in this case it's going to be the length of 1 away from A and also an additional
+
+00:05:53.060 --> 00:06:03.060
+point 5 because the moment of rotation is about the center of a rectangle whereas it was 2-thirds away from the edge of this triangle.
+
+00:06:03.060 --> 00:06:21.060
+So let's say 1.5 feet and this will give us a much larger rotation of 1470 pounds feet per foot.
+
+00:06:22.060 --> 00:06:38.060
+We can combine these two since they are all contributing to get 1793 pound feet per linear foot of wall.
+
+00:06:38.060 --> 00:06:46.060
+Okay, so knowing that our factor of safety again of the concrete and the soil,
+
+00:06:46.060 --> 00:07:04.060
+just go back up here since we already wrote it out, equals this case that's going to be 1793 pounds feet per feet over
+
+00:07:04.060 --> 00:07:11.060
+a moment about A of the soil.
+
+00:07:11.060 --> 00:07:22.060
+So solving for that real fast gives us and I'll just write it down here.
+
+00:07:22.060 --> 00:07:49.060
+So we need to keep in mind that that's the rotational force and we were asked for the active earth pressure which is the PA.
+
+00:07:49.060 --> 00:08:17.060
+So PA in this case is going to be 597.8 pound foot per linear foot divided by and we need to use the height of the wall in this case
+
+00:08:17.060 --> 00:08:29.060
+as our distance but knowing that the force in the soil increases steadily as we go down.
+
+00:08:29.060 --> 00:08:39.059
+So in the same way that this triangle, it was 2-thirds of the length we're going to be using 2-thirds of the depth here.
+
+00:08:39.059 --> 00:08:46.059
+Also known as the bottom third is where that rotational point about A is going to be coming from.
+
+00:08:46.059 --> 00:08:52.059
+So it's going to be rotating at a depth of 1-third times 7.
+
+00:08:52.059 --> 00:09:00.059
+So 7 feet times 1-third and we did the math out for that.
+
+00:09:00.059 --> 00:09:18.059
+We will get 256.6 pound feet and that will be our active pressure for this problem.
+
+00:09:18.059 --> 00:09:28.059
+So there's also one more thing I wanted to add is how this problem could have been solved if P had been given instead.
+
+00:09:28.059 --> 00:09:37.059
+So let's say that P had been equal to 57 degrees instead of being not given as we could see here.
+
+00:09:37.059 --> 00:09:41.059
+So in this case we could start off the problem by calculating Ka.
+
+00:09:41.059 --> 00:09:57.059
+So that would have been tan squared of 45 minus 57 over 2 and that should have given us 0.087.
+
+00:09:57.059 --> 00:10:03.059
+And this is probably a lower than realistic coefficient of active pressure to be honest with you.
+
+00:10:03.059 --> 00:10:08.059
+I don't think I should have used a very dense soil when trying to design this problem.
+
+00:10:08.059 --> 00:10:16.059
+Most Ka is I believe are between 0.2 and 0.5 so this is a little low but the math will still work for the sake of this problem.
+
+00:10:16.059 --> 00:10:19.059
+So next we would calculate Pa.
+
+00:10:19.059 --> 00:10:32.059
+So we would have 0.087 which is our Ka value times the gamma of the soil being 120 pounds per cubic foot.
+
+00:10:32.059 --> 00:10:40.059
+And then the depth of Z of the soil which we have as 7 feet squared.
+
+00:10:40.059 --> 00:10:52.059
+We're in this equation up here all over 2 and that should calculate out to be the same number here.
+
+00:10:52.059 --> 00:10:57.059
+So if I do this in my calculator very quickly.
+
+00:10:57.059 --> 00:11:06.059
+I'm getting 256.6 pound feet.
+
+00:11:06.059 --> 00:11:15.059
+So that would have been how you calculate Pa and from there if you wanted your your moments you just would have had to work backwards from what we did here.
+
+00:11:15.059 --> 00:11:26.059
+And they'd asked for maybe the factor of safety instead you could have still used this to get the calculation of the moment for the wall.
+
+00:11:26.059 --> 00:11:34.059
+You would have had the calculation of the moment in the soil and you could have calculated for your factor of safety that way.
+
+00:11:34.059 --> 00:11:43.059
+So yeah to do that though you would have needed fee and then you would have been using the active earth pressure equations instead of sort of avoiding them in the way that we did this problem.
+
+00:11:43.059 --> 00:11:46.059
+To get to the active earth pressure here.
+
+00:11:46.059 --> 00:11:53.059
+Okay so I just wanted to clarify that and I hope that was actually helpful for you.

@@ -1,0 +1,688 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:01.079 --> 00:00:03.510 align:start position:0%
+ 
+in<00:00:01.319><c> this</c><00:00:01.560><c> problem</c><00:00:02.120><c> an</c><00:00:02.280><c> engineer</c><00:00:02.840><c> is</c><00:00:03.040><c> reporting</c>
+
+00:00:03.510 --> 00:00:03.520 align:start position:0%
+in this problem an engineer is reporting
+ 
+
+00:00:03.520 --> 00:00:05.710 align:start position:0%
+in this problem an engineer is reporting
+on<00:00:03.719><c> fully</c><00:00:04.120><c> turbulent</c><00:00:04.640><c> flow</c><00:00:05.160><c> in</c><00:00:05.319><c> a</c><00:00:05.520><c> pipe</c>
+
+00:00:05.710 --> 00:00:05.720 align:start position:0%
+on fully turbulent flow in a pipe
+ 
+
+00:00:05.720 --> 00:00:08.990 align:start position:0%
+on fully turbulent flow in a pipe
+flowing<00:00:06.160><c> at</c><00:00:06.440><c> 15</c><00:00:07.120><c> cubic</c><00:00:07.399><c> feet</c><00:00:07.680><c> per</c><00:00:07.880><c> second</c><00:00:08.880><c> they</c>
+
+00:00:08.990 --> 00:00:09.000 align:start position:0%
+flowing at 15 cubic feet per second they
+ 
+
+00:00:09.000 --> 00:00:11.669 align:start position:0%
+flowing at 15 cubic feet per second they
+know<00:00:09.240><c> that</c><00:00:09.440><c> the</c><00:00:09.639><c> pipe</c><00:00:09.880><c> is</c><00:00:10.120><c> 500</c><00:00:10.599><c> ft</c><00:00:10.880><c> long</c><00:00:11.440><c> and</c>
+
+00:00:11.669 --> 00:00:11.679 align:start position:0%
+know that the pipe is 500 ft long and
+ 
+
+00:00:11.679 --> 00:00:15.110 align:start position:0%
+know that the pipe is 500 ft long and
+1.5<00:00:12.480><c> ft</c><00:00:12.759><c> in</c><00:00:13.080><c> diameter</c><00:00:14.080><c> they</c><00:00:14.280><c> also</c><00:00:14.559><c> observe</c><00:00:14.960><c> a</c>
+
+00:00:15.110 --> 00:00:15.120 align:start position:0%
+1.5 ft in diameter they also observe a
+ 
+
+00:00:15.120 --> 00:00:17.590 align:start position:0%
+1.5 ft in diameter they also observe a
+3-ft<00:00:15.639><c> drop</c><00:00:16.039><c> in</c><00:00:16.160><c> the</c><00:00:16.240><c> energy</c><00:00:16.640><c> grade</c><00:00:16.960><c> line</c><00:00:17.400><c> over</c>
+
+00:00:17.590 --> 00:00:17.600 align:start position:0%
+3-ft drop in the energy grade line over
+ 
+
+00:00:17.600 --> 00:00:20.830 align:start position:0%
+3-ft drop in the energy grade line over
+the<00:00:17.760><c> course</c><00:00:18.000><c> of</c><00:00:18.160><c> the</c><00:00:18.520><c> pipe</c><00:00:19.520><c> however</c><00:00:20.519><c> they</c><00:00:20.680><c> have</c>
+
+00:00:20.830 --> 00:00:20.840 align:start position:0%
+the course of the pipe however they have
+ 
+
+00:00:20.840 --> 00:00:22.790 align:start position:0%
+the course of the pipe however they have
+lost<00:00:21.199><c> their</c><00:00:21.359><c> notes</c><00:00:21.840><c> on</c><00:00:22.039><c> what</c><00:00:22.199><c> the</c><00:00:22.320><c> Darcy</c>
+
+00:00:22.790 --> 00:00:22.800 align:start position:0%
+lost their notes on what the Darcy
+ 
+
+00:00:22.800 --> 00:00:26.830 align:start position:0%
+lost their notes on what the Darcy
+wepack<00:00:23.400><c> friction</c><00:00:24.039><c> factor</c><00:00:24.480><c> F</c><00:00:25.160><c> is</c><00:00:26.160><c> calculating</c>
+
+00:00:26.830 --> 00:00:26.840 align:start position:0%
+wepack friction factor F is calculating
+ 
+
+00:00:26.840 --> 00:00:29.349 align:start position:0%
+wepack friction factor F is calculating
+this<00:00:27.439><c> they</c><00:00:27.599><c> find</c><00:00:28.080><c> that</c><00:00:28.199><c> the</c><00:00:28.359><c> friction</c><00:00:28.840><c> factor</c>
+
+00:00:29.349 --> 00:00:29.359 align:start position:0%
+this they find that the friction factor
+ 
+
+00:00:29.359 --> 00:00:30.630 align:start position:0%
+this they find that the friction factor
+is<00:00:29.599><c> about</c>
+
+00:00:30.630 --> 00:00:30.640 align:start position:0%
+is about
+ 
+
+00:00:30.640 --> 00:00:33.030 align:start position:0%
+is about
+X<00:00:31.480><c> where</c><00:00:31.679><c> in</c><00:00:31.800><c> this</c><00:00:32.000><c> case</c><00:00:32.239><c> we</c><00:00:32.320><c> are</c><00:00:32.520><c> solving</c><00:00:32.880><c> for</c>
+
+00:00:33.030 --> 00:00:33.040 align:start position:0%
+X where in this case we are solving for
+ 
+
+00:00:33.040 --> 00:00:36.310 align:start position:0%
+X where in this case we are solving for
+the<00:00:33.280><c> Darcy</c><00:00:33.719><c> YB</c><00:00:34.239><c> friction</c><00:00:35.040><c> Factor</c><00:00:36.040><c> so</c><00:00:36.200><c> the</c>
+
+00:00:36.310 --> 00:00:36.320 align:start position:0%
+the Darcy YB friction Factor so the
+ 
+
+00:00:36.320 --> 00:00:38.270 align:start position:0%
+the Darcy YB friction Factor so the
+first<00:00:36.520><c> thing</c><00:00:36.640><c> we</c><00:00:36.800><c> have</c><00:00:36.879><c> to</c><00:00:37.079><c> do</c><00:00:37.680><c> in</c><00:00:38.000><c> this</c>
+
+00:00:38.270 --> 00:00:38.280 align:start position:0%
+first thing we have to do in this
+ 
+
+00:00:38.280 --> 00:00:42.670 align:start position:0%
+first thing we have to do in this
+problem<00:00:39.079><c> is</c><00:00:40.079><c> use</c><00:00:40.280><c> our</c><00:00:40.520><c> reference</c><00:00:41.000><c> manual</c><00:00:41.840><c> and</c>
+
+00:00:42.670 --> 00:00:42.680 align:start position:0%
+problem is use our reference manual and
+ 
+
+00:00:42.680 --> 00:00:43.790 align:start position:0%
+problem is use our reference manual and
+search<00:00:43.039><c> for</c>
+
+00:00:43.790 --> 00:00:43.800 align:start position:0%
+search for
+ 
+
+00:00:43.800 --> 00:00:48.150 align:start position:0%
+search for
+Darcy<00:00:44.800><c> this</c><00:00:44.920><c> will</c><00:00:45.160><c> bring</c><00:00:45.440><c> you</c><00:00:45.719><c> to</c><00:00:46.399><c> page</c><00:00:47.160><c> 313</c>
+
+00:00:48.150 --> 00:00:48.160 align:start position:0%
+Darcy this will bring you to page 313
+ 
+
+00:00:48.160 --> 00:00:50.709 align:start position:0%
+Darcy this will bring you to page 313
+first<00:00:49.160><c> where</c><00:00:49.360><c> we</c><00:00:49.520><c> can</c><00:00:49.760><c> get</c><00:00:49.960><c> the</c><00:00:50.160><c> equation</c><00:00:50.520><c> for</c>
+
+00:00:50.709 --> 00:00:50.719 align:start position:0%
+first where we can get the equation for
+ 
+
+00:00:50.719 --> 00:00:53.950 align:start position:0%
+first where we can get the equation for
+the<00:00:50.840><c> Darcy</c><00:00:51.320><c> YP</c><00:00:51.800><c> friction</c><00:00:52.359><c> Factor</c><00:00:53.359><c> so</c><00:00:53.680><c> that's</c>
+
+00:00:53.950 --> 00:00:53.960 align:start position:0%
+the Darcy YP friction Factor so that's
+ 
+
+00:00:53.960 --> 00:01:03.709 align:start position:0%
+the Darcy YP friction Factor so that's
+going<00:00:54.079><c> to</c><00:00:54.719><c> be</c><00:00:55.719><c> HF</c><00:00:56.760><c> =</c><00:00:57.760><c> f</c><00:00:58.680><c> *</c><00:00:59.480><c> l</c><00:01:00.199><c> over</c><00:01:00.800><c> D</c><00:01:01.800><c> *</c><00:01:02.399><c> v^</c><00:01:02.840><c> 2</c>
+
+00:01:03.709 --> 00:01:03.719 align:start position:0%
+going to be HF = f * l over D * v^ 2
+ 
+
+00:01:03.719 --> 00:01:10.390 align:start position:0%
+going to be HF = f * l over D * v^ 2
+over<00:01:04.680><c> 2</c><00:01:06.000><c> G</c><00:01:07.000><c> where</c><00:01:07.680><c> HF</c><00:01:08.680><c> is</c><00:01:08.920><c> the</c><00:01:09.159><c> head</c><00:01:09.400><c> loss</c><00:01:09.799><c> in</c>
+
+00:01:10.390 --> 00:01:10.400 align:start position:0%
+over 2 G where HF is the head loss in
+ 
+
+00:01:10.400 --> 00:01:13.270 align:start position:0%
+over 2 G where HF is the head loss in
+feet<00:01:11.400><c> f</c><00:01:11.720><c> is</c><00:01:11.840><c> the</c><00:01:11.960><c> Darcy</c><00:01:12.360><c> wispack</c><00:01:12.840><c> friction</c>
+
+00:01:13.270 --> 00:01:13.280 align:start position:0%
+feet f is the Darcy wispack friction
+ 
+
+00:01:13.280 --> 00:01:17.429 align:start position:0%
+feet f is the Darcy wispack friction
+Factor<00:01:14.280><c> L</c><00:01:14.680><c> is</c><00:01:14.840><c> the</c><00:01:15.040><c> pipe</c><00:01:15.320><c> length</c><00:01:16.240><c> D</c><00:01:16.640><c> is</c><00:01:16.880><c> pipe</c>
+
+00:01:17.429 --> 00:01:17.439 align:start position:0%
+Factor L is the pipe length D is pipe
+ 
+
+00:01:17.439 --> 00:01:22.069 align:start position:0%
+Factor L is the pipe length D is pipe
+diameter<00:01:18.439><c> and</c><00:01:18.720><c> V</c><00:01:19.159><c> is</c><00:01:19.360><c> the</c><00:01:19.600><c> velocity</c><00:01:20.600><c> G</c><00:01:21.000><c> will</c><00:01:21.159><c> be</c>
+
+00:01:22.069 --> 00:01:22.079 align:start position:0%
+diameter and V is the velocity G will be
+ 
+
+00:01:22.079 --> 00:01:25.030 align:start position:0%
+diameter and V is the velocity G will be
+gravity<00:01:23.079><c> so</c><00:01:23.880><c> we</c><00:01:24.040><c> can</c><00:01:24.240><c> immediately</c><00:01:24.759><c> start</c>
+
+00:01:25.030 --> 00:01:25.040 align:start position:0%
+gravity so we can immediately start
+ 
+
+00:01:25.040 --> 00:01:28.429 align:start position:0%
+gravity so we can immediately start
+filling<00:01:25.400><c> out</c><00:01:25.600><c> some</c><00:01:25.840><c> terms</c><00:01:26.479><c> in</c><00:01:26.680><c> this</c><00:01:27.439><c> problem</c>
+
+00:01:28.429 --> 00:01:28.439 align:start position:0%
+filling out some terms in this problem
+ 
+
+00:01:28.439 --> 00:01:30.830 align:start position:0%
+filling out some terms in this problem
+we<00:01:28.560><c> can</c><00:01:28.840><c> see</c><00:01:29.240><c> that</c><00:01:29.439><c> we</c><00:01:29.560><c> have</c><00:01:29.680><c> a</c><00:01:29.960><c> 3ft</c><00:01:30.439><c> drop</c><00:01:30.720><c> in</c>
+
+00:01:30.830 --> 00:01:30.840 align:start position:0%
+we can see that we have a 3ft drop in
+ 
+
+00:01:30.840 --> 00:01:32.789 align:start position:0%
+we can see that we have a 3ft drop in
+the<00:01:31.000><c> energy</c><00:01:31.360><c> grade</c><00:01:31.759><c> line</c><00:01:32.119><c> so</c><00:01:32.320><c> that's</c><00:01:32.479><c> going</c><00:01:32.600><c> to</c>
+
+00:01:32.789 --> 00:01:32.799 align:start position:0%
+the energy grade line so that's going to
+ 
+
+00:01:32.799 --> 00:01:34.230 align:start position:0%
+the energy grade line so that's going to
+be<00:01:33.040><c> our</c>
+
+00:01:34.230 --> 00:01:34.240 align:start position:0%
+be our
+ 
+
+00:01:34.240 --> 00:01:38.469 align:start position:0%
+be our
+HF<00:01:35.240><c> so</c><00:01:35.479><c> that's</c><00:01:35.759><c> 3</c><00:01:36.399><c> feet</c><00:01:37.399><c> we're</c><00:01:37.600><c> solving</c><00:01:38.200><c> for</c>
+
+00:01:38.469 --> 00:01:38.479 align:start position:0%
+HF so that's 3 feet we're solving for
+ 
+
+00:01:38.479 --> 00:01:40.149 align:start position:0%
+HF so that's 3 feet we're solving for
+the<00:01:38.640><c> friction</c><00:01:39.119><c> Factor</c><00:01:39.479><c> so</c><00:01:39.600><c> we</c><00:01:39.720><c> don't</c><00:01:39.960><c> have</c>
+
+00:01:40.149 --> 00:01:40.159 align:start position:0%
+the friction Factor so we don't have
+ 
+
+00:01:40.159 --> 00:01:43.749 align:start position:0%
+the friction Factor so we don't have
+that<00:01:40.439><c> yet</c><00:01:41.439><c> we</c><00:01:41.560><c> know</c><00:01:41.880><c> that</c><00:01:42.079><c> L</c>
+
+00:01:43.749 --> 00:01:43.759 align:start position:0%
+that yet we know that L
+ 
+
+00:01:43.759 --> 00:01:46.270 align:start position:0%
+that yet we know that L
+is<00:01:44.759><c> 500</c>
+
+00:01:46.270 --> 00:01:46.280 align:start position:0%
+is 500
+ 
+
+00:01:46.280 --> 00:01:48.749 align:start position:0%
+is 500
+ft<00:01:47.280><c> and</c>
+
+00:01:48.749 --> 00:01:48.759 align:start position:0%
+ft and
+ 
+
+00:01:48.759 --> 00:01:55.149 align:start position:0%
+ft and
+D<00:01:49.759><c> is</c><00:01:50.280><c> given</c><00:01:50.640><c> as</c><00:01:50.880><c> 1.5</c>
+
+00:01:55.149 --> 00:01:55.159 align:start position:0%
+ 
+ 
+
+00:01:55.159 --> 00:02:00.590 align:start position:0%
+ 
+ft<00:01:56.159><c> we</c><00:01:56.320><c> do</c><00:01:56.520><c> not</c><00:01:56.799><c> have</c><00:01:57.079><c> velocity</c><00:01:57.719><c> yet</c>
+
+00:02:00.590 --> 00:02:00.600 align:start position:0%
+ft we do not have velocity yet
+ 
+
+00:02:00.600 --> 00:02:03.950 align:start position:0%
+ft we do not have velocity yet
+and<00:02:00.840><c> then</c>
+
+00:02:03.950 --> 00:02:03.960 align:start position:0%
+ 
+ 
+
+00:02:03.960 --> 00:02:08.510 align:start position:0%
+ 
+32.2<00:02:04.960><c> fat</c><00:02:05.880><c> pers</c><00:02:06.200><c> second</c><00:02:06.759><c> squared</c><00:02:07.680><c> is</c><00:02:08.160><c> our</c>
+
+00:02:08.510 --> 00:02:08.520 align:start position:0%
+32.2 fat pers second squared is our
+ 
+
+00:02:08.520 --> 00:02:10.270 align:start position:0%
+32.2 fat pers second squared is our
+gravitational
+
+00:02:10.270 --> 00:02:10.280 align:start position:0%
+gravitational
+ 
+
+00:02:10.280 --> 00:02:12.949 align:start position:0%
+gravitational
+acceleration<00:02:11.280><c> this</c><00:02:11.400><c> is</c><00:02:11.599><c> just</c><00:02:11.760><c> a</c><00:02:12.000><c> good</c><00:02:12.640><c> value</c>
+
+00:02:12.949 --> 00:02:12.959 align:start position:0%
+acceleration this is just a good value
+ 
+
+00:02:12.959 --> 00:02:15.949 align:start position:0%
+acceleration this is just a good value
+to<00:02:13.239><c> have</c>
+
+00:02:15.949 --> 00:02:15.959 align:start position:0%
+ 
+ 
+
+00:02:15.959 --> 00:02:18.589 align:start position:0%
+ 
+memorized<00:02:16.959><c> So</c><00:02:17.400><c> currently</c><00:02:17.840><c> we</c><00:02:17.959><c> need</c><00:02:18.120><c> to</c><00:02:18.319><c> solve</c>
+
+00:02:18.589 --> 00:02:18.599 align:start position:0%
+memorized So currently we need to solve
+ 
+
+00:02:18.599 --> 00:02:22.550 align:start position:0%
+memorized So currently we need to solve
+for<00:02:18.800><c> V</c><00:02:19.680><c> what</c><00:02:19.840><c> can</c><00:02:19.959><c> we</c><00:02:20.120><c> do</c><00:02:20.319><c> to</c><00:02:20.519><c> get</c><00:02:21.080><c> that</c><00:02:22.080><c> we</c><00:02:22.239><c> know</c>
+
+00:02:22.550 --> 00:02:22.560 align:start position:0%
+for V what can we do to get that we know
+ 
+
+00:02:22.560 --> 00:02:25.589 align:start position:0%
+for V what can we do to get that we know
+that<00:02:22.760><c> there</c><00:02:22.920><c> is</c><00:02:23.080><c> a</c><00:02:23.239><c> flow</c><00:02:23.599><c> rate</c><00:02:24.599><c> and</c><00:02:25.000><c> we</c><00:02:25.200><c> know</c>
+
+00:02:25.589 --> 00:02:25.599 align:start position:0%
+that there is a flow rate and we know
+ 
+
+00:02:25.599 --> 00:02:28.589 align:start position:0%
+that there is a flow rate and we know
+that<00:02:25.879><c> there</c><00:02:26.160><c> is</c><00:02:26.519><c> a</c><00:02:26.959><c> diameter</c><00:02:27.959><c> so</c><00:02:28.120><c> in</c><00:02:28.239><c> this</c><00:02:28.400><c> case</c>
+
+00:02:28.589 --> 00:02:28.599 align:start position:0%
+that there is a diameter so in this case
+ 
+
+00:02:28.599 --> 00:02:31.910 align:start position:0%
+that there is a diameter so in this case
+it's<00:02:28.800><c> very</c><00:02:29.040><c> easy</c><00:02:29.319><c> for</c><00:02:29.560><c> us</c><00:02:30.040><c> we</c><00:02:30.160><c> can</c><00:02:30.360><c> simply</c><00:02:30.720><c> do</c><00:02:31.360><c> Q</c>
+
+00:02:31.910 --> 00:02:31.920 align:start position:0%
+it's very easy for us we can simply do Q
+ 
+
+00:02:31.920 --> 00:02:33.509 align:start position:0%
+it's very easy for us we can simply do Q
+=
+
+00:02:33.509 --> 00:02:33.519 align:start position:0%
+=
+ 
+
+00:02:33.519 --> 00:02:38.990 align:start position:0%
+=
+VA<00:02:34.519><c> solve</c><00:02:34.879><c> for</c><00:02:35.160><c> V</c><00:02:36.160><c> =</c><00:02:36.800><c> Q</c><00:02:37.400><c> over</c>
+
+00:02:38.990 --> 00:02:39.000 align:start position:0%
+VA solve for V = Q over
+ 
+
+00:02:39.000 --> 00:02:40.910 align:start position:0%
+VA solve for V = Q over
+a<00:02:40.000><c> this</c>
+
+00:02:40.910 --> 00:02:40.920 align:start position:0%
+a this
+ 
+
+00:02:40.920 --> 00:02:44.270 align:start position:0%
+a this
+equals<00:02:42.120><c> 15</c>
+
+00:02:44.270 --> 00:02:44.280 align:start position:0%
+equals 15
+ 
+
+00:02:44.280 --> 00:02:47.550 align:start position:0%
+equals 15
+CFS<00:02:45.280><c> area</c><00:02:45.599><c> of</c><00:02:45.720><c> a</c><00:02:45.920><c> circle</c><00:02:46.319><c> is</c><00:02:46.519><c> going</c><00:02:46.720><c> to</c>
+
+00:02:47.550 --> 00:02:47.560 align:start position:0%
+CFS area of a circle is going to
+ 
+
+00:02:47.560 --> 00:02:49.710 align:start position:0%
+CFS area of a circle is going to
+be
+
+00:02:49.710 --> 00:02:49.720 align:start position:0%
+be
+ 
+
+00:02:49.720 --> 00:02:54.390 align:start position:0%
+be
+Pi<00:02:50.800><c> 1.5</c><00:02:51.800><c> is</c><00:02:51.959><c> our</c>
+
+00:02:54.390 --> 00:02:54.400 align:start position:0%
+ 
+ 
+
+00:02:54.400 --> 00:02:56.790 align:start position:0%
+ 
+diameter<00:02:55.400><c> be</c>
+
+00:02:56.790 --> 00:02:56.800 align:start position:0%
+diameter be
+ 
+
+00:02:56.800 --> 00:03:01.589 align:start position:0%
+diameter be
+squared<00:02:57.800><c> over</c><00:02:58.159><c> 4</c>
+
+00:03:01.589 --> 00:03:01.599 align:start position:0%
+ 
+ 
+
+00:03:01.599 --> 00:03:06.990 align:start position:0%
+ 
+and<00:03:01.920><c> this</c><00:03:02.159><c> gives</c><00:03:02.480><c> us</c><00:03:03.280><c> just</c><00:03:03.680><c> about</c>
+
+00:03:06.990 --> 00:03:07.000 align:start position:0%
+ 
+ 
+
+00:03:07.000 --> 00:03:10.470 align:start position:0%
+ 
+8.5<00:03:08.000><c> feet</c><00:03:08.440><c> per</c><00:03:08.720><c> second</c>
+
+00:03:10.470 --> 00:03:10.480 align:start position:0%
+8.5 feet per second
+ 
+
+00:03:10.480 --> 00:03:16.589 align:start position:0%
+8.5 feet per second
+oops<00:03:11.480><c> which</c><00:03:11.840><c> we</c><00:03:12.000><c> can</c><00:03:12.239><c> plug</c><00:03:12.519><c> in</c><00:03:13.080><c> to</c><00:03:14.400><c> V</c><00:03:15.400><c> up</c><00:03:15.599><c> here</c>
+
+00:03:16.589 --> 00:03:16.599 align:start position:0%
+oops which we can plug in to V up here
+ 
+
+00:03:16.599 --> 00:03:19.550 align:start position:0%
+oops which we can plug in to V up here
+so<00:03:16.879><c> if</c><00:03:17.040><c> we</c><00:03:17.239><c> do</c>
+
+00:03:19.550 --> 00:03:19.560 align:start position:0%
+so if we do
+ 
+
+00:03:19.560 --> 00:03:23.910 align:start position:0%
+so if we do
+that<00:03:20.560><c> got</c>
+
+00:03:23.910 --> 00:03:23.920 align:start position:0%
+ 
+ 
+
+00:03:23.920 --> 00:03:26.430 align:start position:0%
+ 
+8.5<00:03:24.920><c> be</c><00:03:25.360><c> per</c>
+
+00:03:26.430 --> 00:03:26.440 align:start position:0%
+8.5 be per
+ 
+
+00:03:26.440 --> 00:03:30.110 align:start position:0%
+8.5 be per
+second<00:03:27.440><c> squared</c>
+
+00:03:30.110 --> 00:03:30.120 align:start position:0%
+second squared
+ 
+
+00:03:30.120 --> 00:03:32.509 align:start position:0%
+second squared
+so<00:03:30.360><c> solving</c><00:03:30.879><c> this</c><00:03:31.040><c> out</c><00:03:31.400><c> we</c><00:03:31.519><c> can</c><00:03:31.720><c> see</c><00:03:32.080><c> even</c><00:03:32.360><c> just</c>
+
+00:03:32.509 --> 00:03:32.519 align:start position:0%
+so solving this out we can see even just
+ 
+
+00:03:32.519 --> 00:03:34.830 align:start position:0%
+so solving this out we can see even just
+with<00:03:32.680><c> the</c><00:03:32.840><c> units</c><00:03:33.560><c> that</c><00:03:34.239><c> this</c><00:03:34.360><c> is</c><00:03:34.519><c> going</c><00:03:34.599><c> to</c><00:03:34.680><c> be</c>
+
+00:03:34.830 --> 00:03:34.840 align:start position:0%
+with the units that this is going to be
+ 
+
+00:03:34.840 --> 00:03:37.149 align:start position:0%
+with the units that this is going to be
+feet<00:03:35.159><c> squared</c><00:03:35.560><c> over</c><00:03:35.799><c> seconds</c><00:03:36.200><c> squared</c><00:03:36.799><c> all</c><00:03:36.920><c> of</c>
+
+00:03:37.149 --> 00:03:37.159 align:start position:0%
+feet squared over seconds squared all of
+ 
+
+00:03:37.159 --> 00:03:39.270 align:start position:0%
+feet squared over seconds squared all of
+that<00:03:37.400><c> over</c><00:03:37.879><c> feet</c><00:03:38.200><c> over</c><00:03:38.519><c> second</c><00:03:38.840><c> squared</c><00:03:39.200><c> so</c>
+
+00:03:39.270 --> 00:03:39.280 align:start position:0%
+that over feet over second squared so
+ 
+
+00:03:39.280 --> 00:03:40.990 align:start position:0%
+that over feet over second squared so
+we're<00:03:39.400><c> going</c><00:03:39.480><c> to</c><00:03:39.560><c> be</c><00:03:39.720><c> left</c><00:03:39.879><c> with</c><00:03:40.040><c> one</c><00:03:40.280><c> units</c><00:03:40.799><c> of</c>
+
+00:03:40.990 --> 00:03:41.000 align:start position:0%
+we're going to be left with one units of
+ 
+
+00:03:41.000 --> 00:03:44.869 align:start position:0%
+we're going to be left with one units of
+feet<00:03:41.560><c> here</c><00:03:42.560><c> these</c><00:03:42.760><c> two</c><00:03:42.920><c> are</c><00:03:43.120><c> going</c><00:03:43.319><c> to</c><00:03:43.879><c> cancel</c>
+
+00:03:44.869 --> 00:03:44.879 align:start position:0%
+feet here these two are going to cancel
+ 
+
+00:03:44.879 --> 00:03:47.270 align:start position:0%
+feet here these two are going to cancel
+which<00:03:45.040><c> means</c><00:03:45.959><c> we</c><00:03:46.080><c> are</c><00:03:46.239><c> only</c><00:03:46.599><c> going</c><00:03:46.799><c> to</c><00:03:46.920><c> be</c><00:03:47.080><c> left</c>
+
+00:03:47.270 --> 00:03:47.280 align:start position:0%
+which means we are only going to be left
+ 
+
+00:03:47.280 --> 00:03:49.229 align:start position:0%
+which means we are only going to be left
+with<00:03:47.439><c> feet</c><00:03:47.760><c> on</c><00:03:47.959><c> this</c><00:03:48.159><c> side</c><00:03:48.439><c> and</c><00:03:48.599><c> feet</c><00:03:48.959><c> over</c>
+
+00:03:49.229 --> 00:03:49.239 align:start position:0%
+with feet on this side and feet over
+ 
+
+00:03:49.239 --> 00:03:52.670 align:start position:0%
+with feet on this side and feet over
+here<00:03:49.599><c> that</c><00:03:49.720><c> will</c><00:03:50.080><c> cancel</c><00:03:51.080><c> Darcy</c><00:03:51.560><c> ypack</c><00:03:52.159><c> is</c><00:03:52.480><c> in</c>
+
+00:03:52.670 --> 00:03:52.680 align:start position:0%
+here that will cancel Darcy ypack is in
+ 
+
+00:03:52.680 --> 00:03:55.710 align:start position:0%
+here that will cancel Darcy ypack is in
+fact<00:03:52.879><c> a</c><00:03:53.040><c> unitless</c><00:03:53.760><c> value</c><00:03:54.760><c> and</c><00:03:55.040><c> if</c><00:03:55.159><c> we</c><00:03:55.280><c> were</c><00:03:55.480><c> to</c>
+
+00:03:55.710 --> 00:03:55.720 align:start position:0%
+fact a unitless value and if we were to
+ 
+
+00:03:55.720 --> 00:03:57.470 align:start position:0%
+fact a unitless value and if we were to
+solve<00:03:56.040><c> for</c><00:03:56.239><c> this</c><00:03:56.439><c> all</c><00:03:56.599><c> the</c><00:03:56.720><c> way</c>
+
+00:03:57.470 --> 00:03:57.480 align:start position:0%
+solve for this all the way
+ 
+
+00:03:57.480 --> 00:04:01.470 align:start position:0%
+solve for this all the way
+out<00:03:58.480><c> the</c><00:03:58.680><c> friction</c><00:03:59.239><c> Factor</c><00:03:59.799><c> is</c><00:04:00.000><c> going</c><00:04:00.280><c> to</c>
+
+00:04:01.470 --> 00:04:01.480 align:start position:0%
+out the friction Factor is going to
+ 
+
+00:04:01.480 --> 00:04:03.949 align:start position:0%
+out the friction Factor is going to
+be<00:04:02.480><c> just</c>
+
+00:04:03.949 --> 00:04:03.959 align:start position:0%
+be just
+ 
+
+00:04:03.959 --> 00:04:07.750 align:start position:0%
+be just
+about
+
+00:04:07.750 --> 00:04:07.760 align:start position:0%
+ 
+ 
+
+00:04:07.760 --> 00:04:10.869 align:start position:0%
+ 
+0.08<00:04:08.760><c> and</c><00:04:09.079><c> that</c><00:04:09.239><c> is</c><00:04:09.439><c> all</c><00:04:09.680><c> you</c><00:04:09.840><c> need</c><00:04:10.120><c> to</c><00:04:10.319><c> do</c><00:04:10.640><c> to</c>
+
+00:04:10.869 --> 00:04:10.879 align:start position:0%
+0.08 and that is all you need to do to
+ 
+
+00:04:10.879 --> 00:04:14.589 align:start position:0%
+0.08 and that is all you need to do to
+solve<00:04:11.319><c> this</c><00:04:11.959><c> problem</c><00:04:12.959><c> we</c><00:04:13.159><c> have</c><00:04:13.280><c> to</c><00:04:13.519><c> start</c><00:04:14.280><c> with</c>
+
+00:04:14.589 --> 00:04:14.599 align:start position:0%
+solve this problem we have to start with
+ 
+
+00:04:14.599 --> 00:04:16.189 align:start position:0%
+solve this problem we have to start with
+our<00:04:14.920><c> two</c>
+
+00:04:16.189 --> 00:04:16.199 align:start position:0%
+our two
+ 
+
+00:04:16.199 --> 00:04:18.870 align:start position:0%
+our two
+equations<00:04:17.199><c> we</c><00:04:17.400><c> have</c><00:04:17.519><c> to</c><00:04:17.799><c> recognize</c><00:04:18.560><c> that</c><00:04:18.720><c> the</c>
+
+00:04:18.870 --> 00:04:18.880 align:start position:0%
+equations we have to recognize that the
+ 
+
+00:04:18.880 --> 00:04:21.310 align:start position:0%
+equations we have to recognize that the
+3-foot<00:04:19.479><c> drop</c><00:04:19.840><c> is</c><00:04:20.000><c> our</c><00:04:20.239><c> head</c>
+
+00:04:21.310 --> 00:04:21.320 align:start position:0%
+3-foot drop is our head
+ 
+
+00:04:21.320 --> 00:04:24.310 align:start position:0%
+3-foot drop is our head
+loss<00:04:22.320><c> and</c><00:04:22.600><c> we</c><00:04:22.800><c> have</c><00:04:22.919><c> to</c><00:04:23.160><c> recognize</c><00:04:23.960><c> that</c><00:04:24.199><c> we</c>
+
+00:04:24.310 --> 00:04:24.320 align:start position:0%
+loss and we have to recognize that we
+ 
+
+00:04:24.320 --> 00:04:28.590 align:start position:0%
+loss and we have to recognize that we
+can<00:04:24.600><c> find</c><00:04:25.000><c> velocity</c><00:04:26.280><c> given</c><00:04:27.280><c> the</c><00:04:27.440><c> flow</c><00:04:27.800><c> rate</c>
+
+00:04:28.590 --> 00:04:28.600 align:start position:0%
+can find velocity given the flow rate
+ 
+
+00:04:28.600 --> 00:04:31.629 align:start position:0%
+can find velocity given the flow rate
+and<00:04:29.039><c> the</c><00:04:29.280><c> diameter</c><00:04:29.840><c> of</c><00:04:29.960><c> the</c>
+
+00:04:31.629 --> 00:04:31.639 align:start position:0%
+and the diameter of the
+ 
+
+00:04:31.639 --> 00:04:34.189 align:start position:0%
+and the diameter of the
+pipe<00:04:32.639><c> uh</c><00:04:32.759><c> but</c><00:04:32.960><c> yeah</c><00:04:33.199><c> that's</c><00:04:33.440><c> all</c><00:04:33.639><c> it</c><00:04:33.800><c> takes</c><00:04:34.039><c> to</c>
+
+00:04:34.189 --> 00:04:34.199 align:start position:0%
+pipe uh but yeah that's all it takes to
+ 
+
+00:04:34.199 --> 00:04:37.720 align:start position:0%
+pipe uh but yeah that's all it takes to
+solve<00:04:34.479><c> this</c><00:04:34.720><c> problem</c>
+

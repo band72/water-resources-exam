@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolvedIn6 • PE Exam Water Resources & Environmental Practice Problems</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- KaTeX for crisp mathematical formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo-group">
+        <div class="logo-badge">PE / 6</div>
+        <div class="logo-text">
+          <h1>SolvedIn6 • Water Resources PE Exam Practice</h1>
+          <p>99 Comprehensive Problems, Step-by-Step Solutions & Video Walkthroughs</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="btn btn-sm" title="Toggle Theme">
+          <span id="themeIcon">☀️</span> Light / Dark
+        </button>
+        <button id="practiceModeGlobalBtn" class="btn btn-sm" title="Toggle Practice Mode (Hides answers initially)">
+          🎯 Practice Mode: <span id="practiceStatusText">OFF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Study Progress Stats Banner -->
+  <section class="stats-banner">
+    <div class="stats-inner">
+      <div class="stat-pills">
+        <span class="stat-pill total">📚 <span id="statTotal">99</span> Total Problems</span>
+        <span class="stat-pill mastered">✅ <span id="statMastered">0</span> Mastered</span>
+        <span class="stat-pill review">⚠️ <span id="statReview">0</span> Needs Review</span>
+        <span class="stat-pill">⭐ <span id="statFavs">0</span> Bookmarked</span>
+      </div>
+      <div id="videoOfflineStats" style="color: var(--text-muted);">
+        🎥 Local Videos: <span id="localVideosCount">Loading...</span> / 99 Ready
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Controls Bar: Search & Filters -->
+    <section class="controls-bar">
+      <div class="search-row">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Search by problem #, topic, formula, or question keywords (e.g. 'Manning', 'Clarifier', '#24', 'BOD5', 'Aquifer')..."
+            autocomplete="off"
+          >
+          <span class="search-shortcut">/</span>
+        </div>
+      </div>
+
+      <!-- Series / Exam Playlist Tabs -->
+      <div class="series-tab-row" id="seriesTabContainer">
+        <button class="series-tab active" data-series="ALL">
+          All Problems <span class="tab-count" id="tabCountAll">129</span>
+        </button>
+        <button class="series-tab" data-series="Water Resources">
+          💧 Water Resources Playlist <span class="tab-count" id="tabCountWR">76</span>
+        </button>
+        <button class="series-tab" data-series="Environmental">
+          🌱 Environmental Playlist <span class="tab-count" id="tabCountEnv">65</span>
+        </button>
+        <button class="series-tab" data-series="Civil Breadth">
+          🏗️ Civil Breadth Playlist <span class="tab-count" id="tabCountBreadth">30</span>
+        </button>
+        <button class="series-tab" data-series="BOTH">
+          🔄 Shared Depth <span class="tab-count" id="tabCountBoth">42</span>
+        </button>
+      </div>
+
+      <!-- Topic Filter Pills -->
+      <div class="filter-row" id="topicFilterContainer">
+        <button class="filter-pill active" data-topic="ALL">All Categories</button>
+        <button class="filter-pill" data-topic="Transportation">Transportation</button>
+        <button class="filter-pill" data-topic="Water Treatment">Water Treatment</button>
+        <button class="filter-pill" data-topic="Wastewater Treatment">Wastewater Treatment</button>
+        <button class="filter-pill" data-topic="Hydraulics & Pipe Flow">Hydraulics & Pipe Flow</button>
+        <button class="filter-pill" data-topic="Hydrology & Stormwater">Hydrology & Stormwater</button>
+        <button class="filter-pill" data-topic="Groundwater & Wells">Groundwater & Wells</button>
+        <button class="filter-pill" data-topic="Structural Mechanics">Structural Mechanics</button>
+        <button class="filter-pill" data-topic="Geotechnical & Soils">Geotechnical & Soils</button>
+        <button class="filter-pill" data-topic="Construction & Project Planning">Construction & Planning</button>
+        <button class="filter-pill" data-topic="Environmental Engineering">Air, Soil & Health Risk</button>
+        <button class="filter-pill" data-topic="Engineering Economics">Engineering Economics</button>
+      </div>
+
+      <!-- Sub-controls: Status Filter & Sorting -->
+      <div class="sub-controls">
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <span>Showing <strong id="visibleCount">129</strong> problems</span>
+          <select id="statusFilterSelect">
+            <option value="ALL">All Study Statuses</option>
+            <option value="FAVORITES">⭐ Bookmarked Only</option>
+            <option value="MASTERED">✅ Mastered</option>
+            <option value="REVIEW">⚠️ Needs Review</option>
+            <option value="UNATTEMPTED">⭕ Unattempted</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <label for="sortSelect">Sort:</label>
+          <select id="sortSelect">
+            <option value="num-asc">Problem / Video # (#1 → #129)</option>
+            <option value="num-desc">Problem / Video # (#129 → #1)</option>
+            <option value="exam-asc">Exam Playlist Sequence</option>
+            <option value="duration-desc">Duration (Longest First)</option>
+            <option value="duration-asc">Duration (Shortest First)</option>
+            <option value="title-asc">Title (A → Z)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems Grid -->
+    <section class="problems-grid" id="problemsGrid">
+      <!-- Problem Cards dynamically rendered here -->
+    </section>
+
+  </main>
+
+  <!-- Problem Detail Modal -->
+  <div class="modal-backdrop" id="problemModal" aria-hidden="true">
+    <div class="modal-container">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span id="modalProbNum" class="prob-num-badge">Problem #1</span>
+          <span id="modalCategory" class="badge category">Water Treatment</span>
+          <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 700;">Problem Title</h2>
+        </div>
+        <div class="modal-header-right">
+          <select id="modalStatusSelect" style="padding: 0.25rem 0.5rem; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px;">
+            <option value="UNATTEMPTED">⭕ Unattempted</option>
+            <option value="MASTERED">✅ Mastered</option>
+            <option value="REVIEW">⚠️ Needs Review</option>
+          </select>
+          <button id="modalFavBtn" class="btn btn-sm" title="Bookmark Problem">⭐</button>
+          <button id="modalCloseBtn" class="btn btn-sm" style="font-size: 1.1rem; line-height: 1;">✕</button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Two-Column Layout) -->
+      <div class="modal-body">
+        
+        <!-- Left Column: Video & Synced Transcript -->
+        <div class="video-column">
+          <div class="video-player-container" id="videoContainer">
+            <!-- Either HTML5 Video or YouTube iframe injected dynamically -->
+          </div>
+
+          <!-- Player Controls & Source Switcher -->
+          <div class="video-controls-bar">
+            <div class="source-toggle">
+              <button id="srcLocalBtn" class="source-btn active">Offline MP4</button>
+              <button id="srcYoutubeBtn" class="source-btn">YouTube Embed</button>
+            </div>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="btn btn-sm speed-btn" data-speed="1">1x</button>
+              <button class="btn btn-sm speed-btn" data-speed="1.25">1.25x</button>
+              <button class="btn btn-sm speed-btn" data-speed="1.5">1.5x</button>
+              <button class="btn btn-sm speed-btn" data-speed="2">2x</button>
+            </div>
+          </div>
+
+          <!-- Interactive Transcript with Click-to-Seek -->
+          <div class="transcript-panel">
+            <div class="transcript-header">
+              <span>Synchronized Transcript</span>
+              <input type="text" id="transcriptSearchInput" class="transcript-search" placeholder="Find in video...">
+            </div>
+            <div class="transcript-list" id="transcriptList">
+              <!-- Transcript segments injected here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Problem Statement, NCEES References & Step-by-Step Solution -->
+        <div class="solution-column">
+          
+          <!-- Problem Statement -->
+          <div class="problem-statement-card">
+            <div class="problem-statement-title">Problem Statement</div>
+            <div class="problem-statement-text" id="modalStatement">
+              Problem prompt text will appear here.
+            </div>
+          </div>
+
+          <!-- NCEES Handbook Search Keywords -->
+          <div class="ncees-box">
+            <div class="ncees-title">🔍 NCEES Handbook Search Terms (Ctrl+F)</div>
+            <div class="ncees-tags" id="modalNceesTerms">
+              <!-- NCEES tags injected here -->
+            </div>
+          </div>
+
+          <!-- Solution Header & Practice Mode Toggle -->
+          <div class="solution-header-bar">
+            <h3 style="font-size: 1.05rem; font-weight: 700;">Detailed Step-by-Step Solution</h3>
+            <button id="toggleModalSolutionBtn" class="btn btn-sm">
+              👁️ Show / Hide Solution
+            </button>
+          </div>
+
+          <!-- Detailed Steps Container -->
+          <div class="solution-section" id="modalStepsContainer">
+            <!-- Step cards injected here -->
+          </div>
+
+          <!-- Final Answer Card -->
+          <div class="final-answer-card" id="modalAnswerCard">
+            <span class="final-answer-label">🎯 Final Answer</span>
+            <span class="final-answer-value" id="modalAnswerVal">3.3 Hours</span>
+          </div>
+
+          <!-- Key Takeaway & Exam Tips Card -->
+          <div class="takeaway-card" id="modalTakeawayCard">
+            <div class="takeaway-title">💡 PE Exam Tip & Key Takeaway</div>
+            <div class="takeaway-text" id="modalTakeawayText">
+              Exam tip text here.
+            </div>
+          </div>
+
+          <!-- Prev / Next Navigation -->
+          <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+            <button id="prevProbBtn" class="btn">← Previous Problem</button>
+            <button id="copySolutionBtn" class="btn">📋 Copy Problem & Solution</button>
+            <button id="nextProbBtn" class="btn">Next Problem →</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    SolvedIn6 PE Exam Practice Problem Portal • Water Resources & Environmental Engineering • Built for PE Licensure Preparation
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

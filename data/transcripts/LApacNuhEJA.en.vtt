@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.000
+Continuous daily traffic counts are recorded on Street 1 and are given in the following table.
+
+00:00:08.000 --> 00:00:17.000
+A similar street on the other side of town also exists Street 2, where continuous traffic counts were taken on a Thursday.
+
+00:00:17.000 --> 00:00:28.000
+If the traffic is assumed to be proportional between these streets each day of the week, estimate the average daily traffic volume over the week for Street 2.
+
+00:00:28.000 --> 00:00:41.000
+So this problem is pretty straightforward. We have a week's worth of traffic counts for Street 1 and we are being asked to find the average daily traffic volume for Street 2.
+
+00:00:41.000 --> 00:00:51.000
+Section 5.1.3.1 of the reference manual covers average daily traffic values but doesn't give us a specific equation to use.
+
+00:00:51.000 --> 00:01:03.000
+In this case, we need to recognize that the average for the week is going to be a regular average, summing the daily volumes in Street 1 and dividing by the number of days in a week.
+
+00:01:03.000 --> 00:01:16.000
+Since the problem notes that the traffic is assumed to be proportional between these streets on each day of the week, all we need to do is find the ratio of Street 2 to Street 1 on Thursday.
+
+00:01:16.000 --> 00:01:23.000
+The day when measurements were taken on both streets and then adjust Street 1's average daily volume accordingly.
+
+00:01:23.000 --> 00:01:25.000
+So let's get to it.
+
+00:01:25.000 --> 00:01:37.000
+The first thing we're going to do is get the ratio between Street 2 and Street 1 on Thursday.
+
+00:01:37.000 --> 00:01:54.000
+So that's going to be 8756 over 10842, which is going to give us about 0.8.
+
+00:01:54.000 --> 00:02:07.000
+Next, we can find the average daily traffic volume for Street 1.
+
+00:02:07.000 --> 00:02:16.000
+And that's going to be a sum of the following days of the week divided by the number of days in the week.
+
+00:02:16.000 --> 00:02:44.000
+So we're going to do 76433 plus 11, 11, 10 plus 8176 plus 9632 plus 10, 842 plus 12, 3, 2, 0, plus 9405 plus 8176 plus 9.
+
+00:02:44.000 --> 00:03:05.000
+Over 7 and that's going to give us 69128 over 7, which is going to give us 9875.
+
+00:03:05.000 --> 00:03:09.000
+So that's the ADT for Street 1.
+
+00:03:09.000 --> 00:03:28.000
+Assuming proportionality between the two streets like the problem mentions, all we need to do now is multiply the ratio for Thursday that we came up with by Street 1's ADT.
+
+00:03:28.000 --> 00:03:42.000
+And that will give us 7975, which is the ADT for Street 2.
+
+00:03:42.000 --> 00:03:47.000
+And that's all it takes to solve this problem.

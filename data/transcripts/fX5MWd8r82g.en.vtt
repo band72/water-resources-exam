@@ -1,0 +1,1328 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.480 --> 00:00:02.790 align:start position:0%
+ 
+In<00:00:00.719><c> this</c><00:00:00.960><c> problem,</c><00:00:01.600><c> a</c><00:00:01.839><c> membrane</c><00:00:02.399><c> lined</c>
+
+00:00:02.790 --> 00:00:02.800 align:start position:0%
+In this problem, a membrane lined
+ 
+
+00:00:02.800 --> 00:00:05.430 align:start position:0%
+In this problem, a membrane lined
+landfill<00:00:03.360><c> generates</c><00:00:03.760><c> a</c><00:00:04.000><c> peak</c><00:00:04.319><c> leate</c><00:00:04.880><c> flow</c><00:00:05.120><c> of</c>
+
+00:00:05.430 --> 00:00:05.440 align:start position:0%
+landfill generates a peak leate flow of
+ 
+
+00:00:05.440 --> 00:00:08.790 align:start position:0%
+landfill generates a peak leate flow of
+1<00:00:05.759><c> CFS</c><00:00:06.560><c> that</c><00:00:06.799><c> must</c><00:00:07.040><c> be</c><00:00:07.200><c> conveyed</c><00:00:07.919><c> in</c><00:00:08.240><c> a</c><00:00:08.400><c> full</c>
+
+00:00:08.790 --> 00:00:08.800 align:start position:0%
+1 CFS that must be conveyed in a full
+ 
+
+00:00:08.800 --> 00:00:12.709 align:start position:0%
+1 CFS that must be conveyed in a full
+flow<00:00:09.280><c> HDP</c><00:00:10.400><c> circular</c><00:00:10.880><c> pipe.</c><00:00:12.240><c> Manning's</c>
+
+00:00:12.709 --> 00:00:12.719 align:start position:0%
+flow HDP circular pipe. Manning's
+ 
+
+00:00:12.719 --> 00:00:16.470 align:start position:0%
+flow HDP circular pipe. Manning's
+roughness<00:00:13.440><c> n=</c><00:00:14.400><c> 0.01</c>
+
+00:00:16.470 --> 00:00:16.480 align:start position:0%
+roughness n= 0.01
+ 
+
+00:00:16.480 --> 00:00:20.150 align:start position:0%
+roughness n= 0.01
+and<00:00:16.800><c> the</c><00:00:16.960><c> pipe</c><00:00:17.279><c> slope</c><00:00:18.000><c> is</c><00:00:18.400><c> 1%.</c>
+
+00:00:20.150 --> 00:00:20.160 align:start position:0%
+and the pipe slope is 1%.
+ 
+
+00:00:20.160 --> 00:00:22.390 align:start position:0%
+and the pipe slope is 1%.
+The<00:00:20.400><c> design</c><00:00:20.800><c> also</c><00:00:21.119><c> requires</c><00:00:21.600><c> that</c><00:00:21.840><c> the</c><00:00:22.080><c> flow</c>
+
+00:00:22.390 --> 00:00:22.400 align:start position:0%
+The design also requires that the flow
+ 
+
+00:00:22.400 --> 00:00:25.990 align:start position:0%
+The design also requires that the flow
+velocity<00:00:22.960><c> when</c><00:00:23.199><c> conveying</c><00:00:23.760><c> 1</c><00:00:24.000><c> cfs</c><00:00:24.960><c> not</c><00:00:25.279><c> exceed</c>
+
+00:00:25.990 --> 00:00:26.000 align:start position:0%
+velocity when conveying 1 cfs not exceed
+ 
+
+00:00:26.000 --> 00:00:27.990 align:start position:0%
+velocity when conveying 1 cfs not exceed
+5<00:00:26.240><c> ft</c><00:00:26.480><c> pers.</c>
+
+00:00:27.990 --> 00:00:28.000 align:start position:0%
+5 ft pers.
+ 
+
+00:00:28.000 --> 00:00:29.750 align:start position:0%
+5 ft pers.
+Which<00:00:28.240><c> of</c><00:00:28.320><c> the</c><00:00:28.560><c> following</c><00:00:28.960><c> nominal</c><00:00:29.439><c> pipe</c>
+
+00:00:29.750 --> 00:00:29.760 align:start position:0%
+Which of the following nominal pipe
+ 
+
+00:00:29.760 --> 00:00:32.229 align:start position:0%
+Which of the following nominal pipe
+diameters<00:00:30.400><c> in</c><00:00:30.640><c> inches</c><00:00:31.119><c> is</c><00:00:31.359><c> the</c><00:00:31.519><c> smallest</c><00:00:31.920><c> that</c>
+
+00:00:32.229 --> 00:00:32.239 align:start position:0%
+diameters in inches is the smallest that
+ 
+
+00:00:32.239 --> 00:00:34.389 align:start position:0%
+diameters in inches is the smallest that
+satisfies<00:00:32.800><c> both</c><00:00:33.040><c> the</c><00:00:33.280><c> flow</c><00:00:33.520><c> and</c><00:00:33.760><c> the</c><00:00:33.920><c> velocity</c>
+
+00:00:34.389 --> 00:00:34.399 align:start position:0%
+satisfies both the flow and the velocity
+ 
+
+00:00:34.399 --> 00:00:37.430 align:start position:0%
+satisfies both the flow and the velocity
+constraints?
+
+00:00:37.430 --> 00:00:37.440 align:start position:0%
+ 
+ 
+
+00:00:37.440 --> 00:00:39.750 align:start position:0%
+ 
+So<00:00:37.680><c> in</c><00:00:37.920><c> theory,</c><00:00:38.399><c> this</c><00:00:38.719><c> is</c><00:00:38.879><c> a</c><00:00:39.120><c> problem</c><00:00:39.440><c> that</c>
+
+00:00:39.750 --> 00:00:39.760 align:start position:0%
+So in theory, this is a problem that
+ 
+
+00:00:39.760 --> 00:00:42.790 align:start position:0%
+So in theory, this is a problem that
+could<00:00:40.000><c> be</c><00:00:40.559><c> on</c><00:00:40.960><c> either</c><00:00:41.280><c> the</c><00:00:41.520><c> water</c><00:00:42.239><c> resources</c>
+
+00:00:42.790 --> 00:00:42.800 align:start position:0%
+could be on either the water resources
+ 
+
+00:00:42.800 --> 00:00:45.350 align:start position:0%
+could be on either the water resources
+or<00:00:43.040><c> the</c><00:00:43.280><c> environmental</c><00:00:43.840><c> exam,</c><00:00:44.800><c> but</c><00:00:45.120><c> given</c>
+
+00:00:45.350 --> 00:00:45.360 align:start position:0%
+or the environmental exam, but given
+ 
+
+00:00:45.360 --> 00:00:48.389 align:start position:0%
+or the environmental exam, but given
+that<00:00:45.520><c> it's</c><00:00:45.920><c> landfill</c><00:00:46.559><c> lee</c><00:00:47.200><c> related,</c><00:00:47.840><c> it's</c>
+
+00:00:48.389 --> 00:00:48.399 align:start position:0%
+that it's landfill lee related, it's
+ 
+
+00:00:48.399 --> 00:00:49.910 align:start position:0%
+that it's landfill lee related, it's
+much<00:00:48.719><c> more</c><00:00:48.879><c> likely</c><00:00:49.120><c> that</c><00:00:49.360><c> it's</c><00:00:49.600><c> going</c><00:00:49.680><c> to</c><00:00:49.840><c> be</c>
+
+00:00:49.910 --> 00:00:49.920 align:start position:0%
+much more likely that it's going to be
+ 
+
+00:00:49.920 --> 00:00:52.630 align:start position:0%
+much more likely that it's going to be
+on<00:00:50.079><c> the</c><00:00:50.239><c> environmental</c><00:00:50.800><c> exam.</c><00:00:52.079><c> So,</c><00:00:52.320><c> we're</c>
+
+00:00:52.630 --> 00:00:52.640 align:start position:0%
+on the environmental exam. So, we're
+ 
+
+00:00:52.640 --> 00:00:55.830 align:start position:0%
+on the environmental exam. So, we're
+going<00:00:52.800><c> to</c><00:00:53.039><c> use</c><00:00:53.760><c> the</c><00:00:54.079><c> equation</c><00:00:54.559><c> from</c><00:00:55.360><c> that</c>
+
+00:00:55.830 --> 00:00:55.840 align:start position:0%
+going to use the equation from that
+ 
+
+00:00:55.840 --> 00:00:58.630 align:start position:0%
+going to use the equation from that
+exam's<00:00:56.320><c> reference</c><00:00:56.719><c> manual.</c>
+
+00:00:58.630 --> 00:00:58.640 align:start position:0%
+exam's reference manual.
+ 
+
+00:00:58.640 --> 00:01:00.549 align:start position:0%
+exam's reference manual.
+So,<00:00:58.800><c> if</c><00:00:58.960><c> you</c><00:00:59.120><c> search</c><00:00:59.359><c> Manning,</c><00:01:00.239><c> this</c><00:01:00.399><c> will</c>
+
+00:01:00.549 --> 00:01:00.559 align:start position:0%
+So, if you search Manning, this will
+ 
+
+00:01:00.559 --> 00:01:03.189 align:start position:0%
+So, if you search Manning, this will
+bring<00:01:00.640><c> you</c><00:01:00.800><c> to</c><00:01:01.039><c> chapter</c><00:01:01.440><c> 1,</c><00:01:02.480><c> the</c><00:01:02.719><c> Manning's</c>
+
+00:01:03.189 --> 00:01:03.199 align:start position:0%
+bring you to chapter 1, the Manning's
+ 
+
+00:01:03.199 --> 00:01:06.230 align:start position:0%
+bring you to chapter 1, the Manning's
+equation<00:01:03.840><c> on</c><00:01:04.159><c> page</c><00:01:04.400><c> 9.</c><00:01:05.519><c> And</c><00:01:05.680><c> that's</c><00:01:06.000><c> going</c><00:01:06.080><c> to</c>
+
+00:01:06.230 --> 00:01:06.240 align:start position:0%
+equation on page 9. And that's going to
+ 
+
+00:01:06.240 --> 00:01:10.390 align:start position:0%
+equation on page 9. And that's going to
+be<00:01:06.400><c> equal</c><00:01:06.720><c> to</c><00:01:06.960><c> V</c><00:01:07.600><c> =</c><00:01:08.000><c> K</c><00:01:08.400><c> /</c><00:01:08.720><c> N</c><00:01:09.439><c> *</c><00:01:09.600><c> the</c><00:01:09.840><c> hydraulic</c>
+
+00:01:10.390 --> 00:01:10.400 align:start position:0%
+be equal to V = K / N * the hydraulic
+ 
+
+00:01:10.400 --> 00:01:12.950 align:start position:0%
+be equal to V = K / N * the hydraulic
+radius<00:01:11.040><c> to</c><00:01:11.200><c> 2/3*</c>
+
+00:01:12.950 --> 00:01:12.960 align:start position:0%
+radius to 2/3*
+ 
+
+00:01:12.960 --> 00:01:15.990 align:start position:0%
+radius to 2/3*
+the<00:01:13.200><c> slope</c><00:01:13.520><c> raised</c><00:01:13.760><c> to</c><00:01:13.840><c> the</c><00:01:14.000><c> 1/2.</c>
+
+00:01:15.990 --> 00:01:16.000 align:start position:0%
+the slope raised to the 1/2.
+ 
+
+00:01:16.000 --> 00:01:20.149 align:start position:0%
+the slope raised to the 1/2.
+If<00:01:16.240><c> we</c><00:01:16.479><c> keep</c><00:01:16.640><c> in</c><00:01:16.880><c> mind</c><00:01:17.200><c> that</c><00:01:17.680><c> Q=</c><00:01:18.479><c> VA</c>
+
+00:01:20.149 --> 00:01:20.159 align:start position:0%
+If we keep in mind that Q= VA
+ 
+
+00:01:20.159 --> 00:01:23.670 align:start position:0%
+If we keep in mind that Q= VA
+and<00:01:20.640><c> K=</c><00:01:21.520><c> 1.486</c>
+
+00:01:23.670 --> 00:01:23.680 align:start position:0%
+and K= 1.486
+ 
+
+00:01:23.680 --> 00:01:26.550 align:start position:0%
+and K= 1.486
+for<00:01:24.080><c> US</c><00:01:24.479><c> units,</c>
+
+00:01:26.550 --> 00:01:26.560 align:start position:0%
+for US units,
+ 
+
+00:01:26.560 --> 00:01:30.630 align:start position:0%
+for US units,
+we<00:01:26.880><c> can</c><00:01:27.040><c> further</c><00:01:27.920><c> expand</c><00:01:28.320><c> on</c><00:01:28.560><c> this</c><00:01:28.799><c> equation.</c>
+
+00:01:30.630 --> 00:01:30.640 align:start position:0%
+we can further expand on this equation.
+ 
+
+00:01:30.640 --> 00:01:32.630 align:start position:0%
+we can further expand on this equation.
+So<00:01:30.960><c> instead</c><00:01:31.200><c> of</c><00:01:31.360><c> solving</c><00:01:31.759><c> for</c><00:01:31.920><c> V,</c><00:01:32.320><c> we</c><00:01:32.560><c> can</c>
+
+00:01:32.630 --> 00:01:32.640 align:start position:0%
+So instead of solving for V, we can
+ 
+
+00:01:32.640 --> 00:01:35.350 align:start position:0%
+So instead of solving for V, we can
+instead<00:01:33.119><c> solve</c><00:01:33.439><c> for</c><00:01:33.680><c> Q</c>
+
+00:01:35.350 --> 00:01:35.360 align:start position:0%
+instead solve for Q
+ 
+
+00:01:35.360 --> 00:01:38.390 align:start position:0%
+instead solve for Q
+by<00:01:35.680><c> adding</c><00:01:36.000><c> the</c><00:01:36.240><c> area</c><00:01:36.720><c> term</c><00:01:37.520><c> into</c><00:01:37.920><c> Manning's</c>
+
+00:01:38.390 --> 00:01:38.400 align:start position:0%
+by adding the area term into Manning's
+ 
+
+00:01:38.400 --> 00:01:40.550 align:start position:0%
+by adding the area term into Manning's
+equation.<00:01:39.280><c> This</c><00:01:39.520><c> is</c><00:01:39.680><c> pretty</c><00:01:40.000><c> common,</c><00:01:40.400><c> so</c>
+
+00:01:40.550 --> 00:01:40.560 align:start position:0%
+equation. This is pretty common, so
+ 
+
+00:01:40.560 --> 00:01:43.749 align:start position:0%
+equation. This is pretty common, so
+you've<00:01:40.799><c> probably</c><00:01:41.119><c> already</c><00:01:41.360><c> seen</c><00:01:41.600><c> it</c><00:01:41.759><c> before.</c>
+
+00:01:43.749 --> 00:01:43.759 align:start position:0%
+you've probably already seen it before.
+ 
+
+00:01:43.759 --> 00:01:47.590 align:start position:0%
+you've probably already seen it before.
+And<00:01:43.920><c> it's</c><00:01:44.159><c> going</c><00:01:44.320><c> to</c><00:01:44.479><c> be</c><00:01:44.640><c> Q</c><00:01:45.119><c> =</c><00:01:45.360><c> KN</c><00:01:46.640><c> *</c><00:01:46.880><c> the</c><00:01:47.200><c> area</c>
+
+00:01:47.590 --> 00:01:47.600 align:start position:0%
+And it's going to be Q = KN * the area
+ 
+
+00:01:47.600 --> 00:01:50.069 align:start position:0%
+And it's going to be Q = KN * the area
+now*<00:01:48.399><c> the</c><00:01:48.560><c> hydraulic</c><00:01:49.119><c> radius</c><00:01:49.600><c> raised</c><00:01:49.840><c> to</c><00:01:50.000><c> the</c>
+
+00:01:50.069 --> 00:01:50.079 align:start position:0%
+now* the hydraulic radius raised to the
+ 
+
+00:01:50.079 --> 00:01:56.149 align:start position:0%
+now* the hydraulic radius raised to the
+2/3<00:01:50.799><c> *</c><00:01:50.960><c> the</c><00:01:51.200><c> slope</c><00:01:51.520><c> to</c><00:01:51.600><c> the</c><00:01:51.759><c> 1/2.</c>
+
+00:01:56.149 --> 00:01:56.159 align:start position:0%
+ 
+ 
+
+00:01:56.159 --> 00:01:58.310 align:start position:0%
+ 
+Furthermore,<00:01:56.880><c> we</c><00:01:57.200><c> can</c><00:01:57.520><c> identify</c><00:01:57.840><c> what</c><00:01:58.079><c> the</c>
+
+00:01:58.310 --> 00:01:58.320 align:start position:0%
+Furthermore, we can identify what the
+ 
+
+00:01:58.320 --> 00:02:00.469 align:start position:0%
+Furthermore, we can identify what the
+minimum<00:01:58.719><c> required</c><00:01:59.280><c> cross-sectional</c><00:02:00.159><c> area</c>
+
+00:02:00.469 --> 00:02:00.479 align:start position:0%
+minimum required cross-sectional area
+ 
+
+00:02:00.479 --> 00:02:03.109 align:start position:0%
+minimum required cross-sectional area
+would<00:02:00.719><c> be</c><00:02:00.880><c> for</c><00:02:01.119><c> this</c><00:02:01.280><c> problem</c><00:02:02.320><c> if</c><00:02:02.560><c> we</c><00:02:02.799><c> divide</c>
+
+00:02:03.109 --> 00:02:03.119 align:start position:0%
+would be for this problem if we divide
+ 
+
+00:02:03.119 --> 00:02:06.950 align:start position:0%
+would be for this problem if we divide
+the<00:02:03.360><c> peak</c><00:02:03.759><c> leate</c><00:02:04.399><c> flow</c><00:02:04.799><c> of</c><00:02:05.119><c> 1</c><00:02:05.360><c> cfs</c><00:02:06.479><c> by</c><00:02:06.719><c> the</c>
+
+00:02:06.950 --> 00:02:06.960 align:start position:0%
+the peak leate flow of 1 cfs by the
+ 
+
+00:02:06.960 --> 00:02:12.550 align:start position:0%
+the peak leate flow of 1 cfs by the
+maximum<00:02:07.600><c> allowable</c><00:02:08.560><c> velocity</c><00:02:09.200><c> of</c><00:02:09.520><c> 5</c><00:02:09.759><c> ft</c><00:02:10.000><c> pers.</c>
+
+00:02:12.550 --> 00:02:12.560 align:start position:0%
+maximum allowable velocity of 5 ft pers.
+ 
+
+00:02:12.560 --> 00:02:14.470 align:start position:0%
+maximum allowable velocity of 5 ft pers.
+And<00:02:12.800><c> as</c><00:02:13.040><c> we</c><00:02:13.200><c> can</c><00:02:13.360><c> see</c><00:02:13.520><c> here,</c><00:02:13.840><c> the</c><00:02:14.080><c> minimum</c>
+
+00:02:14.470 --> 00:02:14.480 align:start position:0%
+And as we can see here, the minimum
+ 
+
+00:02:14.480 --> 00:02:19.830 align:start position:0%
+And as we can see here, the minimum
+required<00:02:15.040><c> area</c><00:02:16.319><c> of</c><00:02:16.560><c> the</c><00:02:16.800><c> pipe</c><00:02:17.200><c> would</c><00:02:17.520><c> be</c><00:02:17.840><c> 0.2</c>
+
+00:02:19.830 --> 00:02:19.840 align:start position:0%
+required area of the pipe would be 0.2
+ 
+
+00:02:19.840 --> 00:02:23.190 align:start position:0%
+required area of the pipe would be 0.2
+square<00:02:20.160><c> ft.</c>
+
+00:02:23.190 --> 00:02:23.200 align:start position:0%
+ 
+ 
+
+00:02:23.200 --> 00:02:25.510 align:start position:0%
+ 
+So<00:02:23.440><c> now</c><00:02:23.599><c> that</c><00:02:23.760><c> we've</c><00:02:24.080><c> established</c><00:02:24.959><c> which</c><00:02:25.200><c> form</c>
+
+00:02:25.510 --> 00:02:25.520 align:start position:0%
+So now that we've established which form
+ 
+
+00:02:25.520 --> 00:02:27.830 align:start position:0%
+So now that we've established which form
+of<00:02:25.680><c> Manning's</c><00:02:26.160><c> equation</c><00:02:26.560><c> we</c><00:02:26.800><c> need</c><00:02:26.959><c> to</c><00:02:27.120><c> use</c>
+
+00:02:27.830 --> 00:02:27.840 align:start position:0%
+of Manning's equation we need to use
+ 
+
+00:02:27.840 --> 00:02:29.670 align:start position:0%
+of Manning's equation we need to use
+given<00:02:28.160><c> the</c><00:02:28.480><c> types</c><00:02:28.800><c> of</c><00:02:28.959><c> terms</c><00:02:29.280><c> we</c><00:02:29.520><c> have</c>
+
+00:02:29.670 --> 00:02:29.680 align:start position:0%
+given the types of terms we have
+ 
+
+00:02:29.680 --> 00:02:32.390 align:start position:0%
+given the types of terms we have
+available<00:02:30.080><c> to</c><00:02:30.400><c> us,</c><00:02:31.360><c> we</c><00:02:31.599><c> can</c><00:02:31.760><c> write</c><00:02:31.920><c> these</c><00:02:32.239><c> out</c>
+
+00:02:32.390 --> 00:02:32.400 align:start position:0%
+available to us, we can write these out
+ 
+
+00:02:32.400 --> 00:02:34.949 align:start position:0%
+available to us, we can write these out
+and<00:02:32.640><c> begin</c><00:02:32.800><c> to</c><00:02:33.040><c> fill</c><00:02:33.280><c> them</c><00:02:33.360><c> in.</c><00:02:34.480><c> We</c><00:02:34.720><c> can</c>
+
+00:02:34.949 --> 00:02:34.959 align:start position:0%
+and begin to fill them in. We can
+ 
+
+00:02:34.959 --> 00:02:38.150 align:start position:0%
+and begin to fill them in. We can
+experiment<00:02:35.680><c> to</c><00:02:36.000><c> see</c><00:02:36.319><c> which</c><00:02:36.720><c> pipe</c><00:02:37.040><c> sizes</c><00:02:37.840><c> meet</c>
+
+00:02:38.150 --> 00:02:38.160 align:start position:0%
+experiment to see which pipe sizes meet
+ 
+
+00:02:38.160 --> 00:02:41.030 align:start position:0%
+experiment to see which pipe sizes meet
+the<00:02:38.400><c> criteria</c><00:02:39.040><c> described</c><00:02:39.519><c> above</c><00:02:40.319><c> by</c><00:02:40.640><c> simply</c>
+
+00:02:41.030 --> 00:02:41.040 align:start position:0%
+the criteria described above by simply
+ 
+
+00:02:41.040 --> 00:02:43.430 align:start position:0%
+the criteria described above by simply
+plugging<00:02:41.360><c> in</c><00:02:41.920><c> the</c><00:02:42.160><c> diameter</c><00:02:42.640><c> of</c><00:02:42.800><c> those</c><00:02:43.040><c> pipes</c>
+
+00:02:43.430 --> 00:02:43.440 align:start position:0%
+plugging in the diameter of those pipes
+ 
+
+00:02:43.440 --> 00:02:47.350 align:start position:0%
+plugging in the diameter of those pipes
+into<00:02:43.760><c> Manning's</c><00:02:44.239><c> equation.</c>
+
+00:02:47.350 --> 00:02:47.360 align:start position:0%
+ 
+ 
+
+00:02:47.360 --> 00:02:52.150 align:start position:0%
+ 
+So<00:02:47.599><c> we</c><00:02:47.840><c> can</c><00:02:48.000><c> see</c><00:02:48.160><c> that</c><00:02:48.480><c> Q=</c><00:02:49.519><c> 1.486</c>
+
+00:02:52.150 --> 00:02:52.160 align:start position:0%
+So we can see that Q= 1.486
+ 
+
+00:02:52.160 --> 00:02:56.470 align:start position:0%
+So we can see that Q= 1.486
+over
+
+00:02:56.470 --> 00:02:56.480 align:start position:0%
+ 
+ 
+
+00:02:56.480 --> 00:03:02.630 align:start position:0%
+ 
+Manning<00:02:56.959><c> Zen</c><00:02:57.280><c> of</c><00:02:57.599><c> 0.01</c><00:02:58.239><c> 01</c>
+
+00:03:02.630 --> 00:03:02.640 align:start position:0%
+ 
+ 
+
+00:03:02.640 --> 00:03:04.710 align:start position:0%
+ 
+times<00:03:02.879><c> the</c><00:03:03.200><c> equation</c><00:03:03.599><c> for</c><00:03:03.920><c> area</c><00:03:04.319><c> of</c><00:03:04.480><c> a</c>
+
+00:03:04.710 --> 00:03:04.720 align:start position:0%
+times the equation for area of a
+ 
+
+00:03:04.720 --> 00:03:07.350 align:start position:0%
+times the equation for area of a
+circular<00:03:05.120><c> pipe</c><00:03:06.239><c> which</c><00:03:06.560><c> over</c><00:03:06.800><c> here</c><00:03:07.040><c> we'll</c>
+
+00:03:07.350 --> 00:03:07.360 align:start position:0%
+circular pipe which over here we'll
+ 
+
+00:03:07.360 --> 00:03:12.390 align:start position:0%
+circular pipe which over here we'll
+write<00:03:07.599><c> down</c><00:03:08.800><c> a</c><00:03:09.280><c> =&lt;unk&gt;</c><00:03:10.000><c> *</c><00:03:10.239><c> d</c><00:03:10.480><c> ^2</c><00:03:11.120><c> 4.</c><00:03:11.840><c> So</c><00:03:12.000><c> in</c><00:03:12.239><c> the</c>
+
+00:03:12.390 --> 00:03:12.400 align:start position:0%
+write down a =&lt;unk&gt; * d ^2 4. So in the
+ 
+
+00:03:12.400 --> 00:03:14.869 align:start position:0%
+write down a =&lt;unk&gt; * d ^2 4. So in the
+equation<00:03:12.879><c> we</c><00:03:13.120><c> can</c><00:03:13.280><c> write&lt;unk&gt;</c>
+
+00:03:14.869 --> 00:03:14.879 align:start position:0%
+equation we can write&lt;unk&gt;
+ 
+
+00:03:14.879 --> 00:03:21.430 align:start position:0%
+equation we can write&lt;unk&gt;
+*<00:03:15.360><c> 0.5</c><00:03:16.400><c> ft^2</c><00:03:17.280><c> /</c><00:03:17.599><c> 4</c><00:03:18.480><c> which</c><00:03:19.440><c> is</c><00:03:19.599><c> what</c><00:03:19.920><c> 62</c><00:03:21.040><c> is</c><00:03:21.280><c> going</c>
+
+00:03:21.430 --> 00:03:21.440 align:start position:0%
+* 0.5 ft^2 / 4 which is what 62 is going
+ 
+
+00:03:21.440 --> 00:03:25.830 align:start position:0%
+* 0.5 ft^2 / 4 which is what 62 is going
+to<00:03:21.599><c> simplify</c><00:03:22.159><c> to</c>
+
+00:03:25.830 --> 00:03:25.840 align:start position:0%
+ 
+ 
+
+00:03:25.840 --> 00:03:28.309 align:start position:0%
+ 
+times<00:03:26.080><c> the</c><00:03:26.319><c> equation</c><00:03:26.720><c> for</c><00:03:26.959><c> hydraulic</c><00:03:27.519><c> radius</c>
+
+00:03:28.309 --> 00:03:28.319 align:start position:0%
+times the equation for hydraulic radius
+ 
+
+00:03:28.319 --> 00:03:30.149 align:start position:0%
+times the equation for hydraulic radius
+which<00:03:28.560><c> is</c><00:03:28.720><c> just</c><00:03:28.959><c> going</c><00:03:29.120><c> to</c><00:03:29.280><c> be</c><00:03:29.599><c> area</c><00:03:29.920><c> over</c>
+
+00:03:30.149 --> 00:03:30.159 align:start position:0%
+which is just going to be area over
+ 
+
+00:03:30.159 --> 00:03:32.710 align:start position:0%
+which is just going to be area over
+weded<00:03:30.560><c> perimeter.</c>
+
+00:03:32.710 --> 00:03:32.720 align:start position:0%
+weded perimeter.
+ 
+
+00:03:32.720 --> 00:03:36.309 align:start position:0%
+weded perimeter.
+So<00:03:32.959><c> that's</c><00:03:33.280><c> going</c><00:03:33.440><c> to</c><00:03:33.680><c> be&lt;unk&gt;</c><00:03:34.480><c> *.5^2</c><00:03:35.760><c> over</c><00:03:36.000><c> 4</c>
+
+00:03:36.309 --> 00:03:36.319 align:start position:0%
+So that's going to be&lt;unk&gt; *.5^2 over 4
+ 
+
+00:03:36.319 --> 00:03:40.390 align:start position:0%
+So that's going to be&lt;unk&gt; *.5^2 over 4
+again<00:03:37.760><c> over</c><00:03:38.959><c> the</c><00:03:39.200><c> wided</c><00:03:39.519><c> perimeter</c><00:03:40.000><c> equation</c>
+
+00:03:40.390 --> 00:03:40.400 align:start position:0%
+again over the wided perimeter equation
+ 
+
+00:03:40.400 --> 00:03:43.350 align:start position:0%
+again over the wided perimeter equation
+is<00:03:40.640><c> just</c><00:03:40.799><c> p&lt;unk&gt;</c><00:03:41.200><c> *</c><00:03:41.440><c> diameter.</c><00:03:42.319><c> So</c><00:03:42.959><c> at</c><00:03:43.200><c> the</c>
+
+00:03:43.350 --> 00:03:43.360 align:start position:0%
+is just p&lt;unk&gt; * diameter. So at the
+ 
+
+00:03:43.360 --> 00:03:48.710 align:start position:0%
+is just p&lt;unk&gt; * diameter. So at the
+bottom<00:03:43.599><c> we'll</c><00:03:43.920><c> do&lt;unk&gt;</c><00:03:45.120><c> *</c><00:03:45.360><c> 0.5</c><00:03:46.159><c> ft.</c>
+
+00:03:48.710 --> 00:03:48.720 align:start position:0%
+bottom we'll do&lt;unk&gt; * 0.5 ft.
+ 
+
+00:03:48.720 --> 00:03:51.110 align:start position:0%
+bottom we'll do&lt;unk&gt; * 0.5 ft.
+And<00:03:49.120><c> this</c><00:03:49.440><c> entire</c>
+
+00:03:51.110 --> 00:03:51.120 align:start position:0%
+And this entire
+ 
+
+00:03:51.120 --> 00:03:53.110 align:start position:0%
+And this entire
+fraction<00:03:51.599><c> is</c><00:03:51.920><c> going</c><00:03:52.080><c> to</c><00:03:52.239><c> be</c><00:03:52.400><c> raised</c><00:03:52.720><c> to</c><00:03:52.959><c> the</c>
+
+00:03:53.110 --> 00:03:53.120 align:start position:0%
+fraction is going to be raised to the
+ 
+
+00:03:53.120 --> 00:04:00.869 align:start position:0%
+fraction is going to be raised to the
+2/3.
+
+00:04:00.869 --> 00:04:00.879 align:start position:0%
+ 
+ 
+
+00:04:00.879 --> 00:04:05.190 align:start position:0%
+ 
+And<00:04:01.120><c> then</c><00:04:01.360><c> finally</c><00:04:02.080><c> the</c><00:04:02.560><c> slope</c><00:04:03.040><c> of</c><00:04:03.360><c> 1%</c>
+
+00:04:05.190 --> 00:04:05.200 align:start position:0%
+And then finally the slope of 1%
+ 
+
+00:04:05.200 --> 00:04:09.670 align:start position:0%
+And then finally the slope of 1%
+aka<00:04:06.080><c> 1</c><00:04:06.319><c> over</c><00:04:06.720><c> 100</c><00:04:07.439><c> equals</c><00:04:07.920><c> 0.01</c>
+
+00:04:09.670 --> 00:04:09.680 align:start position:0%
+aka 1 over 100 equals 0.01
+ 
+
+00:04:09.680 --> 00:04:13.429 align:start position:0%
+aka 1 over 100 equals 0.01
+as<00:04:10.480><c> it</c><00:04:10.720><c> fits</c><00:04:11.040><c> within</c><00:04:11.439><c> the</c><00:04:11.760><c> equation</c>
+
+00:04:13.429 --> 00:04:13.439 align:start position:0%
+as it fits within the equation
+ 
+
+00:04:13.439 --> 00:04:17.590 align:start position:0%
+as it fits within the equation
+and<00:04:13.599><c> that's</c><00:04:13.920><c> square</c><00:04:14.239><c> rooted.</c>
+
+00:04:17.590 --> 00:04:17.600 align:start position:0%
+ 
+ 
+
+00:04:17.600 --> 00:04:19.349 align:start position:0%
+ 
+So<00:04:17.919><c> this</c><00:04:18.079><c> is</c><00:04:18.160><c> a</c><00:04:18.400><c> little</c><00:04:18.479><c> bit</c><00:04:18.639><c> annoying</c><00:04:19.040><c> to</c><00:04:19.199><c> plug</c>
+
+00:04:19.349 --> 00:04:19.359 align:start position:0%
+So this is a little bit annoying to plug
+ 
+
+00:04:19.359 --> 00:04:22.310 align:start position:0%
+So this is a little bit annoying to plug
+into<00:04:19.680><c> your</c><00:04:19.919><c> calculator,</c><00:04:21.280><c> but</c><00:04:21.680><c> you</c><00:04:22.000><c> can</c>
+
+00:04:22.310 --> 00:04:22.320 align:start position:0%
+into your calculator, but you can
+ 
+
+00:04:22.320 --> 00:04:25.590 align:start position:0%
+into your calculator, but you can
+simplify<00:04:22.880><c> a</c><00:04:23.120><c> little</c><00:04:23.280><c> bit</c><00:04:24.320><c> to</c><00:04:25.040><c> make</c><00:04:25.199><c> it</c><00:04:25.360><c> a</c>
+
+00:04:25.590 --> 00:04:25.600 align:start position:0%
+simplify a little bit to make it a
+ 
+
+00:04:25.600 --> 00:04:27.830 align:start position:0%
+simplify a little bit to make it a
+little<00:04:25.680><c> bit</c><00:04:25.840><c> easier.</c><00:04:26.800><c> Now,</c><00:04:27.040><c> assuming</c><00:04:27.520><c> you</c><00:04:27.680><c> do</c>
+
+00:04:27.830 --> 00:04:27.840 align:start position:0%
+little bit easier. Now, assuming you do
+ 
+
+00:04:27.840 --> 00:04:29.590 align:start position:0%
+little bit easier. Now, assuming you do
+this<00:04:28.080><c> correctly</c><00:04:28.479><c> and</c><00:04:28.800><c> don't</c><00:04:28.960><c> mess</c><00:04:29.199><c> up</c><00:04:29.360><c> any</c>
+
+00:04:29.590 --> 00:04:29.600 align:start position:0%
+this correctly and don't mess up any
+ 
+
+00:04:29.600 --> 00:04:32.230 align:start position:0%
+this correctly and don't mess up any
+terms<00:04:29.840><c> in</c><00:04:30.080><c> your</c><00:04:30.320><c> calculator,</c><00:04:31.440><c> you</c><00:04:31.680><c> should</c><00:04:31.919><c> get</c>
+
+00:04:32.230 --> 00:04:32.240 align:start position:0%
+terms in your calculator, you should get
+ 
+
+00:04:32.240 --> 00:04:37.749 align:start position:0%
+terms in your calculator, you should get
+a<00:04:32.479><c> flow</c><00:04:33.840><c> of</c><00:04:34.479><c> 0.73</c><00:04:35.840><c> cubic</c><00:04:36.160><c> feet</c><00:04:36.479><c> per</c><00:04:36.720><c> second</c>
+
+00:04:37.749 --> 00:04:37.759 align:start position:0%
+a flow of 0.73 cubic feet per second
+ 
+
+00:04:37.759 --> 00:04:41.510 align:start position:0%
+a flow of 0.73 cubic feet per second
+when<00:04:38.000><c> the</c><00:04:38.240><c> pipe</c><00:04:38.560><c> diameter</c><00:04:39.120><c> is</c><00:04:39.440><c> 6</c><00:04:39.759><c> in.</c><00:04:41.199><c> Since</c>
+
+00:04:41.510 --> 00:04:41.520 align:start position:0%
+when the pipe diameter is 6 in. Since
+ 
+
+00:04:41.520 --> 00:04:44.469 align:start position:0%
+when the pipe diameter is 6 in. Since
+this<00:04:41.759><c> is</c><00:04:41.919><c> less</c><00:04:42.160><c> than</c><00:04:42.400><c> our</c><00:04:42.720><c> peak</c><00:04:43.040><c> leate</c><00:04:43.600><c> flow</c><00:04:44.080><c> of</c>
+
+00:04:44.469 --> 00:04:44.479 align:start position:0%
+this is less than our peak leate flow of
+ 
+
+00:04:44.479 --> 00:04:47.350 align:start position:0%
+this is less than our peak leate flow of
+1<00:04:44.800><c> cfs,</c><00:04:46.080><c> there</c><00:04:46.240><c> is</c><00:04:46.400><c> not</c><00:04:46.560><c> enough</c><00:04:46.720><c> flow</c><00:04:46.960><c> able</c><00:04:47.199><c> to</c>
+
+00:04:47.350 --> 00:04:47.360 align:start position:0%
+1 cfs, there is not enough flow able to
+ 
+
+00:04:47.360 --> 00:04:48.790 align:start position:0%
+1 cfs, there is not enough flow able to
+be<00:04:47.440><c> delivered</c><00:04:47.759><c> through</c><00:04:47.919><c> this</c><00:04:48.160><c> pipe.</c><00:04:48.479><c> So,</c><00:04:48.560><c> we</c>
+
+00:04:48.790 --> 00:04:48.800 align:start position:0%
+be delivered through this pipe. So, we
+ 
+
+00:04:48.800 --> 00:04:49.990 align:start position:0%
+be delivered through this pipe. So, we
+have<00:04:48.880><c> to</c><00:04:48.960><c> look</c><00:04:49.120><c> at</c><00:04:49.199><c> the</c><00:04:49.360><c> next</c><00:04:49.520><c> one</c><00:04:49.680><c> on</c><00:04:49.840><c> the</c>
+
+00:04:49.990 --> 00:04:50.000 align:start position:0%
+have to look at the next one on the
+ 
+
+00:04:50.000 --> 00:04:54.629 align:start position:0%
+have to look at the next one on the
+list.
+
+00:04:54.629 --> 00:04:54.639 align:start position:0%
+ 
+ 
+
+00:04:54.639 --> 00:04:56.790 align:start position:0%
+ 
+So<00:04:54.880><c> we</c><00:04:55.120><c> will</c><00:04:55.280><c> simply</c><00:04:55.680><c> rewrite</c><00:04:56.160><c> the</c><00:04:56.400><c> Manning's</c>
+
+00:04:56.790 --> 00:04:56.800 align:start position:0%
+So we will simply rewrite the Manning's
+ 
+
+00:04:56.800 --> 00:05:01.030 align:start position:0%
+So we will simply rewrite the Manning's
+equation<00:04:57.199><c> again</c><00:04:58.320><c> swapping</c><00:04:58.720><c> out</c><00:04:59.040><c> the</c><00:04:59.680><c> 6</c><00:05:00.000><c> in</c><00:05:00.720><c> for</c>
+
+00:05:01.030 --> 00:05:01.040 align:start position:0%
+equation again swapping out the 6 in for
+ 
+
+00:05:01.040 --> 00:05:02.870 align:start position:0%
+equation again swapping out the 6 in for
+8<00:05:01.280><c> in.</c>
+
+00:05:02.870 --> 00:05:02.880 align:start position:0%
+8 in.
+ 
+
+00:05:02.880 --> 00:05:06.230 align:start position:0%
+8 in.
+So<00:05:03.120><c> Q</c><00:05:03.440><c> is</c><00:05:03.600><c> going</c><00:05:03.759><c> to</c><00:05:03.919><c> be</c><00:05:04.000><c> equal</c><00:05:04.320><c> again</c><00:05:04.560><c> to</c><00:05:04.800><c> 1.486</c>
+
+00:05:06.230 --> 00:05:06.240 align:start position:0%
+So Q is going to be equal again to 1.486
+ 
+
+00:05:06.240 --> 00:05:09.189 align:start position:0%
+So Q is going to be equal again to 1.486
+over<00:05:06.479><c> Rn</c><00:05:06.960><c> of</c><00:05:07.120><c> 0.01*</c><00:05:07.680><c> 01</c>
+
+00:05:09.189 --> 00:05:09.199 align:start position:0%
+over Rn of 0.01* 01
+ 
+
+00:05:09.199 --> 00:05:14.230 align:start position:0%
+over Rn of 0.01* 01
+*<00:05:09.440><c> our</c><00:05:09.600><c> area</c><00:05:10.080><c> which</c><00:05:10.240><c> is</c><00:05:10.400><c> equivalent</c><00:05:11.039><c> to&lt;unk&gt;</c><00:05:12.320><c> *</c>
+
+00:05:14.230 --> 00:05:14.240 align:start position:0%
+* our area which is equivalent to&lt;unk&gt; *
+ 
+
+00:05:14.240 --> 00:05:18.230 align:start position:0%
+* our area which is equivalent to&lt;unk&gt; *
+8<00:05:14.720><c> /</c><00:05:15.120><c> 12</c>
+
+00:05:18.230 --> 00:05:18.240 align:start position:0%
+ 
+ 
+
+00:05:18.240 --> 00:05:20.550 align:start position:0%
+ 
+quantity^<00:05:18.800><c> 2ar</c>
+
+00:05:20.550 --> 00:05:20.560 align:start position:0%
+quantity^ 2ar
+ 
+
+00:05:20.560 --> 00:05:30.629 align:start position:0%
+quantity^ 2ar
+/<00:05:21.120><c> 4</c>
+
+00:05:30.629 --> 00:05:30.639 align:start position:0%
+ 
+ 
+
+00:05:30.639 --> 00:05:33.270 align:start position:0%
+ 
+times<00:05:30.880><c> the</c><00:05:31.039><c> hydraulic</c><00:05:31.520><c> radius</c><00:05:32.160><c> aka</c><00:05:32.720><c> the</c><00:05:32.960><c> area</c>
+
+00:05:33.270 --> 00:05:33.280 align:start position:0%
+times the hydraulic radius aka the area
+ 
+
+00:05:33.280 --> 00:05:35.350 align:start position:0%
+times the hydraulic radius aka the area
+over<00:05:33.520><c> the</c><00:05:33.680><c> wetted</c><00:05:34.080><c> perimeter.</c><00:05:34.960><c> So</c><00:05:35.120><c> that's</c>
+
+00:05:35.350 --> 00:05:35.360 align:start position:0%
+over the wetted perimeter. So that's
+ 
+
+00:05:35.360 --> 00:05:37.749 align:start position:0%
+over the wetted perimeter. So that's
+going<00:05:35.440><c> to</c><00:05:35.520><c> be</c><00:05:35.680><c> p&lt;unk&gt;</c><00:05:36.080><c> *</c><00:05:36.320><c> 8</c><00:05:36.479><c> over</c><00:05:37.039><c> 12^</c><00:05:37.360><c> squar</c>
+
+00:05:37.749 --> 00:05:37.759 align:start position:0%
+going to be p&lt;unk&gt; * 8 over 12^ squar
+ 
+
+00:05:37.759 --> 00:05:43.670 align:start position:0%
+going to be p&lt;unk&gt; * 8 over 12^ squar
+again<00:05:38.800><c> quantity</c><00:05:39.280><c> over</c><00:05:39.600><c> 4</c>
+
+00:05:43.670 --> 00:05:43.680 align:start position:0%
+ 
+ 
+
+00:05:43.680 --> 00:05:45.670 align:start position:0%
+ 
+over&lt;unk&gt;
+
+00:05:45.670 --> 00:05:45.680 align:start position:0%
+over&lt;unk&gt;
+ 
+
+00:05:45.680 --> 00:05:57.510 align:start position:0%
+over&lt;unk&gt;
+*<00:05:46.240><c> 82</c>
+
+00:05:57.510 --> 00:05:57.520 align:start position:0%
+ 
+ 
+
+00:05:57.520 --> 00:05:59.270 align:start position:0%
+ 
+red<00:05:57.759><c> is</c><00:05:58.000><c> just</c><00:05:58.160><c> supposed</c><00:05:58.400><c> to</c><00:05:58.560><c> help</c><00:05:58.800><c> highlight</c>
+
+00:05:59.270 --> 00:05:59.280 align:start position:0%
+red is just supposed to help highlight
+ 
+
+00:05:59.280 --> 00:06:01.990 align:start position:0%
+red is just supposed to help highlight
+what's<00:05:59.680><c> changed</c><00:06:00.160><c> between</c><00:06:01.360><c> the</c><00:06:01.600><c> equation</c>
+
+00:06:01.990 --> 00:06:02.000 align:start position:0%
+what's changed between the equation
+ 
+
+00:06:02.000 --> 00:06:04.629 align:start position:0%
+what's changed between the equation
+above<00:06:02.320><c> and</c><00:06:02.479><c> this</c><00:06:02.720><c> current</c><00:06:02.960><c> equation.</c>
+
+00:06:04.629 --> 00:06:04.639 align:start position:0%
+above and this current equation.
+ 
+
+00:06:04.639 --> 00:06:07.029 align:start position:0%
+above and this current equation.
+And<00:06:04.800><c> then</c><00:06:04.960><c> our</c><00:06:05.199><c> slope</c><00:06:05.440><c> is</c><00:06:05.680><c> going</c><00:06:05.759><c> to</c><00:06:05.840><c> be</c><00:06:06.000><c> 0.01</c>
+
+00:06:07.029 --> 00:06:07.039 align:start position:0%
+And then our slope is going to be 0.01
+ 
+
+00:06:07.039 --> 00:06:09.430 align:start position:0%
+And then our slope is going to be 0.01
+again.
+
+00:06:09.430 --> 00:06:09.440 align:start position:0%
+again.
+ 
+
+00:06:09.440 --> 00:06:11.749 align:start position:0%
+again.
+And<00:06:09.680><c> as</c><00:06:09.919><c> is</c><00:06:10.160><c> before,</c>
+
+00:06:11.749 --> 00:06:11.759 align:start position:0%
+And as is before,
+ 
+
+00:06:11.759 --> 00:06:14.150 align:start position:0%
+And as is before,
+some<00:06:11.840><c> of</c><00:06:12.000><c> our</c><00:06:12.160><c> terms</c><00:06:12.479><c> will</c><00:06:12.720><c> cancel</c><00:06:13.039><c> out.</c><00:06:14.000><c> And</c>
+
+00:06:14.150 --> 00:06:14.160 align:start position:0%
+some of our terms will cancel out. And
+ 
+
+00:06:14.160 --> 00:06:15.749 align:start position:0%
+some of our terms will cancel out. And
+if<00:06:14.319><c> you</c><00:06:14.479><c> can</c><00:06:14.560><c> plug</c><00:06:14.800><c> the</c><00:06:15.039><c> rest</c><00:06:15.280><c> successfully</c>
+
+00:06:15.749 --> 00:06:15.759 align:start position:0%
+if you can plug the rest successfully
+ 
+
+00:06:15.759 --> 00:06:17.830 align:start position:0%
+if you can plug the rest successfully
+into<00:06:16.080><c> your</c><00:06:16.319><c> calculator,</c><00:06:17.280><c> you</c><00:06:17.520><c> should</c><00:06:17.680><c> see</c>
+
+00:06:17.830 --> 00:06:17.840 align:start position:0%
+into your calculator, you should see
+ 
+
+00:06:17.840 --> 00:06:22.230 align:start position:0%
+into your calculator, you should see
+that<00:06:18.160><c> flow</c><00:06:18.560><c> is</c><00:06:18.800><c> equal</c><00:06:19.280><c> to</c><00:06:20.319><c> 1.52</c>
+
+00:06:22.230 --> 00:06:22.240 align:start position:0%
+that flow is equal to 1.52
+ 
+
+00:06:22.240 --> 00:06:24.790 align:start position:0%
+that flow is equal to 1.52
+cubic<00:06:22.560><c> feet</c><00:06:22.800><c> per</c><00:06:23.039><c> second.</c>
+
+00:06:24.790 --> 00:06:24.800 align:start position:0%
+cubic feet per second.
+ 
+
+00:06:24.800 --> 00:06:28.390 align:start position:0%
+cubic feet per second.
+So<00:06:24.960><c> the</c><00:06:25.199><c> 8</c><00:06:25.440><c> in</c><00:06:25.680><c> pipe</c><00:06:26.960><c> can</c><00:06:27.199><c> achieve</c><00:06:27.600><c> a</c><00:06:27.840><c> peakle</c>
+
+00:06:28.390 --> 00:06:28.400 align:start position:0%
+So the 8 in pipe can achieve a peakle
+ 
+
+00:06:28.400 --> 00:06:31.029 align:start position:0%
+So the 8 in pipe can achieve a peakle
+shape<00:06:28.639><c> flow</c><00:06:29.600><c> greater</c><00:06:30.000><c> than</c><00:06:30.400><c> the</c><00:06:30.720><c> amount</c>
+
+00:06:31.029 --> 00:06:31.039 align:start position:0%
+shape flow greater than the amount
+ 
+
+00:06:31.039 --> 00:06:33.430 align:start position:0%
+shape flow greater than the amount
+required<00:06:31.520><c> for</c><00:06:31.600><c> our</c><00:06:31.840><c> landfill.</c><00:06:32.639><c> So</c><00:06:32.960><c> this</c><00:06:33.199><c> will</c>
+
+00:06:33.430 --> 00:06:33.440 align:start position:0%
+required for our landfill. So this will
+ 
+
+00:06:33.440 --> 00:06:36.629 align:start position:0%
+required for our landfill. So this will
+pass.
+
+00:06:36.629 --> 00:06:36.639 align:start position:0%
+ 
+ 
+
+00:06:36.639 --> 00:06:38.390 align:start position:0%
+ 
+Now<00:06:36.800><c> that</c><00:06:37.039><c> we</c><00:06:37.120><c> know</c><00:06:37.280><c> it</c><00:06:37.520><c> meets</c><00:06:37.759><c> the</c><00:06:37.919><c> flow</c>
+
+00:06:38.390 --> 00:06:38.400 align:start position:0%
+Now that we know it meets the flow
+ 
+
+00:06:38.400 --> 00:06:41.670 align:start position:0%
+Now that we know it meets the flow
+requirement,<00:06:39.360><c> we</c><00:06:39.600><c> have</c><00:06:39.680><c> to</c><00:06:39.919><c> check</c><00:06:40.160><c> to</c><00:06:40.479><c> see</c><00:06:41.440><c> if</c>
+
+00:06:41.670 --> 00:06:41.680 align:start position:0%
+requirement, we have to check to see if
+ 
+
+00:06:41.680 --> 00:06:43.590 align:start position:0%
+requirement, we have to check to see if
+it<00:06:41.919><c> also</c><00:06:42.240><c> meets</c><00:06:42.479><c> the</c><00:06:42.720><c> design</c><00:06:43.039><c> constraint</c><00:06:43.440><c> for</c>
+
+00:06:43.590 --> 00:06:43.600 align:start position:0%
+it also meets the design constraint for
+ 
+
+00:06:43.600 --> 00:06:46.230 align:start position:0%
+it also meets the design constraint for
+the<00:06:43.759><c> velocity.</c>
+
+00:06:46.230 --> 00:06:46.240 align:start position:0%
+the velocity.
+ 
+
+00:06:46.240 --> 00:06:48.710 align:start position:0%
+the velocity.
+Now,<00:06:46.479><c> when</c><00:06:46.720><c> checking</c><00:06:47.039><c> to</c><00:06:47.280><c> see</c><00:06:48.160><c> if</c><00:06:48.400><c> the</c>
+
+00:06:48.710 --> 00:06:48.720 align:start position:0%
+Now, when checking to see if the
+ 
+
+00:06:48.720 --> 00:06:50.629 align:start position:0%
+Now, when checking to see if the
+velocity<00:06:49.120><c> is</c><00:06:49.360><c> going</c><00:06:49.520><c> to</c><00:06:49.680><c> be</c><00:06:49.759><c> less</c><00:06:50.000><c> than</c><00:06:50.160><c> 5</c><00:06:50.400><c> ft</c>
+
+00:06:50.629 --> 00:06:50.639 align:start position:0%
+velocity is going to be less than 5 ft
+ 
+
+00:06:50.639 --> 00:06:53.749 align:start position:0%
+velocity is going to be less than 5 ft
+per<00:06:50.880><c> second,</c><00:06:51.440><c> it's</c><00:06:51.759><c> important</c><00:06:52.000><c> to</c><00:06:52.319><c> remember</c>
+
+00:06:53.749 --> 00:06:53.759 align:start position:0%
+per second, it's important to remember
+ 
+
+00:06:53.759 --> 00:06:57.110 align:start position:0%
+per second, it's important to remember
+that<00:06:54.080><c> we</c><00:06:54.240><c> aren't</c><00:06:54.560><c> going</c><00:06:54.720><c> to</c><00:06:54.960><c> use</c><00:06:55.759><c> the</c><00:06:56.000><c> pipes</c>
+
+00:06:57.110 --> 00:06:57.120 align:start position:0%
+that we aren't going to use the pipes
+ 
+
+00:06:57.120 --> 00:06:59.670 align:start position:0%
+that we aren't going to use the pipes
+peak<00:06:57.440><c> flow</c><00:06:57.840><c> as</c><00:06:58.080><c> is</c><00:06:58.319><c> derived</c><00:06:58.639><c> from</c><00:06:58.800><c> Mannings,</c>
+
+00:06:59.670 --> 00:06:59.680 align:start position:0%
+peak flow as is derived from Mannings,
+ 
+
+00:06:59.680 --> 00:07:02.230 align:start position:0%
+peak flow as is derived from Mannings,
+but<00:07:00.000><c> instead</c><00:07:00.880><c> just</c><00:07:01.120><c> the</c><00:07:01.440><c> value</c><00:07:01.680><c> for</c><00:07:01.840><c> the</c><00:07:02.000><c> peak</c>
+
+00:07:02.230 --> 00:07:02.240 align:start position:0%
+but instead just the value for the peak
+ 
+
+00:07:02.240 --> 00:07:03.990 align:start position:0%
+but instead just the value for the peak
+leate<00:07:02.720><c> flow</c><00:07:02.960><c> that</c><00:07:03.120><c> is</c><00:07:03.280><c> actually</c><00:07:03.520><c> going</c><00:07:03.680><c> to</c><00:07:03.840><c> be</c>
+
+00:07:03.990 --> 00:07:04.000 align:start position:0%
+leate flow that is actually going to be
+ 
+
+00:07:04.000 --> 00:07:07.110 align:start position:0%
+leate flow that is actually going to be
+coming<00:07:04.160><c> from</c><00:07:04.319><c> the</c><00:07:04.479><c> landfill.</c>
+
+00:07:07.110 --> 00:07:07.120 align:start position:0%
+coming from the landfill.
+ 
+
+00:07:07.120 --> 00:07:08.550 align:start position:0%
+coming from the landfill.
+So,<00:07:07.280><c> that</c><00:07:07.440><c> would</c><00:07:07.599><c> be</c><00:07:07.680><c> an</c><00:07:07.840><c> easy</c><00:07:08.080><c> mistake</c><00:07:08.400><c> you</c>
+
+00:07:08.550 --> 00:07:08.560 align:start position:0%
+So, that would be an easy mistake you
+ 
+
+00:07:08.560 --> 00:07:11.430 align:start position:0%
+So, that would be an easy mistake you
+could<00:07:08.720><c> make</c><00:07:08.880><c> here.</c>
+
+00:07:11.430 --> 00:07:11.440 align:start position:0%
+could make here.
+ 
+
+00:07:11.440 --> 00:07:12.629 align:start position:0%
+could make here.
+But<00:07:11.599><c> we're</c><00:07:11.840><c> not</c><00:07:12.000><c> going</c><00:07:12.080><c> to</c><00:07:12.240><c> make</c><00:07:12.400><c> that</c>
+
+00:07:12.629 --> 00:07:12.639 align:start position:0%
+But we're not going to make that
+ 
+
+00:07:12.639 --> 00:07:14.550 align:start position:0%
+But we're not going to make that
+mistake.<00:07:13.360><c> Instead,</c><00:07:13.759><c> we're</c><00:07:14.080><c> going</c><00:07:14.160><c> to</c><00:07:14.319><c> write</c>
+
+00:07:14.550 --> 00:07:14.560 align:start position:0%
+mistake. Instead, we're going to write
+ 
+
+00:07:14.560 --> 00:07:19.350 align:start position:0%
+mistake. Instead, we're going to write
+out<00:07:14.880><c> again</c><00:07:15.120><c> that</c><00:07:15.440><c> V</c><00:07:15.759><c> equals</c><00:07:16.400><c> Q</c><00:07:16.800><c> /</c><00:07:17.039><c> A</c>
+
+00:07:19.350 --> 00:07:19.360 align:start position:0%
+out again that V equals Q / A
+ 
+
+00:07:19.360 --> 00:07:23.029 align:start position:0%
+out again that V equals Q / A
+plugging<00:07:19.759><c> in</c><00:07:20.240><c> our</c><00:07:20.400><c> Q</c><00:07:20.720><c> of</c><00:07:21.039><c> 1</c><00:07:21.280><c> CFS</c><00:07:22.400><c> given</c><00:07:22.720><c> in</c><00:07:22.880><c> the</c>
+
+00:07:23.029 --> 00:07:23.039 align:start position:0%
+plugging in our Q of 1 CFS given in the
+ 
+
+00:07:23.039 --> 00:07:26.070 align:start position:0%
+plugging in our Q of 1 CFS given in the
+problem<00:07:23.360><c> statement</c>
+
+00:07:26.070 --> 00:07:26.080 align:start position:0%
+problem statement
+ 
+
+00:07:26.080 --> 00:07:29.510 align:start position:0%
+problem statement
+and<00:07:26.319><c> divided</c><00:07:26.800><c> by</c><00:07:26.960><c> the</c><00:07:27.280><c> equation</c><00:07:28.080><c> for</c><00:07:28.400><c> area</c><00:07:29.280><c> of</c>
+
+00:07:29.510 --> 00:07:29.520 align:start position:0%
+and divided by the equation for area of
+ 
+
+00:07:29.520 --> 00:07:34.230 align:start position:0%
+and divided by the equation for area of
+the<00:07:29.680><c> pipe</c><00:07:30.560><c> which</c><00:07:30.800><c> is</c><00:07:30.960><c> going</c><00:07:31.039><c> to</c><00:07:31.199><c> be</c><00:07:31.440><c> p&lt;unk&gt;</c><00:07:32.560><c> *</c><00:07:33.120><c> 8</c>
+
+00:07:34.230 --> 00:07:34.240 align:start position:0%
+the pipe which is going to be p&lt;unk&gt; * 8
+ 
+
+00:07:34.240 --> 00:07:37.749 align:start position:0%
+the pipe which is going to be p&lt;unk&gt; * 8
+12^<00:07:35.039><c> 2</c><00:07:35.360><c> /</c><00:07:35.919><c> 4</c>
+
+00:07:37.749 --> 00:07:37.759 align:start position:0%
+12^ 2 / 4
+ 
+
+00:07:37.759 --> 00:07:41.830 align:start position:0%
+12^ 2 / 4
+giving<00:07:38.080><c> us</c><00:07:38.160><c> a</c><00:07:38.400><c> velocity</c><00:07:38.880><c> of</c><00:07:39.199><c> 2.9</c><00:07:39.919><c> ft</c><00:07:40.160><c> pers.</c>
+
+00:07:41.830 --> 00:07:41.840 align:start position:0%
+giving us a velocity of 2.9 ft pers.
+ 
+
+00:07:41.840 --> 00:07:43.990 align:start position:0%
+giving us a velocity of 2.9 ft pers.
+As<00:07:42.080><c> we</c><00:07:42.319><c> can</c><00:07:42.400><c> see,</c><00:07:42.800><c> this</c><00:07:43.039><c> does</c><00:07:43.360><c> satisfy</c><00:07:43.840><c> the</c>
+
+00:07:43.990 --> 00:07:44.000 align:start position:0%
+As we can see, this does satisfy the
+ 
+
+00:07:44.000 --> 00:07:46.629 align:start position:0%
+As we can see, this does satisfy the
+velocity<00:07:44.479><c> constraints.</c><00:07:45.520><c> So,</c><00:07:45.680><c> the</c><00:07:45.919><c> 8-in</c><00:07:46.400><c> pipe</c>
+
+00:07:46.629 --> 00:07:46.639 align:start position:0%
+velocity constraints. So, the 8-in pipe
+ 
+
+00:07:46.639 --> 00:07:48.469 align:start position:0%
+velocity constraints. So, the 8-in pipe
+would<00:07:46.800><c> be</c><00:07:46.960><c> acceptable</c><00:07:47.360><c> for</c><00:07:47.599><c> this</c><00:07:47.840><c> design.</c><00:07:48.319><c> So,</c>
+
+00:07:48.469 --> 00:07:48.479 align:start position:0%
+would be acceptable for this design. So,
+ 
+
+00:07:48.479 --> 00:07:50.469 align:start position:0%
+would be acceptable for this design. So,
+the<00:07:48.639><c> hardest</c><00:07:48.960><c> part</c><00:07:49.039><c> of</c><00:07:49.280><c> this</c><00:07:49.440><c> problem</c><00:07:50.160><c> really</c>
+
+00:07:50.469 --> 00:07:50.479 align:start position:0%
+the hardest part of this problem really
+ 
+
+00:07:50.479 --> 00:07:54.390 align:start position:0%
+the hardest part of this problem really
+isn't<00:07:51.280><c> the</c><00:07:51.759><c> concept</c><00:07:53.039><c> given</c><00:07:53.360><c> that</c><00:07:53.759><c> the</c><00:07:54.080><c> problem</c>
+
+00:07:54.390 --> 00:07:54.400 align:start position:0%
+isn't the concept given that the problem
+ 
+
+00:07:54.400 --> 00:07:55.909 align:start position:0%
+isn't the concept given that the problem
+statement<00:07:54.800><c> already</c><00:07:55.120><c> tells</c><00:07:55.280><c> you</c><00:07:55.520><c> you're</c><00:07:55.759><c> going</c>
+
+00:07:55.909 --> 00:07:55.919 align:start position:0%
+statement already tells you you're going
+ 
+
+00:07:55.919 --> 00:07:58.550 align:start position:0%
+statement already tells you you're going
+to<00:07:56.080><c> need</c><00:07:56.240><c> Manning's</c><00:07:56.720><c> equation.</c><00:07:58.080><c> Instead,</c>
+
+00:07:58.550 --> 00:07:58.560 align:start position:0%
+to need Manning's equation. Instead,
+ 
+
+00:07:58.560 --> 00:08:01.749 align:start position:0%
+to need Manning's equation. Instead,
+it's<00:07:58.879><c> just</c><00:07:59.039><c> going</c><00:07:59.280><c> to</c><00:07:59.520><c> be</c><00:08:00.800><c> manually</c><00:08:01.360><c> plugging</c>
+
+00:08:01.749 --> 00:08:01.759 align:start position:0%
+it's just going to be manually plugging
+ 
+
+00:08:01.759 --> 00:08:04.070 align:start position:0%
+it's just going to be manually plugging
+things<00:08:02.000><c> in</c><00:08:02.479><c> and</c><00:08:02.879><c> keeping</c><00:08:03.199><c> Manning's</c><00:08:03.680><c> equation</c>
+
+00:08:04.070 --> 00:08:04.080 align:start position:0%
+things in and keeping Manning's equation
+ 
+
+00:08:04.080 --> 00:08:08.070 align:start position:0%
+things in and keeping Manning's equation
+organized.
+
+00:08:08.070 --> 00:08:08.080 align:start position:0%
+ 
+ 
+
+00:08:08.080 --> 00:08:10.950 align:start position:0%
+ 
+Also,<00:08:08.800><c> we</c><00:08:09.039><c> got</c><00:08:09.280><c> lucky</c><00:08:09.599><c> by</c><00:08:09.840><c> guessing</c><00:08:10.560><c> that</c><00:08:10.800><c> it</c>
+
+00:08:10.950 --> 00:08:10.960 align:start position:0%
+Also, we got lucky by guessing that it
+ 
+
+00:08:10.960 --> 00:08:13.909 align:start position:0%
+Also, we got lucky by guessing that it
+was<00:08:11.039><c> one</c><00:08:11.199><c> of</c><00:08:11.280><c> the</c><00:08:11.440><c> smaller</c><00:08:11.759><c> two</c><00:08:12.000><c> pipes.</c><00:08:12.800><c> So,</c><00:08:13.680><c> we</c>
+
+00:08:13.909 --> 00:08:13.919 align:start position:0%
+was one of the smaller two pipes. So, we
+ 
+
+00:08:13.919 --> 00:08:15.670 align:start position:0%
+was one of the smaller two pipes. So, we
+started<00:08:14.240><c> with</c><00:08:14.479><c> six</c><00:08:14.800><c> and</c><00:08:14.960><c> then</c><00:08:15.199><c> moved</c><00:08:15.360><c> on</c><00:08:15.520><c> to</c>
+
+00:08:15.670 --> 00:08:15.680 align:start position:0%
+started with six and then moved on to
+ 
+
+00:08:15.680 --> 00:08:18.230 align:start position:0%
+started with six and then moved on to
+eight.<00:08:16.639><c> Whereas,</c>
+
+00:08:18.230 --> 00:08:18.240 align:start position:0%
+eight. Whereas,
+ 
+
+00:08:18.240 --> 00:08:20.070 align:start position:0%
+eight. Whereas,
+we<00:08:18.400><c> could</c><00:08:18.560><c> have</c><00:08:18.720><c> started</c><00:08:19.039><c> with</c><00:08:19.280><c> 12</c><00:08:19.599><c> and</c><00:08:19.840><c> worked</c>
+
+00:08:20.070 --> 00:08:20.080 align:start position:0%
+we could have started with 12 and worked
+ 
+
+00:08:20.080 --> 00:08:21.909 align:start position:0%
+we could have started with 12 and worked
+our<00:08:20.240><c> way</c><00:08:20.400><c> down.</c><00:08:21.120><c> So,</c><00:08:21.360><c> that's</c><00:08:21.520><c> a</c><00:08:21.680><c> little</c><00:08:21.759><c> bit</c><00:08:21.840><c> of</c>
+
+00:08:21.909 --> 00:08:21.919 align:start position:0%
+our way down. So, that's a little bit of
+ 
+
+00:08:21.919 --> 00:08:24.710 align:start position:0%
+our way down. So, that's a little bit of
+a<00:08:22.080><c> tossup</c><00:08:22.560><c> as</c><00:08:22.720><c> well.</c><00:08:23.919><c> But,</c><00:08:24.080><c> this</c><00:08:24.240><c> problem's</c>
+
+00:08:24.710 --> 00:08:24.720 align:start position:0%
+a tossup as well. But, this problem's
+ 
+
+00:08:24.720 --> 00:08:26.790 align:start position:0%
+a tossup as well. But, this problem's
+not<00:08:24.879><c> very</c><00:08:25.039><c> difficult.</c><00:08:25.520><c> Just</c><00:08:25.759><c> do</c><00:08:25.919><c> your</c><00:08:26.160><c> best</c><00:08:26.400><c> to</c>
+
+00:08:26.790 --> 00:08:26.800 align:start position:0%
+not very difficult. Just do your best to
+ 
+
+00:08:26.800 --> 00:08:29.029 align:start position:0%
+not very difficult. Just do your best to
+stay<00:08:27.120><c> organized</c><00:08:27.759><c> and</c><00:08:28.080><c> you</c><00:08:28.319><c> should</c><00:08:28.639><c> be</c><00:08:28.800><c> able</c><00:08:28.879><c> to</c>
+
+00:08:29.029 --> 00:08:29.039 align:start position:0%
+stay organized and you should be able to
+ 
+
+00:08:29.039 --> 00:08:31.110 align:start position:0%
+stay organized and you should be able to
+calculate<00:08:29.440><c> out</c><00:08:29.680><c> to</c><00:08:29.840><c> the</c><00:08:29.919><c> right</c><00:08:30.080><c> answers.</c><00:08:30.960><c> And</c>
+
+00:08:31.110 --> 00:08:31.120 align:start position:0%
+calculate out to the right answers. And
+ 
+
+00:08:31.120 --> 00:08:33.759 align:start position:0%
+calculate out to the right answers. And
+that's<00:08:31.360><c> it.</c>
+

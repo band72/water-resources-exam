@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.500
+In this problem, a given area is being graded for a project.
+
+00:00:06.500 --> 00:00:11.800
+How much additional film material in cubic yards will be required at or need to be removed
+
+00:00:11.800 --> 00:00:14.500
+from this project site.
+
+00:00:14.500 --> 00:00:20.300
+So when I see a problem like this, the words that come to mind for me are cut and fill.
+
+00:00:20.300 --> 00:00:25.940
+Searching for either of those in the reference manual will bring us to the Earthwork Volumes
+
+00:00:25.940 --> 00:00:31.240
+section of chapter 2, where we can find the average end area method described for
+
+00:00:31.240 --> 00:00:34.740
+finding Earthwork, Cut, and Fill volumes.
+
+00:00:34.740 --> 00:00:41.420
+The average end area method for Earthwork calculates volume between two consecutive cross
+
+00:00:41.420 --> 00:00:46.780
+sections as the average of their areas multiplied by the distance between them, where
+
+00:00:46.780 --> 00:00:49.540
+fill is positive and cut is negative.
+
+00:00:49.540 --> 00:00:54.640
+The equation is given as follows.
+
+00:00:54.640 --> 00:01:02.240
+The volume here equals the multiplication of the distance between two cross sections L,
+
+00:01:02.240 --> 00:01:12.439
+and the sum of their end areas of cross section A1 and A2 divided by two.
+
+00:01:12.439 --> 00:01:15.040
+So let's begin to solve this problem.
+
+00:01:15.040 --> 00:01:21.920
+We have already been given our table of stations as well as the cut and fill volumes being
+
+00:01:21.920 --> 00:01:27.359
+excavated or cut and fill areas being excavated at each station.
+
+00:01:27.359 --> 00:01:38.000
+So plugging these into the equation, average end area method should give us what we need.
+
+00:01:38.000 --> 00:01:48.000
+So first we're going to go from station 1 to station 2.
+
+00:01:48.000 --> 00:02:04.280
+And then we're going to go from station 2 to station 3.50.
+
+00:02:04.280 --> 00:02:14.280
+Next we can focus on our cut volumes first.
+
+00:02:14.280 --> 00:02:25.599
+So in this case V equals our length between stations is 100 feet, and we have no cut volumes
+
+00:02:25.599 --> 00:02:28.360
+in area 1 or area 2.
+
+00:02:28.360 --> 00:02:40.520
+So this is going to simply be 0 cubic feet.
+
+00:02:41.520 --> 00:02:53.200
+We do have a cut volume in area 2 of the measurement between station 2 and 3.5.
+
+00:02:53.200 --> 00:02:58.320
+So the length here is 150 feet between the two stations.
+
+00:02:58.320 --> 00:03:04.040
+And again area 1 for us, which is the old area 2, will be 0.
+
+00:03:05.039 --> 00:03:12.719
+Area 2 for our current one is going to be 50.
+
+00:03:12.719 --> 00:03:26.479
+And this will give us 37.50 feet cubed.
+
+00:03:26.479 --> 00:03:36.079
+Next we can look at our fill volumes for both stations.
+
+00:03:36.079 --> 00:03:42.919
+Again our total length between station 1 and 2 is 100 feet.
+
+00:03:42.919 --> 00:03:51.239
+And this time we have fill values in both of these stations.
+
+00:03:51.239 --> 00:04:04.039
+200 feet squared plus 75 feet squared over 2.
+
+00:04:04.039 --> 00:04:15.120
+And that's going to give us 13, 750 feet cubed.
+
+00:04:15.120 --> 00:04:21.319
+And our next measurement is going to be between station 2 and 3.5.
+
+00:04:21.319 --> 00:04:26.159
+I keep saying that wrong, but between these two stations.
+
+00:04:26.159 --> 00:04:30.879
+So that's going to be 150 feet.
+
+00:04:31.879 --> 00:04:35.680
+This is going to be whoops not 50.
+
+00:04:35.680 --> 00:04:46.759
+This is going to be 75 feet squared plus 0 feet squared over 2.
+
+00:04:46.759 --> 00:04:55.719
+And that's going to give us 5, 6, 2, 5 feet cubed.
+
+00:04:55.719 --> 00:04:59.920
+So now we've assembled our total cut volumes for each station.
+
+00:04:59.920 --> 00:05:03.120
+And our total fill volumes for each station.
+
+00:05:03.120 --> 00:05:06.800
+So our next step is to simply sum all of these together.
+
+00:05:06.800 --> 00:05:13.439
+The formula notes that fill is positive and cut is negative.
+
+00:05:13.439 --> 00:05:16.400
+So let's keep that convention here.
+
+00:05:16.400 --> 00:05:29.800
+So we have plus 13, 750 feet cubed for the fill volume for station 1 to 2.
+
+00:05:30.720 --> 00:05:40.960
+And plus 5, 6, 2, 5 feet cubed from station 2 to 3 plus 50.
+
+00:05:40.960 --> 00:05:51.879
+And nothing in the fill volume, the cut volume for station 1 to 2.
+
+00:05:51.879 --> 00:06:06.040
+And then negative 3, 750 feet cubed.
+
+00:06:06.040 --> 00:06:12.800
+So fill, fill, cut, cut.
+
+00:06:12.800 --> 00:06:28.800
+And that's going to come out to 15, 6, 2, 5 feet cubed of fill material.
+
+00:06:28.800 --> 00:06:36.000
+And finally, since the equation is asking, or the question is asking for this to be in cubic yards.
+
+00:06:36.519 --> 00:06:38.959
+We will convert that.
+
+00:06:38.959 --> 00:07:04.319
+So 15, 6, 2, 5 feet cubed times 1 yard cubed over 3 feet cubed equals 578 yards cubed of fill material.
+
+00:07:04.319 --> 00:07:14.719
+So as you can see here, it's going to require approximately 580 additional cubic yards of fill material in order to complete this project.
+
+00:07:14.719 --> 00:07:29.480
+Logically, we can even see this in the image based on the fact that station 1 and station 2 both require more fill material than can possibly even be excavated at the third station.
+
+00:07:29.480 --> 00:07:38.680
+So this whole problem pretty much only requires knowing where to find the average end area method equation and how to apply it, which is pretty simple.
+
+00:07:38.680 --> 00:07:41.240
+And that's all it takes to solve this problem.

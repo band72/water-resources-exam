@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.960
+Ok guys, in this problem, a fully loaded dump truck can carry about 14 tons.
+
+00:00:07.960 --> 00:00:13.439
+A dump truck leaving a construction site damages its front right wheel, and it needs to
+
+00:00:13.439 --> 00:00:16.440
+be replaced before it can continue.
+
+00:00:16.440 --> 00:00:21.920
+The on-site contractor has requested a hydraulic ram to lift and support the truck while
+
+00:00:21.920 --> 00:00:24.320
+the wheel is being replaced.
+
+00:00:24.320 --> 00:00:28.839
+These rams are rated in tons, 2000 pounds per ton.
+
+00:00:28.839 --> 00:00:39.079
+How much force does the dump truck impart onto the ground beneath it in kilonewtons?
+
+00:00:39.079 --> 00:00:43.200
+So the first thing we can determine about this problem is that most of this stuff is
+
+00:00:43.200 --> 00:00:45.159
+just meant to trick you.
+
+00:00:45.159 --> 00:00:48.640
+The whole story about the dump truck doesn't matter.
+
+00:00:48.640 --> 00:00:55.200
+All we need to know is that we need to find the force imparted onto the ground in kilonewtons
+
+00:00:55.200 --> 00:00:57.879
+by a 14 ton dump truck.
+
+00:00:57.880 --> 00:01:02.440
+The wheel story doesn't matter at all, and the information about the ram doesn't really
+
+00:01:02.440 --> 00:01:08.480
+matter, but it will be useful to know that 2000 pounds are in a ton in case you've forgotten
+
+00:01:08.480 --> 00:01:10.120
+that.
+
+00:01:10.120 --> 00:01:14.960
+So the first thing we'd be doing in this case is trying to get the conversion either from
+
+00:01:14.960 --> 00:01:20.640
+tons to kilonewtons or from pounds to kilonewtons.
+
+00:01:20.640 --> 00:01:25.680
+So step one for us is to go to our reference manual.
+
+00:01:25.680 --> 00:01:31.320
+If we go to page three, we can find the conversion factors here, and the way they're laid
+
+00:01:31.320 --> 00:01:34.040
+out is in columns.
+
+00:01:34.040 --> 00:01:41.760
+So multiply a certain value by a certain number to obtain another certain unit.
+
+00:01:41.760 --> 00:01:48.400
+So if we write this down just for clarity on the first one.
+
+00:01:48.400 --> 00:02:05.960
+Multiply in this case, it's pound force by 4.448 to obtain newtons.
+
+00:02:05.960 --> 00:02:14.000
+So if we write this down just for clarity on the first one.
+
+00:02:14.000 --> 00:02:27.120
+multiply pound force in this case by 4.448 to obtain newtons.
+
+00:02:27.120 --> 00:02:37.199
+Now the way I write this out so as not to confuse myself is 4.448 newtons to one pound.
+
+00:02:37.239 --> 00:02:46.519
+I try to do this so that I don't accidentally say that 4.448 pounds are in one newton instead.
+
+00:02:46.519 --> 00:02:51.799
+So it's just important to understand how to group these things together when we start
+
+00:02:51.799 --> 00:02:56.599
+with multiplying a unit to obtain a different kind of unit.
+
+00:02:56.599 --> 00:03:01.000
+All we need to do now is to solve our unit conversion.
+
+00:03:01.000 --> 00:03:06.639
+So step two for us or step one if you prefer to think of it that way is going to be
+
+00:03:06.639 --> 00:03:23.279
+4.448 newtons per pound times 2,000 pounds, one ton times 14 tons for the truck,
+
+00:03:23.279 --> 00:03:29.039
+times one kilo newton over 1,000 newtons.
+
+00:03:29.039 --> 00:03:34.279
+Before we finish solving we can check to make sure that all of our units cancel out.
+
+00:03:34.280 --> 00:03:41.000
+So pounds go away, tons go away, and newtons go away.
+
+00:03:41.000 --> 00:03:44.520
+And we are left with kilo newtons.
+
+00:03:44.520 --> 00:03:53.479
+And our answer calculates out to be 124.54 kilo newtons.
+
+00:03:53.479 --> 00:03:57.400
+There is an alternate way to solve this problem.
+
+00:03:57.400 --> 00:04:04.300
+If you know that 8.89 kilo newtons equals one ton, you can simply multiply that by 14
+
+00:04:04.300 --> 00:04:09.599
+tons and get straight to the final answer.
+
+00:04:09.599 --> 00:04:14.120
+Either way, the answer we would select for this problem is 125.

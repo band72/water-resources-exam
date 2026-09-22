@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.679
+Okay guys, in this problem we are going to observe the following simply supported
+
+00:00:05.679 --> 00:00:13.080
+truss and we are going to find the loads in members B and C in kips. So in this
+
+00:00:13.080 --> 00:00:20.600
+truss we can see that it is supported here and here and members A, B, C and D are
+
+00:00:20.600 --> 00:00:26.920
+called out. Additionally all of the truss members are the same length and we have
+
+00:00:26.920 --> 00:00:32.480
+three reaction forces applied at the following joints. So this problem is
+
+00:00:32.480 --> 00:00:37.840
+asking us just to find the loads in two members here and we can do that with
+
+00:00:37.840 --> 00:00:43.420
+what is called a force analysis. And really all we are looking for here are
+
+00:00:43.420 --> 00:00:50.760
+zero force members. Because if we look at the availability of our answers here we
+
+00:00:50.759 --> 00:00:56.960
+we can see that they are either 200 kips or zero. So we don't need to do any math.
+
+00:00:56.960 --> 00:01:03.719
+So we can do this problem just by inspection as well. And the way we can do this
+
+00:01:03.719 --> 00:01:09.039
+is by following three rules to determine if something is a zero force member or
+
+00:01:09.039 --> 00:01:16.439
+not. So the first rule is if three members form a joint.
+
+00:01:17.439 --> 00:01:24.719
+The second case is if two members are what we call co-linear and what that means
+
+00:01:24.719 --> 00:01:30.039
+is they are in the same axis, the same vector and the same plane as each other.
+
+00:01:30.039 --> 00:01:39.719
+And finally if no external load or reaction occurs at that joint. So if you can
+
+00:01:39.719 --> 00:01:46.120
+meet these three cases then the third non-co-linear member in your three-member
+
+00:01:46.120 --> 00:01:55.400
+joint is a zero force member. So let's start doing this by inspection. We could
+
+00:01:55.400 --> 00:02:01.200
+start with a but because we're not being asked to solve for a I think we should
+
+00:02:01.200 --> 00:02:09.120
+go right to be. Now we can see here that b has two different sides but we can only
+
+00:02:09.120 --> 00:02:16.280
+analyze b using the zero force series of rules from this joint up here. So there
+
+00:02:16.280 --> 00:02:22.580
+are three members in this joint. Two of the members are co-linear. If two of the
+
+00:02:22.580 --> 00:02:28.120
+members are co-linear as we can see here and finally we have no external load or
+
+00:02:28.120 --> 00:02:33.759
+reaction at this joint. We do have one beneath it but we are looking at the joint at
+
+00:02:33.759 --> 00:02:40.759
+the top instead. So using our rules we can determine that there is zero force in member
+
+00:02:40.759 --> 00:02:50.879
+b. So what this implies here is that these other two diagonal members are taking the
+
+00:02:50.879 --> 00:03:00.000
+force of the applied load from the joint beneath it. So now that we've solved b, let's
+
+00:03:00.000 --> 00:03:09.240
+move on to c. We can see that at the top joint there are five members so we can't solve
+
+00:03:09.240 --> 00:03:16.000
+member c from the top joint. If we go to the bottom of member c we can see that three members
+
+00:03:16.000 --> 00:03:24.420
+do form a joint here and two of them are co-linear. However rule three is violated because
+
+00:03:24.419 --> 00:03:31.579
+there is in fact an external load at this joint. So we cannot say that this member here
+
+00:03:31.579 --> 00:03:38.479
+is a zero force member. So even if we had not solved for c and we had only solved for b so
+
+00:03:38.479 --> 00:03:46.579
+far we can already determine that two of these answers are wrong. However since we have
+
+00:03:46.579 --> 00:03:53.139
+also solved for c now we can determine that the third answer here is going to be our correct
+
+00:03:53.139 --> 00:03:59.459
+answer. And that's it for this problem. If you see a problem like this on the test remember
+
+00:03:59.459 --> 00:04:04.099
+these three rules and you should be successful in solving it.

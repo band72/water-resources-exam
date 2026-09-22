@@ -1,0 +1,736 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.290 --> 00:00:01.709 align:start position:0%
+ 
+[Music]
+
+00:00:01.709 --> 00:00:01.719 align:start position:0%
+[Music]
+ 
+
+00:00:01.719 --> 00:00:04.789 align:start position:0%
+[Music]
+consider<00:00:02.200><c> the</c><00:00:02.360><c> given</c><00:00:02.679><c> triangular</c><00:00:03.799><c> Channel</c>
+
+00:00:04.789 --> 00:00:04.799 align:start position:0%
+consider the given triangular Channel
+ 
+
+00:00:04.799 --> 00:00:07.190 align:start position:0%
+consider the given triangular Channel
+this<00:00:04.920><c> is</c><00:00:05.080><c> a</c><00:00:05.319><c> concrete</c><00:00:05.799><c> lined</c><00:00:06.160><c> channel</c><00:00:06.879><c> that</c><00:00:07.000><c> is</c>
+
+00:00:07.190 --> 00:00:07.200 align:start position:0%
+this is a concrete lined channel that is
+ 
+
+00:00:07.200 --> 00:00:09.950 align:start position:0%
+this is a concrete lined channel that is
+designed<00:00:07.640><c> for</c><00:00:07.799><c> a</c><00:00:08.080><c> maximum</c><00:00:08.519><c> flow</c><00:00:09.120><c> of</c><00:00:09.360><c> 5</c><00:00:09.679><c> cubic</c>
+
+00:00:09.950 --> 00:00:09.960 align:start position:0%
+designed for a maximum flow of 5 cubic
+ 
+
+00:00:09.960 --> 00:00:14.549 align:start position:0%
+designed for a maximum flow of 5 cubic
+feet<00:00:10.240><c> per</c><00:00:10.759><c> second</c><00:00:11.759><c> its</c><00:00:12.000><c> length</c><00:00:12.559><c> is500</c><00:00:13.480><c> ft</c><00:00:14.440><c> and</c>
+
+00:00:14.549 --> 00:00:14.559 align:start position:0%
+feet per second its length is500 ft and
+ 
+
+00:00:14.559 --> 00:00:16.950 align:start position:0%
+feet per second its length is500 ft and
+it<00:00:14.759><c> has</c><00:00:14.920><c> a</c><00:00:15.080><c> vertical</c><00:00:15.480><c> slope</c><00:00:16.039><c> of</c>
+
+00:00:16.950 --> 00:00:16.960 align:start position:0%
+it has a vertical slope of
+ 
+
+00:00:16.960 --> 00:00:20.349 align:start position:0%
+it has a vertical slope of
+2%<00:00:17.960><c> if</c><00:00:18.119><c> the</c><00:00:18.240><c> flow</c><00:00:18.760><c> is</c><00:00:19.000><c> 3</c><00:00:19.520><c> cubic</c><00:00:19.800><c> feet</c><00:00:20.080><c> per</c>
+
+00:00:20.349 --> 00:00:20.359 align:start position:0%
+2% if the flow is 3 cubic feet per
+ 
+
+00:00:20.359 --> 00:00:25.790 align:start position:0%
+2% if the flow is 3 cubic feet per
+second<00:00:21.359><c> what</c><00:00:21.560><c> is</c><00:00:21.680><c> the</c><00:00:21.840><c> critical</c><00:00:22.279><c> depth</c><00:00:22.720><c> in</c>
+
+00:00:25.790 --> 00:00:25.800 align:start position:0%
+ 
+ 
+
+00:00:25.800 --> 00:00:28.710 align:start position:0%
+ 
+feet<00:00:26.800><c> in</c><00:00:26.960><c> this</c><00:00:27.279><c> problem</c><00:00:27.880><c> we</c><00:00:28.000><c> are</c><00:00:28.240><c> given</c><00:00:28.519><c> a</c>
+
+00:00:28.710 --> 00:00:28.720 align:start position:0%
+feet in this problem we are given a
+ 
+
+00:00:28.720 --> 00:00:31.470 align:start position:0%
+feet in this problem we are given a
+triangular<00:00:29.359><c> Channel</c><00:00:30.080><c> and</c><00:00:30.240><c> are</c><00:00:30.480><c> asked</c><00:00:30.840><c> to</c><00:00:31.080><c> find</c>
+
+00:00:31.470 --> 00:00:31.480 align:start position:0%
+triangular Channel and are asked to find
+ 
+
+00:00:31.480 --> 00:00:34.830 align:start position:0%
+triangular Channel and are asked to find
+the<00:00:31.640><c> critical</c><00:00:32.119><c> depth</c><00:00:32.520><c> at</c><00:00:32.640><c> a</c><00:00:32.800><c> given</c><00:00:33.040><c> flow</c><00:00:33.840><c> rate</c>
+
+00:00:34.830 --> 00:00:34.840 align:start position:0%
+the critical depth at a given flow rate
+ 
+
+00:00:34.840 --> 00:00:37.190 align:start position:0%
+the critical depth at a given flow rate
+first<00:00:35.160><c> things</c><00:00:35.520><c> first</c><00:00:36.480><c> let's</c><00:00:36.680><c> search</c><00:00:37.040><c> the</c>
+
+00:00:37.190 --> 00:00:37.200 align:start position:0%
+first things first let's search the
+ 
+
+00:00:37.200 --> 00:00:40.150 align:start position:0%
+first things first let's search the
+manual<00:00:37.600><c> for</c><00:00:37.800><c> critical</c><00:00:38.680><c> depth</c><00:00:39.680><c> the</c><00:00:39.840><c> first</c>
+
+00:00:40.150 --> 00:00:40.160 align:start position:0%
+manual for critical depth the first
+ 
+
+00:00:40.160 --> 00:00:42.270 align:start position:0%
+manual for critical depth the first
+occurrence<00:00:40.719><c> will</c><00:00:40.920><c> take</c><00:00:41.079><c> you</c><00:00:41.280><c> to</c><00:00:41.440><c> a</c><00:00:41.680><c> section</c><00:00:42.000><c> on</c>
+
+00:00:42.270 --> 00:00:42.280 align:start position:0%
+occurrence will take you to a section on
+ 
+
+00:00:42.280 --> 00:00:45.470 align:start position:0%
+occurrence will take you to a section on
+rectangular<00:00:43.160><c> channels</c><00:00:44.160><c> let's</c><00:00:44.440><c> skip</c><00:00:44.840><c> this</c><00:00:45.280><c> and</c>
+
+00:00:45.470 --> 00:00:45.480 align:start position:0%
+rectangular channels let's skip this and
+ 
+
+00:00:45.480 --> 00:00:48.510 align:start position:0%
+rectangular channels let's skip this and
+find<00:00:45.760><c> the</c><00:00:45.879><c> one</c><00:00:46.120><c> for</c><00:00:46.360><c> triangular</c><00:00:47.399><c> channels</c><00:00:48.399><c> we</c>
+
+00:00:48.510 --> 00:00:48.520 align:start position:0%
+find the one for triangular channels we
+ 
+
+00:00:48.520 --> 00:00:50.350 align:start position:0%
+find the one for triangular channels we
+can<00:00:48.760><c> keep</c><00:00:49.000><c> clicking</c><00:00:49.399><c> through</c><00:00:49.680><c> results</c><00:00:50.120><c> for</c>
+
+00:00:50.350 --> 00:00:50.360 align:start position:0%
+can keep clicking through results for
+ 
+
+00:00:50.360 --> 00:00:52.470 align:start position:0%
+can keep clicking through results for
+critical<00:00:50.800><c> depth</c><00:00:51.520><c> until</c><00:00:51.800><c> we</c><00:00:51.960><c> come</c><00:00:52.120><c> to</c><00:00:52.320><c> the</c>
+
+00:00:52.470 --> 00:00:52.480 align:start position:0%
+critical depth until we come to the
+ 
+
+00:00:52.480 --> 00:00:54.110 align:start position:0%
+critical depth until we come to the
+section
+
+00:00:54.110 --> 00:00:54.120 align:start position:0%
+section
+ 
+
+00:00:54.120 --> 00:00:59.110 align:start position:0%
+section
+6.4.5<00:00:55.199><c> point4</c><00:00:56.199><c> titled</c><00:00:56.840><c> flow</c><00:00:57.239><c> in</c><00:00:57.920><c> channels</c><00:00:58.920><c> the</c>
+
+00:00:59.110 --> 00:00:59.120 align:start position:0%
+6.4.5 point4 titled flow in channels the
+ 
+
+00:00:59.120 --> 00:01:01.750 align:start position:0%
+6.4.5 point4 titled flow in channels the
+second<00:00:59.480><c> page</c><00:00:59.719><c> of</c><00:01:00.079><c> this</c><00:01:00.239><c> section</c><00:01:01.000><c> leads</c><00:01:01.359><c> to</c><00:01:01.559><c> the</c>
+
+00:01:01.750 --> 00:01:01.760 align:start position:0%
+second page of this section leads to the
+ 
+
+00:01:01.760 --> 00:01:04.149 align:start position:0%
+second page of this section leads to the
+channel<00:01:02.199><c> section</c><00:01:02.680><c> critical</c>
+
+00:01:04.149 --> 00:01:04.159 align:start position:0%
+channel section critical
+ 
+
+00:01:04.159 --> 00:01:06.390 align:start position:0%
+channel section critical
+depths<00:01:05.159><c> if</c><00:01:05.320><c> we</c><00:01:05.479><c> look</c><00:01:05.640><c> at</c><00:01:05.799><c> the</c><00:01:05.920><c> part</c><00:01:06.080><c> of</c><00:01:06.240><c> the</c>
+
+00:01:06.390 --> 00:01:06.400 align:start position:0%
+depths if we look at the part of the
+ 
+
+00:01:06.400 --> 00:01:09.030 align:start position:0%
+depths if we look at the part of the
+table<00:01:07.040><c> that</c><00:01:07.200><c> deals</c><00:01:07.560><c> with</c><00:01:07.840><c> triangular</c>
+
+00:01:09.030 --> 00:01:09.040 align:start position:0%
+table that deals with triangular
+ 
+
+00:01:09.040 --> 00:01:10.950 align:start position:0%
+table that deals with triangular
+cross-sections<00:01:10.040><c> we</c><00:01:10.200><c> can</c><00:01:10.360><c> see</c><00:01:10.640><c> that</c><00:01:10.799><c> the</c>
+
+00:01:10.950 --> 00:01:10.960 align:start position:0%
+cross-sections we can see that the
+ 
+
+00:01:10.960 --> 00:01:13.830 align:start position:0%
+cross-sections we can see that the
+equation<00:01:11.320><c> for</c><00:01:11.560><c> critical</c><00:01:11.960><c> depth</c><00:01:12.360><c> is</c><00:01:12.520><c> given</c><00:01:12.840><c> as</c>
+
+00:01:13.830 --> 00:01:13.840 align:start position:0%
+equation for critical depth is given as
+ 
+
+00:01:13.840 --> 00:01:19.190 align:start position:0%
+equation for critical depth is given as
+follows<00:01:14.840><c> y</c><00:01:15.119><c> Sub</c><00:01:15.439><c> C</c><00:01:16.200><c> equals</c><00:01:17.159><c> theare</c><00:01:17.640><c> &lt;</c><00:01:17.759><c> TK</c><00:01:17.920><c> of</c><00:01:18.200><c> 2</c>
+
+00:01:19.190 --> 00:01:19.200 align:start position:0%
+follows y Sub C equals theare &lt; TK of 2
+ 
+
+00:01:19.200 --> 00:01:27.190 align:start position:0%
+follows y Sub C equals theare &lt; TK of 2
+*<00:01:19.920><c> Z</c><00:01:20.280><c> Sub</c><00:01:20.560><c> C</c><00:01:21.520><c> /</c><00:01:22.360><c> Z</c><00:01:23.360><c> all</c><00:01:23.520><c> of</c><00:01:23.720><c> which</c><00:01:23.920><c> is</c><00:01:24.159><c> raised</c><00:01:24.640><c> to</c>
+
+00:01:27.190 --> 00:01:27.200 align:start position:0%
+ 
+ 
+
+00:01:27.200 --> 00:01:30.749 align:start position:0%
+ 
+0.4<00:01:28.200><c> note</c><00:01:28.600><c> that</c><00:01:28.799><c> zc</c><00:01:29.439><c> in</c><00:01:29.560><c> this</c><00:01:29.920><c> equation</c><00:01:30.439><c> is</c><00:01:30.600><c> the</c>
+
+00:01:30.749 --> 00:01:30.759 align:start position:0%
+0.4 note that zc in this equation is the
+ 
+
+00:01:30.759 --> 00:01:32.830 align:start position:0%
+0.4 note that zc in this equation is the
+critical<00:01:31.240><c> flow</c><00:01:31.720><c> section</c>
+
+00:01:32.830 --> 00:01:32.840 align:start position:0%
+critical flow section
+ 
+
+00:01:32.840 --> 00:01:36.389 align:start position:0%
+critical flow section
+factor<00:01:33.840><c> in</c><00:01:34.000><c> general</c><00:01:34.840><c> a</c><00:01:35.040><c> section</c><00:01:35.520><c> factor</c><00:01:36.040><c> is</c><00:01:36.159><c> a</c>
+
+00:01:36.389 --> 00:01:36.399 align:start position:0%
+factor in general a section factor is a
+ 
+
+00:01:36.399 --> 00:01:39.190 align:start position:0%
+factor in general a section factor is a
+ratio<00:01:36.960><c> involving</c><00:01:37.520><c> area</c><00:01:38.119><c> with</c><00:01:38.640><c> or</c><00:01:38.880><c> other</c>
+
+00:01:39.190 --> 00:01:39.200 align:start position:0%
+ratio involving area with or other
+ 
+
+00:01:39.200 --> 00:01:40.830 align:start position:0%
+ratio involving area with or other
+geometric
+
+00:01:40.830 --> 00:01:40.840 align:start position:0%
+geometric
+ 
+
+00:01:40.840 --> 00:01:43.190 align:start position:0%
+geometric
+properties<00:01:41.840><c> the</c><00:01:42.000><c> critical</c><00:01:42.360><c> flow</c><00:01:42.720><c> section</c>
+
+00:01:43.190 --> 00:01:43.200 align:start position:0%
+properties the critical flow section
+ 
+
+00:01:43.200 --> 00:01:46.870 align:start position:0%
+properties the critical flow section
+Factor<00:01:43.680><c> Z</c><00:01:44.000><c> subc</c><00:01:45.000><c> is</c><00:01:45.119><c> a</c><00:01:45.439><c> parameter</c><00:01:46.439><c> that</c><00:01:46.600><c> helps</c>
+
+00:01:46.870 --> 00:01:46.880 align:start position:0%
+Factor Z subc is a parameter that helps
+ 
+
+00:01:46.880 --> 00:01:49.149 align:start position:0%
+Factor Z subc is a parameter that helps
+us<00:01:47.040><c> to</c><00:01:47.240><c> determine</c><00:01:47.680><c> the</c><00:01:47.840><c> critical</c><00:01:48.320><c> depth</c><00:01:48.880><c> Y</c>
+
+00:01:49.149 --> 00:01:49.159 align:start position:0%
+us to determine the critical depth Y
+ 
+
+00:01:49.159 --> 00:01:53.030 align:start position:0%
+us to determine the critical depth Y
+subc<00:01:49.960><c> in</c><00:01:50.079><c> a</c><00:01:50.640><c> channel</c><00:01:51.640><c> it</c><00:01:51.759><c> is</c><00:01:52.000><c> based</c><00:01:52.399><c> on</c><00:01:52.719><c> two</c>
+
+00:01:53.030 --> 00:01:53.040 align:start position:0%
+subc in a channel it is based on two
+ 
+
+00:01:53.040 --> 00:01:55.910 align:start position:0%
+subc in a channel it is based on two
+geometric<00:01:53.640><c> properties</c><00:01:54.640><c> the</c><00:01:54.759><c> flow</c><00:01:55.159><c> area</c><00:01:55.759><c> and</c>
+
+00:01:55.910 --> 00:01:55.920 align:start position:0%
+geometric properties the flow area and
+ 
+
+00:01:55.920 --> 00:01:57.190 align:start position:0%
+geometric properties the flow area and
+the<00:01:56.079><c> top</c>
+
+00:01:57.190 --> 00:01:57.200 align:start position:0%
+the top
+ 
+
+00:01:57.200 --> 00:01:59.910 align:start position:0%
+the top
+width<00:01:58.200><c> this</c><00:01:58.320><c> is</c><00:01:58.439><c> a</c><00:01:58.759><c> product</c><00:01:59.200><c> of</c><00:01:59.320><c> the</c><00:01:59.439><c> wed</c>
+
+00:01:59.910 --> 00:01:59.920 align:start position:0%
+width this is a product of the wed
+ 
+
+00:01:59.920 --> 00:02:01.990 align:start position:0%
+width this is a product of the wed
+perimeter<00:02:00.759><c> and</c><00:02:00.920><c> the</c><00:02:01.119><c> square</c><00:02:01.399><c> root</c><00:02:01.719><c> of</c><00:02:01.840><c> the</c>
+
+00:02:01.990 --> 00:02:02.000 align:start position:0%
+perimeter and the square root of the
+ 
+
+00:02:02.000 --> 00:02:04.749 align:start position:0%
+perimeter and the square root of the
+hydraulic<00:02:02.880><c> depth</c><00:02:03.880><c> not</c><00:02:04.079><c> that</c><00:02:04.200><c> you</c><00:02:04.399><c> need</c><00:02:04.560><c> to</c>
+
+00:02:04.749 --> 00:02:04.759 align:start position:0%
+hydraulic depth not that you need to
+ 
+
+00:02:04.759 --> 00:02:08.229 align:start position:0%
+hydraulic depth not that you need to
+know<00:02:05.119><c> any</c><00:02:05.280><c> of</c><00:02:05.520><c> this</c><00:02:06.039><c> to</c><00:02:06.320><c> actually</c><00:02:06.640><c> solve</c><00:02:07.000><c> this</c>
+
+00:02:08.229 --> 00:02:08.239 align:start position:0%
+know any of this to actually solve this
+ 
+
+00:02:08.239 --> 00:02:11.150 align:start position:0%
+know any of this to actually solve this
+problem<00:02:09.239><c> what</c><00:02:09.360><c> you</c><00:02:09.520><c> do</c><00:02:09.720><c> need</c><00:02:09.920><c> to</c><00:02:10.119><c> know</c><00:02:10.800><c> is</c><00:02:11.000><c> that</c>
+
+00:02:11.150 --> 00:02:11.160 align:start position:0%
+problem what you do need to know is that
+ 
+
+00:02:11.160 --> 00:02:13.670 align:start position:0%
+problem what you do need to know is that
+there<00:02:11.280><c> is</c><00:02:11.400><c> an</c><00:02:11.640><c> equation</c><00:02:12.040><c> for</c><00:02:12.280><c> Z</c><00:02:12.599><c> subc</c><00:02:13.400><c> in</c><00:02:13.520><c> the</c>
+
+00:02:13.670 --> 00:02:13.680 align:start position:0%
+there is an equation for Z subc in the
+ 
+
+00:02:13.680 --> 00:02:17.350 align:start position:0%
+there is an equation for Z subc in the
+table<00:02:14.120><c> as</c><00:02:14.640><c> well</c><00:02:15.640><c> however</c><00:02:16.280><c> we</c><00:02:16.480><c> can't</c><00:02:16.840><c> use</c><00:02:17.040><c> it</c>
+
+00:02:17.350 --> 00:02:17.360 align:start position:0%
+table as well however we can't use it
+ 
+
+00:02:17.360 --> 00:02:20.869 align:start position:0%
+table as well however we can't use it
+since<00:02:17.599><c> we</c><00:02:17.800><c> don't</c><00:02:18.080><c> have</c><00:02:18.319><c> the</c><00:02:18.840><c> depth</c><00:02:19.840><c> instead</c><00:02:20.720><c> we</c>
+
+00:02:20.869 --> 00:02:20.879 align:start position:0%
+since we don't have the depth instead we
+ 
+
+00:02:20.879 --> 00:02:22.949 align:start position:0%
+since we don't have the depth instead we
+have<00:02:21.040><c> to</c><00:02:21.200><c> use</c><00:02:21.480><c> the</c><00:02:21.680><c> general</c><00:02:22.120><c> equation</c><00:02:22.640><c> at</c><00:02:22.760><c> the</c>
+
+00:02:22.949 --> 00:02:22.959 align:start position:0%
+have to use the general equation at the
+ 
+
+00:02:22.959 --> 00:02:25.270 align:start position:0%
+have to use the general equation at the
+top<00:02:23.120><c> of</c><00:02:23.239><c> the</c><00:02:23.400><c> table</c><00:02:23.680><c> to</c><00:02:23.920><c> solve</c><00:02:24.280><c> for</c><00:02:24.440><c> it</c><00:02:25.040><c> since</c>
+
+00:02:25.270 --> 00:02:25.280 align:start position:0%
+top of the table to solve for it since
+ 
+
+00:02:25.280 --> 00:02:29.150 align:start position:0%
+top of the table to solve for it since
+we<00:02:25.519><c> have</c><00:02:25.720><c> flow</c><00:02:26.720><c> and</c><00:02:26.879><c> know</c><00:02:27.080><c> what</c><00:02:27.280><c> gravity</c><00:02:28.160><c> is</c>
+
+00:02:29.150 --> 00:02:29.160 align:start position:0%
+we have flow and know what gravity is
+ 
+
+00:02:29.160 --> 00:02:34.430 align:start position:0%
+we have flow and know what gravity is
+the<00:02:29.360><c> equation</c><00:02:29.920><c> to</c><00:02:30.080><c> use</c><00:02:30.360><c> is</c><00:02:30.560><c> going</c><00:02:30.760><c> to</c><00:02:30.959><c> be</c><00:02:31.519><c> as</c>
+
+00:02:34.430 --> 00:02:34.440 align:start position:0%
+ 
+ 
+
+00:02:34.440 --> 00:02:38.990 align:start position:0%
+ 
+follows<00:02:35.440><c> Z</c><00:02:36.160><c> subc</c><00:02:37.160><c> equal</c><00:02:37.599><c> Q</c><00:02:38.120><c> over</c><00:02:38.360><c> theare</c><00:02:38.760><c> &lt;</c><00:02:38.879><c> TK</c>
+
+00:02:38.990 --> 00:02:39.000 align:start position:0%
+follows Z subc equal Q over theare &lt; TK
+ 
+
+00:02:39.000 --> 00:02:40.229 align:start position:0%
+follows Z subc equal Q over theare &lt; TK
+of
+
+00:02:40.229 --> 00:02:40.239 align:start position:0%
+of
+ 
+
+00:02:40.239 --> 00:02:43.550 align:start position:0%
+of
+G<00:02:41.239><c> so</c><00:02:41.920><c> the</c><00:02:42.120><c> information</c><00:02:42.640><c> we</c><00:02:42.760><c> need</c><00:02:43.080><c> from</c><00:02:43.319><c> this</c>
+
+00:02:43.550 --> 00:02:43.560 align:start position:0%
+G so the information we need from this
+ 
+
+00:02:43.560 --> 00:02:45.990 align:start position:0%
+G so the information we need from this
+problem<00:02:44.080><c> includes</c><00:02:44.599><c> the</c><00:02:44.800><c> side</c><00:02:45.040><c> slopes</c><00:02:45.720><c> and</c><00:02:45.879><c> the</c>
+
+00:02:45.990 --> 00:02:46.000 align:start position:0%
+problem includes the side slopes and the
+ 
+
+00:02:46.000 --> 00:02:49.110 align:start position:0%
+problem includes the side slopes and the
+flow<00:02:46.400><c> rate</c><00:02:47.400><c> the</c><00:02:47.519><c> other</c><00:02:47.840><c> information</c><00:02:48.440><c> provided</c>
+
+00:02:49.110 --> 00:02:49.120 align:start position:0%
+flow rate the other information provided
+ 
+
+00:02:49.120 --> 00:02:52.229 align:start position:0%
+flow rate the other information provided
+includes<00:02:49.599><c> the</c><00:02:49.760><c> max</c><00:02:50.120><c> design</c><00:02:50.519><c> flow</c><00:02:51.080><c> rate</c><00:02:52.080><c> the</c>
+
+00:02:52.229 --> 00:02:52.239 align:start position:0%
+includes the max design flow rate the
+ 
+
+00:02:52.239 --> 00:02:54.630 align:start position:0%
+includes the max design flow rate the
+vertical<00:02:52.640><c> slope</c><00:02:53.599><c> and</c><00:02:53.760><c> the</c><00:02:53.920><c> length</c><00:02:54.120><c> of</c><00:02:54.239><c> the</c>
+
+00:02:54.630 --> 00:02:54.640 align:start position:0%
+vertical slope and the length of the
+ 
+
+00:02:54.640 --> 00:02:57.430 align:start position:0%
+vertical slope and the length of the
+channel<00:02:55.640><c> none</c><00:02:55.840><c> of</c><00:02:56.080><c> these</c><00:02:56.280><c> are</c><00:02:56.519><c> needed</c><00:02:57.239><c> to</c>
+
+00:02:57.430 --> 00:02:57.440 align:start position:0%
+channel none of these are needed to
+ 
+
+00:02:57.440 --> 00:03:00.509 align:start position:0%
+channel none of these are needed to
+solve<00:02:57.720><c> the</c><00:02:57.920><c> problem</c>
+
+00:03:00.509 --> 00:03:00.519 align:start position:0%
+solve the problem
+ 
+
+00:03:00.519 --> 00:03:02.869 align:start position:0%
+solve the problem
+so<00:03:00.800><c> first</c><00:03:01.519><c> we</c><00:03:01.680><c> can</c><00:03:01.879><c> solve</c><00:03:02.200><c> for</c><00:03:02.360><c> the</c><00:03:02.519><c> critical</c>
+
+00:03:02.869 --> 00:03:02.879 align:start position:0%
+so first we can solve for the critical
+ 
+
+00:03:02.879 --> 00:03:06.789 align:start position:0%
+so first we can solve for the critical
+flow<00:03:03.280><c> section</c><00:03:04.239><c> Factor</c><00:03:05.239><c> where</c><00:03:05.560><c> Q</c>
+
+00:03:06.789 --> 00:03:06.799 align:start position:0%
+flow section Factor where Q
+ 
+
+00:03:06.799 --> 00:03:11.350 align:start position:0%
+flow section Factor where Q
+equal<00:03:07.799><c> 3</c><00:03:08.159><c> cubic</c><00:03:08.480><c> feet</c><00:03:08.760><c> per</c><00:03:09.400><c> second</c><00:03:10.400><c> and</c><00:03:10.879><c> G</c><00:03:11.200><c> is</c>
+
+00:03:11.350 --> 00:03:11.360 align:start position:0%
+equal 3 cubic feet per second and G is
+ 
+
+00:03:11.360 --> 00:03:14.509 align:start position:0%
+equal 3 cubic feet per second and G is
+going<00:03:11.519><c> to</c><00:03:11.640><c> be</c><00:03:11.799><c> the</c><00:03:11.959><c> square</c><00:03:12.239><c> OT</c><00:03:12.560><c> of</c><00:03:13.200><c> 32.2</c><00:03:14.200><c> ft</c>
+
+00:03:14.509 --> 00:03:14.519 align:start position:0%
+going to be the square OT of 32.2 ft
+ 
+
+00:03:14.519 --> 00:03:16.630 align:start position:0%
+going to be the square OT of 32.2 ft
+perss
+
+00:03:16.630 --> 00:03:16.640 align:start position:0%
+perss
+ 
+
+00:03:16.640 --> 00:03:20.670 align:start position:0%
+perss
+squar<00:03:17.640><c> and</c><00:03:17.799><c> we</c><00:03:17.959><c> can</c><00:03:18.159><c> see</c><00:03:18.640><c> that</c><00:03:18.959><c> Z</c>
+
+00:03:20.670 --> 00:03:20.680 align:start position:0%
+squar and we can see that Z
+ 
+
+00:03:20.680 --> 00:03:23.589 align:start position:0%
+squar and we can see that Z
+subc<00:03:21.680><c> solves</c><00:03:22.200><c> to</c>
+
+00:03:23.589 --> 00:03:23.599 align:start position:0%
+subc solves to
+ 
+
+00:03:23.599 --> 00:03:27.149 align:start position:0%
+subc solves to
+0.53<00:03:24.599><c> Ft</c><00:03:25.080><c> raised</c><00:03:25.560><c> to</c><00:03:25.760><c> the</c>
+
+00:03:27.149 --> 00:03:27.159 align:start position:0%
+0.53 Ft raised to the
+ 
+
+00:03:27.159 --> 00:03:30.470 align:start position:0%
+0.53 Ft raised to the
+2.5<00:03:28.159><c> note</c><00:03:28.560><c> that</c><00:03:28.720><c> the</c><00:03:28.879><c> units</c><00:03:29.239><c> of</c><00:03:29.400><c> this</c>
+
+00:03:30.470 --> 00:03:30.480 align:start position:0%
+2.5 note that the units of this
+ 
+
+00:03:30.480 --> 00:03:33.830 align:start position:0%
+2.5 note that the units of this
+answer<00:03:31.480><c> our</c><00:03:31.720><c> feet</c><00:03:32.000><c> raised</c><00:03:32.280><c> to</c><00:03:32.439><c> the</c><00:03:32.599><c> 2.5</c><00:03:33.599><c> not</c>
+
+00:03:33.830 --> 00:03:33.840 align:start position:0%
+answer our feet raised to the 2.5 not
+ 
+
+00:03:33.840 --> 00:03:36.030 align:start position:0%
+answer our feet raised to the 2.5 not
+the<00:03:34.040><c> whole</c>
+
+00:03:36.030 --> 00:03:36.040 align:start position:0%
+the whole
+ 
+
+00:03:36.040 --> 00:03:38.470 align:start position:0%
+the whole
+number<00:03:37.040><c> this</c><00:03:37.159><c> will</c><00:03:37.360><c> make</c><00:03:37.519><c> sense</c><00:03:37.959><c> once</c><00:03:38.239><c> the</c>
+
+00:03:38.470 --> 00:03:38.480 align:start position:0%
+number this will make sense once the
+ 
+
+00:03:38.480 --> 00:03:39.789 align:start position:0%
+number this will make sense once the
+problem<00:03:38.760><c> is</c>
+
+00:03:39.789 --> 00:03:39.799 align:start position:0%
+problem is
+ 
+
+00:03:39.799 --> 00:03:42.869 align:start position:0%
+problem is
+solved<00:03:40.799><c> then</c><00:03:41.599><c> we</c><00:03:41.720><c> can</c><00:03:41.920><c> plug</c><00:03:42.200><c> this</c><00:03:42.439><c> back</c><00:03:42.599><c> into</c>
+
+00:03:42.869 --> 00:03:42.879 align:start position:0%
+solved then we can plug this back into
+ 
+
+00:03:42.879 --> 00:03:44.869 align:start position:0%
+solved then we can plug this back into
+the<00:03:43.080><c> equation</c><00:03:43.599><c> for</c><00:03:43.840><c> critical</c>
+
+00:03:44.869 --> 00:03:44.879 align:start position:0%
+the equation for critical
+ 
+
+00:03:44.879 --> 00:03:47.149 align:start position:0%
+the equation for critical
+depth<00:03:45.879><c> note</c><00:03:46.159><c> that</c><00:03:46.319><c> multiplying</c><00:03:46.959><c> the</c>
+
+00:03:47.149 --> 00:03:47.159 align:start position:0%
+depth note that multiplying the
+ 
+
+00:03:47.159 --> 00:03:49.990 align:start position:0%
+depth note that multiplying the
+exponents<00:03:47.760><c> on</c><00:03:47.920><c> the</c><00:03:48.080><c> units</c><00:03:48.599><c> together</c><00:03:49.560><c> gives</c><00:03:49.799><c> us</c>
+
+00:03:49.990 --> 00:03:50.000 align:start position:0%
+exponents on the units together gives us
+ 
+
+00:03:50.000 --> 00:03:52.830 align:start position:0%
+exponents on the units together gives us
+a<00:03:50.239><c> final</c><00:03:50.599><c> unit</c><00:03:50.959><c> of</c><00:03:51.120><c> feet</c><00:03:51.720><c> once</c>
+
+00:03:52.830 --> 00:03:52.840 align:start position:0%
+a final unit of feet once
+ 
+
+00:03:52.840 --> 00:03:54.830 align:start position:0%
+a final unit of feet once
+again
+
+00:03:54.830 --> 00:03:54.840 align:start position:0%
+again
+ 
+
+00:03:54.840 --> 00:03:58.990 align:start position:0%
+again
+so<00:03:55.840><c> solving</c><00:03:56.280><c> for</c><00:03:56.560><c> y</c><00:03:56.760><c> Sub</c><00:03:57.040><c> C</c><00:03:57.959><c> we</c><00:03:58.120><c> can</c><00:03:58.280><c> see</c><00:03:58.680><c> that</c>
+
+00:03:58.990 --> 00:03:59.000 align:start position:0%
+so solving for y Sub C we can see that
+ 
+
+00:03:59.000 --> 00:04:00.710 align:start position:0%
+so solving for y Sub C we can see that
+the<00:03:59.159><c> square</c><00:03:59.439><c> root</c>
+
+00:04:00.710 --> 00:04:00.720 align:start position:0%
+the square root
+ 
+
+00:04:00.720 --> 00:04:01.789 align:start position:0%
+the square root
+of
+
+00:04:01.789 --> 00:04:01.799 align:start position:0%
+of
+ 
+
+00:04:01.799 --> 00:04:07.350 align:start position:0%
+of
+2<00:04:03.040><c> *</c><00:04:04.480><c> 0.53</c><00:04:05.480><c> solved</c><00:04:05.879><c> for</c>
+
+00:04:07.350 --> 00:04:07.360 align:start position:0%
+2 * 0.53 solved for
+ 
+
+00:04:07.360 --> 00:04:09.750 align:start position:0%
+2 * 0.53 solved for
+before<00:04:08.360><c> over</c><00:04:08.680><c> the</c><00:04:08.840><c> Z</c>
+
+00:04:09.750 --> 00:04:09.760 align:start position:0%
+before over the Z
+ 
+
+00:04:09.760 --> 00:04:13.309 align:start position:0%
+before over the Z
+value<00:04:10.760><c> which</c><00:04:11.000><c> according</c><00:04:11.360><c> to</c><00:04:11.560><c> our</c><00:04:11.959><c> table</c><00:04:12.959><c> is</c>
+
+00:04:13.309 --> 00:04:13.319 align:start position:0%
+value which according to our table is
+ 
+
+00:04:13.319 --> 00:04:16.270 align:start position:0%
+value which according to our table is
+the<00:04:13.799><c> horizontal</c><00:04:14.599><c> component</c><00:04:15.079><c> to</c><00:04:15.239><c> the</c><00:04:15.360><c> slope</c>
+
+00:04:16.270 --> 00:04:16.280 align:start position:0%
+the horizontal component to the slope
+ 
+
+00:04:16.280 --> 00:04:17.949 align:start position:0%
+the horizontal component to the slope
+which<00:04:16.400><c> is</c><00:04:16.560><c> going</c><00:04:16.720><c> to</c><00:04:16.840><c> be</c>
+
+00:04:17.949 --> 00:04:17.959 align:start position:0%
+which is going to be
+ 
+
+00:04:17.959 --> 00:04:22.310 align:start position:0%
+which is going to be
+three<00:04:18.959><c> and</c><00:04:19.160><c> all</c><00:04:19.280><c> of</c><00:04:19.519><c> this</c><00:04:19.919><c> raised</c><00:04:20.280><c> to</c><00:04:20.440><c> the</c>
+
+00:04:22.310 --> 00:04:22.320 align:start position:0%
+three and all of this raised to the
+ 
+
+00:04:22.320 --> 00:04:26.070 align:start position:0%
+three and all of this raised to the
+0.4<00:04:23.320><c> and</c><00:04:23.440><c> we</c><00:04:23.560><c> can</c><00:04:23.800><c> see</c><00:04:24.479><c> that</c><00:04:25.280><c> this</c><00:04:25.520><c> calculates</c>
+
+00:04:26.070 --> 00:04:26.080 align:start position:0%
+0.4 and we can see that this calculates
+ 
+
+00:04:26.080 --> 00:04:30.270 align:start position:0%
+0.4 and we can see that this calculates
+out<00:04:26.440><c> to</c><00:04:27.000><c> 0.57</c><00:04:28.000><c> Ft</c>
+
+00:04:30.270 --> 00:04:30.280 align:start position:0%
+out to 0.57 Ft
+ 
+
+00:04:30.280 --> 00:04:31.870 align:start position:0%
+out to 0.57 Ft
+and<00:04:30.440><c> that's</c><00:04:30.639><c> all</c><00:04:30.800><c> it</c><00:04:30.919><c> takes</c><00:04:31.160><c> to</c><00:04:31.360><c> solve</c><00:04:31.680><c> this</c>
+
+00:04:31.870 --> 00:04:31.880 align:start position:0%
+and that's all it takes to solve this
+ 
+
+00:04:31.880 --> 00:04:34.880 align:start position:0%
+and that's all it takes to solve this
+problem
+

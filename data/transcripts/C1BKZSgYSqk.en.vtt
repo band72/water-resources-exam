@@ -1,0 +1,94 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.639
+At a construction site, an engineer samples cement from a truck pouring a slab.
+
+00:00:05.440 --> 00:00:11.759
+Three concrete cylinders are made and sent to a lab for compressive strength testing 28 days later.
+
+00:00:12.720 --> 00:00:16.559
+Each cylinder is 6 inches in diameter and 12 inches high.
+
+00:00:17.359 --> 00:00:28.480
+When tested, the axial compressive failure load in pounds for the cylinders is 53,667, 52,166,
+
+00:00:29.120 --> 00:00:39.200
+and 64,918 respectively. What is the average 28 day compressive strength of the cement in PSI?
+
+00:00:40.880 --> 00:00:45.760
+Okay, so in this problem, we're being asked to find the compressive strength in PSI.
+
+00:00:47.039 --> 00:00:53.040
+We can see that the axial compressive failure load of the cylinders is provided in pounds
+
+00:00:53.839 --> 00:00:59.679
+and we are given the dimensions of each concrete cylinder in inches.
+
+00:01:00.719 --> 00:01:09.680
+So the manual here, if you want to search for something to look at, you can use the term compressive or
+
+00:01:09.680 --> 00:01:18.159
+FC if you're using the search command. And that can bring you to chapter 2, section 2.5.1,
+
+00:01:18.959 --> 00:01:25.359
+material properties and testing. This is a section about compressive strength
+
+00:01:25.359 --> 00:01:29.840
+if you need a refresher on it, but the section itself does not provide an equation to use.
+
+00:01:30.640 --> 00:01:36.560
+Instead, the only thing it notes that I think is worth pointing out here is a strength test
+
+00:01:36.560 --> 00:01:44.000
+shall be the average of the strengths of at least 2, 6 by 12 inch cylinders. We have been
+
+00:01:44.000 --> 00:01:50.959
+provided with three cylinders. So we are looking at units of PSI and as mentioned, we've been given
+
+00:01:52.480 --> 00:01:58.960
+the compressive load in pounds and the cylinder dimensions in inches. All we need to do is
+
+00:01:58.960 --> 00:02:04.240
+calculate the compressive strength of each sample and then find the result. So let's get started.
+
+00:02:05.200 --> 00:02:11.599
+The area equation is going to be needed so that we can calculate the area of our concrete cylinder.
+
+00:02:12.479 --> 00:02:18.159
+So each cylinder is 6 inches in diameter and an axial compressive test
+
+00:02:20.799 --> 00:02:30.639
+is applied to the y-axis in a cylinder. Therefore, we're going to be using the 6 inches and not
+
+00:02:30.719 --> 00:02:43.919
+the 12 inches. So area in this case is going to be pi d squared over 4. In this case, that's going to
+
+00:02:43.919 --> 00:03:00.000
+be pi times 6 inches squared over 4. And this is going to come out to about 28.26 inches squared.
+
+00:03:01.279 --> 00:03:08.879
+Now all we have to do is divide each of the axial compressive failure loads by that number.
+
+00:03:09.759 --> 00:03:30.000
+So 53, 6, 6, 7 pounds over 28.26 inches squared equals about 18, 99 pound over inches.
+
+00:03:30.799 --> 00:03:48.799
+Geward also called PSI. Then the second cylinder is 52, 116 pounds over 28.26 inches squared.
+
+00:03:50.079 --> 00:03:59.599
+That's going to come out to about 18, 45 pound per inch squared. And then finally, we have
+
+00:04:01.199 --> 00:04:16.399
+64, 9, 1, 8 pound over 28.26 inches squared. And that's going to come out to about 22, 97
+
+00:04:17.599 --> 00:04:24.000
+pound over inches squared. Now all we have to do is get the average of these values. So
+
+00:04:24.480 --> 00:04:46.160
+18, 99 plus 18, 45 plus 2, 2, 9, 7 divided by 3 is going to give us 2013.67 pound over inches
+
+00:04:46.160 --> 00:04:53.680
+squared, which is very close to our answer of C. And that's all it takes to solve this particular
+
+00:04:53.680 --> 00:04:54.879
+problem.

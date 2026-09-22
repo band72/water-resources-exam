@@ -1,0 +1,331 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:08.000
+Okay, guys, in this problem, the information below has been given for a horizontal curve in a roadway.
+
+00:00:08.000 --> 00:00:15.000
+We have the point of intersection or the PI station at 15 plus 0, 0 station.
+
+00:00:15.000 --> 00:00:22.000
+We have the degree of curve at 9 degrees, the deflection angle at 11 degrees in 30 minutes,
+
+00:00:22.000 --> 00:00:28.000
+and the station of the point of tangent where the PT is what we are looking to find.
+
+00:00:28.000 --> 00:00:33.000
+So, let's spend some time defining a few things here.
+
+00:00:33.000 --> 00:00:43.000
+So, this station number can also be written out as 1500 feet.
+
+00:00:43.000 --> 00:00:56.000
+And that's because stations are given in increments of 100 on this side and the remaining numbers on the other side.
+
+00:00:57.000 --> 00:01:00.000
+The degree of curve is fine the way it is for this.
+
+00:01:00.000 --> 00:01:09.000
+The deflection angle we should convert to a decimal degree, not a minute.
+
+00:01:09.000 --> 00:01:16.000
+So, the easiest way to do this is to divide this number by 60,
+
+00:01:16.000 --> 00:01:21.000
+which would give you 11.5 degrees.
+
+00:01:21.000 --> 00:01:27.000
+And I think now we're ready to solve the problem.
+
+00:01:27.000 --> 00:01:32.000
+So, we're being asked to find PT.
+
+00:01:32.000 --> 00:01:42.000
+And now PT, if we look in our reference manual, there is a drawing of all the basic curve elements.
+
+00:01:42.000 --> 00:01:50.000
+And just in case you don't have the reference manual handy, we can draw out some basic parts of it real fast.
+
+00:01:50.000 --> 00:01:57.000
+So, try to get this close to correct.
+
+00:01:57.000 --> 00:02:04.000
+We're going to have the point of the curve here at PC.
+
+00:02:04.000 --> 00:02:09.000
+And we're going to have the point of tangent, which is what we want to find over here.
+
+00:02:09.000 --> 00:02:14.000
+And then the point of intersection is up here at PI.
+
+00:02:14.000 --> 00:02:16.000
+And there's a lot more involved.
+
+00:02:16.000 --> 00:02:25.000
+So, this is going to be the arc length L, which is the curve itself.
+
+00:02:25.000 --> 00:02:40.000
+And if we were to continue out at this angle, this would be our theta, which is our deflection angle.
+
+00:02:40.000 --> 00:02:43.000
+Or delta, sorry.
+
+00:02:43.000 --> 00:02:50.000
+The degree of curve here, we can assign as value D.
+
+00:02:50.000 --> 00:03:06.000
+And we also need the radius of the circular curve, which is this value here.
+
+00:03:06.000 --> 00:03:15.000
+And this length is going to be T.
+
+00:03:15.000 --> 00:03:21.000
+And in some cases, if it's a symmetrical curve, it can be possible that this is T.
+
+00:03:21.000 --> 00:03:24.000
+I'm not 100% sure that it's the same.
+
+00:03:24.000 --> 00:03:28.000
+And I'll talk about this a little more at the end of the problem too.
+
+00:03:28.000 --> 00:03:30.000
+So, let's get started.
+
+00:03:30.000 --> 00:03:43.000
+Looking for PT, something the manual doesn't tell you, but the drawing will imply.
+
+00:03:43.000 --> 00:03:53.000
+And this is something I guess it would be good to memorize if I were you would be that PT equals PC plus L.
+
+00:03:53.000 --> 00:04:04.000
+So, our point of curve and our arc length, and that will give us the station value of the point of tangent.
+
+00:04:04.000 --> 00:04:06.000
+So, that's well in good, right?
+
+00:04:06.000 --> 00:04:12.000
+But it doesn't tell us, we don't know what PC is right now or how to calculate that, right?
+
+00:04:12.000 --> 00:04:15.000
+So, we also don't know what L is.
+
+00:04:15.000 --> 00:04:21.000
+So, if we start writing this out, we can start trying to go after some other terms here as well.
+
+00:04:21.000 --> 00:04:27.000
+So, L is going to be given actually in the manual.
+
+00:04:27.000 --> 00:04:32.000
+So, not in manual.
+
+00:04:32.000 --> 00:04:39.000
+And if it is, let me know in the comments that I didn't see it on the pages that I was referencing here.
+
+00:04:39.000 --> 00:04:44.000
+And these are the ones I assume you'd be using on the test.
+
+00:04:44.000 --> 00:04:55.000
+So, L is going to be equal to radius of circular curve times delta times pi over 180.
+
+00:04:55.000 --> 00:05:00.000
+And that's annoying for us too, because we do not know what the radius is.
+
+00:05:00.000 --> 00:05:05.000
+However, the manual gives us that as well.
+
+00:05:05.000 --> 00:05:22.000
+And the radius is going to be equal to the value of 5729.6 over your degree of curve, degree of curve, which we have here.
+
+00:05:22.000 --> 00:05:25.000
+So, we've got that.
+
+00:05:25.000 --> 00:05:31.000
+And finally, we can look back now.
+
+00:05:31.000 --> 00:05:36.000
+So, we have everything we need to look at to solve for L.
+
+00:05:36.000 --> 00:05:47.000
+To solve for PC, that is going to be equal to pi, the point of intersection minus the tangent.
+
+00:05:47.000 --> 00:05:57.000
+So, again, we can see here that pi minus this length of tangent will give you PC.
+
+00:05:57.000 --> 00:06:04.000
+Now, that's important to remember too, because I also do not see this explicitly called out in the manual.
+
+00:06:04.000 --> 00:06:13.000
+So, it'll be good to try to understand that and have this part understood.
+
+00:06:13.000 --> 00:06:17.000
+You may notice as well that we're not given t here for the tangent.
+
+00:06:17.000 --> 00:06:19.000
+We don't know how to calculate that.
+
+00:06:19.000 --> 00:06:23.000
+That is also given in the manual.
+
+00:06:23.000 --> 00:06:35.000
+So, t is going to be equal to R10 delta over 2.
+
+00:06:35.000 --> 00:06:42.000
+And R we have from up here, which is our radius of circular curve.
+
+00:06:42.000 --> 00:06:43.000
+Okay.
+
+00:06:43.000 --> 00:06:50.000
+So, next, what we just have to do is solve these in order and then we can solve the problem.
+
+00:06:50.000 --> 00:07:06.000
+So, I would solve by solving for the radius, then for the tangent, then we could solve for PC, then we could solve, we could solve for L or the PC.
+
+00:07:06.000 --> 00:07:16.000
+Both of those could be step three or four and then finally step five to tie it all back together.
+
+00:07:16.000 --> 00:07:23.000
+So, if we were to do this, we could get started and let's just copy it over here.
+
+00:07:23.000 --> 00:07:34.000
+So, R is going to be equal to 5729.6 feet over nine degrees.
+
+00:07:34.000 --> 00:07:42.000
+That's going to give us about 643.62.
+
+00:07:42.000 --> 00:07:49.000
+Step two, our tangent is going to be plugging in this value.
+
+00:07:49.000 --> 00:08:06.000
+So, 643.62 times the tan of 11.5, which is our deflection angle in the correct units up here.
+
+00:08:07.000 --> 00:08:15.000
+Over two, that's going to give us a value close to 64.8.
+
+00:08:15.000 --> 00:08:20.000
+Step three is going to be solving for the PC.
+
+00:08:20.000 --> 00:08:27.000
+So, that's simply going to be now PI plus or minus T in this case.
+
+00:08:27.000 --> 00:08:44.000
+So, PC equals 1500 feet minus 64.8 feet.
+
+00:08:44.000 --> 00:08:55.000
+And that'll give us just about 1435.2, which just so you know it could also be written as 1400 plus 30.
+
+00:08:55.000 --> 00:09:06.000
+plus 35.20 if this were as a station.
+
+00:09:06.000 --> 00:09:14.000
+And step four will be solving for RL.
+
+00:09:14.000 --> 00:09:36.000
+So, L is going to be equal to 64.32 times 11.5 times PI over 180.
+
+00:09:36.000 --> 00:09:43.000
+That should give you a value close to 129.18.
+
+00:09:43.000 --> 00:09:50.000
+And then finally, we can solve for PT.
+
+00:09:50.000 --> 00:09:56.000
+PT is going to be like we mentioned PC plus L.
+
+00:09:56.000 --> 00:10:11.000
+So, 1435.2 plus 60.
+
+00:10:11.000 --> 00:10:13.000
+Oh, sorry, no.
+
+00:10:13.000 --> 00:10:20.000
+Plus 129.18.
+
+00:10:20.000 --> 00:10:25.000
+It's important to make sure you're grabbing the right terms when you go to calculate your final.
+
+00:10:25.000 --> 00:10:28.000
+Well, each of your steps.
+
+00:10:28.000 --> 00:10:35.000
+And this will give us just about 1564.
+
+00:10:35.000 --> 00:10:42.000
+Oops.
+
+00:10:42.000 --> 00:10:46.000
+Sorry, looking for the eraser.
+
+00:10:46.000 --> 00:10:55.000
+1564.3.
+
+00:10:55.000 --> 00:10:57.000
+8.
+
+00:10:57.000 --> 00:11:05.000
+And the closest number we have here is the first one.
+
+00:11:05.000 --> 00:11:14.000
+So, going through these steps, that would be what you would need to do to solve this problem.
+
+00:11:14.000 --> 00:11:20.000
+There's another way that you might be able to do this that would save you a little bit of time, but it's not going to be correct.
+
+00:11:20.000 --> 00:11:23.000
+And so, I don't recommend it.
+
+00:11:23.000 --> 00:11:31.000
+In theory, it may be possible.
+
+00:11:31.000 --> 00:11:37.000
+So, let's be clear about that here.
+
+00:11:37.000 --> 00:11:50.000
+If this is a perfectly symmetrical circular curve, or horizontal curve, you might be able to skip a few steps and say that P.
+
+00:11:50.000 --> 00:11:56.000
+I plus T.
+
+00:11:56.000 --> 00:12:00.000
+We'll give you PT.
+
+00:12:00.000 --> 00:12:04.000
+But that's not usually correct.
+
+00:12:04.000 --> 00:12:24.000
+So, our caveats to this would be symmetrical curve.
+
+00:12:24.000 --> 00:12:32.000
+And two, that you don't have two answers that are almost the same.
+
+00:12:32.000 --> 00:12:34.000
+Like these two are here.
+
+00:12:34.000 --> 00:12:40.000
+If so, I wouldn't be comfortable guessing.
+
+00:12:40.000 --> 00:12:47.000
+Because there's really no guarantee that one is going to be correct versus the other.
+
+00:12:47.000 --> 00:13:03.000
+So, yeah, in general, I would recommend doing this by following all five steps.
+
+00:13:03.000 --> 00:13:09.000
+Just working your way through with the equations that the manual gives you.
+
+00:13:09.000 --> 00:13:18.000
+And trying to hammer number three and number five here into your head since they're not explicitly included in the manual.
+
+00:13:18.000 --> 00:13:24.000
+It'll be better to remember that P.I.
+
+00:13:24.000 --> 00:13:27.000
+minus T.
+
+00:13:27.000 --> 00:13:30.000
+Can get you PC.
+
+00:13:30.000 --> 00:13:37.000
+And that PC plus L will get you to PT.
+
+00:13:37.000 --> 00:13:41.000
+And that is what it takes to solve this problem.

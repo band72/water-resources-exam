@@ -1,0 +1,13 @@
+{
+  "name": "pe-exam-water-resources",
+  "version": "1.0.0",
+  "description": "SolvedIn6 PE Exam Water Resources & Environmental Practice Problems and Searchable Solutions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

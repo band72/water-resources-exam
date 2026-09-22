@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.719
+Consider the roadside ditch provided. Using the chart excerpt from the
+
+00:00:06.719 --> 00:00:12.480
+Ashto roadside design guide, determine the steepest allowable force lobe in
+
+00:00:12.480 --> 00:00:18.359
+units of vertical slash horizontal. So in this problem all we need to do is use
+
+00:00:18.359 --> 00:00:22.480
+the Ashto chart provided to correctly identify the steepest allowable
+
+00:00:22.480 --> 00:00:28.879
+force lobe in units of vertical slash horizontal. First we need to recognize
+
+00:00:28.879 --> 00:00:32.700
+that force lobe is the first slope leading down from the roadway to the
+
+00:00:32.700 --> 00:00:38.119
+bottom of the v-ditch and the back slope is the second slope leading back up to
+
+00:00:38.119 --> 00:00:44.659
+the ground surface. So we can draw a line from the back slope given which is 1
+
+00:00:44.659 --> 00:00:51.799
+colon 5 or 1 vertical unit to 5 horizontal units. Once we reach the edge of the
+
+00:00:51.799 --> 00:00:57.219
+preferred channel cross section we can draw the line either up or down. The
+
+00:00:57.219 --> 00:01:02.700
+problem asks for units of vertical slash horizontal. So let's draw this
+
+00:01:02.700 --> 00:01:10.980
+line downward. As can be seen we land somewhere between 0.3 and 0.2.
+
+00:01:10.980 --> 00:01:16.460
+Typically it makes sense to round to the more conservative slope. So let's pick
+
+00:01:16.460 --> 00:01:21.819
+the smaller of the two numbers given. This would be less than the max allowable
+
+00:01:21.819 --> 00:01:26.539
+foreslope according to the chart but rounding the other way would exceed our
+
+00:01:26.540 --> 00:01:32.180
+limitations instead. You will notice that technically 1 colon 5 is the same
+
+00:01:32.180 --> 00:01:40.580
+slope as 0.2. But the problem asks for units of v slash h so we will pick 0.2
+
+00:01:40.580 --> 00:01:45.780
+instead. And that's all it takes to solve this problem.

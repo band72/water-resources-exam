@@ -1,0 +1,1152 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:03.040 --> 00:00:05.430 align:start position:0%
+ 
+In<00:00:03.280><c> this</c><00:00:03.520><c> problem,</c><00:00:04.240><c> a</c><00:00:04.400><c> waste</c><00:00:04.799><c> mixture</c><00:00:05.200><c> with</c>
+
+00:00:05.430 --> 00:00:05.440 align:start position:0%
+In this problem, a waste mixture with
+ 
+
+00:00:05.440 --> 00:00:06.950 align:start position:0%
+In this problem, a waste mixture with
+the<00:00:05.600><c> following</c><00:00:06.000><c> principal</c><00:00:06.480><c> organic</c>
+
+00:00:06.950 --> 00:00:06.960 align:start position:0%
+the following principal organic
+ 
+
+00:00:06.960 --> 00:00:10.150 align:start position:0%
+the following principal organic
+hazardous<00:00:07.520><c> constituents</c><00:00:08.320><c> or</c><00:00:08.639><c> PC's</c><00:00:09.920><c> is</c>
+
+00:00:10.150 --> 00:00:10.160 align:start position:0%
+hazardous constituents or PC's is
+ 
+
+00:00:10.160 --> 00:00:12.790 align:start position:0%
+hazardous constituents or PC's is
+incinerated<00:00:11.120><c> and</c><00:00:11.440><c> all</c><00:00:11.679><c> chlorine</c><00:00:12.160><c> atoms</c><00:00:12.559><c> are</c>
+
+00:00:12.790 --> 00:00:12.800 align:start position:0%
+incinerated and all chlorine atoms are
+ 
+
+00:00:12.800 --> 00:00:15.110 align:start position:0%
+incinerated and all chlorine atoms are
+converted<00:00:13.200><c> to</c><00:00:13.519><c> HCl.</c>
+
+00:00:15.110 --> 00:00:15.120 align:start position:0%
+converted to HCl.
+ 
+
+00:00:15.120 --> 00:00:19.029 align:start position:0%
+converted to HCl.
+Find<00:00:15.440><c> the</c><00:00:15.679><c> total</c><00:00:16.000><c> HCl</c><00:00:16.640><c> flow</c><00:00:16.960><c> rate</c><00:00:17.359><c> in</c><00:00:17.600><c> kilog</c>
+
+00:00:19.029 --> 00:00:19.039 align:start position:0%
+Find the total HCl flow rate in kilog
+ 
+
+00:00:19.039 --> 00:00:21.349 align:start position:0%
+Find the total HCl flow rate in kilog
+generated<00:00:19.600><c> during</c><00:00:19.920><c> incineration</c><00:00:20.800><c> prior</c><00:00:21.119><c> to</c>
+
+00:00:21.349 --> 00:00:21.359 align:start position:0%
+generated during incineration prior to
+ 
+
+00:00:21.359 --> 00:00:23.269 align:start position:0%
+generated during incineration prior to
+control.
+
+00:00:23.269 --> 00:00:23.279 align:start position:0%
+control.
+ 
+
+00:00:23.279 --> 00:00:27.750 align:start position:0%
+control.
+So<00:00:23.519><c> here</c><00:00:23.840><c> we</c><00:00:24.080><c> are</c><00:00:24.240><c> given</c><00:00:25.519><c> three</c><00:00:25.840><c> different</c>
+
+00:00:27.750 --> 00:00:27.760 align:start position:0%
+So here we are given three different
+ 
+
+00:00:27.760 --> 00:00:31.029 align:start position:0%
+So here we are given three different
+PCs<00:00:28.720><c> in</c><00:00:28.880><c> our</c><00:00:29.039><c> waste</c><00:00:29.359><c> feed.</c><00:00:30.160><c> One,</c><00:00:30.480><c> two</c>
+
+00:00:31.029 --> 00:00:31.039 align:start position:0%
+PCs in our waste feed. One, two
+ 
+
+00:00:31.039 --> 00:00:33.350 align:start position:0%
+PCs in our waste feed. One, two
+dchloroeththane,
+
+00:00:33.350 --> 00:00:33.360 align:start position:0%
+dchloroeththane,
+ 
+
+00:00:33.360 --> 00:00:35.350 align:start position:0%
+dchloroeththane,
+chloromthane
+
+00:00:35.350 --> 00:00:35.360 align:start position:0%
+chloromthane
+ 
+
+00:00:35.360 --> 00:00:37.350 align:start position:0%
+chloromthane
+and<00:00:35.680><c> benzene.</c>
+
+00:00:37.350 --> 00:00:37.360 align:start position:0%
+and benzene.
+ 
+
+00:00:37.360 --> 00:00:39.430 align:start position:0%
+and benzene.
+Our<00:00:37.600><c> objective</c><00:00:38.000><c> is</c><00:00:38.160><c> to</c><00:00:38.399><c> figure</c><00:00:38.640><c> out</c><00:00:38.879><c> how</c><00:00:39.120><c> much</c>
+
+00:00:39.430 --> 00:00:39.440 align:start position:0%
+Our objective is to figure out how much
+ 
+
+00:00:39.440 --> 00:00:43.430 align:start position:0%
+Our objective is to figure out how much
+HCl<00:00:40.559><c> is</c><00:00:41.120><c> present</c><00:00:42.320><c> from</c><00:00:42.559><c> the</c><00:00:42.719><c> incineration</c>
+
+00:00:43.430 --> 00:00:43.440 align:start position:0%
+HCl is present from the incineration
+ 
+
+00:00:43.440 --> 00:00:45.030 align:start position:0%
+HCl is present from the incineration
+process.
+
+00:00:45.030 --> 00:00:45.040 align:start position:0%
+process.
+ 
+
+00:00:45.040 --> 00:00:47.430 align:start position:0%
+process.
+So<00:00:45.200><c> for</c><00:00:45.440><c> step</c><00:00:45.760><c> one,</c><00:00:46.559><c> let's</c><00:00:46.800><c> decide</c><00:00:47.200><c> which</c>
+
+00:00:47.430 --> 00:00:47.440 align:start position:0%
+So for step one, let's decide which
+ 
+
+00:00:47.440 --> 00:00:55.910 align:start position:0%
+So for step one, let's decide which
+compounds<00:00:48.079><c> actually</c><00:00:48.320><c> matter.</c>
+
+00:00:55.910 --> 00:00:55.920 align:start position:0%
+ 
+ 
+
+00:00:55.920 --> 00:00:57.750 align:start position:0%
+ 
+So<00:00:56.160><c> let's</c><00:00:56.480><c> look</c><00:00:56.559><c> at</c><00:00:56.719><c> the</c><00:00:56.879><c> atomic</c><00:00:57.280><c> weights</c><00:00:57.600><c> that</c>
+
+00:00:57.750 --> 00:00:57.760 align:start position:0%
+So let's look at the atomic weights that
+ 
+
+00:00:57.760 --> 00:01:00.310 align:start position:0%
+So let's look at the atomic weights that
+we<00:00:57.920><c> can</c><00:00:58.079><c> find</c><00:00:58.239><c> in</c><00:00:58.480><c> the</c><00:00:58.559><c> reference</c><00:00:58.960><c> manual.</c><00:01:00.079><c> The</c>
+
+00:01:00.310 --> 00:01:00.320 align:start position:0%
+we can find in the reference manual. The
+ 
+
+00:01:00.320 --> 00:01:03.830 align:start position:0%
+we can find in the reference manual. The
+three<00:01:00.480><c> that</c><00:01:00.719><c> we</c><00:01:00.879><c> need</c><00:01:01.280><c> are</c><00:01:01.600><c> C,</c><00:01:02.160><c> H,</c><00:01:02.559><c> and</c><00:01:03.199><c> CL</c>
+
+00:01:03.830 --> 00:01:03.840 align:start position:0%
+three that we need are C, H, and CL
+ 
+
+00:01:03.840 --> 00:01:05.590 align:start position:0%
+three that we need are C, H, and CL
+since<00:01:04.080><c> these</c><00:01:04.320><c> are</c><00:01:04.559><c> present</c><00:01:04.960><c> to</c><00:01:05.199><c> some</c><00:01:05.360><c> extent</c>
+
+00:01:05.590 --> 00:01:05.600 align:start position:0%
+since these are present to some extent
+ 
+
+00:01:05.600 --> 00:01:10.710 align:start position:0%
+since these are present to some extent
+in<00:01:05.840><c> each</c><00:01:06.000><c> of</c><00:01:06.159><c> the</c><00:01:06.400><c> parts</c><00:01:06.640><c> of</c><00:01:06.720><c> the</c><00:01:06.880><c> table.</c>
+
+00:01:10.710 --> 00:01:10.720 align:start position:0%
+ 
+ 
+
+00:01:10.720 --> 00:01:15.030 align:start position:0%
+ 
+So<00:01:11.040><c> C</c><00:01:11.360><c> is</c><00:01:11.600><c> going</c><00:01:11.760><c> to</c><00:01:11.920><c> be</c><00:01:12.240><c> 12</c><00:01:12.560><c> g</c><00:01:12.799><c> per</c><00:01:13.040><c> mole.</c><00:01:14.400><c> H</c><00:01:14.720><c> is</c>
+
+00:01:15.030 --> 00:01:15.040 align:start position:0%
+So C is going to be 12 g per mole. H is
+ 
+
+00:01:15.040 --> 00:01:20.070 align:start position:0%
+So C is going to be 12 g per mole. H is
+going<00:01:15.200><c> to</c><00:01:15.360><c> be</c><00:01:15.600><c> 1</c><00:01:16.799><c> and</c><00:01:17.520><c> CL</c><00:01:18.640><c> is</c><00:01:18.880><c> going</c><00:01:19.119><c> to</c><00:01:19.280><c> be</c>
+
+00:01:20.070 --> 00:01:20.080 align:start position:0%
+going to be 1 and CL is going to be
+ 
+
+00:01:20.080 --> 00:01:26.149 align:start position:0%
+going to be 1 and CL is going to be
+35.45.
+
+00:01:26.149 --> 00:01:26.159 align:start position:0%
+ 
+ 
+
+00:01:26.159 --> 00:01:27.830 align:start position:0%
+ 
+So<00:01:26.320><c> we</c><00:01:26.560><c> can</c><00:01:26.720><c> calculate</c><00:01:27.119><c> the</c><00:01:27.280><c> molecular</c>
+
+00:01:27.830 --> 00:01:27.840 align:start position:0%
+So we can calculate the molecular
+ 
+
+00:01:27.840 --> 00:01:30.390 align:start position:0%
+So we can calculate the molecular
+weights<00:01:28.240><c> now</c><00:01:28.560><c> for</c><00:01:28.880><c> each</c><00:01:29.200><c> of</c><00:01:29.360><c> the</c><00:01:29.600><c> feed</c><00:01:29.920><c> items</c>
+
+00:01:30.390 --> 00:01:30.400 align:start position:0%
+weights now for each of the feed items
+ 
+
+00:01:30.400 --> 00:01:33.190 align:start position:0%
+weights now for each of the feed items
+that<00:01:30.720><c> contributes</c><00:01:31.119><c> to</c><00:01:31.280><c> HCl.</c>
+
+00:01:33.190 --> 00:01:33.200 align:start position:0%
+that contributes to HCl.
+ 
+
+00:01:33.200 --> 00:01:34.950 align:start position:0%
+that contributes to HCl.
+This<00:01:33.439><c> would</c><00:01:33.600><c> rule</c><00:01:33.840><c> out</c><00:01:34.079><c> benzene</c><00:01:34.640><c> from</c><00:01:34.799><c> the</c>
+
+00:01:34.950 --> 00:01:34.960 align:start position:0%
+This would rule out benzene from the
+ 
+
+00:01:34.960 --> 00:01:37.749 align:start position:0%
+This would rule out benzene from the
+rest<00:01:35.119><c> of</c><00:01:35.200><c> the</c><00:01:35.360><c> problem</c><00:01:36.159><c> since</c><00:01:36.640><c> there</c><00:01:36.880><c> is</c><00:01:37.119><c> no</c><00:01:37.360><c> CL</c>
+
+00:01:37.749 --> 00:01:37.759 align:start position:0%
+rest of the problem since there is no CL
+ 
+
+00:01:37.759 --> 00:01:41.109 align:start position:0%
+rest of the problem since there is no CL
+in<00:01:38.000><c> that</c><00:01:38.479><c> waste</c><00:01:38.799><c> feed.</c>
+
+00:01:41.109 --> 00:01:41.119 align:start position:0%
+in that waste feed.
+ 
+
+00:01:41.119 --> 00:01:43.270 align:start position:0%
+in that waste feed.
+Let's<00:01:41.439><c> fill</c><00:01:41.600><c> in</c><00:01:41.759><c> the</c><00:01:42.000><c> rest</c><00:01:42.240><c> in</c><00:01:42.560><c> the</c><00:01:42.799><c> existing</c>
+
+00:01:43.270 --> 00:01:43.280 align:start position:0%
+Let's fill in the rest in the existing
+ 
+
+00:01:43.280 --> 00:01:48.310 align:start position:0%
+Let's fill in the rest in the existing
+table<00:01:43.520><c> below.</c>
+
+00:01:48.310 --> 00:01:48.320 align:start position:0%
+ 
+ 
+
+00:01:48.320 --> 00:01:55.190 align:start position:0%
+ 
+So<00:01:48.479><c> we</c><00:01:48.720><c> have</c><00:01:49.040><c> 12</c><00:01:49.759><c> g</c><00:01:50.079><c> per</c><00:01:50.320><c> mole</c><00:01:51.680><c> time</c><00:01:52.880><c> 2</c><00:01:53.680><c> C's</c>
+
+00:01:55.190 --> 00:01:55.200 align:start position:0%
+So we have 12 g per mole time 2 C's
+ 
+
+00:01:55.200 --> 00:01:58.310 align:start position:0%
+So we have 12 g per mole time 2 C's
+plus
+
+00:01:58.310 --> 00:01:58.320 align:start position:0%
+ 
+ 
+
+00:01:58.320 --> 00:02:01.190 align:start position:0%
+ 
+1<00:01:58.560><c> g</c><00:01:58.799><c> per</c><00:01:59.040><c> mole</c><00:01:59.200><c> of</c><00:01:59.360><c> H</c>
+
+00:02:01.190 --> 00:02:01.200 align:start position:0%
+1 g per mole of H
+ 
+
+00:02:01.200 --> 00:02:05.830 align:start position:0%
+1 g per mole of H
+times<00:02:01.439><c> four</c><00:02:01.680><c> of</c><00:02:01.840><c> those</c><00:02:03.119><c> plus</c>
+
+00:02:05.830 --> 00:02:05.840 align:start position:0%
+times four of those plus
+ 
+
+00:02:05.840 --> 00:02:10.790 align:start position:0%
+times four of those plus
+35.45<00:02:07.119><c> 45</c><00:02:07.680><c> g</c><00:02:08.000><c> per</c><00:02:08.160><c> mole*</c>
+
+00:02:10.790 --> 00:02:10.800 align:start position:0%
+35.45 45 g per mole*
+ 
+
+00:02:10.800 --> 00:02:13.430 align:start position:0%
+35.45 45 g per mole*
+2<00:02:11.039><c> for</c><00:02:11.280><c> CL</c>
+
+00:02:13.430 --> 00:02:13.440 align:start position:0%
+2 for CL
+ 
+
+00:02:13.440 --> 00:02:19.030 align:start position:0%
+2 for CL
+and<00:02:13.760><c> that</c><00:02:14.000><c> is</c><00:02:14.239><c> going</c><00:02:14.319><c> to</c><00:02:14.480><c> come</c><00:02:14.640><c> out</c><00:02:14.959><c> to</c><00:02:15.680><c> 98.9</c>
+
+00:02:19.030 --> 00:02:19.040 align:start position:0%
+ 
+ 
+
+00:02:19.040 --> 00:02:22.390 align:start position:0%
+ 
+g<00:02:19.920><c> per</c><00:02:20.160><c> mole.</c>
+
+00:02:22.390 --> 00:02:22.400 align:start position:0%
+g per mole.
+ 
+
+00:02:22.400 --> 00:02:26.869 align:start position:0%
+g per mole.
+Down<00:02:22.720><c> here</c><00:02:23.120><c> we</c><00:02:23.440><c> have</c><00:02:23.680><c> 12</c><00:02:24.239><c> *</c><00:02:25.280><c> 1</c>
+
+00:02:26.869 --> 00:02:26.879 align:start position:0%
+Down here we have 12 * 1
+ 
+
+00:02:26.879 --> 00:02:30.390 align:start position:0%
+Down here we have 12 * 1
++
+
+00:02:30.390 --> 00:02:30.400 align:start position:0%
+ 
+ 
+
+00:02:30.400 --> 00:02:33.750 align:start position:0%
+ 
+1<00:02:30.879><c> *</c><00:02:31.280><c> 3.</c><00:02:32.480><c> Sorry</c><00:02:32.720><c> about</c><00:02:32.879><c> the</c><00:02:33.040><c> parentheses</c><00:02:33.599><c> being</c>
+
+00:02:33.750 --> 00:02:33.760 align:start position:0%
+1 * 3. Sorry about the parentheses being
+ 
+
+00:02:33.760 --> 00:02:39.350 align:start position:0%
+1 * 3. Sorry about the parentheses being
+inconsistent.<00:02:35.200><c> plus</c><00:02:36.560><c> 35.45</c>
+
+00:02:39.350 --> 00:02:39.360 align:start position:0%
+inconsistent. plus 35.45
+ 
+
+00:02:39.360 --> 00:02:42.869 align:start position:0%
+inconsistent. plus 35.45
+and<00:02:39.599><c> that's</c><00:02:39.920><c> going</c><00:02:40.000><c> to</c><00:02:40.160><c> be</c><00:02:40.400><c> equal</c><00:02:40.879><c> to</c>
+
+00:02:42.869 --> 00:02:42.879 align:start position:0%
+and that's going to be equal to
+ 
+
+00:02:42.879 --> 00:02:46.869 align:start position:0%
+and that's going to be equal to
+50.45.
+
+00:02:46.869 --> 00:02:46.879 align:start position:0%
+ 
+ 
+
+00:02:46.879 --> 00:02:48.229 align:start position:0%
+ 
+And<00:02:47.040><c> then</c><00:02:47.200><c> we</c><00:02:47.360><c> don't</c><00:02:47.519><c> need</c><00:02:47.599><c> to</c><00:02:47.760><c> calculate</c><00:02:48.080><c> the</c>
+
+00:02:48.229 --> 00:02:48.239 align:start position:0%
+And then we don't need to calculate the
+ 
+
+00:02:48.239 --> 00:02:52.630 align:start position:0%
+And then we don't need to calculate the
+last<00:02:48.400><c> one.</c><00:02:49.840><c> Now</c><00:02:50.160><c> for</c><00:02:50.400><c> step</c><00:02:50.720><c> two</c>
+
+00:02:52.630 --> 00:02:52.640 align:start position:0%
+last one. Now for step two
+ 
+
+00:02:52.640 --> 00:02:54.790 align:start position:0%
+last one. Now for step two
+and<00:02:52.959><c> three,</c><00:02:53.360><c> we</c><00:02:53.599><c> can</c><00:02:53.680><c> convert</c><00:02:54.000><c> the</c><00:02:54.160><c> feed</c><00:02:54.400><c> rates</c>
+
+00:02:54.790 --> 00:02:54.800 align:start position:0%
+and three, we can convert the feed rates
+ 
+
+00:02:54.800 --> 00:02:59.030 align:start position:0%
+and three, we can convert the feed rates
+into<00:02:55.120><c> moles</c><00:02:55.440><c> per</c><00:02:55.599><c> hour.</c><00:02:56.959><c> So</c><00:02:57.120><c> for</c><00:02:57.360><c> step</c><00:02:57.680><c> two,</c>
+
+00:02:59.030 --> 00:02:59.040 align:start position:0%
+into moles per hour. So for step two,
+ 
+
+00:02:59.040 --> 00:03:05.110 align:start position:0%
+into moles per hour. So for step two,
+let's<00:02:59.360><c> convert</c><00:02:59.760><c> the</c><00:03:00.000><c> feed</c><00:03:01.040><c> to</c><00:03:02.000><c> grams</c><00:03:02.640><c> hour.</c>
+
+00:03:05.110 --> 00:03:05.120 align:start position:0%
+let's convert the feed to grams hour.
+ 
+
+00:03:05.120 --> 00:03:07.110 align:start position:0%
+let's convert the feed to grams hour.
+So,<00:03:05.360><c> we're</c><00:03:05.599><c> already</c><00:03:05.760><c> given</c><00:03:06.000><c> it</c><00:03:06.159><c> in</c><00:03:06.319><c> kilograms.</c>
+
+00:03:07.110 --> 00:03:07.120 align:start position:0%
+So, we're already given it in kilograms.
+ 
+
+00:03:07.120 --> 00:03:11.750 align:start position:0%
+So, we're already given it in kilograms.
+So,<00:03:07.280><c> let's</c><00:03:07.519><c> just</c><00:03:07.680><c> multiply</c><00:03:08.080><c> by</c><00:03:08.319><c> a</c><00:03:08.319><c> th00and.</c>
+
+00:03:11.750 --> 00:03:11.760 align:start position:0%
+ 
+ 
+
+00:03:11.760 --> 00:03:13.190 align:start position:0%
+ 
+You<00:03:11.920><c> could</c><00:03:12.080><c> skip</c><00:03:12.319><c> writing</c><00:03:12.560><c> this</c><00:03:12.720><c> out</c><00:03:12.879><c> on</c><00:03:13.040><c> the</c>
+
+00:03:13.190 --> 00:03:13.200 align:start position:0%
+You could skip writing this out on the
+ 
+
+00:03:13.200 --> 00:03:22.390 align:start position:0%
+You could skip writing this out on the
+exam<00:03:13.440><c> if</c><00:03:13.599><c> you</c><00:03:13.680><c> need</c><00:03:13.760><c> to</c><00:03:13.920><c> save</c><00:03:14.159><c> time.</c>
+
+00:03:22.390 --> 00:03:22.400 align:start position:0%
+ 
+ 
+
+00:03:22.400 --> 00:03:24.309 align:start position:0%
+ 
+And<00:03:22.640><c> since</c><00:03:22.879><c> we</c><00:03:23.040><c> have</c><00:03:23.200><c> grams</c><00:03:23.599><c> per</c><00:03:23.760><c> mole</c><00:03:24.080><c> and</c>
+
+00:03:24.309 --> 00:03:24.319 align:start position:0%
+And since we have grams per mole and
+ 
+
+00:03:24.319 --> 00:03:29.430 align:start position:0%
+And since we have grams per mole and
+grams<00:03:24.640><c> per</c><00:03:24.879><c> hour,</c><00:03:26.080><c> we</c><00:03:26.319><c> can</c><00:03:26.480><c> now</c><00:03:26.800><c> divide</c>
+
+00:03:29.430 --> 00:03:29.440 align:start position:0%
+grams per hour, we can now divide
+ 
+
+00:03:29.440 --> 00:03:32.630 align:start position:0%
+grams per hour, we can now divide
+column<00:03:29.840><c> two</c><00:03:30.159><c> here</c>
+
+00:03:32.630 --> 00:03:32.640 align:start position:0%
+column two here
+ 
+
+00:03:32.640 --> 00:03:36.630 align:start position:0%
+column two here
+by<00:03:33.040><c> column</c><00:03:33.440><c> 1.5</c>
+
+00:03:36.630 --> 00:03:36.640 align:start position:0%
+ 
+ 
+
+00:03:36.640 --> 00:03:40.309 align:start position:0%
+ 
+and
+
+00:03:40.309 --> 00:03:40.319 align:start position:0%
+ 
+ 
+
+00:03:40.319 --> 00:03:43.270 align:start position:0%
+ 
+calculate<00:03:40.799><c> our</c><00:03:41.120><c> feed</c>
+
+00:03:43.270 --> 00:03:43.280 align:start position:0%
+calculate our feed
+ 
+
+00:03:43.280 --> 00:03:56.070 align:start position:0%
+calculate our feed
+in<00:03:43.519><c> moles</c><00:03:43.840><c> per</c><00:03:44.080><c> hour.</c>
+
+00:03:56.070 --> 00:03:56.080 align:start position:0%
+ 
+ 
+
+00:03:56.080 --> 00:04:00.630 align:start position:0%
+ 
+So,<00:03:57.120><c> 180,000</c>
+
+00:04:00.630 --> 00:04:00.640 align:start position:0%
+ 
+ 
+
+00:04:00.640 --> 00:04:03.670 align:start position:0%
+ 
+g<00:04:01.280><c> per</c><00:04:01.519><c> hour</c>
+
+00:04:03.670 --> 00:04:03.680 align:start position:0%
+g per hour
+ 
+
+00:04:03.680 --> 00:04:06.869 align:start position:0%
+g per hour
+divided<00:04:04.159><c> by</c>
+
+00:04:06.869 --> 00:04:06.879 align:start position:0%
+divided by
+ 
+
+00:04:06.879 --> 00:04:11.190 align:start position:0%
+divided by
+98.9
+
+00:04:11.190 --> 00:04:11.200 align:start position:0%
+ 
+ 
+
+00:04:11.200 --> 00:04:14.309 align:start position:0%
+ 
+g<00:04:11.599><c> per</c><00:04:11.920><c> mole.</c>
+
+00:04:14.309 --> 00:04:14.319 align:start position:0%
+g per mole.
+ 
+
+00:04:14.319 --> 00:04:18.229 align:start position:0%
+g per mole.
+gives<00:04:14.720><c> us</c><00:04:16.160><c> just</c><00:04:16.479><c> about</c>
+
+00:04:18.229 --> 00:04:18.239 align:start position:0%
+gives us just about
+ 
+
+00:04:18.239 --> 00:04:20.789 align:start position:0%
+gives us just about
+1819
+
+00:04:20.789 --> 00:04:20.799 align:start position:0%
+1819
+ 
+
+00:04:20.799 --> 00:04:25.830 align:start position:0%
+1819
+moles<00:04:21.199><c> per</c><00:04:21.440><c> hour.</c>
+
+00:04:25.830 --> 00:04:25.840 align:start position:0%
+ 
+ 
+
+00:04:25.840 --> 00:04:29.430 align:start position:0%
+ 
+And<00:04:26.240><c> doing</c><00:04:26.560><c> this</c><00:04:26.800><c> again</c><00:04:27.759><c> for</c>
+
+00:04:29.430 --> 00:04:29.440 align:start position:0%
+And doing this again for
+ 
+
+00:04:29.440 --> 00:04:33.350 align:start position:0%
+And doing this again for
+chloromthane<00:04:30.560><c> we</c><00:04:30.720><c> will</c><00:04:30.960><c> get</c><00:04:31.199><c> about</c>
+
+00:04:33.350 --> 00:04:33.360 align:start position:0%
+chloromthane we will get about
+ 
+
+00:04:33.360 --> 00:04:38.550 align:start position:0%
+chloromthane we will get about
+4357.
+
+00:04:38.550 --> 00:04:38.560 align:start position:0%
+ 
+ 
+
+00:04:38.560 --> 00:04:41.590 align:start position:0%
+ 
+Now<00:04:38.880><c> for</c><00:04:39.120><c> step</c><00:04:39.440><c> four,</c>
+
+00:04:41.590 --> 00:04:41.600 align:start position:0%
+Now for step four,
+ 
+
+00:04:41.600 --> 00:04:44.550 align:start position:0%
+Now for step four,
+we're<00:04:41.919><c> going</c><00:04:42.000><c> to</c><00:04:42.240><c> convert</c><00:04:43.360><c> the</c><00:04:43.759><c> moles</c><00:04:44.080><c> of</c><00:04:44.320><c> each</c>
+
+00:04:44.550 --> 00:04:44.560 align:start position:0%
+we're going to convert the moles of each
+ 
+
+00:04:44.560 --> 00:04:49.510 align:start position:0%
+we're going to convert the moles of each
+compound<00:04:45.040><c> into</c><00:04:45.440><c> moles</c><00:04:45.759><c> of</c><00:04:45.919><c> chlorine</c><00:04:46.320><c> atoms.</c>
+
+00:04:49.510 --> 00:04:49.520 align:start position:0%
+ 
+ 
+
+00:04:49.520 --> 00:04:52.230 align:start position:0%
+ 
+So<00:04:49.759><c> if</c><00:04:49.919><c> we</c><00:04:50.080><c> take</c><00:04:50.320><c> dchloroethane,</c>
+
+00:04:52.230 --> 00:04:52.240 align:start position:0%
+So if we take dchloroethane,
+ 
+
+00:04:52.240 --> 00:04:55.909 align:start position:0%
+So if we take dchloroethane,
+which<00:04:52.479><c> is</c><00:04:53.919><c> C2</c>
+
+00:04:55.909 --> 00:04:55.919 align:start position:0%
+which is C2
+ 
+
+00:04:55.919 --> 00:04:57.670 align:start position:0%
+which is C2
+H4
+
+00:04:57.670 --> 00:04:57.680 align:start position:0%
+H4
+ 
+
+00:04:57.680 --> 00:05:00.230 align:start position:0%
+H4
+CL2,
+
+00:05:00.230 --> 00:05:00.240 align:start position:0%
+CL2,
+ 
+
+00:05:00.240 --> 00:05:04.629 align:start position:0%
+CL2,
+we<00:05:00.560><c> can</c><00:05:00.800><c> see</c><00:05:01.440><c> that</c><00:05:01.759><c> there</c><00:05:01.919><c> are</c><00:05:02.160><c> two</c><00:05:02.479><c> HCl</c><00:05:03.600><c> moles</c>
+
+00:05:04.629 --> 00:05:04.639 align:start position:0%
+we can see that there are two HCl moles
+ 
+
+00:05:04.639 --> 00:05:13.830 align:start position:0%
+we can see that there are two HCl moles
+present<00:05:05.199><c> of</c><00:05:05.440><c> chlorine</c><00:05:05.840><c> atoms.</c>
+
+00:05:13.830 --> 00:05:13.840 align:start position:0%
+ 
+ 
+
+00:05:13.840 --> 00:05:18.950 align:start position:0%
+ 
+Similarly<00:05:15.039><c> for</c><00:05:16.400><c> C</c><00:05:17.199><c> H3</c>
+
+00:05:18.950 --> 00:05:18.960 align:start position:0%
+Similarly for C H3
+ 
+
+00:05:18.960 --> 00:05:21.749 align:start position:0%
+Similarly for C H3
+CL
+
+00:05:21.749 --> 00:05:21.759 align:start position:0%
+CL
+ 
+
+00:05:21.759 --> 00:05:27.510 align:start position:0%
+CL
+we<00:05:22.000><c> could</c><00:05:22.240><c> create</c><00:05:22.880><c> one</c>
+
+00:05:27.510 --> 00:05:27.520 align:start position:0%
+ 
+ 
+
+00:05:27.520 --> 00:05:31.830 align:start position:0%
+ 
+for<00:05:27.759><c> benzene</c><00:05:28.560><c> C6</c><00:05:29.360><c> H6.</c><00:05:30.479><c> We</c><00:05:30.720><c> already</c><00:05:30.960><c> stated</c>
+
+00:05:31.830 --> 00:05:31.840 align:start position:0%
+for benzene C6 H6. We already stated
+ 
+
+00:05:31.840 --> 00:05:35.590 align:start position:0%
+for benzene C6 H6. We already stated
+there<00:05:32.080><c> is</c><00:05:32.240><c> no</c><00:05:32.479><c> Cl</c><00:05:32.880><c> component</c><00:05:33.360><c> here.</c><00:05:34.240><c> So</c><00:05:35.360><c> we're</c>
+
+00:05:35.590 --> 00:05:35.600 align:start position:0%
+there is no Cl component here. So we're
+ 
+
+00:05:35.600 --> 00:05:43.430 align:start position:0%
+there is no Cl component here. So we're
+not<00:05:35.840><c> going</c><00:05:35.919><c> to</c><00:05:36.000><c> have</c><00:05:36.240><c> any.</c>
+
+00:05:43.430 --> 00:05:43.440 align:start position:0%
+ 
+ 
+
+00:05:43.440 --> 00:05:45.029 align:start position:0%
+ 
+So<00:05:43.600><c> for</c><00:05:43.840><c> this</c><00:05:44.000><c> next</c><00:05:44.240><c> step,</c><00:05:44.400><c> we</c><00:05:44.639><c> are</c><00:05:44.800><c> going</c><00:05:44.880><c> to</c>
+
+00:05:45.029 --> 00:05:45.039 align:start position:0%
+So for this next step, we are going to
+ 
+
+00:05:45.039 --> 00:05:47.909 align:start position:0%
+So for this next step, we are going to
+multiply<00:05:46.320><c> the</c><00:05:46.639><c> moles</c><00:05:46.880><c> of</c><00:05:47.039><c> chlorine</c><00:05:47.520><c> atoms</c>
+
+00:05:47.909 --> 00:05:47.919 align:start position:0%
+multiply the moles of chlorine atoms
+ 
+
+00:05:47.919 --> 00:05:51.990 align:start position:0%
+multiply the moles of chlorine atoms
+available<00:05:48.400><c> to</c><00:05:48.560><c> us</c><00:05:49.039><c> by</c><00:05:49.360><c> the</c><00:05:49.600><c> feed</c><00:05:50.080><c> mole.</c>
+
+00:05:51.990 --> 00:05:52.000 align:start position:0%
+available to us by the feed mole.
+ 
+
+00:05:52.000 --> 00:05:55.430 align:start position:0%
+available to us by the feed mole.
+So<00:05:52.240><c> this</c><00:05:52.400><c> will</c><00:05:52.639><c> be</c><00:05:53.600><c> 1819</c>
+
+00:05:55.430 --> 00:05:55.440 align:start position:0%
+So this will be 1819
+ 
+
+00:05:55.440 --> 00:06:01.990 align:start position:0%
+So this will be 1819
+mole<00:05:56.000><c> hour*</c><00:05:57.039><c> 2</c><00:05:57.680><c> to</c><00:05:58.000><c> give</c><00:05:58.240><c> us</c><00:05:59.039><c> 36</c><00:06:00.320><c> 38</c>
+
+00:06:01.990 --> 00:06:02.000 align:start position:0%
+mole hour* 2 to give us 36 38
+ 
+
+00:06:02.000 --> 00:06:03.909 align:start position:0%
+mole hour* 2 to give us 36 38
+mole<00:06:02.560><c> hour.</c>
+
+00:06:03.909 --> 00:06:03.919 align:start position:0%
+mole hour.
+ 
+
+00:06:03.919 --> 00:06:06.150 align:start position:0%
+mole hour.
+And<00:06:04.160><c> then</c>
+
+00:06:06.150 --> 00:06:06.160 align:start position:0%
+And then
+ 
+
+00:06:06.160 --> 00:06:10.469 align:start position:0%
+And then
+obviously<00:06:06.880><c> 4357</c>
+
+00:06:10.469 --> 00:06:10.479 align:start position:0%
+ 
+ 
+
+00:06:10.479 --> 00:06:13.350 align:start position:0%
+ 
+*<00:06:10.800><c> 1</c><00:06:11.199><c> remains</c>
+
+00:06:13.350 --> 00:06:13.360 align:start position:0%
+* 1 remains
+ 
+
+00:06:13.360 --> 00:06:15.990 align:start position:0%
+* 1 remains
+4357
+
+00:06:15.990 --> 00:06:16.000 align:start position:0%
+4357
+ 
+
+00:06:16.000 --> 00:06:19.749 align:start position:0%
+4357
+mole<00:06:16.639><c> hour.</c><00:06:17.360><c> So</c><00:06:17.520><c> if</c><00:06:17.680><c> we</c><00:06:17.840><c> sum</c><00:06:18.160><c> these</c><00:06:18.479><c> together</c>
+
+00:06:19.749 --> 00:06:19.759 align:start position:0%
+mole hour. So if we sum these together
+ 
+
+00:06:19.759 --> 00:06:24.309 align:start position:0%
+mole hour. So if we sum these together
+we<00:06:20.000><c> will</c><00:06:20.240><c> have</c><00:06:20.479><c> just</c><00:06:20.800><c> about</c><00:06:21.280><c> 7995</c>
+
+00:06:24.309 --> 00:06:24.319 align:start position:0%
+ 
+ 
+
+00:06:24.319 --> 00:06:27.830 align:start position:0%
+ 
+mole<00:06:24.880><c> hour.</c><00:06:25.919><c> So</c><00:06:26.160><c> for</c><00:06:26.400><c> step</c><00:06:26.720><c> five</c><00:06:27.520><c> we'll</c>
+
+00:06:27.830 --> 00:06:27.840 align:start position:0%
+mole hour. So for step five we'll
+ 
+
+00:06:27.840 --> 00:06:30.870 align:start position:0%
+mole hour. So for step five we'll
+convert<00:06:28.080><c> the</c><00:06:28.319><c> moles</c><00:06:28.560><c> of</c><00:06:28.720><c> HCl</c><00:06:29.919><c> to</c><00:06:30.160><c> a</c><00:06:30.400><c> mass</c><00:06:30.720><c> in</c>
+
+00:06:30.870 --> 00:06:30.880 align:start position:0%
+convert the moles of HCl to a mass in
+ 
+
+00:06:30.880 --> 00:06:34.710 align:start position:0%
+convert the moles of HCl to a mass in
+kilog.<00:06:32.160><c> So</c><00:06:32.400><c> all</c><00:06:32.639><c> we</c><00:06:32.800><c> have</c><00:06:32.880><c> to</c><00:06:33.039><c> do</c><00:06:33.199><c> here</c><00:06:34.319><c> is</c>
+
+00:06:34.710 --> 00:06:34.720 align:start position:0%
+kilog. So all we have to do here is
+ 
+
+00:06:34.720 --> 00:06:38.070 align:start position:0%
+kilog. So all we have to do here is
+multiply<00:06:35.520><c> by</c><00:06:35.759><c> the</c><00:06:35.919><c> weight</c><00:06:36.160><c> of</c><00:06:36.319><c> our</c><00:06:36.479><c> HCl,</c><00:06:37.680><c> which</c>
+
+00:06:38.070 --> 00:06:38.080 align:start position:0%
+multiply by the weight of our HCl, which
+ 
+
+00:06:38.080 --> 00:06:40.469 align:start position:0%
+multiply by the weight of our HCl, which
+we<00:06:38.400><c> didn't</c><00:06:38.639><c> calculate.</c><00:06:39.360><c> So</c><00:06:39.600><c> let's</c><00:06:39.919><c> just</c><00:06:40.240><c> do</c>
+
+00:06:40.469 --> 00:06:40.479 align:start position:0%
+we didn't calculate. So let's just do
+ 
+
+00:06:40.479 --> 00:06:44.070 align:start position:0%
+we didn't calculate. So let's just do
+that<00:06:41.520><c> right</c><00:06:41.840><c> here</c>
+
+00:06:44.070 --> 00:06:44.080 align:start position:0%
+that right here
+ 
+
+00:06:44.080 --> 00:06:47.270 align:start position:0%
+that right here
+and<00:06:44.639><c> say</c>
+
+00:06:47.270 --> 00:06:47.280 align:start position:0%
+and say
+ 
+
+00:06:47.280 --> 00:06:50.230 align:start position:0%
+and say
+1<00:06:47.600><c> for</c><00:06:47.840><c> H</c><00:06:48.400><c> plus</c>
+
+00:06:50.230 --> 00:06:50.240 align:start position:0%
+1 for H plus
+ 
+
+00:06:50.240 --> 00:06:52.070 align:start position:0%
+1 for H plus
+35.45
+
+00:06:52.070 --> 00:06:52.080 align:start position:0%
+35.45
+ 
+
+00:06:52.080 --> 00:06:57.590 align:start position:0%
+35.45
+for<00:06:52.319><c> Cl</c><00:06:52.880><c> to</c><00:06:53.120><c> give</c><00:06:53.360><c> us</c><00:06:54.560><c> 36.45</c>
+
+00:06:57.590 --> 00:06:57.600 align:start position:0%
+ 
+ 
+
+00:06:57.600 --> 00:07:01.430 align:start position:0%
+ 
+g<00:06:58.000><c> per</c><00:06:58.240><c> mole.</c>
+
+00:07:01.430 --> 00:07:01.440 align:start position:0%
+ 
+ 
+
+00:07:01.440 --> 00:07:05.110 align:start position:0%
+ 
+So<00:07:01.759><c> times</c><00:07:02.240><c> 36.45</c>
+
+00:07:05.110 --> 00:07:05.120 align:start position:0%
+So times 36.45
+ 
+
+00:07:05.120 --> 00:07:08.870 align:start position:0%
+So times 36.45
+g<00:07:05.599><c> per</c><00:07:05.840><c> mole</c><00:07:06.319><c> here.</c><00:07:07.680><c> This</c><00:07:07.840><c> would</c><00:07:08.080><c> give</c><00:07:08.240><c> us</c><00:07:08.639><c> just</c>
+
+00:07:08.870 --> 00:07:08.880 align:start position:0%
+g per mole here. This would give us just
+ 
+
+00:07:08.880 --> 00:07:11.110 align:start position:0%
+g per mole here. This would give us just
+about
+
+00:07:11.110 --> 00:07:11.120 align:start position:0%
+about
+ 
+
+00:07:11.120 --> 00:07:13.909 align:start position:0%
+about
+291
+
+00:07:13.909 --> 00:07:13.919 align:start position:0%
+291
+ 
+
+00:07:13.919 --> 00:07:17.110 align:start position:0%
+291
+561
+
+00:07:17.110 --> 00:07:17.120 align:start position:0%
+ 
+ 
+
+00:07:17.120 --> 00:07:20.309 align:start position:0%
+ 
+g<00:07:17.520><c> per</c><00:07:17.759><c> hour.</c>
+
+00:07:20.309 --> 00:07:20.319 align:start position:0%
+g per hour.
+ 
+
+00:07:20.319 --> 00:07:25.270 align:start position:0%
+g per hour.
+And<00:07:20.560><c> obviously</c><00:07:21.039><c> if</c><00:07:21.199><c> we</c><00:07:21.440><c> divide</c><00:07:22.319><c> back</c>
+
+00:07:25.270 --> 00:07:25.280 align:start position:0%
+And obviously if we divide back
+ 
+
+00:07:25.280 --> 00:07:30.870 align:start position:0%
+And obviously if we divide back
+by<00:07:25.599><c> a</c><00:07:25.680><c> th00and</c><00:07:26.240><c> we</c><00:07:26.479><c> would</c><00:07:26.639><c> get</c><00:07:27.199><c> 291.5</c>
+
+00:07:30.870 --> 00:07:30.880 align:start position:0%
+ 
+ 
+
+00:07:30.880 --> 00:07:32.710 align:start position:0%
+ 
+kilogram
+
+00:07:32.710 --> 00:07:32.720 align:start position:0%
+kilogram
+ 
+
+00:07:32.720 --> 00:07:34.629 align:start position:0%
+kilogram
+per<00:07:33.039><c> hour</c>
+
+00:07:34.629 --> 00:07:34.639 align:start position:0%
+per hour
+ 
+
+00:07:34.639 --> 00:07:37.110 align:start position:0%
+per hour
+which<00:07:34.880><c> would</c><00:07:35.039><c> lead</c><00:07:35.280><c> us</c><00:07:35.520><c> over</c><00:07:35.840><c> here</c><00:07:36.319><c> to</c><00:07:36.720><c> number</c>
+
+00:07:37.110 --> 00:07:37.120 align:start position:0%
+which would lead us over here to number
+ 
+
+00:07:37.120 --> 00:07:41.350 align:start position:0%
+which would lead us over here to number
+three<00:07:37.520><c> being</c><00:07:38.240><c> the</c><00:07:38.560><c> closest</c><00:07:39.039><c> answer.</c>
+
+00:07:41.350 --> 00:07:41.360 align:start position:0%
+three being the closest answer.
+ 
+
+00:07:41.360 --> 00:07:43.029 align:start position:0%
+three being the closest answer.
+So,
+
+00:07:43.029 --> 00:07:43.039 align:start position:0%
+So,
+ 
+
+00:07:43.039 --> 00:07:44.790 align:start position:0%
+So,
+this<00:07:43.280><c> problem</c><00:07:43.599><c> has</c><00:07:43.759><c> a</c><00:07:44.000><c> few</c><00:07:44.080><c> more</c><00:07:44.240><c> steps</c><00:07:44.560><c> than</c>
+
+00:07:44.790 --> 00:07:44.800 align:start position:0%
+this problem has a few more steps than
+ 
+
+00:07:44.800 --> 00:07:47.029 align:start position:0%
+this problem has a few more steps than
+some<00:07:45.039><c> of</c><00:07:45.120><c> the</c><00:07:45.280><c> others</c><00:07:45.599><c> on</c><00:07:45.759><c> this</c><00:07:46.000><c> channel,</c><00:07:46.800><c> but</c>
+
+00:07:47.029 --> 00:07:47.039 align:start position:0%
+some of the others on this channel, but
+ 
+
+00:07:47.039 --> 00:07:50.230 align:start position:0%
+some of the others on this channel, but
+all<00:07:47.280><c> it</c><00:07:47.440><c> is</c><00:07:47.599><c> is</c><00:07:47.919><c> unit</c><00:07:48.240><c> conversions</c><00:07:48.800><c> from</c><00:07:49.039><c> kilog</c>
+
+00:07:50.230 --> 00:07:50.240 align:start position:0%
+all it is is unit conversions from kilog
+ 
+
+00:07:50.240 --> 00:07:53.189 align:start position:0%
+all it is is unit conversions from kilog
+to<00:07:50.479><c> moles</c><00:07:51.039><c> hour</c><00:07:51.199><c> for</c><00:07:51.360><c> the</c><00:07:51.520><c> PHC's,</c>
+
+00:07:53.189 --> 00:07:53.199 align:start position:0%
+to moles hour for the PHC's,
+ 
+
+00:07:53.199 --> 00:07:56.869 align:start position:0%
+to moles hour for the PHC's,
+then<00:07:53.599><c> converting</c><00:07:54.000><c> back</c><00:07:54.319><c> to</c><00:07:54.560><c> kg</c><00:07:55.280><c> hour</c><00:07:55.599><c> to</c><00:07:55.919><c> find</c>
+
+00:07:56.869 --> 00:07:56.879 align:start position:0%
+then converting back to kg hour to find
+ 
+
+00:07:56.879 --> 00:07:59.830 align:start position:0%
+then converting back to kg hour to find
+the<00:07:57.120><c> units</c><00:07:57.440><c> for</c><00:07:57.680><c> HCl.</c>
+
+00:07:59.830 --> 00:07:59.840 align:start position:0%
+the units for HCl.
+ 
+
+00:07:59.840 --> 00:08:01.909 align:start position:0%
+the units for HCl.
+And<00:08:00.080><c> one</c><00:08:00.319><c> other</c><00:08:00.560><c> quick</c><00:08:00.800><c> conceptual</c><00:08:01.360><c> note,</c>
+
+00:08:01.909 --> 00:08:01.919 align:start position:0%
+And one other quick conceptual note,
+ 
+
+00:08:01.919 --> 00:08:03.909 align:start position:0%
+And one other quick conceptual note,
+although<00:08:02.240><c> benzene</c><00:08:02.879><c> in</c><00:08:03.120><c> this</c><00:08:03.280><c> problem</c><00:08:03.599><c> doesn't</c>
+
+00:08:03.909 --> 00:08:03.919 align:start position:0%
+although benzene in this problem doesn't
+ 
+
+00:08:03.919 --> 00:08:07.830 align:start position:0%
+although benzene in this problem doesn't
+supply<00:08:04.240><c> chlorine,</c><00:08:05.360><c> the</c><00:08:05.599><c> H</c><00:08:06.000><c> and</c><00:08:06.240><c> HCls</c>
+
+00:08:07.830 --> 00:08:07.840 align:start position:0%
+supply chlorine, the H and HCls
+ 
+
+00:08:07.840 --> 00:08:09.749 align:start position:0%
+supply chlorine, the H and HCls
+can<00:08:08.160><c> come</c><00:08:08.479><c> from</c><00:08:08.720><c> water</c><00:08:09.039><c> vapor</c><00:08:09.360><c> or</c><00:08:09.599><c> other</c>
+
+00:08:09.749 --> 00:08:09.759 align:start position:0%
+can come from water vapor or other
+ 
+
+00:08:09.759 --> 00:08:12.710 align:start position:0%
+can come from water vapor or other
+hydrocarbons<00:08:10.639><c> in</c><00:08:10.800><c> an</c><00:08:10.960><c> incinerator's</c><00:08:11.680><c> flame.</c>
+
+00:08:12.710 --> 00:08:12.720 align:start position:0%
+hydrocarbons in an incinerator's flame.
+ 
+
+00:08:12.720 --> 00:08:14.629 align:start position:0%
+hydrocarbons in an incinerator's flame.
+So<00:08:12.960><c> there</c><00:08:13.120><c> could</c><00:08:13.280><c> be</c><00:08:13.440><c> chlorinated</c><00:08:14.160><c> compounds</c>
+
+00:08:14.629 --> 00:08:14.639 align:start position:0%
+So there could be chlorinated compounds
+ 
+
+00:08:14.639 --> 00:08:16.550 align:start position:0%
+So there could be chlorinated compounds
+without<00:08:14.960><c> hydrogen</c><00:08:15.520><c> on</c><00:08:15.680><c> the</c><00:08:15.919><c> exam</c><00:08:16.160><c> that</c><00:08:16.400><c> they</c>
+
+00:08:16.550 --> 00:08:16.560 align:start position:0%
+without hydrogen on the exam that they
+ 
+
+00:08:16.560 --> 00:08:20.710 align:start position:0%
+without hydrogen on the exam that they
+give<00:08:16.720><c> you</c><00:08:17.599><c> that</c><00:08:17.919><c> would</c><00:08:18.240><c> still</c><00:08:18.560><c> produce</c><00:08:19.440><c> HCl</c>
+
+00:08:20.710 --> 00:08:20.720 align:start position:0%
+give you that would still produce HCl
+ 
+
+00:08:20.720 --> 00:08:22.790 align:start position:0%
+give you that would still produce HCl
+since<00:08:20.960><c> there's</c><00:08:21.280><c> hydrogen</c><00:08:22.080><c> available</c><00:08:22.560><c> during</c>
+
+00:08:22.790 --> 00:08:22.800 align:start position:0%
+since there's hydrogen available during
+ 
+
+00:08:22.800 --> 00:08:24.710 align:start position:0%
+since there's hydrogen available during
+the<00:08:22.960><c> combustion.</c><00:08:23.919><c> So</c><00:08:24.160><c> just</c><00:08:24.319><c> something</c><00:08:24.560><c> they</c>
+
+00:08:24.710 --> 00:08:24.720 align:start position:0%
+the combustion. So just something they
+ 
+
+00:08:24.720 --> 00:08:27.029 align:start position:0%
+the combustion. So just something they
+might<00:08:24.879><c> do</c><00:08:25.039><c> to</c><00:08:25.199><c> try</c><00:08:25.280><c> to</c><00:08:25.440><c> trick</c><00:08:25.680><c> you.</c><00:08:26.560><c> And</c><00:08:26.800><c> that's</c>
+
+00:08:27.029 --> 00:08:27.039 align:start position:0%
+might do to try to trick you. And that's
+ 
+
+00:08:27.039 --> 00:08:30.039 align:start position:0%
+might do to try to trick you. And that's
+it.
+

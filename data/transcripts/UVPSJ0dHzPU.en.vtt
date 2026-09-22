@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:09.279
+Okay guys, in this problem, a dump truck has an upfront cost of $100,000 and an expected
+
+00:00:09.279 --> 00:00:11.560
+salvage value of $15,000.
+
+00:00:11.560 --> 00:00:17.160
+It is expected to last 7 years before the truck falls apart.
+
+00:00:17.160 --> 00:00:22.879
+What is the closest to the assumed value of the truck at the end of its 5th year of service
+
+00:00:22.879 --> 00:00:26.839
+based on the straight line method of depreciation?
+
+00:00:26.839 --> 00:00:31.539
+So the first thing we are going to do here is go to our PDF reference manual and
+
+00:00:31.539 --> 00:00:35.240
+keyword search for depreciation.
+
+00:00:35.240 --> 00:00:41.840
+That will take us to page 38 or 37 of our reference manual and if you start on 37 you can
+
+00:00:41.840 --> 00:00:46.840
+just scroll down to 38 and get the equation for the straight line method of depreciation
+
+00:00:46.840 --> 00:00:49.519
+which is provided.
+
+00:00:49.520 --> 00:01:00.520
+So it is going to be dj equals c minus s sub n over n where dj is going to be the depreciation
+
+00:01:00.520 --> 00:01:12.340
+value in your j.
+
+00:01:12.340 --> 00:01:17.060
+c is going to be our cost.
+
+00:01:17.060 --> 00:01:29.100
+S sub n is our salvage value in your n.
+
+00:01:29.099 --> 00:01:45.299
+And n equals the expected life of the asset.
+
+00:01:45.299 --> 00:01:49.979
+So we can start just plugging into the equation and filling it out.
+
+00:01:49.979 --> 00:01:53.099
+So dj is what we are solving for.
+
+00:01:53.099 --> 00:01:56.179
+dj is going to be $100,000.
+
+00:01:56.179 --> 00:01:59.979
+S sub n is going to be $15,000.
+
+00:01:59.979 --> 00:02:07.739
+And n is the total lifespan of the truck.
+
+00:02:07.739 --> 00:02:16.240
+So solving for this we get $12,142 which is really dj but I prefer to think of it in this
+
+00:02:16.240 --> 00:02:38.800
+problem as the rate of depreciation per year.
+
+00:02:38.800 --> 00:02:44.879
+So we can do one final step now to get our answer and find the value after 5 years of depreciation
+
+00:02:44.879 --> 00:02:46.960
+of this asset.
+
+00:02:46.960 --> 00:02:52.079
+So we have got our initial value of the truck and we are going to subtract from that
+
+00:02:52.079 --> 00:02:55.680
+5 years of linear depreciation.
+
+00:02:55.680 --> 00:03:06.719
+We can think of this to match our units up as 5 years times 12,142 so that the units cancel
+
+00:03:06.719 --> 00:03:09.079
+and we are left with a dollar to dollar comparison.
+
+00:03:15.879 --> 00:03:26.280
+At the end result here would be $39,290 which we can see is very close to our answer of C.
+
+00:03:26.280 --> 00:03:30.680
+If the problem had wanted to try to ask the question in a slightly different way, they
+
+00:03:30.680 --> 00:03:35.599
+could have asked what is the amount that the truck depreciated by at the end of its fifth
+
+00:03:35.599 --> 00:03:42.759
+year of service, at which case we would just need to solve for one more basic step.
+
+00:03:42.759 --> 00:03:47.199
+So we now know the depreciated value at the end of 5 years.
+
+00:03:47.199 --> 00:03:52.299
+So we simply could have subtracted the original value of the truck or the depreciated value
+
+00:03:52.299 --> 00:03:56.919
+of the truck from the original value of the truck and gotten the amount that the truck
+
+00:03:56.919 --> 00:04:01.039
+depreciated by at the end of 5 years.
+
+00:04:01.039 --> 00:04:04.039
+In this case the answer would have been about $60,000.

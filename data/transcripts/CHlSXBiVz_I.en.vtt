@@ -1,0 +1,313 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.639
+All right, in this problem, an engineer is presented with a vertical curve upon which
+
+00:00:05.639 --> 00:00:08.279
+car accident has recently occurred.
+
+00:00:08.279 --> 00:00:14.640
+The engineer is asked to determine the tangent slope of the road at station 17 plus 0, 0,
+
+00:00:14.640 --> 00:00:18.160
+where the skid marks of a given car began.
+
+00:00:18.160 --> 00:00:27.039
+So in this problem, we are being asked to find a slope at a station in a horizontal, or
+
+00:00:27.039 --> 00:00:29.679
+I'm sorry, in a vertical curve.
+
+00:00:29.679 --> 00:00:34.640
+So if we type in vertical curve into our reference manual to get us started, that's
+
+00:00:34.640 --> 00:00:40.119
+going to take us to chapter five titled transportation, specifically directly to section
+
+00:00:40.119 --> 00:00:45.560
+5.3.1 symmetrical vertical curve formula.
+
+00:00:45.560 --> 00:00:49.280
+So we're going to use the equations there to solve this problem.
+
+00:00:49.280 --> 00:00:58.039
+The first thing we need to solve for is the rate of change along the horizontal curve.
+
+00:00:58.039 --> 00:01:04.519
+With that term, the rate of vertical curvature, otherwise thought of as the rate of change
+
+00:01:04.519 --> 00:01:13.439
+of grade, is given as k equals L over a.
+
+00:01:13.439 --> 00:01:17.719
+And in this case, k is the rate of vertical change.
+
+00:01:17.719 --> 00:01:23.599
+L is going to be the length of the curve, otherwise known here as the distance between
+
+00:01:23.599 --> 00:01:25.480
+the two stations.
+
+00:01:25.480 --> 00:01:30.560
+And then A is going to be the algebraic difference in grades.
+
+00:01:30.560 --> 00:01:36.680
+So the way we can write this out, I'll write down A really fast.
+
+00:01:36.680 --> 00:01:42.439
+That's going to be g2 minus g1 absolute value.
+
+00:01:42.439 --> 00:01:45.120
+And this is expressed as a percent.
+
+00:01:45.120 --> 00:01:49.719
+g2 in this case is going to be the grade of our forward tangent.
+
+00:01:49.719 --> 00:01:57.959
+And grade one is going to be the rate of our backward tangent or back tangent.
+
+00:01:57.959 --> 00:02:01.920
+So let's get started calculating k.
+
+00:02:01.920 --> 00:02:10.840
+That's simply going to be 19 hundred feet, because remember, we can rewrite stations
+
+00:02:10.840 --> 00:02:28.180
+in this terminology instead minus 1400 feet over 2.9 minus a negative 2.5 percent, which
+
+00:02:28.180 --> 00:02:36.400
+is somewhat redundant, since this is going to be an absolute value here.
+
+00:02:36.400 --> 00:02:44.360
+And if we solve this out, we can see that our rate of vertical curvature is going to
+
+00:02:44.360 --> 00:02:50.439
+be 92.59.
+
+00:02:50.439 --> 00:02:56.319
+And if we want, we can write this down as feet per percent.
+
+00:02:56.319 --> 00:03:02.159
+I don't know if this is actually the way it's written out in transportation engineering,
+
+00:03:02.159 --> 00:03:04.560
+because that's not my own personal background.
+
+00:03:04.560 --> 00:03:09.819
+But I do find that writing out units in a problem can help you solve, help you remember
+
+00:03:09.819 --> 00:03:12.219
+what you're trying to solve for at the end.
+
+00:03:12.219 --> 00:03:15.080
+So I personally like to do it in this case.
+
+00:03:15.080 --> 00:03:22.439
+So we have found k, the rate of our vertical curvature from one station to the next, otherwise
+
+00:03:22.439 --> 00:03:28.560
+known as the rate of change to the grade over distance.
+
+00:03:28.560 --> 00:03:41.520
+So what we can do now is find our slope at station 17 plus 0, 0.
+
+00:03:41.520 --> 00:03:46.599
+So we can wind up using this exact same equation again, and simply solve for a different
+
+00:03:46.599 --> 00:03:48.640
+term.
+
+00:03:48.639 --> 00:04:01.239
+So in this case, g2 is going to be the new term we're solving for since station 17 plus
+
+00:04:01.239 --> 00:04:06.959
+0, 0 is going to be the new term, the new station that we've been given.
+
+00:04:06.960 --> 00:04:20.280
+So in this case, what we can say, since we already solved for k, we can say 92.59 feet per
+
+00:04:20.280 --> 00:04:36.439
+percent equals 1700 feet minus 1400 feet over g2 is now the grade that we're solving for
+
+00:04:36.439 --> 00:04:42.839
+minus negative 2.5.
+
+00:04:42.839 --> 00:04:49.480
+And down here, that's going to be a percent absolute value.
+
+00:04:49.480 --> 00:05:00.040
+So if we write this out, we could solve for this algebraically and say 92.59 feet over
+
+00:05:00.040 --> 00:05:08.960
+percent times term g2 plus since negative 2, negative 0 is going to give us a positive.
+
+00:05:08.960 --> 00:05:23.000
+If we multiply those 2 terms together, we're going to get 231.48 feet over percent times
+
+00:05:23.000 --> 00:05:24.000
+per cent.
+
+00:05:24.000 --> 00:05:31.480
+So just feet equals the 300 feet on the other side.
+
+00:05:31.480 --> 00:05:36.680
+So we can see that we can subtract these because the units work out.
+
+00:05:36.680 --> 00:05:52.800
+So that's going to give us 92.59 feet over percent equals 68.52 feet.
+
+00:05:52.800 --> 00:05:59.800
+And if we were to divide now, oh, I forgot to add term g2 in here.
+
+00:05:59.800 --> 00:06:15.280
+So if we were to isolate g2 now, we will get g2 equals 0.74 feet over feet over percent,
+
+00:06:15.280 --> 00:06:21.480
+which is really just percent.
+
+00:06:21.480 --> 00:06:28.000
+So the answer to our problem is the second answer here.
+
+00:06:28.000 --> 00:06:31.040
+And that's all it takes to solve this problem.
+
+00:06:31.040 --> 00:06:35.800
+One more thing I want to point out is that there is technically a second way to solve
+
+00:06:35.800 --> 00:06:45.560
+this problem using some additional information that's provided in the reference manual.
+
+00:06:45.560 --> 00:06:50.439
+So I don't use it because it's not explicitly called out as clearly.
+
+00:06:50.439 --> 00:07:01.160
+And it relies on the fact that you know that the derivative of an elevation is a slope.
+
+00:07:01.160 --> 00:07:04.680
+So again, I think the first way is easier to use.
+
+00:07:04.680 --> 00:07:09.439
+But let's go through the second way and just in case it makes more sense for some of
+
+00:07:09.439 --> 00:07:10.439
+you.
+
+00:07:10.519 --> 00:07:16.680
+So in the same part of the reference manual where we got our previous equations,
+
+00:07:16.680 --> 00:07:23.759
+you'll see that there is a curve elevation equation provided.
+
+00:07:23.759 --> 00:07:26.439
+And I can write that out here.
+
+00:07:26.439 --> 00:07:37.399
+So it's given as y point of vertical curve plus g1 times x plus.
+
+00:07:40.920 --> 00:07:45.240
+A times x squared.
+
+00:07:45.240 --> 00:07:59.680
+Now in this case, A is also given in the equation in the handbook as g2 minus g1 over 2l.
+
+00:07:59.680 --> 00:08:15.840
+So to use this equation in this problem, again, we have to know that the derivative
+
+00:08:15.840 --> 00:08:27.280
+of elevation is a slope.
+
+00:08:27.279 --> 00:08:36.799
+And that's not explicitly called out in the reference manual.
+
+00:08:36.799 --> 00:08:39.799
+So that's just something to be aware of.
+
+00:08:39.799 --> 00:08:48.480
+That being said, let's see what happens when we take the derivative of this formula.
+
+00:08:48.480 --> 00:08:54.120
+So the first thing that we'd see is we can rewrite it over here first.
+
+00:08:54.120 --> 00:09:05.879
+Y pvc plus g1 times x plus will combine these two parts now.
+
+00:09:05.879 --> 00:09:16.920
+G2 minus g1 over 2l times x squared.
+
+00:09:16.919 --> 00:09:34.079
+So if we were to take the derivative of this, first we'll see that this term is gone.
+
+00:09:34.079 --> 00:09:40.959
+And x will be derived away leaving us just with g1.
+
+00:09:40.960 --> 00:09:56.960
+And this x squared would become 2 times g2 minus g1 over 2l times x.
+
+00:09:56.960 --> 00:10:03.800
+And both these two would cancel.
+
+00:10:03.799 --> 00:10:16.439
+Let's take us with only, take us down a little more.
+
+00:10:16.439 --> 00:10:29.399
+Y prime equals g1 plus g2 minus g1 times x.
+
+00:10:29.399 --> 00:10:34.840
+And I forgot to mention that x, as called out in the reference manual here, is going
+
+00:10:34.840 --> 00:10:40.919
+to be your horizontal distance from your point of vertical curvature to the point on the
+
+00:10:40.919 --> 00:10:43.240
+curve that you're interested in.
+
+00:10:43.240 --> 00:10:54.600
+So again, in our case, that's going to be 1700 minus the first point, which was 1400.
+
+00:10:54.600 --> 00:11:07.560
+So Y prime equals negative 0.025.
+
+00:11:07.560 --> 00:11:13.080
+So in this equation, these are expressed as decimals rather than the full percent.
+
+00:11:13.080 --> 00:11:26.120
+Plus 0.029 minus a negative 0.025.
+
+00:11:26.120 --> 00:11:42.240
+These are the grades from given above over 1900 plus subtracted from 1400.
+
+00:11:42.240 --> 00:11:55.720
+Sorry, 1400 subtracted from 1900.
+
+00:11:55.720 --> 00:12:05.519
+And x is going to be, like we just said, the distance from the PVC to the point on the curve.
+
+00:12:05.519 --> 00:12:12.000
+So that's going to be 1700 minus 1400.
+
+00:12:12.000 --> 00:12:27.399
+And if we were to solve all of this out, you get 0.0074 or 0.74%.
+
+00:12:27.399 --> 00:12:32.799
+So this might feel like a faster way to solve the problem, but you do have to inherently
+
+00:12:32.799 --> 00:12:38.919
+understand and remember that the derivative of the curve elevation formula will give you
+
+00:12:38.919 --> 00:12:41.360
+slope.
+
+00:12:41.360 --> 00:12:45.759
+And that's not something that's explicitly called out in the reference manual, or if it
+
+00:12:45.759 --> 00:12:49.360
+is, I missed it myself when I looked through it.
+
+00:12:49.360 --> 00:12:52.759
+But yeah, that's the alternative way to solve this problem.
+
+00:12:52.759 --> 00:12:58.519
+If you don't want to do it that way, there's always the original that we did here.
+
+00:12:58.519 --> 00:12:59.879
+And that should be it for this problem.
