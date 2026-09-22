@@ -620,6 +620,27 @@ body {
   width: 100%;
   height: 100%;
   border: none;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Theater / Expanded High-Resolution Viewing Mode */
+.modal-container.theater-mode {
+  max-width: 96vw;
+  width: 96vw;
+  height: 94vh;
+  max-height: 94vh;
+}
+
+.modal-container.theater-mode .modal-body {
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1400px) {
+  .modal-container.theater-mode .modal-body {
+    grid-template-columns: 1.75fr 1fr;
+  }
 }
 
 .video-controls-bar {

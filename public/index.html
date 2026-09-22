@@ -115,6 +115,13 @@
           </select>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <label for="defaultQualitySelect">Video Source:</label>
+          <select id="defaultQualitySelect">
+            <option value="youtube-hd">📺 Highest Resolution (1080p HD)</option>
+            <option value="local">⚡ Offline MP4 (Fast Playback)</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
           <label for="sortSelect">Sort:</label>
           <select id="sortSelect">
             <option value="num-asc">Problem / Video # (#1 → #129)</option>
@@ -147,6 +154,8 @@
           <h2 id="modalTitle" style="font-size: 1.15rem; font-weight: 700;">Problem Title</h2>
         </div>
         <div class="modal-header-right">
+          <button id="modalTheaterBtn" class="btn btn-sm btn-outline" title="Toggle Full Width / Theater Mode">⤢ Theater Mode</button>
+          <a id="modalYtDirectLink" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline" title="Watch in Native 1080p HD on YouTube" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem;">↗ YouTube 1080p</a>
           <select id="modalStatusSelect" style="padding: 0.25rem 0.5rem; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 4px;">
             <option value="UNATTEMPTED">⭕ Unattempted</option>
             <option value="MASTERED">✅ Mastered</option>
@@ -169,9 +178,10 @@
           <!-- Player Controls & Source Switcher -->
           <div class="video-controls-bar">
             <div class="source-toggle">
-              <button id="srcLocalBtn" class="source-btn active">Offline MP4</button>
-              <button id="srcYoutubeBtn" class="source-btn">YouTube Embed</button>
+              <button id="srcYoutubeBtn" class="source-btn active" title="Stream in 1080p Full HD">📺 1080p HD Stream</button>
+              <button id="srcLocalBtn" class="source-btn" title="Play local offline copy">⚡ Offline MP4</button>
             </div>
+            <span id="videoQualityBadge" class="badge" style="background: rgba(34, 197, 94, 0.15); color: #22c55e; font-weight: 700;">🎯 1080p Full HD</span>
             <div style="display: flex; gap: 0.35rem;">
               <button class="btn btn-sm speed-btn" data-speed="1">1x</button>
               <button class="btn btn-sm speed-btn" data-speed="1.25">1.25x</button>

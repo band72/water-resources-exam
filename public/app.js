@@ -3,7 +3,7 @@
 let allProblems = [];
 let localVideosSet = new Set();
 let currentModalProblem = null;
-let currentVideoSource = 'local'; // 'local' or 'youtube'
+let currentVideoSource = 'youtube'; // default to 'youtube' for highest 1080p resolution
 let practiceMode = false;
 let modalSolutionVisible = true;
 
@@ -12,7 +12,9 @@ const STORAGE_KEY = 'solvedin6_pe_study_state_v1';
 let userState = {
   favorites: {},
   statuses: {}, // id -> 'UNATTEMPTED' | 'MASTERED' | 'REVIEW'
-  theme: 'dark'
+  theme: 'dark',
+  preferredVideoSource: 'youtube-hd', // 'youtube-hd' (1080p Full HD) or 'local' (offline)
+  theaterMode: false
 };
 
 // Load saved user state
@@ -21,6 +23,12 @@ function loadUserState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       userState = Object.assign(userState, JSON.parse(raw));
+    }
+    if (userState.preferredVideoSource === 'local') {
+      currentVideoSource = 'local';
+    } else {
+      currentVideoSource = 'youtube';
+      userState.preferredVideoSource = 'youtube-hd';
     }
   } catch (e) {
     console.error('Error loading study state', e);
@@ -458,6 +466,17 @@ function openProblemModal(problemId) {
   loadVideoPlayer(p);
   renderTranscriptList(p);
 
+  // Apply theater mode state
+  const modalContainer = document.querySelector('.modal-container');
+  if (modalContainer) {
+    modalContainer.classList.toggle('theater-mode', !!userState.theaterMode);
+  }
+  const theaterBtn = document.getElementById('modalTheaterBtn');
+  if (theaterBtn) {
+    theaterBtn.textContent = userState.theaterMode ? '🗗 Standard View' : '⤢ Theater Mode';
+    theaterBtn.classList.toggle('btn-primary', !!userState.theaterMode);
+  }
+
   // Render LaTeX formulas if KaTeX auto-render is present
   triggerMathRender();
 }
@@ -525,15 +544,49 @@ function toggleModalSolution() {
   }
 }
 
+function toggleTheaterMode() {
+  const modalContainer = document.querySelector('.modal-container');
+  if (!modalContainer) return;
+  const isTheater = modalContainer.classList.toggle('theater-mode');
+  userState.theaterMode = isTheater;
+  saveUserState();
+  const btn = document.getElementById('modalTheaterBtn');
+  if (btn) {
+    btn.textContent = isTheater ? '🗗 Standard View' : '⤢ Theater Mode';
+    btn.classList.toggle('btn-primary', isTheater);
+  }
+}
+
 function loadVideoPlayer(p) {
   const container = document.getElementById('videoContainer');
   const hasLocal = localVideosSet.has(`${p.id}.mp4`);
 
-  // Default to local if available, otherwise youtube
-  const activeSrc = (currentVideoSource === 'local' && hasLocal) ? 'local' : 'youtube';
+  // Default to highest resolution (youtube = 1080p HD) or local if explicitly selected
+  const activeSrc = (currentVideoSource === 'youtube' || !hasLocal) ? 'youtube' : 'local';
 
   document.getElementById('srcLocalBtn').classList.toggle('active', activeSrc === 'local');
   document.getElementById('srcYoutubeBtn').classList.toggle('active', activeSrc === 'youtube');
+
+  // Update direct YouTube 1080p link
+  const ytLink = document.getElementById('modalYtDirectLink');
+  if (ytLink) {
+    ytLink.href = `https://www.youtube.com/watch?v=${p.id}&vq=hd1080`;
+  }
+
+  // Update video quality badge
+  const qualityBadge = document.getElementById('videoQualityBadge');
+  if (qualityBadge) {
+    if (activeSrc === 'youtube') {
+      qualityBadge.textContent = '🎯 1080p Full HD';
+      qualityBadge.style.background = 'rgba(34, 197, 94, 0.15)';
+      qualityBadge.style.color = '#22c55e';
+    } else {
+      const isBreadth52 = p.problem_number === 52;
+      qualityBadge.textContent = isBreadth52 ? '🎯 1080p Local HD' : '⚡ 360p Local SD';
+      qualityBadge.style.background = isBreadth52 ? 'rgba(34, 197, 94, 0.15)' : 'rgba(234, 179, 8, 0.15)';
+      qualityBadge.style.color = isBreadth52 ? '#22c55e' : '#eab308';
+    }
+  }
 
   if (activeSrc === 'local') {
     container.innerHTML = `
@@ -547,12 +600,32 @@ function loadVideoPlayer(p) {
     container.innerHTML = `
       <iframe 
         id="activeYtPlayer"
-        src="https://www.youtube-nocookie.com/embed/${p.id}?autoplay=1&enablejsapi=1&rel=0" 
+        src="https://www.youtube-nocookie.com/embed/${p.id}?autoplay=1&enablejsapi=1&rel=0&vq=hd1080&highres=1" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
         allowfullscreen>
       </iframe>
     `;
+    setupYoutubePlayerQuality();
   }
+}
+
+function setupYoutubePlayerQuality() {
+  const iframe = document.getElementById('activeYtPlayer');
+  if (!iframe) return;
+  iframe.onload = () => {
+    try {
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'setPlaybackQuality',
+        args: ['hd1080']
+      }), '*');
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'setPlaybackQualityRange',
+        args: ['hd1080', 'highres']
+      }), '*');
+    } catch (e) {}
+  };
 }
 
 function setupVideoPlayerListeners() {
@@ -578,17 +651,18 @@ function seekVideo(timeStr) {
     localVid.currentTime = seconds;
     localVid.play();
   } else {
-    // For iframe, reload with start parameter
+    // For iframe, reload with start parameter and 1080p vq
     if (currentModalProblem) {
       const container = document.getElementById('videoContainer');
       container.innerHTML = `
         <iframe 
           id="activeYtPlayer"
-          src="https://www.youtube-nocookie.com/embed/${currentModalProblem.id}?autoplay=1&start=${Math.floor(seconds)}&enablejsapi=1&rel=0" 
+          src="https://www.youtube-nocookie.com/embed/${currentModalProblem.id}?autoplay=1&start=${Math.floor(seconds)}&enablejsapi=1&rel=0&vq=hd1080&highres=1" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen>
         </iframe>
       `;
+      setupYoutubePlayerQuality();
     }
   }
 }
@@ -815,13 +889,39 @@ function setupEventListeners() {
   // Toggle modal solution
   document.getElementById('toggleModalSolutionBtn').addEventListener('click', toggleModalSolution);
 
+  // Default quality selector in sub-controls
+  const qualitySelect = document.getElementById('defaultQualitySelect');
+  if (qualitySelect) {
+    qualitySelect.value = userState.preferredVideoSource || 'youtube-hd';
+    qualitySelect.addEventListener('change', (e) => {
+      userState.preferredVideoSource = e.target.value;
+      currentVideoSource = e.target.value === 'local' ? 'local' : 'youtube';
+      saveUserState();
+      if (currentModalProblem) {
+        loadVideoPlayer(currentModalProblem);
+      }
+    });
+  }
+
+  // Theater Mode button in modal header
+  const theaterBtn = document.getElementById('modalTheaterBtn');
+  if (theaterBtn) {
+    theaterBtn.addEventListener('click', toggleTheaterMode);
+  }
+
   // Video source buttons
   document.getElementById('srcLocalBtn').addEventListener('click', () => {
     currentVideoSource = 'local';
+    userState.preferredVideoSource = 'local';
+    if (qualitySelect) qualitySelect.value = 'local';
+    saveUserState();
     if (currentModalProblem) loadVideoPlayer(currentModalProblem);
   });
   document.getElementById('srcYoutubeBtn').addEventListener('click', () => {
     currentVideoSource = 'youtube';
+    userState.preferredVideoSource = 'youtube-hd';
+    if (qualitySelect) qualitySelect.value = 'youtube-hd';
+    saveUserState();
     if (currentModalProblem) loadVideoPlayer(currentModalProblem);
   });
 
