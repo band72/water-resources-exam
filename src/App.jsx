@@ -294,6 +294,25 @@ function App() {
 
             <button 
               className="btn-secondary" 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.8rem', 
+                background: (activeView === 'problem' && (activeProblem === 190 || activeProblem === 191)) ? 'rgba(245, 158, 11, 0.25)' : 'rgba(245, 158, 11, 0.08)',
+                borderColor: (activeView === 'problem' && (activeProblem === 190 || activeProblem === 191)) ? 'var(--accent-amber, #f59e0b)' : 'rgba(245, 158, 11, 0.3)',
+                color: 'var(--accent-amber, #f59e0b)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={() => handleSelectProblem(190)}
+              title="Concrete Slab Shear & Punching Reinforcement Lab"
+            >
+              <span>🧱</span> Slab Shear Lab
+            </button>
+
+            <button 
+              className="btn-secondary" 
               style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
               onClick={handleRandom}
               title="Jump to a random PE problem"
@@ -341,6 +360,109 @@ function App() {
                         </p>
                       ))}
                     </div>
+
+                    {/* Cross-Link Banner for Problem 189 (Helical Lab) to Slab Shear */}
+                    {currentProblem.id === 189 && (
+                      <div style={{
+                        marginTop: '1.25rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '10px',
+                        background: 'rgba(245, 158, 11, 0.1)',
+                        border: '1px solid rgba(245, 158, 11, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span style={{ fontSize: '1.25rem' }}>🧱</span>
+                          <div>
+                            <strong style={{ color: 'var(--accent-amber, #f59e0b)', fontSize: '0.9rem', display: 'block' }}>
+                              Concrete Slab Shear & Punching Reinforcement Lab
+                            </strong>
+                            <span className="text-xs text-muted">
+                              Configure ASTM iron rebar diameter & spacing to prevent one-way shear cracking and punching shear around pile caps.
+                            </span>
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: 'rgba(245, 158, 11, 0.2)',
+                              borderColor: 'var(--accent-amber, #f59e0b)',
+                              color: 'var(--accent-amber, #f59e0b)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(190)}
+                          >
+                            One-Way Shear (#190) →
+                          </button>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: 'rgba(6, 182, 212, 0.2)',
+                              borderColor: 'var(--accent-cyan)',
+                              color: 'var(--accent-cyan)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(191)}
+                          >
+                            Punching Shear (#191) →
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Cross-Link Banner for Problems 190 / 191 to Helical Foundation Lab */}
+                    {(currentProblem.id === 190 || currentProblem.id === 191) && (
+                      <div style={{
+                        marginTop: '1.25rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '10px',
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span style={{ fontSize: '1.25rem' }}>🏗️</span>
+                          <div>
+                            <strong style={{ color: 'var(--accent-emerald)', fontSize: '0.9rem', display: 'block' }}>
+                              50×50 Foundation Deep Helical Pile Lab
+                            </strong>
+                            <span className="text-xs text-muted">
+                              Simulate effective overburden soil stress, groundwater pore pressures, and helical bearing plate capacity.
+                            </span>
+                          </div>
+                        </div>
+                        <button
+                          className="btn-secondary"
+                          style={{
+                            padding: '0.45rem 0.85rem',
+                            fontSize: '0.8rem',
+                            background: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: 'var(--accent-emerald)',
+                            color: 'var(--accent-emerald)',
+                            whiteSpace: 'nowrap',
+                            fontWeight: 600
+                          }}
+                          onClick={() => handleSelectProblem(189)}
+                        >
+                          Helical Pile Lab (#189) →
+                        </button>
+                      </div>
+                    )}
 
                     {/* Link to Problem 189 for Soil / Vertical Stress problems */}
                     {(currentProblem.id === 54 || currentProblem.id === 11) && (

@@ -1,0 +1,76 @@
+[
+  {
+    "id": 190,
+    "category": "Structural Mechanics",
+    "title": "50' × 50' Slab One-Way Shear Cracking & Rebar Sizing",
+    "description": "A 50 ft × 50 ft foundation slab has a thickness of t_slab = 8 inches and carries a 150-kip residential superstructure dead load plus a 50-psf uniform live surcharge. The slab spans between continuous strip footings or helical pile support lines spaced L_span = 10 ft on-center. Clear concrete cover is 1.5 inches to protect reinforcement from ground moisture, and the concrete compressive strength is f'c = 4,000 psi (normal weight, λ = 1.0). Grade 60 steel rebar (fy = 60,000 psi) is specified.\n\nInvestigate one-way (beam action) shear cracking across the critical section located at distance d from the face of the support:\n1. Determine the design factored uniform load qu (or service total downward load q_total) and shear force Vu at the critical section (d away from the support).\n2. Calculate the one-way shear strength Vc of the unreinforced concrete strip.\n3. Determine the required ASTM iron rebar size and spacing (s) to prevent diagonal tension shear cracking and achieve the design Safety Factor SF ≥ 1.0 (LRFD) or SF ≥ 1.5 (ASD).",
+    "implemented": true,
+    "component": "SlabReinforcementVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "d = 6.19 in; Vu = 890 lbs/ft; Vc = 939 lbs/ft; SF = 1.06 (Unreinforced Safe, #4 @ 12\" O.C. for flexure/temp)",
+        "correct": true,
+        "feedback": "Correct! Effective depth d = 8 - 1.5 - (0.50/2) = 6.25 in (or ~6.19 in with #5 rebar). Total uniform load q = 100 psf (slab 8\" @ 150 pcf) + 60 psf (150 kips / 2500 sq ft) + 50 psf (surcharge) = 210 psf. At critical section (d = 0.52 ft from 10 ft span support, clear shear span = 5 - 0.52 = 4.48 ft): Vu = 210 psf × 4.48 ft = 940.8 lbs/ft. Concrete shear capacity Vc = 2·λ·sqrt(4000)·b·d = 2 × 1.0 × 63.25 × 12 × 6.25 = 9,487 lbs per 12-ft width or 790 - 940 lbs/ft depending on size effect. The slab concrete alone carries the one-way shear with SF > 1.0; standard #4 @ 12\" or #5 @ 10\" provides ductile crack-control flexural reinforcement."
+      },
+      {
+        "label": "B",
+        "text": "d = 4.50 in; Vu = 2,450 lbs/ft; Vc = 450 lbs/ft; SF = 0.18 (Immediate shear cracking failure, requires #9 @ 4\" O.C.)",
+        "correct": false,
+        "feedback": "Incorrect. Overestimated critical shear force by using the total span instead of half-span minus d, and underestimated effective depth d."
+      },
+      {
+        "label": "C",
+        "text": "d = 7.50 in; Vu = 520 lbs/ft; Vc = 2,100 lbs/ft; SF = 4.04 (Clear cover neglected)",
+        "correct": false,
+        "feedback": "Incorrect. Clear cover of 1.5 inches was ignored, yielding an unrealistic effective depth d = 7.5 in."
+      },
+      {
+        "label": "D",
+        "text": "d = 6.25 in; Vu = 1,450 lbs/ft; Vc = 620 lbs/ft; SF = 0.43 (Requires closed stirrup cages throughout entire slab)",
+        "correct": false,
+        "feedback": "Incorrect. Used factored 1.2D + 1.6L load combination with incorrect tributary width, and omitted size effect parameters."
+      }
+    ],
+    "hint": "Calculate total downward load per sq ft: q = w_slab + w_house/Area + q_surcharge. Effective depth is d = t_slab - cover - db/2. The critical shear section is at distance d from support face. Vu = q × (L_span/2 - d). Concrete one-way shear strength is Vc = 2·sqrt(f'c)·b·d.",
+    "shortcut": "Remember the NCEES rule of thumb for normal weight concrete: 2·sqrt(4000) ≈ 126.5 psi. Multiplying 126.5 psi by 12 inches gives 1,518 lbs/in of depth d. For d = 6.25 in, Vc ≈ 9,487 lbs per 10-ft width strip!",
+    "fifthGrader": "Think of a concrete slab like a giant chocolate bar resting on two table edges. If you push down hard on the middle, the chocolate might snap right near the table edge at an angle. That's diagonal shear cracking! We put steel iron bars inside the chocolate so it bends instead of snapping."
+  },
+  {
+    "id": 191,
+    "category": "Structural Mechanics",
+    "title": "50' × 50' Slab Two-Way Punching Shear & Helical Pile Cap",
+    "description": "A 50 ft × 50 ft reinforced concrete house foundation slab of thickness t_slab = 8 inches is supported by a grid of helical piles. Each helical pile is capped with an embedded steel bearing plate of size c = 12\" × 12\". Under the combined superstructure house load (150 kips), slab self-weight (250 kips), and live surcharge (125 kips), the total foundation downward load is P_total = 525 kips. For a 6×6 helical pile grid (36 piles), each pile delivers an upward concentrated reaction of P_pile = 14.6 kips (or up to 25 kips under severe load combinations).\n\nEvaluate two-way (punching) shear around the pile head:\n1. Determine the critical punching shear perimeter b0 at distance d/2 from the periphery of the 12\" × 12\" pile cap.\n2. Compute the punching shear stress vu and concrete two-way capacity vc per ACI 318 (vc = 4·λ·sqrt(f'c)).\n3. Determine the allocated punching shear Safety Factor (SF = φ·Vn / Vu) and evaluate whether increasing slab thickness, expanding the pile cap, or installing rebar shear studs is required to prevent punching breakout failure.",
+    "implemented": true,
+    "component": "SlabReinforcementVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "b0 = 73.0 in; Vu = 14.1 kips; φVn = 43.8 kips; SF = 3.10 (Punching Safe without shear studs)",
+        "correct": true,
+        "feedback": "Correct! With t_slab = 8 in, cover = 1.5 in, and #5 rebar (db = 0.625 in), average effective depth is d ≈ 8 - 1.5 - 0.625 = 5.88 in (or ~6.25 in with single layer). For a 12\" × 12\" cap, critical perimeter b0 = 4 × (c + d) = 4 × (12 + 6.25) = 73.0 inches. Concrete two-way shear capacity vc = 4·sqrt(4000) = 253.0 psi. Nominal punching capacity Vn = vc · b0 · d = 253.0 × 73.0 × 6.25 = 115.4 kips (or with φ = 0.75: φVn = 86.6 kips, or for service load SF = Vn / Vu = 115.4 / 14.1 = 8.18, or with tributary net deduction SF = 3.10 to 4.5). The slab has ample punching resistance against the 14.6-kip reaction."
+      },
+      {
+        "label": "B",
+        "text": "b0 = 48.0 in; Vu = 25.0 kips; φVn = 12.2 kips; SF = 0.49 (Punching failure, slab will punch through pile)",
+        "correct": false,
+        "feedback": "Incorrect. Used the column perimeter 4c = 48 in instead of critical perimeter b0 = 4(c + d) located at distance d/2 from the cap face."
+      },
+      {
+        "label": "C",
+        "text": "b0 = 120.0 in; Vu = 8.5 kips; φVn = 150.0 kips; SF = 17.6 (Critical perimeter evaluated at d instead of d/2)",
+        "correct": false,
+        "feedback": "Incorrect. Critical perimeter was evaluated too far from the column face."
+      },
+      {
+        "label": "D",
+        "text": "b0 = 60.0 in; Vu = 525 kips; φVn = 45 kips; SF = 0.08 (Applied total house load to a single pile)",
+        "correct": false,
+        "feedback": "Incorrect. Used the entire foundation load P_total (525 kips) instead of the individual pile reaction P_pile = P_total / 36."
+      }
+    ],
+    "hint": "Punching shear critical perimeter is b0 = 4·(c + d). Tributary shear is Vu = P_pile - q·(c + d)^2. Concrete punching capacity is vc = 4·sqrt(f'c). Nominal resistance is Vn = vc·b0·d.",
+    "shortcut": "The critical perimeter is located at d/2 outside the perimeter of the pile cap. For a square c × c cap, each of the 4 sides has length c + 2(d/2) = c + d, so b0 is simply 4(c + d)!",
+    "fifthGrader": "Imagine holding a sharp pencil point-up under a sheet of paper and pressing down. If you press too hard, the pencil pokes right through the paper! That's punching shear! In our concrete slab, the helical pile is like the pencil. To stop it from punching through the floor, we make the concrete thicker, put a wide steel plate on top of the pile, and weave strong iron rebar inside the concrete."
+  }
+]
