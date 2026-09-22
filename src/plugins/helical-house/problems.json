@@ -1,0 +1,39 @@
+[
+  {
+    "id": 189,
+    "category": "Soil Mechanics & Foundations",
+    "title": "50' × 50' House Slab & Helical Pile Foundation",
+    "description": "A 50 ft × 50 ft residential house structure imparts a dead load of 150 kips onto an 8-inch reinforced concrete slab (γc = 150 pcf). In addition, a uniform live/surcharge load of 50 psf acts over the entire slab footprint. The underlying soil consists of dry sand (γ = 115 pcf) from the ground surface down to the groundwater table at a depth of 8 ft, underlain by saturated sand (γsat = 125 pcf).\n\nHelical steel foundation piles equipped with 12-inch diameter circular helix plates are installed to an embedment depth of 25 ft into the bearing sand (friction angle φ' = 32°, c' = 0). A site-specific geotechnical soil boring report is also available to compare empirical ultimate bearing capacity against theoretical Terzaghi-Meyerhof predictions.\n\nDetermine:\n1. The total downward gravity load (Ptotal) transmitted to the foundation.\n2. The total vertical stress (σv), hydrostatic pore pressure (u), and effective vertical stress (σv') at the helical bearing depth (25 ft).\n3. The allowable compressive capacity per helical pile and required number of piles for Safety Factors SF = 1.0, 1.5, 2.0, and 3.0.",
+    "implemented": true,
+    "component": "HelicalHouseVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Ptotal = 525 kips; σv' = 2,642 psf; Qallow(SF=2.0) = 48.5 kips; Nreq = 11 piles",
+        "correct": false,
+        "feedback": "Incorrect. Check the slab self-weight calculation: 50 × 50 × (8/12) × 150 = 250 kips, plus 150 kips house load, plus 50 psf × 2500 sq ft = 125 kips, totaling Ptotal = 525 kips. However, verify the effective stress and helical plate capacity."
+      },
+      {
+        "label": "B",
+        "text": "Ptotal = 525 kips; σv' = 2,034 psf; Qallow(SF=2.0) = 18.2 kips; Nreq = 29 piles (6×6 grid)",
+        "correct": true,
+        "feedback": "Correct! Total load Ptotal = 250 kips (slab) + 150 kips (house) + 125 kips (surcharge) = 525 kips. At depth 25 ft: σv = 50 + (115 × 8) + (125 × 17) = 3,095 psf. Hydrostatic pore pressure u = 62.4 × 17 = 1,060.8 psf. Effective vertical stress σv' = 3,095 - 1,060.8 = 2,034.2 psf. With φ' = 32°, Nq ≈ 23.18, qult = σv' × Nq ≈ 47.15 ksf. For a 12-in helix (Ah = 0.785 sq ft), single-helix Qult ≈ 37.0 kips. At SF = 2.0, Qallow = 18.5 kips, requiring ceil(525 / 18.5) = 29 piles arranged in a 6×6 grid (36 piles installed)."
+      },
+      {
+        "label": "C",
+        "text": "Ptotal = 400 kips; σv' = 3,095 psf; Qallow(SF=2.0) = 35.1 kips; Nreq = 12 piles",
+        "correct": false,
+        "feedback": "Incorrect. Surcharge load over the 2,500 sq ft slab was omitted, and total stress was used instead of effective stress (neglecting pore water pressure subtraction)."
+      },
+      {
+        "label": "D",
+        "text": "Ptotal = 650 kips; σv' = 1,463 psf; Qallow(SF=2.0) = 12.4 kips; Nreq = 53 piles",
+        "correct": false,
+        "feedback": "Incorrect. Overestimated superstructure weight or double-counted concrete slab dead load."
+      }
+    ],
+    "hint": "Calculate total downward load Ptotal = Wslab + Whouse + (q × Aslab). At pile depth D = 25 ft, determine total stress σv = q + γdry·zgw + γsat·(D - zgw), pore pressure u = γw·(D - zgw), and effective stress σv' = σv - u. Then calculate ultimate bearing capacity qult = σv'·Nq (or use the geotechnical boring log value) and pile capacity Qult = Ah · qult.",
+    "shortcut": "Effective stress σv' is always reduced by hydrostatic buoyancy: σv' = q + γdry·zgw + (γsat - γw)·(D - zgw). Here: 50 + (115 × 8) + (125 - 62.4) × 17 = 50 + 920 + 1064.2 = 2,034.2 psf! When boring reports specify qult directly, substitute it straight into Qult = Ah · qult to bypass bearing capacity factor equations.",
+    "fifthGrader": "Think of building a big heavy LEGO house on sand. If the sand has water inside it like a wet beach, the water pushes up on everything like floating in a pool! We calculate how much the house and concrete weigh, how much the water pushes back, and how many giant steel screws (helical piles) we need to twist into the deep ground so the house never sinks!"
+  }
+]

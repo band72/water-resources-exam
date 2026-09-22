@@ -26,3 +26,4 @@ dist-ssr
 # Scratch & helper scripts
 scratch/
 *.py
+.playwright-mcp/

@@ -275,6 +275,25 @@ function App() {
 
             <button 
               className="btn-secondary" 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.8rem', 
+                background: (activeView === 'problem' && activeProblem === 189) ? 'rgba(16, 185, 129, 0.25)' : 'rgba(16, 185, 129, 0.08)',
+                borderColor: (activeView === 'problem' && activeProblem === 189) ? 'var(--accent-emerald)' : 'rgba(16, 185, 129, 0.3)',
+                color: 'var(--accent-emerald)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={() => handleSelectProblem(189)}
+              title="50'×50' House Slab & Helical Pile Interactive Calculator"
+            >
+              <span>🧮</span> 50×50 Helical Pile Lab
+            </button>
+
+            <button 
+              className="btn-secondary" 
               style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
               onClick={handleRandom}
               title="Jump to a random PE problem"
@@ -322,6 +341,49 @@ function App() {
                         </p>
                       ))}
                     </div>
+
+                    {/* Link to Problem 189 for Soil / Vertical Stress problems */}
+                    {(currentProblem.id === 54 || currentProblem.id === 11) && (
+                      <div style={{
+                        marginTop: '1.25rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '10px',
+                        background: 'rgba(16, 185, 129, 0.1)',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span style={{ fontSize: '1.25rem' }}>🧪</span>
+                          <div>
+                            <strong style={{ color: 'var(--accent-emerald)', fontSize: '0.9rem', display: 'block' }}>
+                              Interactive House Load & Helical Pile Lab Available
+                            </strong>
+                            <span className="text-xs text-muted">
+                              Simulate effective overburden stress, pore water pressure, and helical foundation safety factor sizing.
+                            </span>
+                          </div>
+                        </div>
+                        <button
+                          className="btn-secondary"
+                          style={{
+                            padding: '0.45rem 0.85rem',
+                            fontSize: '0.8rem',
+                            background: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: 'var(--accent-emerald)',
+                            color: 'var(--accent-emerald)',
+                            whiteSpace: 'nowrap',
+                            fontWeight: 600
+                          }}
+                          onClick={() => handleSelectProblem(189)}
+                        >
+                          Launch House Load Lab →
+                        </button>
+                      </div>
+                    )}
 
                     {/* Multiple-Choice Practice Quiz Options */}
                     {currentProblem.options && (
