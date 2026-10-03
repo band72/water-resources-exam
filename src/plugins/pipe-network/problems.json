@@ -1,0 +1,76 @@
+[
+  {
+    "id": 192,
+    "category": "Water Resources & Environmental",
+    "title": "Hardy Cross Looped Pipe Network Analysis (Hazen-Williams Method)",
+    "description": "A municipal water distribution network forms a closed single loop ABCD in the horizontal plane. Water enters Node A at an inflow rate of Q_in = 6.0 cfs (2,693 gpm) and is withdrawn at customer delivery nodes:\n• Node B: Q_B = 2.0 cfs\n• Node C: Q_C = 3.0 cfs\n• Node D: Q_D = 1.0 cfs\n\nPipe properties are:\n• Pipe AB: L1 = 1,200 ft, D1 = 12 in (1.000 ft), C = 120 (ductile iron)\n• Pipe BC: L2 = 1,000 ft, D2 = 10 in (0.833 ft), C = 120 (ductile iron)\n• Pipe CD: L3 = 1,200 ft, D3 = 8 in (0.667 ft), C = 100 (aged cast iron)\n• Pipe DA: L4 = 1,000 ft, D4 = 10 in (0.833 ft), C = 120 (ductile iron)\n\nUsing the Hazen-Williams head loss equation (hf = 4.727 · L · Q^1.852 / (C^1.852 · D^4.870)) and assuming an initial clockwise trial flow of Q_AB = 3.50 cfs in Pipe AB (satisfying continuity with Q_BC = 1.50 cfs, Q_AD = 2.50 cfs, and Q_DC = 1.50 cfs):\n\n1. Compute the loop head loss summation (Σ hf) and resistance derivative sum (Σ |hf/Q|) around loop ABCD using clockwise as positive.\n2. Calculate the first-iteration Hardy Cross flow correction ΔQ (n = 1.852).\n3. Determine the corrected flow rate Q_AB^(1) in Pipe AB after the first iteration.",
+    "implemented": true,
+    "component": "PipeNetworkVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Σ hf = -14.41 ft; Σ |hf/Q| = 19.64 ft/cfs; ΔQ = +0.40 cfs; Q_AB^(1) = 3.90 cfs (clockwise)",
+        "correct": true,
+        "feedback": "Correct! Pipe resistances k = 4.727·L / (C^1.852 · D^4.870) are: k_AB = 0.806, k_BC = 1.631, k_CD = 8.110, k_DA = 1.631. With clockwise as positive: Pipe AB (+3.5 cfs) gives hf1 = +8.18 ft (|hf/Q| = 2.34); Pipe BC (+1.5 cfs) gives hf2 = +3.46 ft (|hf/Q| = 2.30); Pipe CD (counter-clockwise flow from D to C of 1.5 cfs, so Q = -1.5 cfs) gives hf3 = -17.18 ft (|hf/Q| = 11.46); Pipe DA (counter-clockwise flow from A to D of 2.5 cfs, so Q = -2.5 cfs) gives hf4 = -8.87 ft (|hf/Q| = 3.55). Loop sum Σ hf = +8.18 + 3.46 - 17.18 - 8.87 = -14.41 ft. Derivative sum Σ |hf/Q| = 2.34 + 2.30 + 11.46 + 3.55 = 19.64 ft/cfs. Hardy Cross correction: ΔQ = - [Σ hf] / [1.852 · Σ |hf/Q|] = - (-14.41) / (1.852 × 19.64) = +0.396 cfs ≈ +0.40 cfs. Corrected flow in Pipe AB is Q_AB^(1) = 3.50 + 0.40 = 3.90 cfs."
+      },
+      {
+        "label": "B",
+        "text": "Σ hf = +28.82 ft; Σ |hf/Q| = 9.82 ft/cfs; ΔQ = -1.58 cfs; Q_AB^(1) = 1.92 cfs (clockwise)",
+        "correct": false,
+        "feedback": "Incorrect. Summed all head loss terms as positive without accounting for counter-clockwise flow direction in branches CD and DA, and inverted the sign of the Hardy Cross correction."
+      },
+      {
+        "label": "C",
+        "text": "Σ hf = -8.18 ft; Σ |hf/Q| = 36.38 ft/cfs; ΔQ = +0.12 cfs; Q_AB^(1) = 3.62 cfs (clockwise)",
+        "correct": false,
+        "feedback": "Incorrect. Omitted the diameter exponent D^4.87 for the 8-inch pipe in branch CD and used n = 2.0 (Darcy-Weisbach) instead of n = 1.852 for Hazen-Williams."
+      },
+      {
+        "label": "D",
+        "text": "Σ hf = +14.41 ft; Σ |hf/Q| = 19.64 ft/cfs; ΔQ = -0.40 cfs; Q_AB^(1) = 3.10 cfs (clockwise)",
+        "correct": false,
+        "feedback": "Incorrect. Reversed the sign of the head losses, treating counter-clockwise head losses as positive and clockwise as negative, leading to a negative correction."
+      }
+    ],
+    "hint": "Recall the Hardy Cross loop correction formula for Hazen-Williams (n = 1.852): ΔQ = - [Σ hf] / [1.852 · Σ (|hf| / |Q|)]. Establish a consistent sign convention: flows and head losses in the clockwise direction around loop ABCD are positive, while flows in the counter-clockwise direction are negative.",
+    "shortcut": "Inspect which branch has the largest hydraulic resistance: Pipe CD is the longest small-diameter pipe (8\" diameter, C = 100) and carries 1.5 cfs counter-clockwise, creating an enormous counter-clockwise head loss (-17.18 ft). This dominates the loop, making Σ hf strongly negative (-14.41 ft). Because Σ hf is negative, the loop correction ΔQ = -(-14.41)/... MUST be positive, pushing more water clockwise and raising Q_AB to ~3.90 cfs.",
+    "fifthGrader": "Imagine water flowing around a loop like cars on a circular race track going in two lanes. The clockwise lane has nice wide smooth pipes (12-inch and 10-inch), while the counter-clockwise lane has an old, bumpy 8-inch pipe that causes a massive water traffic jam! Because of that bottleneck, the water pressure pushes back hard. The Hardy Cross method calculates how much water (+0.40 cfs) needs to switch lanes so that both paths meet in the middle with equal pressure."
+  },
+  {
+    "id": 193,
+    "category": "Water Resources & Environmental",
+    "title": "Parallel Pipes Flow Split, Darcy-Weisbach Friction Factor & Sizing",
+    "description": "A regional water transmission main splits at Junction A into two parallel pipes that rejoin at Junction B. The total combined water flow rate entering Junction A is Q_total = 10.0 cfs (4,488 gpm). The elevation of Junction A is 150.0 ft and Junction B is 150.0 ft (horizontal system). Water properties at 68°F: kinematic viscosity ν = 1.08 × 10^-5 ft²/s, density ρ = 62.3 lb/ft³.\n\nThe two parallel branches have the following properties:\n• Branch 1 (Existing Cast Iron Line): L1 = 3,000 ft, D1 = 14 in (1.167 ft), equivalent sand roughness ε1 = 0.00085 ft, friction factor f1 = 0.0210.\n• Branch 2 (New Ductile Iron Relief Line): L2 = 2,000 ft, D2 = 12 in (1.000 ft), equivalent sand roughness ε2 = 0.00015 ft, friction factor f2 = 0.0160.\n\n1. Using the Darcy-Weisbach head loss equation (hf = 0.02517 · f · L · Q² / D⁵ in US units), determine the flow rate distribution (Q1 in Branch 1 and Q2 in Branch 2).\n2. Compute the common head loss hf_AB (in ft) and pressure drop ΔP_AB (in psi) between junctions A and B.\n3. If a single equivalent pipe of length Leq = 3,000 ft with feq = 0.020 is to replace the parallel system carrying the entire Q_total = 10.0 cfs with the same head loss, determine the required equivalent diameter Deq.",
+    "implemented": true,
+    "component": "PipeNetworkVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Q1 = 5.12 cfs (51.2%), Q2 = 4.88 cfs (48.8%); hf_AB = 19.17 ft (ΔP = 8.30 psi); Deq = 28.7 in (2.39 ft)",
+        "correct": true,
+        "feedback": "Correct! In parallel pipes, head loss across both branches is equal: hf,1 = hf,2 → (f1·L1·Q1²)/D1⁵ = (f2·L2·Q2²)/D2⁵. Therefore, Q1/Q2 = √[(f2·L2·D1⁵) / (f1·L1·D2⁵)] = √[(0.0160 × 2000 × 1.1667⁵) / (0.0210 × 3000 × 1.000⁵)] = √[69.42 / 63.00] = 1.0497. By continuity: Q1 + Q2 = 10.0 cfs → 1.0497·Q2 + Q2 = 10.0 → Q2 = 4.88 cfs and Q1 = 5.12 cfs. Common head loss: hf_AB = 0.02517 × (0.0210 × 3000 × 5.12²) / (1.1667⁵) = 19.17 ft. Pressure drop: ΔP = γ·hf / 144 = 62.3 × 19.17 / 144 = 8.30 psi. For the equivalent pipe: hf_AB = 0.02517 · feq · Leq · Q_total² / Deq⁵ → 19.17 = 0.02517 × 0.020 × 3000 × (10.0)² / Deq⁵ → Deq⁵ = 151.02 / 19.17 = 78.78 ft⁵ → Deq = (78.78)^0.2 = 2.394 ft = 28.7 inches."
+      },
+      {
+        "label": "B",
+        "text": "Q1 = 7.20 cfs (72.0%), Q2 = 2.80 cfs (28.0%); hf_AB = 38.00 ft (ΔP = 16.45 psi); Deq = 18.2 in (1.52 ft)",
+        "correct": false,
+        "feedback": "Incorrect. Assumed flow splits directly in proportion to diameter (D1 / D2) rather than taking into account the fifth power of diameter and friction factor square root."
+      },
+      {
+        "label": "C",
+        "text": "Q1 = 3.50 cfs (35.0%), Q2 = 6.50 cfs (65.0%); hf_AB = 12.45 ft (ΔP = 5.39 psi); Deq = 32.5 in (2.71 ft)",
+        "correct": false,
+        "feedback": "Incorrect. Inverted the flow ratio between the two pipes and used an incorrect equivalent head loss relation."
+      },
+      {
+        "label": "D",
+        "text": "Q1 = 5.00 cfs (50.0%), Q2 = 5.00 cfs (50.0%); hf_AB = 24.80 ft (ΔP = 10.74 psi); Deq = 24.0 in (2.00 ft)",
+        "correct": false,
+        "feedback": "Incorrect. Split flow evenly (50/50), ignoring differences in pipe lengths (3,000 ft vs 2,000 ft), diameters (14\" vs 12\"), and friction factors (0.021 vs 0.016)."
+      }
+    ],
+    "hint": "In parallel pipe systems, the key physical rule is that head loss across all parallel branches is identical: hf,1 = hf,2 = hf_AB. Express Q1 in terms of Q2 using the ratio of hydraulic resistances, then apply continuity Q1 + Q2 = Q_total. For equivalent pipe, equate hf_eq(Q_total, Deq) = hf_AB and solve for Deq.",
+    "shortcut": "Use the capacity factor method: the flow conductance factor is K = √[D⁵ / (f · L)]. For Pipe 1: K1 = √[1.1667⁵ / (0.021 × 3000)] = √[2.1694 / 63.0] = 0.1856. For Pipe 2: K2 = √[1.000⁵ / (0.016 × 2000)] = √[1.0 / 32.0] = 0.1768. Total conductance K_total = 0.1856 + 0.1768 = 0.3624. Then simply: Q1 = 10.0 × (0.1856 / 0.3624) = 5.12 cfs, and Q2 = 10.0 × (0.1768 / 0.3624) = 4.88 cfs! Instantly solves without quadratic systems!",
+    "fifthGrader": "Imagine a river that splits into two water slides: one slide is wide (14 inches) but long and rough (3,000 feet), while the other slide is a bit narrower (12 inches) but much shorter and super slippery smooth (2,000 feet). Because water always seeks the path of least resistance, it balances itself out almost equally (5.12 cfs vs 4.88 cfs) so that someone sliding down either slide experiences the exact same total splash and water drop!"
+  }
+]

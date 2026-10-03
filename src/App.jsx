@@ -313,6 +313,44 @@ function App() {
 
             <button 
               className="btn-secondary" 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.8rem', 
+                background: (activeView === 'problem' && (activeProblem === 192 || activeProblem === 193)) ? 'rgba(56, 189, 248, 0.25)' : 'rgba(56, 189, 248, 0.08)',
+                borderColor: (activeView === 'problem' && (activeProblem === 192 || activeProblem === 193)) ? 'var(--accent-blue, #38bdf8)' : 'rgba(56, 189, 248, 0.3)',
+                color: 'var(--accent-blue, #38bdf8)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={() => handleSelectProblem(192)}
+              title="Hardy Cross Looped Network & Parallel Pipes Hydraulics Lab"
+            >
+              <span>🔄</span> Pipe Network Lab
+            </button>
+
+            <button 
+              className="btn-secondary" 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.8rem', 
+                background: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 93)) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)',
+                borderColor: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 93)) ? 'var(--accent-purple, #a855f7)' : 'rgba(168, 85, 247, 0.3)',
+                color: 'var(--accent-purple, #a855f7)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={() => handleSelectProblem(86)}
+              title="3D Water Hardness, meq Chemistry & Nuclear Periodic Table Studio"
+            >
+              <span>🧪</span> 3D Hardness & Nuclear Lab
+            </button>
+
+            <button 
+              className="btn-secondary" 
               style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
               onClick={handleRandom}
               title="Jump to a random PE problem"
@@ -461,6 +499,141 @@ function App() {
                         >
                           Helical Pile Lab (#189) →
                         </button>
+                      </div>
+                    )}
+
+                    {/* Cross-Link Banner for Problems 192 / 193 (Pipe Network Lab) */}
+                    {(currentProblem.id === 192 || currentProblem.id === 193) && (
+                      <div style={{
+                        marginTop: '1.25rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '10px',
+                        background: 'rgba(56, 189, 248, 0.1)',
+                        border: '1px solid rgba(56, 189, 248, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span style={{ fontSize: '1.25rem' }}>🌊</span>
+                          <div>
+                            <strong style={{ color: 'var(--accent-blue)', fontSize: '0.9rem', display: 'block' }}>
+                              Closed Conduit & Pipe Distribution Hydraulics Studio
+                            </strong>
+                            <span className="text-xs text-muted">
+                              Switch between Hardy Cross loop balancing (Hazen-Williams) and Parallel conduit friction factor & equivalent pipe sizing (Darcy-Weisbach).
+                            </span>
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: currentProblem.id === 192 ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              borderColor: 'var(--accent-blue)',
+                              color: 'var(--accent-blue)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(192)}
+                          >
+                            Hardy Cross Loop (#192)
+                          </button>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: currentProblem.id === 193 ? 'rgba(6, 182, 212, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              borderColor: 'var(--accent-cyan)',
+                              color: 'var(--accent-cyan)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(193)}
+                          >
+                            Parallel Pipes (#193) →
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Cross-Link Banner for Water Hardness & Nuclear Periodic Lab */}
+                    {(currentProblem.id === 86 || currentProblem.id === 87 || currentProblem.id === 88 || currentProblem.id === 89 || currentProblem.id === 93) && (
+                      <div style={{
+                        marginTop: '1.25rem',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '10px',
+                        background: 'rgba(168, 85, 247, 0.1)',
+                        border: '1px solid rgba(168, 85, 247, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        flexWrap: 'wrap'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span style={{ fontSize: '1.25rem' }}>🧪</span>
+                          <div>
+                            <strong style={{ color: 'var(--accent-purple)', fontSize: '0.9rem', display: 'block' }}>
+                              Water Hardness, Chemistry & Nuclear Radionuclides Studio
+                            </strong>
+                            <span className="text-xs text-muted">
+                              Switch between 3D Beaker & 3rd-Grader Hardness (#86), meq Chemistry & Equation Balancer (#87), and Nuclear Periodic Table (#93).
+                            </span>
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: currentProblem.id === 86 ? 'rgba(56, 189, 248, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              borderColor: 'var(--accent-blue)',
+                              color: 'var(--accent-blue)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(86)}
+                          >
+                            3D Hardness (#86)
+                          </button>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: currentProblem.id === 87 ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              borderColor: 'var(--accent-emerald)',
+                              color: 'var(--accent-emerald)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(87)}
+                          >
+                            Meq Balancer (#87)
+                          </button>
+                          <button
+                            className="btn-secondary"
+                            style={{
+                              padding: '0.45rem 0.85rem',
+                              fontSize: '0.8rem',
+                              background: currentProblem.id === 93 ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              borderColor: 'var(--accent-purple)',
+                              color: 'var(--accent-purple)',
+                              whiteSpace: 'nowrap',
+                              fontWeight: 600
+                            }}
+                            onClick={() => handleSelectProblem(93)}
+                          >
+                            Nuclear Periodic (#93) →
+                          </button>
+                        </div>
                       </div>
                     )}
 
