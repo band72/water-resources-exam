@@ -3,6 +3,7 @@ import Dashboard from './components/Dashboard';
 import { pluginRegistry } from './plugins/registry';
 import { PluginRenderer } from './plugins';
 import { getProblemCategory } from './utils/categorize';
+import MathText from './components/MathText';
 
 function App() {
   const [activeView, setActiveView] = useState(() => {
@@ -196,7 +197,7 @@ function App() {
                     }}>
                       #{prob.id}
                     </span>
-                    <span style={{ fontSize: '0.875rem' }}>{prob.title}</span>
+                    <span style={{ fontSize: '0.875rem' }}><MathText text={prob.title} /></span>
                   </span>
                   {isSim && (
                     <span title="Interactive Visualizer Available" style={{ fontSize: '0.85rem' }}>⚡</span>
@@ -207,7 +208,7 @@ function App() {
                     {probCat}
                   </span>
                 </div>
-                <p className="problem-card-desc">{prob.description}</p>
+                <p className="problem-card-desc"><MathText text={prob.description} /></p>
               </div>
             );
           })}
@@ -240,7 +241,7 @@ function App() {
                   </span>
                   <span>/</span>
                   <span className="breadcrumb-active" style={{ maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    #{currentProblem.id} {currentProblem.title}
+                    #{currentProblem.id} <MathText text={currentProblem.title} />
                   </span>
                 </>
               )}
@@ -407,13 +408,13 @@ function App() {
                         </span>
                       )}
                     </div>
-                    <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem' }}>{currentProblem.title}</h2>
+                    <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem' }}><MathText text={currentProblem.title} /></h2>
                     
                     {/* Paragraph-formatted description */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                       {currentProblem.description.split(/\n\s*\n/).map((para, idx) => (
                         <p key={idx} style={{ lineHeight: '1.7', fontSize: '1.05rem', color: '#cbd5e1', margin: 0 }}>
-                          {para.trim()}
+                          <MathText text={para.trim()} />
                         </p>
                       ))}
                     </div>
@@ -729,7 +730,7 @@ function App() {
                                 }}
                               >
                                 <span style={{ fontWeight: 700, fontFamily: 'var(--font-mono)' }}>({opt.label})</span>
-                                <span style={{ fontWeight: 600 }}>{opt.text}</span>
+                                <span style={{ fontWeight: 600 }}><MathText text={opt.text} /></span>
                               </button>
                             );
                           })}
@@ -746,7 +747,7 @@ function App() {
                             color: currentProblem.options.find(o => o.label === selectedOption)?.correct ? '#34d399' : '#f87171',
                             animation: 'modalEnter 0.2s ease'
                           }}>
-                            {currentProblem.options.find(o => o.label === selectedOption)?.feedback}
+                            <MathText text={currentProblem.options.find(o => o.label === selectedOption)?.feedback} />
                           </div>
                         )}
                       </div>

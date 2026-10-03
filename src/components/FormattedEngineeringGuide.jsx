@@ -1,3 +1,5 @@
+import { renderMath } from './renderMath';
+
 /**
  * FormattedEngineeringGuide
  * Transforms engineering hints, exam shortcuts, and intuition explanations
@@ -74,7 +76,7 @@ const FormattedEngineeringGuide = ({ text }) => {
                   <div style={{ flex: 1, minWidth: '240px', fontSize: '0.95rem', lineHeight: '1.65', color: '#f1f5f9' }}>
                     {proseLines.map((p, pIdx) => (
                       <p key={pIdx} style={{ margin: pIdx > 0 ? '0.35rem 0 0 0' : 0 }}>
-                        {p}
+                        {renderMath(p, `p${pIdx}`)}
                       </p>
                     ))}
                   </div>
@@ -86,7 +88,7 @@ const FormattedEngineeringGuide = ({ text }) => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: proseLines.length ? '0.25rem' : '0' }}>
                   {mathLines.map((m, mIdx) => (
                     <div key={mIdx} className="guide-math-line">
-                      {m}
+                      {renderMath(m, `m${mIdx}`)}
                     </div>
                   ))}
                 </div>
@@ -111,7 +113,7 @@ const FormattedEngineeringGuide = ({ text }) => {
         if (para.includes('⚠️') || /trap|warning|caution/i.test(para.substring(0, 30))) {
           return (
             <div key={idx} className="guide-alert-box">
-              {para}
+              {renderMath(para, `a${idx}`)}
             </div>
           );
         }
@@ -146,7 +148,7 @@ const FormattedEngineeringGuide = ({ text }) => {
                     {isBullet && (
                       <span style={{ color: 'var(--accent-cyan)', fontWeight: 'bold' }}>•</span>
                     )}
-                    <span style={{ flex: 1 }}>{cleanLine}</span>
+                    <span style={{ flex: 1 }}>{renderMath(cleanLine, `l${lIdx}`)}</span>
                   </div>
                 );
               })}
@@ -156,7 +158,7 @@ const FormattedEngineeringGuide = ({ text }) => {
 
         return (
           <p key={idx} style={{ fontSize: '0.95rem', lineHeight: '1.7', color: '#e2e8f0', margin: 0 }}>
-            {para}
+            {renderMath(para, `q${idx}`)}
           </p>
         );
       })}

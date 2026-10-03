@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getProblemCategory } from '../utils/categorize';
+import MathText from './MathText';
 
 const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
   const [activeTab, setActiveTab] = useState('All');
@@ -219,17 +220,17 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
                 </div>
 
                 <h4 style={{ fontSize: '1.15rem', marginBottom: '0.5rem', color: '#ffffff' }}>
-                  {tool.title}
+                  <MathText text={tool.title} />
                 </h4>
 
                 <p style={{ fontSize: '0.825rem', color: '#cbd5e1', lineHeight: 1.45, marginBottom: '1rem' }}>
-                  {tool.description}
+                  <MathText text={tool.description} />
                 </p>
               </div>
 
               <div>
                 <div className="math-block" style={{ fontSize: '0.75rem', padding: '0.5rem 0.75rem', marginBottom: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                  {tool.formula}
+                  <MathText text={tool.formula} />
                 </div>
 
                 <button 
@@ -306,7 +307,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
                       >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
                           <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-main)' }}>
-                            #{prob.id} {prob.title}
+                            #{prob.id} <MathText text={prob.title} />
                           </span>
                           {hasSimulator && (
                             <span className="glass-badge" style={{ fontSize: '0.65rem', padding: '0.1rem 0.4rem', color: 'var(--accent-cyan)', borderColor: 'rgba(6,182,212,0.3)' }}>
@@ -315,7 +316,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
                           )}
                         </div>
                         <p className="problem-card-desc" style={{ fontSize: '0.775rem', marginTop: '0.25rem' }}>
-                          {prob.description}
+                          <MathText text={prob.description} />
                         </p>
                       </div>
                     );

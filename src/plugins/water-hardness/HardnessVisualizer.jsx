@@ -1265,7 +1265,7 @@ const HardnessVisualizer = ({ problem }) => {
                 3. Radioactive First-Order Decay Kinetics:
               </strong>
               <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-purple)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: '4px' }}>
-                N(t) = N₀ · e^(-λt); λ = ln(2) / T₁/₂
+                N(t) = N₀ · e<sup>−λt</sup>; λ = ln(2) / T<sub>1/2</sub>
               </div>
               <p className="text-muted" style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
                 Radium-226 decays via alpha emission to Radon-222. Group 2 radionuclides (²²⁶Ra, ⁹⁰Sr) co-precipitate with Ca/Mg in water softening!

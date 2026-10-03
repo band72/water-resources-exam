@@ -28,6 +28,21 @@ const FAMILY_COLORS = {
   'unknown': { bg: 'rgba(148, 163, 184, 0.15)', border: '#64748b', text: '#cbd5e1', name: 'Unknown Properties' }
 };
 
+// Third-grade-level summaries shown when hovering a legend chip
+const FAMILY_KID_INFO = {
+  'alkali': { emoji: '💥', summary: 'Wild, super-reactive metals that LOVE to give away one electron. They are soft enough to cut with a butter knife and can fizz or even pop when they touch water!', examples: 'Sodium (in table salt), Potassium (in bananas)', water: 'Sodium and potassium dissolve easily in water but do NOT make it “hard.”' },
+  'alkaline-earth': { emoji: '🪨', summary: 'Metals that give away two electrons. They are a little calmer than alkali metals and help build rocks, shells, and your bones.', examples: 'Calcium (bones, milk), Magnesium (leafy greens)', water: 'Calcium and magnesium are what make water “hard” and leave white crust on faucets!' },
+  'transition': { emoji: '🔧', summary: 'The big middle block of strong, shiny metals. They are great for building things, conduct electricity, and many make bright colors.', examples: 'Iron (steel bridges), Copper (wires, pennies), Gold', water: 'Iron and manganese in water can cause rusty-orange or black stains.' },
+  'post-transition': { emoji: '🥫', summary: 'Softer metals that sit just after the transition metals. They melt more easily and are often mixed with other metals.', examples: 'Aluminum (soda cans), Tin, Lead', water: 'Lead from old pipes is dangerous to drink — that is why it is closely tested.' },
+  'metalloid': { emoji: '🌓', summary: 'Half-and-half elements! They act a little like metals and a little like non-metals. They are the heroes inside computer chips.', examples: 'Silicon (computer chips, sand), Boron, Arsenic', water: 'Arsenic is a metalloid that must be removed from drinking water.' },
+  'nonmetal': { emoji: '🌬️', summary: 'Not shiny and not metal. Many are gases, and they are the building blocks of living things — including you!', examples: 'Oxygen (we breathe it), Carbon (in all living things), Nitrogen', water: 'Water itself is made of hydrogen and oxygen — H₂O!' },
+  'halogen': { emoji: '🧪', summary: 'Very grabby elements that want to TAKE one electron. They team up with metals to make salts.', examples: 'Chlorine (pool cleaner), Fluorine (toothpaste), Iodine', water: 'Chlorine is added to kill germs, and fluoride helps protect teeth.' },
+  'noble': { emoji: '👑', summary: 'The “royal” gases. Their electron shells are already full, so they are happy alone and almost never react with anything.', examples: 'Helium (floaty balloons), Neon (glowing signs), Radon', water: 'Radon is a radioactive noble gas that can sneak into well water and basements.' },
+  'lanthanide': { emoji: '🧲', summary: 'The “rare earth” metals, placed in their own row at the bottom. They make super-strong magnets and bright screen colors.', examples: 'Neodymium (strong magnets), Europium (screen colors)', water: 'Gadolinium is so good at soaking up neutrons it is used in nuclear reactor safety.' },
+  'actinide': { emoji: '☢️', summary: 'Heavy elements on the bottom row. ALL of them are radioactive, meaning their centers slowly break apart and give off energy.', examples: 'Uranium & Plutonium (nuclear power), Thorium', water: 'Uranium in drinking water is limited by the EPA to 30 µg/L.' },
+  'unknown': { emoji: '❓', summary: 'Super-heavy elements made in labs for just a tiny moment. They fall apart so fast that scientists are still learning how they behave.', examples: 'Oganesson, Tennessine, Meitnerium', water: 'They do not exist in nature, so they never show up in water.' }
+};
+
 // Decay mode → label, daughter shift [ΔZ, ΔA] (null = fission), and which Q-value applies
 const MODE_INFO = {
   'A': { label: 'Alpha (α)', d: [-2, -4], q: 5 },
@@ -185,6 +200,7 @@ const PeriodicNuclearStudio = () => {
   const [elapsedHalfLives, setElapsedHalfLives] = useState(1);
   const [resCat, setResCat] = useState('all');
   const [selRes, setSelRes] = useState(null);
+  const [hoverFam, setHoverFam] = useState(null);
 
   // Lazy-load nuclide data (code-split chunk)
   useEffect(() => {
@@ -387,7 +403,8 @@ const PeriodicNuclearStudio = () => {
                   borderRadius: '6px', padding: '2px 3px', cursor: 'pointer', position: 'relative',
                   background: isSel ? 'var(--accent-purple)' : f.bg,
                   border: isSel ? '2px solid #fff' : `1px solid ${f.border}`,
-                  opacity: on ? 1 : 0.15,
+                  opacity: hoverFam ? (e.family === hoverFam || (hoverFam === 'unknown' && !FAMILY_COLORS[e.family]) ? 1 : 0.12) : (on ? 1 : 0.15),
+                  boxShadow: hoverFam && e.family === hoverFam ? `0 0 10px ${f.border}` : 'none',
                   display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                   color: '#fff', transition: 'transform 0.12s ease, opacity 0.15s ease', lineHeight: 1.05
                 }}
@@ -403,13 +420,56 @@ const PeriodicNuclearStudio = () => {
           })}
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap', fontSize: '0.7rem' }}>
-          {Object.entries(FAMILY_COLORS).map(([k, f]) => (
-            <div key={k} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <div style={{ width: 10, height: 10, borderRadius: 3, background: f.bg, border: `1px solid ${f.border}` }} />
-              <span className="text-muted">{f.name}</span>
-            </div>
-          ))}
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.75rem', flexWrap: 'wrap', fontSize: '0.7rem' }}>
+          {Object.entries(FAMILY_COLORS).map(([k, f], idx, arr) => {
+            const info = FAMILY_KID_INFO[k];
+            const open = hoverFam === k;
+            const count = ELEMENTS.filter(e => (k === 'unknown' ? !FAMILY_COLORS[e.family] || e.family === 'unknown' : e.family === k)).length;
+            return (
+              <div
+                key={k}
+                id={`pt-legend-${k}`}
+                tabIndex={0}
+                role="button"
+                aria-describedby={open ? `pt-legend-tip-${k}` : undefined}
+                onMouseEnter={() => setHoverFam(k)}
+                onMouseLeave={() => setHoverFam(null)}
+                onFocus={() => setHoverFam(k)}
+                onBlur={() => setHoverFam(null)}
+                style={{
+                  position: 'relative', display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'help',
+                  padding: '0.2rem 0.45rem', borderRadius: 6, outline: 'none',
+                  background: open ? f.bg : 'transparent', border: `1px solid ${open ? f.border : 'transparent'}`,
+                  transition: 'background 0.15s ease, border-color 0.15s ease'
+                }}
+              >
+                <div style={{ width: 10, height: 10, borderRadius: 3, background: f.bg, border: `1px solid ${f.border}` }} />
+                <span style={{ color: open ? f.text : 'var(--text-muted)' }}>{f.name}</span>
+                {open && info && (
+                  <div
+                    id={`pt-legend-tip-${k}`}
+                    role="tooltip"
+                    style={{
+                      position: 'absolute', bottom: 'calc(100% + 10px)', ...(idx < arr.length / 2 ? { left: 0 } : { right: 0 }), zIndex: 50, width: 290,
+                      background: 'rgba(10, 15, 28, 0.97)', border: `1px solid ${f.border}`, borderRadius: 12,
+                      padding: '0.8rem 0.9rem', boxShadow: `0 14px 34px -10px rgba(0,0,0,0.7), 0 0 18px ${f.border}33`,
+                      backdropFilter: 'blur(14px)', color: '#e2e8f0', fontSize: '0.78rem', lineHeight: 1.5,
+                      pointerEvents: 'none', animation: 'modalEnter 0.15s ease'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginBottom: '0.4rem' }}>
+                      <span style={{ fontSize: '1.25rem' }}>{info.emoji}</span>
+                      <strong style={{ color: f.text, fontSize: '0.9rem' }}>{f.name}</strong>
+                      <span style={{ marginLeft: 'auto', fontSize: '0.65rem', color: 'var(--text-muted)' }}>{count} elements</span>
+                    </div>
+                    <p style={{ margin: '0 0 0.45rem' }}>{info.summary}</p>
+                    <p style={{ margin: '0 0 0.3rem' }}><strong style={{ color: f.text }}>You know these:</strong> {info.examples}</p>
+                    <p style={{ margin: 0 }}><strong style={{ color: f.text }}>💧 Water connection:</strong> {info.water}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -527,7 +587,7 @@ const PeriodicNuclearStudio = () => {
                   {/* Decay curve */}
                   <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 8, padding: '0.6rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginBottom: '0.3rem', flexWrap: 'wrap', gap: '0.4rem' }}>
-                      <strong style={{ color: 'var(--accent-cyan)' }}>N(t) = N₀·e^(−λt)</strong>
+                      <strong style={{ color: 'var(--accent-cyan)' }}>N(t) = N₀·e<sup>−λt</sup></strong>
                       <span>After <strong>{elapsedHalfLives.toFixed(1)}</strong> half-lives ({fmtTime(elapsedHalfLives * decay.hls)}): <strong style={{ color: '#fde047' }}>{fmtSig(100 * Math.pow(2, -elapsedHalfLives))}%</strong> remains</span>
                     </div>
                     <svg viewBox={`0 0 ${curve.W} ${curve.H}`} style={{ width: '100%', height: 'auto', display: 'block' }}>

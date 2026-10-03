@@ -582,7 +582,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
               border: '1px solid rgba(16, 185, 129, 0.2)'
             }}>
               <span className="text-xs text-muted" style={{ display: 'block', fontWeight: 600 }}>
-                CORRECTED FLOW IN PIPE AB (Q_AB)
+                CORRECTED FLOW IN PIPE AB (Q<sub>AB</sub>)
               </span>
               <div style={{
                 fontSize: '1.6rem',
@@ -934,7 +934,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
                     ΔQ = {activeIterData.deltaQ >= 0 ? '+' : ''}{activeIterData.deltaQ.toFixed(3)} cfs
                   </div>
                   <div style={{ marginTop: '0.35rem', color: 'var(--accent-blue)', fontWeight: 700 }}>
-                    Q_AB^(next) = {activeIterData.qAB.toFixed(2)} + ({activeIterData.deltaQ.toFixed(2)}) = {activeIterData.nextQab.toFixed(2)} cfs
+                    Q<sub>AB</sub><sup>(next)</sup> = {activeIterData.qAB.toFixed(2)} + ({activeIterData.deltaQ.toFixed(2)}) = {activeIterData.nextQab.toFixed(2)} cfs
                   </div>
                 </div>
               </div>
@@ -985,7 +985,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
               {/* Initial Assumed Flow in AB */}
               <div>
                 <label className="text-xs" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontWeight: 600 }}>Assumed Initial Trial Flow in AB (Q_AB,0):</span>
+                  <span style={{ fontWeight: 600 }}>Assumed Initial Trial Flow in AB (Q<sub>AB,0</sub>):</span>
                   <span style={{ color: 'var(--accent-blue)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{initialQab.toFixed(2)} cfs</span>
                 </label>
                 <input
@@ -1082,7 +1082,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
               border: '1px solid rgba(6, 182, 212, 0.25)'
             }}>
               <span className="text-xs text-muted" style={{ display: 'block', fontWeight: 600 }}>
-                COMMON HEAD LOSS (hf_AB)
+                COMMON HEAD LOSS (h<sub>f,AB</sub>)
               </span>
               <div style={{
                 fontSize: '1.6rem',
@@ -1602,7 +1602,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
                   1. Hazen-Williams Head Loss Equation (US Customary):
                 </strong>
                 <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: '4px' }}>
-                  hf = (4.727 · L · Q^1.852) / (C^1.852 · D^4.870)
+                  h<sub>f</sub> = (4.727 · L · Q<sup>1.852</sup>) / (C<sup>1.852</sup> · D<sup>4.870</sup>)
                 </div>
                 <p className="text-muted" style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
                   where L and D are in feet, Q in cfs, and C is the Hazen-Williams roughness coefficient (120 for new ductile iron, 100 for aged cast iron).
@@ -1626,7 +1626,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
                   3. Sign Convention & Convergence Rule:
                 </strong>
                 <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-emerald)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: '4px' }}>
-                  Q_corrected = Q_assumed + ΔQ
+                  Q<sub>corrected</sub> = Q<sub>assumed</sub> + ΔQ
                 </div>
                 <p className="text-muted" style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
                   Iterations continue until residual loop head loss |Σ hf| &lt; 0.1 ft. Notice that nodal continuity (Σ Qin = Σ Qout) is preserved at every node throughout the iteration process.
@@ -1664,7 +1664,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
                   3. Equivalent Pipe Diameter (Deq):
                 </strong>
                 <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-purple)', background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: '4px' }}>
-                  Deq = [ (0.02517 · feq · Leq · Q_total²) / hf ]^(1/5)
+                  D<sub>eq</sub> = [ (0.02517 · f<sub>eq</sub> · L<sub>eq</sub> · Q<sub>total</sub>²) / h<sub>f</sub> ]<sup>1/5</sup>
                 </div>
                 <p className="text-muted" style={{ marginTop: '0.3rem', fontSize: '0.75rem' }}>
                   A single equivalent pipe having diameter Deq and length Leq will carry the entire system flow with the exact same hydraulic grade line loss.

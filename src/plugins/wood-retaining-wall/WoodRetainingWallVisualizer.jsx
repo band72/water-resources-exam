@@ -2328,7 +2328,7 @@ const WoodRetainingWallVisualizer = ({ problem }) => {
                             <rect x={col1X - 20} y={diagGroundY - 5} width="40" height="10" fill="url(#concrete-shaft-grad)" stroke="var(--accent-purple)" strokeWidth="1.2" rx="2" />
                             <line x1={col1X - 20} y1={diagGroundY} x2={col1X - 52} y2={diagGroundY} stroke="var(--accent-purple)" strokeWidth="2" markerEnd="url(#arrow-purple)" />
                             <text x={col1X - 56} y={diagGroundY + 3} fill="var(--accent-purple)" fontSize="7.5" fontWeight="700" textAnchor="end" fontFamily="var(--font-mono)">
-                              R_collar
+                              R<tspan baselineShift="sub" fontSize="5.5">collar</tspan>
                             </text>
                           </g>
                         )}

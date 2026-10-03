@@ -921,8 +921,8 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                   color: COLOR_SAFE,
                   content: (
                     <>
-                      Q = (1.49/n) · A · R^(2/3) · S₀^(1/2)<br />
-                      Q = (1.49/{n}) · {calcs.geoN.A.toFixed(3)} · {calcs.geoN.R.toFixed(4)}^(2/3) · √({S0.toFixed(4)})<br />
+                      Q = (1.49/n) · A · R<sup>2/3</sup> · S₀<sup>1/2</sup><br />
+                      Q = (1.49/{n}) · {calcs.geoN.A.toFixed(3)} · {calcs.geoN.R.toFixed(4)}<sup>2/3</sup> · √({S0.toFixed(4)})<br />
                       Q = {(1.49 / n).toFixed(3)} · {calcs.geoN.A.toFixed(3)} · {Math.pow(calcs.geoN.R, 2 / 3).toFixed(4)} · {Math.sqrt(S0).toFixed(5)}<br />
                       Q = <strong>{manningsQ(yn, bEff, zEff, n, S0).toFixed(2)} cfs</strong> (target: {Q} cfs ✓)<br /><br />
                       Normal Depth: <strong>yₙ = {yn.toFixed(3)} ft</strong> (solved by bisection iteration)
@@ -936,7 +936,7 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                     <>
                       Critical condition: Q²T / (gA³) = 1<br />
                       {channelType === 'rectangular'
-                        ? <>Rectangular closed-form: yc = (Q²/gb²)^(1/3) = ({Q}²/{G}·{bEff}²)^(1/3) = <strong>{yc.toFixed(3)} ft</strong></>
+                        ? <>Rectangular closed-form: yc = (Q²/gb²)<sup>1/3</sup> = ({Q}²/{G}·{bEff}²)<sup>1/3</sup> = <strong>{yc.toFixed(3)} ft</strong></>
                         : <>Solved iteratively (bisection): <strong>yc = {yc.toFixed(3)} ft</strong></>
                       }<br /><br />
                       Minimum Specific Energy: Emin = yc + Q²/(2g·Ac²·Tc/Ac)<br />
@@ -994,8 +994,8 @@ const ChannelHydraulicsVisualizer = ({ problem }) => {
                       &nbsp;&nbsp;= <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lchow.toFixed(2)} ft</strong> (Chow, Open Channel Hydraulics)<br /><br />
 
                       3) <strong>Silvester (1964)</strong> — Fr₁-based power law:<br />
-                      &nbsp;&nbsp;Lⱼ = 9.75·y₁·(Fr₁ − 1)^1.01<br />
-                      &nbsp;&nbsp;= 9.75 × {y1.toFixed(3)} × ({Fr1.toFixed(4)} − 1)^1.01<br />
+                      &nbsp;&nbsp;Lⱼ = 9.75·y₁·(Fr₁ − 1)<sup>1.01</sup><br />
+                      &nbsp;&nbsp;= 9.75 × {y1.toFixed(3)} × ({Fr1.toFixed(4)} − 1)<sup>1.01</sup><br />
                       &nbsp;&nbsp;= 9.75 × {y1.toFixed(3)} × {Math.pow(Math.max(Fr1 - 1, 0.01), 1.01).toFixed(4)}<br />
                       &nbsp;&nbsp;= <strong style={{color:'#f97316'}}>{calcs.jumpLengths.Lsilvester.toFixed(2)} ft</strong> (good for 1.7 &lt; Fr₁ &lt; 20)<br /><br />
 

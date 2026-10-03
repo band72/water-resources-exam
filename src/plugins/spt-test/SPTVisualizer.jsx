@@ -1017,7 +1017,7 @@ const SPTVisualizer = ({ problem }) => {
                   Using the standard Liao & Whitman (1986) / NCEES overburden formula with reference pressure Pa = 2,000 psf (100 kPa):
                 </p>
                 <div className="math-block">
-                  CN = (Pa / σ'vo)^0.5 = (2,000 / {sigmaPrimeVo.toFixed(1)})^0.5 = {cnUncapped.toFixed(4)} (Capped at 1.70 → CN = {cn.toFixed(4)})
+                  C<sub>N</sub> = (P<sub>a</sub> / σ'<sub>vo</sub>)<sup>0.5</sup> = (2,000 / {sigmaPrimeVo.toFixed(1)})<sup>0.5</sup> = {cnUncapped.toFixed(4)} (Capped at 1.70 → CN = {cn.toFixed(4)})
                   <br />
                   <strong>(N1)60 = N60 × CN = {n60.toFixed(2)} × {cn.toFixed(4)} = {n160.toFixed(2)} ≈ {Math.round(n160)} blows/ft</strong>
                 </div>

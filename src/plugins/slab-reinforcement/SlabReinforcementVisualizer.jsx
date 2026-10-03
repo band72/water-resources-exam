@@ -358,7 +358,7 @@ const SlabReinforcementVisualizer = ({ problem }) => {
               {activeMode === 'oneway'
                 ? (isOneWaySafe 
                     ? `Concrete slab depth d = ${effectiveDepthInches.toFixed(2)}″ provides ample shear resistance against ${vuOneWayLbsPerFt.toFixed(0)} lbs/ft factored demand.`
-                    : `Slab depth d is too shallow or load is excessive! Increase thickness t_slab, add shear stirrups, or decrease support span.`)
+                    : `Slab depth d is too shallow or load is excessive! Increase slab thickness t, add shear stirrups, or decrease support span.`)
                 : (isPunchingSafe
                     ? `Pile cap perimeter b0 = ${b0Inches.toFixed(1)}″ distributes the ${vuPunchingFactoredKips.toFixed(1)}-kip pile reaction safely without punching breakout.`
                     : `Helical pile head punches through the slab! Increase slab thickness, enlarge steel pile cap c, or install shear stud rails.`)}
