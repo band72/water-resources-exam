@@ -15,7 +15,7 @@ const plugin = {
   headerLinks: [
     {
       id: 'pipe-network-lab',
-      label: 'Pipe Network Lab',
+      label: 'Hardy Cross Lab',
       icon: '🔄',
       color: 'var(--accent-blue, #38bdf8)',
       tint: '56, 189, 248',
