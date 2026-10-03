@@ -61,7 +61,6 @@ const PipeNetworkVisualizer = ({ problem }) => {
   // MODE 2: PARALLEL PIPES & FRICTION FACTOR SIZING STATE (Problem 193)
   // =========================================================================
   const [qTotalParallelCfs, setQTotalParallelCfs] = useState(10.0);
-  const [waterTempF, setWaterTempF] = useState(68); // 68 deg F
   const [junctionPressurePsi, setJunctionPressurePsi] = useState(65.0); // Upstream pressure at A
 
   // Branch 1 (Existing Line)
@@ -168,7 +167,7 @@ const PipeNetworkVisualizer = ({ problem }) => {
     }
 
     return { k1, k2, k3, k4, iterations };
-  }, [qinCfs, demandB, demandC, demandD, l1Ft, d1In, c1, l2Ft, d2In, c2, l3Ft, d3In, c3, l4Ft, d4In, c4, initialQab]);
+  }, [qinCfs, demandB, demandD, l1Ft, d1In, c1, l2Ft, d2In, c2, l3Ft, d3In, c3, l4Ft, d4In, c4, initialQab]);
 
   // Selected iteration data for display
   const activeIterData = useMemo(() => {
@@ -297,7 +296,6 @@ const PipeNetworkVisualizer = ({ problem }) => {
     };
   }, [
     qTotalParallelCfs,
-    waterTempF,
     junctionPressurePsi,
     parL1Ft,
     parD1In,
@@ -338,7 +336,6 @@ const PipeNetworkVisualizer = ({ problem }) => {
 
   const handleLoadParallelExamPreset = () => {
     setQTotalParallelCfs(10.0);
-    setWaterTempF(68);
     setJunctionPressurePsi(65.0);
     setParL1Ft(3000);
     setParD1In(14);

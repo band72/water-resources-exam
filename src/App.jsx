@@ -335,8 +335,8 @@ function App() {
               style={{ 
                 padding: '0.45rem 0.85rem', 
                 fontSize: '0.8rem', 
-                background: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 88 || activeProblem === 89)) ? 'rgba(56, 189, 248, 0.25)' : 'rgba(56, 189, 248, 0.08)',
-                borderColor: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 88 || activeProblem === 89)) ? 'var(--accent-blue, #38bdf8)' : 'rgba(56, 189, 248, 0.3)',
+                background: (activeView === 'problem' && (activeProblem >= 86 && activeProblem <= 95)) ? 'rgba(56, 189, 248, 0.25)' : 'rgba(56, 189, 248, 0.08)',
+                borderColor: (activeView === 'problem' && (activeProblem >= 86 && activeProblem <= 95)) ? 'var(--accent-blue, #38bdf8)' : 'rgba(56, 189, 248, 0.3)',
                 color: 'var(--accent-blue, #38bdf8)',
                 fontWeight: 600,
                 display: 'flex',
@@ -354,15 +354,15 @@ function App() {
               style={{ 
                 padding: '0.45rem 0.85rem', 
                 fontSize: '0.8rem', 
-                background: (activeView === 'problem' && activeProblem === 93) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)',
-                borderColor: (activeView === 'problem' && activeProblem === 93) ? 'var(--accent-purple, #a855f7)' : 'rgba(168, 85, 247, 0.3)',
+                background: (activeView === 'problem' && activeProblem === 194) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)',
+                borderColor: (activeView === 'problem' && activeProblem === 194) ? 'var(--accent-purple, #a855f7)' : 'rgba(168, 85, 247, 0.3)',
                 color: 'var(--accent-purple, #a855f7)',
                 fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.35rem'
               }}
-              onClick={() => handleSelectProblem(93)}
+              onClick={() => handleSelectProblem(194)}
               title="Interactive Periodic Table, Nuclear Radionuclides & Elemental Trends"
             >
               <span>⚛️</span> Periodic Table
@@ -582,7 +582,7 @@ function App() {
                     )}
 
                     {/* Cross-Link Banner for Water Hardness & Nuclear Periodic Lab */}
-                    {(currentProblem.id === 86 || currentProblem.id === 87 || currentProblem.id === 88 || currentProblem.id === 89 || currentProblem.id === 93) && (
+                    {((currentProblem.id >= 86 && currentProblem.id <= 95) || currentProblem.id === 194) && (
                       <div style={{
                         marginTop: '1.25rem',
                         padding: '0.85rem 1.15rem',
@@ -602,7 +602,7 @@ function App() {
                               Water Hardness, Chemistry & Nuclear Radionuclides Studio
                             </strong>
                             <span className="text-xs text-muted">
-                              Switch between 3D Beaker & 3rd-Grader Hardness (#86), meq Chemistry & Equation Balancer (#87), and Nuclear Periodic Table (#93).
+                              Switch between 3D Beaker & 3rd-Grader Hardness (#86), meq Chemistry & Equation Balancer (#87), and Nuclear Periodic Table (#194).
                             </span>
                           </div>
                         </div>
@@ -642,15 +642,15 @@ function App() {
                             style={{
                               padding: '0.45rem 0.85rem',
                               fontSize: '0.8rem',
-                              background: currentProblem.id === 93 ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.05)',
+                              background: currentProblem.id === 194 ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255, 255, 255, 0.05)',
                               borderColor: 'var(--accent-purple)',
                               color: 'var(--accent-purple)',
                               whiteSpace: 'nowrap',
                               fontWeight: 600
                             }}
-                            onClick={() => handleSelectProblem(93)}
+                            onClick={() => handleSelectProblem(194)}
                           >
-                            Nuclear Periodic (#93) →
+                            Nuclear Periodic (#194) →
                           </button>
                         </div>
                       </div>

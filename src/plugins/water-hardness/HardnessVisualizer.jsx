@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
+import PeriodicNuclearStudio from './PeriodicNuclearStudio';
 
 // =========================================================================
 // CHEMISTRY & RADIONUCLIDE DATA DICTIONARIES
@@ -18,245 +19,25 @@ const WATER_IONS = [
   { id: 'no3', name: 'Nitrate', formula: 'NO₃⁻', charge: -1, mw: 62.00, ew: 62.00, type: 'anion', color: '#ec4899', defaultMgL: 6.2 }
 ];
 
-// Radionuclides of Prime Nuclear Engineering & Drinking Water Importance
-const RADIONUCLIDES = {
-  U235: {
-    symbol: '²³⁵U',
-    element: 'Uranium-235',
-    atomicNumber: 92,
-    massNumber: 235,
-    halfLife: '7.04 × 10⁸ years',
-    halfLifeSec: 2.22e16,
-    decayMode: 'Alpha (α) / Spontaneous Fission',
-    decayEnergyMev: 4.679,
-    decayConstYr: '9.85 × 10⁻¹⁰ yr⁻¹',
-    nuclearRole: 'Primary fissile nuclear reactor fuel (0.72% natural abundance). Thermal fission cross section σf = 585 barns.',
-    fissionEnergy: '~200 MeV per fission event; 2.43 neutrons emitted per fission.',
-    waterHazard: 'Heavy metal nephrotoxicity & radiological risk. EPA Drinking Water MCL = 30 µg/L.',
-    family: 'Actinide'
-  },
-  U238: {
-    symbol: '²³⁸U',
-    element: 'Uranium-238',
-    atomicNumber: 92,
-    massNumber: 238,
-    halfLife: '4.468 × 10⁹ years',
-    halfLifeSec: 1.41e17,
-    decayMode: 'Alpha (α)',
-    decayEnergyMev: 4.270,
-    decayConstYr: '1.55 × 10⁻¹⁰ yr⁻¹',
-    nuclearRole: 'Fertile isotope (99.27% of natural U). Breeds into fissile ²³⁹Pu via neutron capture in fast breeders.',
-    fissionEnergy: 'Fast fission only (threshold ~1 MeV). Major source of internal Earth geothermal heat.',
-    waterHazard: 'EPA Drinking Water MCL = 30 µg/L (combined uranium).',
-    family: 'Actinide'
-  },
-  Pu239: {
-    symbol: '²³⁹Pu',
-    element: 'Plutonium-239',
-    atomicNumber: 94,
-    massNumber: 239,
-    halfLife: '24,110 years',
-    halfLifeSec: 7.61e11,
-    decayMode: 'Alpha (α)',
-    decayEnergyMev: 5.244,
-    decayConstYr: '2.87 × 10⁻⁵ yr⁻¹',
-    nuclearRole: 'Key fissile isotope created in reactors: ²³⁸U + n → ²³⁹U → ²³⁹Np → ²³⁹Pu. σf = 747 barns.',
-    fissionEnergy: 'Yields 2.89 neutrons per thermal fission event; fundamental in MOX nuclear fuel.',
-    waterHazard: 'Severe alpha bone/liver carcinogen if ingested or inhaled.',
-    family: 'Actinide'
-  },
-  Ra226: {
-    symbol: '²²⁶Ra',
-    element: 'Radium-226',
-    atomicNumber: 88,
-    massNumber: 226,
-    halfLife: '1,600 years',
-    halfLifeSec: 5.05e10,
-    decayMode: 'Alpha (α)',
-    decayEnergyMev: 4.871,
-    decayConstYr: '4.33 × 10⁻⁴ yr⁻¹',
-    nuclearRole: 'Decay daughter of ²³⁸U chain. Group 2 alkaline earth metal: chemically behaves identical to Ca²⁺ and Mg²⁺!',
-    fissionEnergy: 'Decays to radioactive noble gas Radon-222 (²²²Rn).',
-    waterHazard: 'EPA Drinking Water MCL = 5.0 pCi/L (combined ²²⁶Ra + ²²⁸Ra). Removed by cation exchange water softening!',
-    family: 'Alkaline Earth'
-  },
-  Rn222: {
-    symbol: '²²²Rn',
-    element: 'Radon-222',
-    atomicNumber: 86,
-    massNumber: 222,
-    halfLife: '3.823 days',
-    halfLifeSec: 3.30e5,
-    decayMode: 'Alpha (α)',
-    decayEnergyMev: 5.590,
-    decayConstYr: '66.1 yr⁻¹',
-    nuclearRole: 'Radioactive noble gas; daughter of ²²⁶Ra. Emanates from granite and bedrock groundwater into homes.',
-    fissionEnergy: 'Alpha emitter with short-lived daughters (²¹⁸Po, ²¹⁴Po). Primary cause of lung cancer in non-smokers.',
-    waterHazard: 'EPA proposed drinking water MCL = 300 to 4,000 pCi/L. Remediated by packed-tower aeration or GAC.',
-    family: 'Noble Gas'
-  },
-  Cs137: {
-    symbol: '¹³⁷Cs',
-    element: 'Cesium-137',
-    atomicNumber: 55,
-    massNumber: 137,
-    halfLife: '30.17 years',
-    halfLifeSec: 9.52e8,
-    decayMode: 'Beta (β⁻) / Gamma (γ)',
-    decayEnergyMev: 1.176,
-    decayConstYr: '0.0230 yr⁻¹',
-    nuclearRole: 'Major high-yield fission product (6.09% yield in ²³⁵U fission). Gamma emission at 661.7 keV from ¹³⁷ᵐBa.',
-    fissionEnergy: 'Dominant long-term radiation hazard in spent nuclear fuel pools and Chernobyl/Fukushima runoff.',
-    waterHazard: 'Group 1 alkali metal: highly soluble in water, behaves like K⁺, distributes uniformly in biological soft tissue.',
-    family: 'Alkali Metal'
-  },
-  Sr90: {
-    symbol: '⁹⁰Sr',
-    element: 'Strontium-90',
-    atomicNumber: 38,
-    massNumber: 90,
-    halfLife: '28.9 years',
-    halfLifeSec: 9.12e8,
-    decayMode: 'Beta (β⁻)',
-    decayEnergyMev: 0.546,
-    decayConstYr: '0.0240 yr⁻¹',
-    nuclearRole: 'High-yield fission product (5.8% yield). Group 2 alkaline earth metal: severe "bone seeker" mimicking calcium!',
-    fissionEnergy: 'Decays to Yttrium-90 (⁹⁰Y, t1/2 = 64 hr, high energy β⁻ 2.28 MeV).',
-    waterHazard: 'EPA Drinking Water MCL = 8.0 pCi/L. Can be removed using lime-soda water softening or zeolite ion exchange.',
-    family: 'Alkaline Earth'
-  },
-  I131: {
-    symbol: '¹³¹I',
-    element: 'Iodine-131',
-    atomicNumber: 53,
-    massNumber: 131,
-    halfLife: '8.02 days',
-    halfLifeSec: 6.93e5,
-    decayMode: 'Beta (β⁻) / Gamma (γ)',
-    decayEnergyMev: 0.971,
-    decayConstYr: '31.5 yr⁻¹',
-    nuclearRole: 'Volatile fission product (2.9% yield). Major biological hazard in immediate aftermath of reactor accidents.',
-    fissionEnergy: 'Concentrates rapidly in the human thyroid gland. Blocked prophylactically by potassium iodide (KI) tablets.',
-    waterHazard: 'EPA Drinking Water MCL = 3.0 pCi/L. Removed by granular activated carbon and reverse osmosis.',
-    family: 'Halogen'
-  },
-  Co60: {
-    symbol: '⁶⁰Co',
-    element: 'Cobalt-60',
-    atomicNumber: 27,
-    massNumber: 60,
-    halfLife: '5.27 years',
-    halfLifeSec: 1.66e8,
-    decayMode: 'Beta (β⁻) / Strong Gamma (γ)',
-    decayEnergyMev: 2.824,
-    decayConstYr: '0.131 yr⁻¹',
-    nuclearRole: 'Produced by neutron activation of structural steel: ⁵⁹Co(n,γ)⁶⁰Co. Emits two cascade gammas: 1.17 and 1.33 MeV.',
-    fissionEnergy: 'Industrial gamma radiography, medical radiotherapy, and food sterilization source.',
-    waterHazard: 'Corrosion product in nuclear power plant cooling loops (BWR/PWR primary coolant filtration).',
-    family: 'Transition Metal'
-  },
-  H3: {
-    symbol: '³H (Tritium)',
-    element: 'Hydrogen-3',
-    atomicNumber: 1,
-    massNumber: 3,
-    halfLife: '12.32 years',
-    halfLifeSec: 3.89e8,
-    decayMode: 'Beta (β⁻)',
-    decayEnergyMev: 0.0186,
-    decayConstYr: '0.0563 yr⁻¹',
-    nuclearRole: 'Nuclear fusion fuel (D-T fusion reaction: ²H + ³H → ⁴He + n + 17.6 MeV). Produced in CANDU heavy water reactors.',
-    fissionEnergy: 'Extremely soft beta emitter (Emax = 18.6 keV, average 5.7 keV; stopped by 6 mm of air).',
-    waterHazard: 'Forms tritiated water (HTO), chemically identical to H₂O, cannot be removed by normal filtration! EPA MCL = 20,000 pCi/L.',
-    family: 'Reactive Nonmetal'
-  }
-};
-
-// Selected Periodic Elements with Family Data & Periodic Properties
-const PERIODIC_ELEMENTS = [
-  // Period 1
-  { z: 1, symbol: 'H', name: 'Hydrogen', group: 1, period: 1, family: 'nonmetal', mass: 1.008, radius: 53, ie: 1312, en: 2.20, ea: 73 },
-  { z: 2, symbol: 'He', name: 'Helium', group: 18, period: 1, family: 'noble', mass: 4.003, radius: 31, ie: 2372, en: 0, ea: 0 },
-  // Period 2
-  { z: 3, symbol: 'Li', name: 'Lithium', group: 1, period: 2, family: 'alkali', mass: 6.94, radius: 152, ie: 520, en: 0.98, ea: 60 },
-  { z: 4, symbol: 'Be', name: 'Beryllium', group: 2, period: 2, family: 'alkaline-earth', mass: 9.012, radius: 112, ie: 899, en: 1.57, ea: 0 },
-  { z: 5, symbol: 'B', name: 'Boron', group: 13, period: 2, family: 'metalloid', mass: 10.81, radius: 85, ie: 801, en: 2.04, ea: 27 },
-  { z: 6, symbol: 'C', name: 'Carbon', group: 14, period: 2, family: 'nonmetal', mass: 12.011, radius: 77, ie: 1086, en: 2.55, ea: 122 },
-  { z: 7, symbol: 'N', name: 'Nitrogen', group: 15, period: 2, family: 'nonmetal', mass: 14.007, radius: 75, ie: 1402, en: 3.04, ea: 7 },
-  { z: 8, symbol: 'O', name: 'Oxygen', group: 16, period: 2, family: 'nonmetal', mass: 15.999, radius: 73, ie: 1314, en: 3.44, ea: 141 },
-  { z: 9, symbol: 'F', name: 'Fluorine', group: 17, period: 2, family: 'halogen', mass: 18.998, radius: 71, ie: 1681, en: 3.98, ea: 328 },
-  { z: 10, symbol: 'Ne', name: 'Neon', group: 18, period: 2, family: 'noble', mass: 20.180, radius: 38, ie: 2081, en: 0, ea: 0 },
-  // Period 3
-  { z: 11, symbol: 'Na', name: 'Sodium', group: 1, period: 3, family: 'alkali', mass: 22.990, radius: 186, ie: 496, en: 0.93, ea: 53 },
-  { z: 12, symbol: 'Mg', name: 'Magnesium', group: 2, period: 3, family: 'alkaline-earth', mass: 24.305, radius: 160, ie: 738, en: 1.31, ea: 0 },
-  { z: 13, symbol: 'Al', name: 'Aluminum', group: 13, period: 3, family: 'post-transition', mass: 26.982, radius: 143, ie: 578, en: 1.61, ea: 43 },
-  { z: 14, symbol: 'Si', name: 'Silicon', group: 14, period: 3, family: 'metalloid', mass: 28.085, radius: 118, ie: 786, en: 1.90, ea: 134 },
-  { z: 15, symbol: 'P', name: 'Phosphorus', group: 15, period: 3, family: 'nonmetal', mass: 30.974, radius: 110, ie: 1012, en: 2.19, ea: 72 },
-  { z: 16, symbol: 'S', name: 'Sulfur', group: 16, period: 3, family: 'nonmetal', mass: 32.06, radius: 103, ie: 1000, en: 2.58, ea: 200 },
-  { z: 17, symbol: 'Cl', name: 'Chlorine', group: 17, period: 3, family: 'halogen', mass: 35.45, radius: 99, ie: 1251, en: 3.16, ea: 349 },
-  { z: 18, symbol: 'Ar', name: 'Argon', group: 18, period: 3, family: 'noble', mass: 39.948, radius: 71, ie: 1521, en: 0, ea: 0 },
-  // Period 4 Key Elements
-  { z: 19, symbol: 'K', name: 'Potassium', group: 1, period: 4, family: 'alkali', mass: 39.098, radius: 227, ie: 419, en: 0.82, ea: 48 },
-  { z: 20, symbol: 'Ca', name: 'Calcium', group: 2, period: 4, family: 'alkaline-earth', mass: 40.078, radius: 197, ie: 590, en: 1.00, ea: 2 },
-  { z: 26, symbol: 'Fe', name: 'Iron', group: 8, period: 4, family: 'transition', mass: 55.845, radius: 126, ie: 762, en: 1.83, ea: 16 },
-  { z: 27, symbol: 'Co', name: 'Cobalt', group: 9, period: 4, family: 'transition', mass: 58.933, radius: 125, ie: 760, en: 1.88, ea: 64 },
-  { z: 29, symbol: 'Cu', name: 'Copper', group: 11, period: 4, family: 'transition', mass: 63.546, radius: 128, ie: 745, en: 1.90, ea: 119 },
-  { z: 30, symbol: 'Zn', name: 'Zinc', group: 12, period: 4, family: 'transition', mass: 65.38, radius: 134, ie: 906, en: 1.65, ea: 0 },
-  { z: 35, symbol: 'Br', name: 'Bromine', group: 17, period: 4, family: 'halogen', mass: 79.904, radius: 114, ie: 1140, en: 2.96, ea: 325 },
-  { z: 36, symbol: 'Kr', name: 'Krypton', group: 18, period: 4, family: 'noble', mass: 83.798, radius: 88, ie: 1351, en: 3.00, ea: 0 },
-  // Period 5 Key Elements
-  { z: 38, symbol: 'Sr', name: 'Strontium', group: 2, period: 5, family: 'alkaline-earth', mass: 87.62, radius: 215, ie: 549, en: 0.95, ea: 5 },
-  { z: 53, symbol: 'I', name: 'Iodine', group: 17, period: 5, family: 'halogen', mass: 126.90, radius: 133, ie: 1008, en: 2.66, ea: 295 },
-  { z: 54, symbol: 'Xe', name: 'Xenon', group: 18, period: 5, family: 'noble', mass: 131.29, radius: 108, ie: 1170, en: 2.60, ea: 0 },
-  // Period 6 Key Elements
-  { z: 55, symbol: 'Cs', name: 'Cesium', group: 1, period: 6, family: 'alkali', mass: 132.91, radius: 265, ie: 376, en: 0.79, ea: 46 },
-  { z: 56, symbol: 'Ba', name: 'Barium', group: 2, period: 6, family: 'alkaline-earth', mass: 137.33, radius: 222, ie: 503, en: 0.89, ea: 14 },
-  { z: 82, symbol: 'Pb', name: 'Lead', group: 14, period: 6, family: 'post-transition', mass: 207.2, radius: 175, ie: 716, en: 2.33, ea: 35 },
-  { z: 86, symbol: 'Rn', name: 'Radon', group: 18, period: 6, family: 'noble', mass: 222.0, radius: 120, ie: 1037, en: 2.20, ea: 0 },
-  // Period 7 Key Elements (Actinides & Heavy)
-  { z: 88, symbol: 'Ra', name: 'Radium', group: 2, period: 7, family: 'alkaline-earth', mass: 226.0, radius: 220, ie: 509, en: 0.90, ea: 10 },
-  { z: 90, symbol: 'Th', name: 'Thorium', group: 3, period: 7, family: 'actinide', mass: 232.04, radius: 180, ie: 587, en: 1.30, ea: 0 },
-  { z: 92, symbol: 'U', name: 'Uranium', group: 3, period: 7, family: 'actinide', mass: 238.03, radius: 175, ie: 598, en: 1.38, ea: 0 },
-  { z: 94, symbol: 'Pu', name: 'Plutonium', group: 3, period: 7, family: 'actinide', mass: 244.0, radius: 175, ie: 585, en: 1.28, ea: 0 }
-];
-
-const FAMILY_COLORS = {
-  'alkali': { bg: 'rgba(239, 68, 68, 0.25)', border: '#ef4444', text: '#fca5a5', name: 'Alkali Metals' },
-  'alkaline-earth': { bg: 'rgba(245, 158, 11, 0.25)', border: '#f59e0b', text: '#fcd34d', name: 'Alkaline Earth (Ca, Mg, Ra)' },
-  'transition': { bg: 'rgba(56, 189, 248, 0.25)', border: '#38bdf8', text: '#7dd3fc', name: 'Transition Metals' },
-  'post-transition': { bg: 'rgba(99, 102, 241, 0.25)', border: '#6366f1', text: '#a5b4fc', name: 'Post-Transition' },
-  'metalloid': { bg: 'rgba(16, 185, 129, 0.25)', border: '#10b981', text: '#6ee7b7', name: 'Metalloids' },
-  'nonmetal': { bg: 'rgba(6, 182, 212, 0.25)', border: '#06b6d4', text: '#67e8f9', name: 'Reactive Nonmetals' },
-  'halogen': { bg: 'rgba(236, 72, 153, 0.25)', border: '#ec4899', text: '#f472b6', name: 'Halogens' },
-  'noble': { bg: 'rgba(168, 85, 247, 0.25)', border: '#a855f7', text: '#d8b4fe', name: 'Noble Gases' },
-  'actinide': { bg: 'rgba(225, 29, 72, 0.25)', border: '#e11d48', text: '#fda4af', name: 'Actinides (U, Pu, Th)' }
+// Studio tab for a given problem id
+const modeForProblem = (id) => {
+  if (id === 194) return 'periodic-nuclear';
+  if (id === 87 || id === 88 || id === 89 || id === 93 || id === 94) return 'meq-chemistry';
+  return '3d-hardness';
 };
 
 const HardnessVisualizer = ({ problem }) => {
-  // Determine initial mode:
-  // Problem 86 -> '3d-hardness'
-  // Problem 87/88/89 -> 'meq-chemistry'
-  // Problem 93 -> 'periodic-nuclear'
-  const initialMode = useMemo(() => {
-    if (problem?.id === 93) return 'periodic-nuclear';
-    if (problem?.id === 87 || problem?.id === 88 || problem?.id === 89) return 'meq-chemistry';
-    return '3d-hardness';
-  }, [problem?.id]);
-
-  const [activeTab, setActiveTab] = useState(initialMode);
+  const [activeTab, setActiveTab] = useState(() => modeForProblem(problem?.id));
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showTheory, setShowTheory] = useState(true);
 
-  // Synchronize active tab whenever a different problem is selected
-  useEffect(() => {
-    if (problem?.id === 93) {
-      setActiveTab('periodic-nuclear');
-    } else if (problem?.id === 87 || problem?.id === 88 || problem?.id === 89) {
-      setActiveTab('meq-chemistry');
-    } else if (problem?.id === 86) {
-      setActiveTab('3d-hardness');
-    }
-  }, [problem?.id]);
+  // Reset the tab when navigating to a different problem (React "adjust state on prop change" pattern;
+  // avoids a setState-inside-useEffect cascade render)
+  const [prevProblemId, setPrevProblemId] = useState(problem?.id);
+  if (problem?.id !== prevProblemId) {
+    setPrevProblemId(problem?.id);
+    setActiveTab(modeForProblem(problem?.id));
+  }
 
   // =========================================================================
   // TAB 1: 3D WATER HARDNESS STATE & 3RD-GRADER LAB
@@ -290,8 +71,8 @@ const HardnessVisualizer = ({ problem }) => {
     const totalHardness = caHardnessCaCO3 + mgHardnessCaCO3;
 
     // Carbonate vs Non-Carbonate Hardness Partition
-    let carbonateHardness = 0;
-    let nonCarbonateHardness = 0;
+    let carbonateHardness;
+    let nonCarbonateHardness;
 
     if (alkalinityMgL < totalHardness) {
       carbonateHardness = alkalinityMgL;
@@ -302,8 +83,8 @@ const HardnessVisualizer = ({ problem }) => {
     }
 
     // Classification
-    let classification = 'Soft';
-    let classColor = '#10b981';
+    let classification;
+    let classColor;
     if (totalHardness > 180) {
       classification = 'Very Hard (> 180 mg/L)';
       classColor = '#ef4444';
@@ -369,7 +150,8 @@ const HardnessVisualizer = ({ problem }) => {
       const focalLength = 320;
 
       const rotX = rotationRef.current.rotX;
-      const rotY = rotationRef.current.rotY + (rotationRef.current.isDragging ? 0 : 0.003); // gentle auto rotation
+      if (!rotationRef.current.isDragging) rotationRef.current.rotY += 0.003; // gentle auto rotation
+      const rotY = rotationRef.current.rotY;
 
       // 3D projection function
       const project = (x, y, z) => {
@@ -550,7 +332,7 @@ const HardnessVisualizer = ({ problem }) => {
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, [activeTab, caMgL, mgMgL, soapActive, heatBoiling, resinSoftened]);
+  }, [activeTab, soapActive, heatBoiling, resinSoftened]);
 
   // Mouse handlers for 3D orbital dragging
   const handleMouseDown = (e) => {
@@ -626,7 +408,8 @@ const HardnessVisualizer = ({ problem }) => {
     const nonCarbonateHardness = Math.max(0, totalHardness - carbonateHardness);
 
     // Lime required (as CaCO3)
-    const limeDoseCaCO3 = freeCo2MgL + carbonateHardness + mgHardness + excessLimeDose;
+    // Lime = CO2 + HCO3- alkalinity (lime reacts with ALL bicarbonate) + Mg2+ + excess  (all as CaCO3)
+    const limeDoseCaCO3 = freeCo2MgL + alkalinity + mgHardness + excessLimeDose;
     // Pure Hydrated Lime Ca(OH)2 MW = 74.1, CaCO3 MW = 100.1 => 74.1/100.1 = 0.741
     const limeDoseCaOH2 = limeDoseCaCO3 * 0.741;
     const limeLbsPerDay = plantFlowMgd * 8.34 * limeDoseCaOH2;
@@ -655,23 +438,6 @@ const HardnessVisualizer = ({ problem }) => {
     };
   }, [ionConcentrations, plantFlowMgd, freeCo2MgL, excessLimeDose]);
 
-  // =========================================================================
-  // TAB 3: PERIODIC TABLE & NUCLEAR RADIONUCLIDES STATE
-  // =========================================================================
-  const [selectedElement, setSelectedElement] = useState(PERIODIC_ELEMENTS.find(e => e.symbol === 'U'));
-  const [selectedNuclideKey, setSelectedNuclideKey] = useState('U235');
-  const [nuclideFilter, setNuclideFilter] = useState('all'); // 'all' | 'radionuclide' | 'fuel' | 'drinking-water'
-  const [trendMetric, setTrendMetric] = useState('radius'); // 'radius' | 'ie' | 'en' | 'ea'
-
-  const activeNuclide = RADIONUCLIDES[selectedNuclideKey] || RADIONUCLIDES['U235'];
-
-  // Trend Metadata
-  const TREND_LABELS = {
-    radius: { name: 'Atomic Radius (Size)', unit: 'pm', desc: 'Decreases across a period (increasing nuclear charge), increases down a group (extra shell).' },
-    ie: { name: 'First Ionization Energy', unit: 'kJ/mol', desc: 'Energy to remove an electron. Peaks at noble gases (He = 2372 kJ/mol), valleys at alkali metals.' },
-    en: { name: 'Electronegativity (Pauling)', unit: '', desc: 'Atom pulling power for bonding electrons. Peaks at Fluorine (3.98), valleys at Francium (0.7).' },
-    ea: { name: 'Electron Affinity', unit: 'kJ/mol', desc: 'Energy released when adding an electron. Halogens have the highest affinities (Cl = 349 kJ/mol).' }
-  };
 
   // Main UI Render Content
   const visualizerContent = (
@@ -737,7 +503,7 @@ const HardnessVisualizer = ({ problem }) => {
                 ? 'Orbital 3D beaker with Ca²⁺/Mg²⁺ mineral magnets, soap scum curd formation, boiling kettle scale, and 3rd-grader intuition.'
                 : (activeTab === 'meq-chemistry'
                   ? 'Milliequivalent conversions (meq/L = mg/L / EW), cation-anion electroneutrality check, and lime-soda ash balancing equations.'
-                  : '118-element periodic grid, nuclear decay energies (Q-value), radioactive half-lives, and graphical family periodic trends.')}
+                  : 'All 118 elements: click any tile for isotopes, decay modes, Q-values, half-lives, decay chains, neutron resonance energies and periodic trends.')}
             </p>
           </div>
         </div>
@@ -806,6 +572,15 @@ const HardnessVisualizer = ({ problem }) => {
               <span>⚛️</span> Periodic Table & Nuclear
             </button>
           </div>
+
+          {/* Theory Toggle */}
+          <button
+            className="btn-secondary"
+            style={{ padding: '0.45rem 0.75rem', fontSize: '0.78rem' }}
+            onClick={() => setShowTheory(!showTheory)}
+          >
+            <span>📐</span> {showTheory ? 'Hide Theory' : 'Show Theory'}
+          </button>
 
           {/* Fullscreen Button */}
           <button
@@ -1383,8 +1158,13 @@ const HardnessVisualizer = ({ problem }) => {
                   <div style={{ fontFamily: 'var(--font-mono)' }}>Mg(HCO₃)₂ + 2Ca(OH)₂ → 2CaCO₃↓ + Mg(OH)₂↓ + 2H₂O</div>
                 </div>
 
+                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '6px', marginBottom: '0.4rem' }}>
+                  <div style={{ color: 'var(--accent-cyan)', fontWeight: 700 }}>4. Magnesium Noncarbonate Hardness (Lime + Soda Ash):</div>
+                  <div style={{ fontFamily: 'var(--font-mono)' }}>MgSO₄ + Ca(OH)₂ → Mg(OH)₂↓ + CaSO₄</div>
+                </div>
+
                 <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.5rem', borderRadius: '6px' }}>
-                  <div style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>4. Noncarbonate Hardness (Soda Ash):</div>
+                  <div style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>5. Calcium Noncarbonate Hardness (Soda Ash):</div>
                   <div style={{ fontFamily: 'var(--font-mono)' }}>CaSO₄ + Na₂CO₃ → CaCO₃↓ + Na₂SO₄</div>
                 </div>
               </div>
@@ -1398,9 +1178,31 @@ const HardnessVisualizer = ({ problem }) => {
                 border: '1px solid rgba(16, 185, 129, 0.3)',
                 fontSize: '0.78rem'
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.2rem' }}>
-                  <span>Plant Flow: <strong>{plantFlowMgd} MGD</strong></span>
-                  <span>Excess Lime: <strong>{excessLimeDose} mg/L</strong></span>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.4rem', marginBottom: '0.5rem' }}>
+                  {[
+                    { label: 'Plant Flow (MGD)', value: plantFlowMgd, set: setPlantFlowMgd, step: 0.5 },
+                    { label: 'Free CO₂ (as CaCO₃)', value: freeCo2MgL, set: setFreeCo2MgL, step: 1 },
+                    { label: 'Excess Lime (as CaCO₃)', value: excessLimeDose, set: setExcessLimeDose, step: 5 }
+                  ].map((f) => (
+                    <label key={f.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem', fontSize: '0.7rem' }}>
+                      <span className="text-muted">{f.label}</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step={f.step}
+                        value={f.value}
+                        onChange={(e) => f.set(Math.max(0, parseFloat(e.target.value) || 0))}
+                        style={{
+                          background: 'rgba(0, 0, 0, 0.4)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          borderRadius: '4px',
+                          color: '#fff',
+                          fontSize: '0.75rem',
+                          padding: '0.2rem 0.35rem'
+                        }}
+                      />
+                    </label>
+                  ))}
                 </div>
                 <div style={{ color: 'var(--accent-emerald)', fontWeight: 700 }}>
                   Lime Ca(OH)₂ Required: {balanceData.limeLbsPerDay.toFixed(0)} lbs/day ({balanceData.limeDoseCaOH2.toFixed(1)} mg/L)
@@ -1414,343 +1216,8 @@ const HardnessVisualizer = ({ problem }) => {
         </div>
       )}
 
-      {/* ===================================================================== */}
-      {/* TAB 3: INTERACTIVE PERIODIC TABLE & NUCLEAR RADIONUCLIDES             */}
-      {/* ===================================================================== */}
-      {activeTab === 'periodic-nuclear' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {/* Controls Bar */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '0.75rem',
-            background: 'rgba(0, 0, 0, 0.3)',
-            padding: '0.75rem 1rem',
-            borderRadius: '12px',
-            border: '1px solid var(--border-color)'
-          }}>
-            {/* Filter Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-              <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Filter Table:</span>
-              {[
-                { id: 'all', label: 'All Elements' },
-                { id: 'radionuclide', label: 'Radionuclides & Isotopes' },
-                { id: 'fuel', label: 'Reactor Fuels (U, Pu, Th)' },
-                { id: 'drinking-water', label: 'Drinking Water MCLs' }
-              ].map((f) => (
-                <button
-                  key={f.id}
-                  style={{
-                    padding: '0.25rem 0.6rem',
-                    borderRadius: '6px',
-                    fontSize: '0.75rem',
-                    border: nuclideFilter === f.id ? '1px solid var(--accent-purple)' : '1px solid rgba(255, 255, 255, 0.1)',
-                    background: nuclideFilter === f.id ? 'rgba(168, 85, 247, 0.25)' : 'rgba(0, 0, 0, 0.2)',
-                    color: nuclideFilter === f.id ? 'var(--accent-purple)' : 'var(--text-main)',
-                    fontWeight: nuclideFilter === f.id ? 700 : 500,
-                    cursor: 'pointer'
-                  }}
-                  onClick={() => setNuclideFilter(f.id)}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Periodic Trend Selector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Family Trend:</span>
-              <select
-                value={trendMetric}
-                onChange={(e) => setTrendMetric(e.target.value)}
-                style={{
-                  background: 'rgba(0, 0, 0, 0.4)',
-                  color: 'var(--text-main)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                  borderRadius: '6px',
-                  padding: '0.25rem 0.5rem',
-                  fontSize: '0.75rem'
-                }}
-              >
-                <option value="radius">Atomic Radius (Size)</option>
-                <option value="ie">First Ionization Energy</option>
-                <option value="en">Electronegativity (Pauling)</option>
-                <option value="ea">Electron Affinity</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Interactive Periodic Grid */}
-          <div style={{
-            background: 'radial-gradient(ellipse at center, rgba(12, 25, 45, 0.8) 0%, rgba(7, 12, 22, 0.95) 100%)',
-            borderRadius: '14px',
-            border: '1px solid var(--border-color)',
-            padding: '1.25rem'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-              <strong style={{ fontSize: '0.9rem', color: 'var(--accent-purple)' }}>
-                Periodic Table of the Elements & Nuclear Isotopes
-              </strong>
-              <span className="text-xs text-muted">
-                Click any element tile to inspect nuclear decay energies & properties
-              </span>
-            </div>
-
-            {/* Grid Layout of Elements */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(18, minmax(28px, 1fr))',
-              gap: '4px',
-              overflowX: 'auto',
-              paddingBottom: '0.5rem'
-            }}>
-              {PERIODIC_ELEMENTS.map((el) => {
-                const isSelected = selectedElement?.z === el.z;
-                const fam = FAMILY_COLORS[el.family] || FAMILY_COLORS['nonmetal'];
-                const isRadioactive = el.z >= 84 || el.z === 43 || el.z === 61;
-                const isSpecialNuclide = Object.values(RADIONUCLIDES).some(r => r.atomicNumber === el.z);
-
-                // Trend value
-                const trendVal = el[trendMetric] || 0;
-
-                return (
-                  <div
-                    key={el.z}
-                    style={{
-                      gridColumn: el.group,
-                      gridRow: el.period,
-                      minHeight: '44px',
-                      borderRadius: '6px',
-                      background: isSelected ? 'var(--accent-purple)' : fam.bg,
-                      border: isSelected ? '2px solid #ffffff' : (isSpecialNuclide ? '2px solid #e11d48' : `1px solid ${fam.border}`),
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                      padding: '2px',
-                      position: 'relative'
-                    }}
-                    onClick={() => {
-                      setSelectedElement(el);
-                      // Check if matches a known radionuclide
-                      const matchedKey = Object.keys(RADIONUCLIDES).find(k => RADIONUCLIDES[k].atomicNumber === el.z);
-                      if (matchedKey) setSelectedNuclideKey(matchedKey);
-                    }}
-                    title={`${el.name} (Z = ${el.z}): ${TREND_LABELS[trendMetric].name} = ${trendVal} ${TREND_LABELS[trendMetric].unit}`}
-                  >
-                    <span style={{ fontSize: '0.6rem', color: isSelected ? '#fff' : 'var(--text-dim)', alignSelf: 'flex-start', lineHeight: 1 }}>
-                      {el.z}
-                    </span>
-                    <strong style={{ fontSize: '0.85rem', color: isSelected ? '#070a12' : '#ffffff', lineHeight: 1 }}>
-                      {el.symbol}
-                    </strong>
-                    <span style={{ fontSize: '0.55rem', color: isSelected ? '#070a12' : fam.text, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {trendVal}
-                    </span>
-                    {isSpecialNuclide && (
-                      <div style={{
-                        position: 'absolute',
-                        top: '-2px',
-                        right: '-2px',
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        background: '#e11d48',
-                        boxShadow: '0 0 6px #e11d48'
-                      }} />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Element Family Legend */}
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap', fontSize: '0.7rem' }}>
-              {Object.keys(FAMILY_COLORS).map((k) => (
-                <div key={k} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <div style={{ width: '10px', height: '10px', borderRadius: '3px', background: FAMILY_COLORS[k].bg, border: `1px solid ${FAMILY_COLORS[k].border}` }} />
-                  <span style={{ color: 'var(--text-muted)' }}>{FAMILY_COLORS[k].name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Nuclear Radionuclide Inspector & Graphical Trend Curve */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(320px, 1.15fr) minmax(320px, 1fr)',
-            gap: '1.25rem',
-            alignItems: 'start'
-          }}>
-            {/* Selected Radionuclide Engineering Card */}
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              borderRadius: '14px',
-              border: '1px solid rgba(168, 85, 247, 0.3)',
-              padding: '1.25rem'
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.75rem' }}>
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-purple)', fontFamily: 'var(--font-mono)' }}>
-                      {activeNuclide.symbol}
-                    </span>
-                    <strong style={{ fontSize: '1.1rem', color: 'var(--text-main)' }}>
-                      {activeNuclide.element} (Z = {activeNuclide.atomicNumber})
-                    </strong>
-                  </div>
-                  <span className="text-xs text-muted" style={{ display: 'block', marginTop: '0.2rem' }}>
-                    Family: <strong style={{ color: 'var(--accent-cyan)' }}>{activeNuclide.family}</strong>
-                  </span>
-                </div>
-
-                {/* Radionuclide Picker */}
-                <select
-                  value={selectedNuclideKey}
-                  onChange={(e) => setSelectedNuclideKey(e.target.value)}
-                  style={{
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    color: 'var(--text-main)',
-                    border: '1px solid rgba(168, 85, 247, 0.4)',
-                    borderRadius: '6px',
-                    padding: '0.35rem 0.5rem',
-                    fontSize: '0.78rem'
-                  }}
-                >
-                  {Object.keys(RADIONUCLIDES).map((key) => (
-                    <option key={key} value={key}>
-                      {RADIONUCLIDES[key].symbol} - {RADIONUCLIDES[key].element}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* KPI Badges */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-                gap: '0.75rem',
-                margin: '1rem 0'
-              }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="text-xs text-muted" style={{ display: 'block' }}>Decay Mode:</span>
-                  <strong style={{ color: 'var(--accent-rose)', fontSize: '0.85rem' }}>{activeNuclide.decayMode}</strong>
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="text-xs text-muted" style={{ display: 'block' }}>Half-Life (T₁/₂):</span>
-                  <strong style={{ color: 'var(--accent-amber)', fontSize: '0.85rem' }}>{activeNuclide.halfLife}</strong>
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="text-xs text-muted" style={{ display: 'block' }}>Decay Energy (Q):</span>
-                  <strong style={{ color: 'var(--accent-emerald)', fontSize: '0.85rem' }}>{activeNuclide.decayEnergyMev} MeV</strong>
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="text-xs text-muted" style={{ display: 'block' }}>Decay Const (λ):</span>
-                  <strong style={{ color: 'var(--accent-blue)', fontSize: '0.85rem' }}>{activeNuclide.decayConstYr}</strong>
-                </div>
-              </div>
-
-              {/* Technical Description */}
-              <div style={{ fontSize: '0.78rem', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div style={{ background: 'rgba(168, 85, 247, 0.08)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <strong style={{ color: 'var(--accent-purple)' }}>Nuclear Engineering Role:</strong> {activeNuclide.nuclearRole}
-                </div>
-                <div style={{ background: 'rgba(56, 189, 248, 0.08)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <strong style={{ color: 'var(--accent-blue)' }}>Fission / Reaction Energetics:</strong> {activeNuclide.fissionEnergy}
-                </div>
-                <div style={{ background: 'rgba(244, 63, 94, 0.08)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <strong style={{ color: 'var(--accent-rose)' }}>Drinking Water / Environmental Limit:</strong> {activeNuclide.waterHazard}
-                </div>
-              </div>
-            </div>
-
-            {/* Graphical Periodic Trend Chart */}
-            <div style={{
-              background: 'rgba(0, 0, 0, 0.3)',
-              borderRadius: '14px',
-              border: '1px solid var(--border-color)',
-              padding: '1.25rem'
-            }}>
-              <strong style={{ fontSize: '0.9rem', color: 'var(--accent-cyan)', display: 'block', marginBottom: '0.25rem' }}>
-                Periodic Trend Curve: {TREND_LABELS[trendMetric].name}
-              </strong>
-              <p className="text-xs text-muted" style={{ margin: '0 0 0.75rem 0' }}>
-                {TREND_LABELS[trendMetric].desc}
-              </p>
-
-              {/* Trend SVG Chart */}
-              <svg viewBox="0 0 460 220" style={{ width: '100%', height: 'auto', display: 'block' }}>
-                {/* Background Grid & Period Bands */}
-                <rect x="40" y="20" width="400" height="160" fill="rgba(0,0,0,0.3)" rx="6" />
-
-                {/* Period demarcation lines */}
-                {[
-                  { z: 2, label: 'P1' },
-                  { z: 10, label: 'P2' },
-                  { z: 18, label: 'P3' },
-                  { z: 36, label: 'P4' },
-                  { z: 54, label: 'P5' },
-                  { z: 86, label: 'P6' }
-                ].map((p, idx) => {
-                  const x = 40 + (p.z / 92) * 390;
-                  return (
-                    <g key={idx}>
-                      <line x1={x} y1="20" x2={x} y2="180" stroke="rgba(255, 255, 255, 0.08)" strokeDasharray="3 3" />
-                      <text x={x - 4} y="32" fill="var(--text-dim)" fontSize="8">{p.label}</text>
-                    </g>
-                  );
-                })}
-
-                {/* Plot Data Line */}
-                {(() => {
-                  const maxVal = Math.max(...PERIODIC_ELEMENTS.map(e => e[trendMetric] || 1));
-                  const points = PERIODIC_ELEMENTS.map(e => {
-                    const x = 40 + (Math.min(92, e.z) / 92) * 390;
-                    const val = e[trendMetric] || 0;
-                    const y = 170 - (val / maxVal) * 140;
-                    return { x, y, el: e };
-                  });
-
-                  const pathStr = points.map((pt, i) => (i === 0 ? `M ${pt.x} ${pt.y}` : `L ${pt.x} ${pt.y}`)).join(' ');
-
-                  return (
-                    <>
-                      <path d={pathStr} fill="none" stroke="var(--accent-cyan)" strokeWidth="2" />
-                      {points.map((pt, i) => (
-                        <circle
-                          key={i}
-                          cx={pt.x}
-                          cy={pt.y}
-                          r={selectedElement?.z === pt.el.z ? 5 : 2.5}
-                          fill={selectedElement?.z === pt.el.z ? 'var(--accent-purple)' : 'var(--accent-blue)'}
-                          stroke="#fff"
-                          strokeWidth={selectedElement?.z === pt.el.z ? 2 : 0.5}
-                          cursor="pointer"
-                          onClick={() => setSelectedElement(pt.el)}
-                        >
-                          <title>{pt.el.name} ({pt.el.symbol}): {pt.el[trendMetric]} {TREND_LABELS[trendMetric].unit}</title>
-                        </circle>
-                      ))}
-                    </>
-                  );
-                })()}
-
-                {/* X & Y Axis Labels */}
-                <text x="240" y="205" textAnchor="middle" fill="var(--text-muted)" fontSize="9">
-                  Atomic Number Z (1 to 92)
-                </text>
-                <text x="18" y="100" textAnchor="middle" fill="var(--text-muted)" fontSize="9" transform="rotate(-90 18 100)">
-                  {TREND_LABELS[trendMetric].name} ({TREND_LABELS[trendMetric].unit})
-                </text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* TAB 3: 118-ELEMENT PERIODIC TABLE, DECAY DATA & NEUTRON RESONANCES */}
+      {activeTab === 'periodic-nuclear' && <PeriodicNuclearStudio />}
 
       {/* ===================================================================== */}
       {/* COLLAPSIBLE THEORY & NCEES HANDBOOK FORMULAS                           */}

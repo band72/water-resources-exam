@@ -33,12 +33,28 @@
       }
     ],
     "cations": [
-      { "name": "Ca2+", "value": 149.8, "color": "#3b82f6" },
-      { "name": "Mg2+", "value": 98.8, "color": "#06b6d4" }
+      {
+        "name": "Ca2+",
+        "value": 149.8,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 98.8,
+        "color": "#06b6d4"
+      }
     ],
     "anions": [
-      { "name": "HCO3-", "value": 150, "color": "#10b981" },
-      { "name": "SO4 2-", "value": 98.8, "color": "#a855f7" }
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2-",
+        "value": 98.8,
+        "color": "#a855f7"
+      }
     ],
     "hint": "Convert each ion concentration to meq/L using meq/L = (mg/L) / EW, then multiply the sum of divalent cations (Ca2+ + Mg2+) by 50.04 mg/meq (the equivalent weight of CaCO3).",
     "shortcut": "Quick NCEES multiplier rule: Ca2+ (mg/L) × 2.50 ≈ Ca Hardness as CaCO3 (60 × 2.50 = 150). Mg2+ (mg/L) × 4.12 ≈ Mg Hardness as CaCO3 (24 × 4.12 = 98.9). Total = 150 + 98.9 = 248.9 ≈ 249 mg/L as CaCO3!",
@@ -78,12 +94,28 @@
       }
     ],
     "cations": [
-      { "name": "Ca2+", "value": 180, "color": "#3b82f6" },
-      { "name": "Mg2+", "value": 70, "color": "#06b6d4" }
+      {
+        "name": "Ca2+",
+        "value": 180,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 70,
+        "color": "#06b6d4"
+      }
     ],
     "anions": [
-      { "name": "HCO3- (Alkalinity)", "value": 180, "color": "#10b981" },
-      { "name": "SO4 2- (NCH)", "value": 70, "color": "#a855f7" }
+      {
+        "name": "HCO3- (Alkalinity)",
+        "value": 180,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2- (NCH)",
+        "value": 70,
+        "color": "#a855f7"
+      }
     ],
     "hint": "NCEES Reference Handbook Rule: If Alkalinity < Total Hardness, then Carbonate Hardness = Alkalinity, and Noncarbonate Hardness = Total Hardness - Alkalinity. If Alkalinity ≥ Total Hardness, then Carbonate Hardness = Total Hardness, and Noncarbonate Hardness = 0.",
     "shortcut": "Look at the water bar chart: Alkalinity is the green bar (180). Because 180 is less than Total Hardness (250), the green bar lines up with Carbonate Hardness (180). Any hardness sticking out past the green bar is Noncarbonate Hardness: 250 - 180 = 70 mg/L as CaCO3!",
@@ -101,7 +133,7 @@
         "label": "A",
         "text": "Lime Dose = 165 mg/L as CaCO3 (CO2 neutralization + Ca-Alkalinity precipitation)",
         "correct": true,
-        "feedback": "Correct! Lime reactions: (1) CO2 + Ca(OH)2 → CaCO3↓ + H2O requires 1 equivalent of lime per equivalent of CO2 (15 mg/L as CaCO3). (2) Ca(HCO3)2 + Ca(OH)2 → 2CaCO3↓ + 2H2O requires 1 equivalent of lime per equivalent of bicarbonate alkalinity associated with Ca (here all 150 mg/L of alkalinity is paired with calcium since Ca = 140 and Alk = 150). Total stoichiometric lime dose for CO2 + Ca(HCO3)2 = 15 + 150 = 165 mg/L as CaCO3."
+        "feedback": "Correct! Lime first neutralizes free CO2: CO2 + Ca(OH)2 → CaCO3↓ + H2O (15 mg/L as CaCO3). Lime then reacts with ALL bicarbonate alkalinity (OH- + HCO3- → CO3 2- + H2O), regardless of which cation it is paired with: 150 mg/L as CaCO3. Of that, 140 mg/L precipitates as CaCO3 with the calcium. Stoichiometric lime dose (no Mg removal, no excess) = CO2 + Alkalinity = 15 + 150 = 165 mg/L as CaCO3."
       },
       {
         "label": "B",
@@ -123,12 +155,28 @@
       }
     ],
     "cations": [
-      { "name": "Ca2+", "value": 140, "color": "#3b82f6" },
-      { "name": "Mg2+", "value": 60, "color": "#06b6d4" }
+      {
+        "name": "Ca2+",
+        "value": 140,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 60,
+        "color": "#06b6d4"
+      }
     ],
     "anions": [
-      { "name": "HCO3-", "value": 150, "color": "#10b981" },
-      { "name": "Cl-", "value": 50, "color": "#ef4444" }
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "Cl-",
+        "value": 50,
+        "color": "#ef4444"
+      }
     ],
     "hint": "Remember that dissolved CO2 gas in water reacts immediately with lime: CO2 + Ca(OH)2 → CaCO3↓ + H2O. You must satisfy the CO2 demand first, then add 1 equivalent of lime for each equivalent of bicarbonate alkalinity.",
     "shortcut": "Stoichiometric Lime Rule: Lime (mg/L as CaCO3) = [CO2] + [HCO3-]. 15 + 150 = 165 mg/L as CaCO3. Simple addition when all quantities are already expressed as CaCO3!",
@@ -168,19 +216,210 @@
       }
     ],
     "cations": [
-      { "name": "Ca2+", "value": 250, "color": "#3b82f6" },
-      { "name": "Mg2+", "value": 50, "color": "#06b6d4" }
+      {
+        "name": "Ca2+",
+        "value": 250,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 50,
+        "color": "#06b6d4"
+      }
     ],
     "anions": [
-      { "name": "HCO3-", "value": 200, "color": "#10b981" },
-      { "name": "SO4 2- (NCH)", "value": 100, "color": "#a855f7" }
+      {
+        "name": "HCO3-",
+        "value": 200,
+        "color": "#10b981"
+      },
+      {
+        "name": "SO4 2- (NCH)",
+        "value": 100,
+        "color": "#a855f7"
+      }
     ],
     "hint": "Soda ash provides carbonate ions (CO3 2-) to pair with calcium associated with strong acid anions (SO4 2-, Cl-). Stoichiometric soda ash dose = Noncarbonate Hardness = Total Hardness - Alkalinity.",
     "shortcut": "Soda Ash Dose (as CaCO3) = Total Hardness - Alkalinity = 300 - 200 = 100 mg/L as CaCO3. Always 1:1 on an equivalent basis!",
     "fifthGrader": "Soda ash is a magic white powder that only cares about the stubborn noncarbonate rocks. We see 300 total rocks minus 200 temporary rocks = 100 stubborn rocks. So we need exactly 100 scoops of soda ash powder!"
   },
   {
+    "id": 90,
+    "category": "Water & Wastewater Systems",
+    "title": "Excess Lime Softening (Magnesium Removal)",
+    "description": "To precipitate Magnesium during softening, the pH must be raised to around 11.0. This requires an 'excess lime' dose. If the total Mg2+ is 80 mg/L as CaCO3, and the standard excess lime dose is 35 mg/L as CaCO3, the total lime required for Mg removal (excluding CO2 and HCO3) is:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Ca2+",
+        "value": 120,
+        "color": "#3b82f6"
+      },
+      {
+        "name": "Mg2+",
+        "value": 80,
+        "color": "#06b6d4"
+      }
+    ],
+    "anions": [
+      {
+        "name": "HCO3-",
+        "value": 150,
+        "color": "#10b981"
+      },
+      {
+        "name": "Cl-",
+        "value": 50,
+        "color": "#ef4444"
+      }
+    ],
+    "hint": "Lime required for Mg removal = Mg2+ concentration + Excess Lime.",
+    "shortcut": "Magnesium is stubborn! It requires 1 part lime to react with the alkalinity, 1 part lime to precipitate the Mg, PLUS an extra 35 mg/L to drive the pH to 11.",
+    "fifthGrader": "Magnesium rocks only melt when the water is super basic (pH 11). We have to add extra 'excess' lime just to push the pH up high enough!"
+  },
+  {
+    "id": 91,
+    "category": "Water & Wastewater Systems",
+    "title": "Ion Exchange Softening Capacity",
+    "description": "An ion exchange softener has a resin capacity of 20 kilograins per cubic foot (kgr/ft3). The resin volume is 50 ft3. The raw water has a hardness of 300 mg/L as CaCO3. What is the maximum volume of water (gallons) that can be softened before regeneration?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Hardness (Ca+Mg)",
+        "value": 300,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Total Anions",
+        "value": 300,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "1 grain per gallon (gpg) = 17.1 mg/L. Total Capacity (grains) = Volume * Capacity. Gallons = Total Capacity / Hardness (in gpg).",
+    "shortcut": "Convert 300 mg/L to grains per gallon: 300 / 17.1 = 17.5 gpg. Total grains = 20,000 * 50 = 1,000,000. 1,000,000 / 17.5 = 57,142 gallons.",
+    "fifthGrader": "Think of the resin like a sponge that can hold exactly 1,000,000 pieces of dirt. If every gallon of water has 17.5 pieces of dirt, how many gallons until the sponge is full?"
+  },
+  {
+    "id": 92,
+    "category": "Water & Wastewater Systems",
+    "title": "Softened Water Blending (Bypass)",
+    "description": "A treatment plant must deliver water with a hardness of 100 mg/L. The raw water has a hardness of 350 mg/L, and the ion exchange softener reduces hardness to 10 mg/L. What percentage of the flow should bypass the softener?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Bypass (350 mg/L)",
+        "value": 26.5,
+        "color": "#f59e0b"
+      },
+      {
+        "name": "Softened (10 mg/L)",
+        "value": 73.5,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Target (100 mg/L)",
+        "value": 100,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "Use the mass balance equation: Q_total * C_target = Q_bypass * C_raw + Q_soft * C_soft. Let Q_total = 1.",
+    "shortcut": "Bypass Fraction = (Target - Softened) / (Raw - Softened). (100 - 10) / (350 - 10) = 90 / 340 = 26.5%.",
+    "fifthGrader": "If you mix super salty water with pure water, you get medium salty water. We are just using math to figure out the perfect recipe for the mix!"
+  },
+  {
     "id": 93,
+    "category": "Water & Wastewater Systems",
+    "title": "Equivalent Weight Conversion",
+    "description": "A water sample has 96 mg/L of Sulfate (SO4 2-). The atomic weights are S=32.1, O=16.0. The equivalent weight of CaCO3 is 50.0 g/eq. What is the Sulfate concentration in mg/L as CaCO3?",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Total Cations",
+        "value": 100,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "SO4 2- (as CaCO3)",
+        "value": 100,
+        "color": "#a855f7"
+      }
+    ],
+    "hint": "Molecular weight of SO4 = 32.1 + 4(16) = 96.1 g/mol. Charge is 2, so Equivalent Weight = 96.1 / 2 = 48.05 g/eq. Multiply mg/L by (50 / 48.05).",
+    "shortcut": "The equivalent weight of Sulfate is roughly 48. Since 96 / 48 = 2 meq/L. Multiply by 50 to get 100 mg/L as CaCO3.",
+    "fifthGrader": "Scientists like to measure everything using the exact same ruler (CaCO3). We are just converting Sulfate's weight into the universal ruler's weight!"
+  },
+  {
+    "id": 94,
+    "category": "Water & Wastewater Systems",
+    "title": "Alkalinity Relationships",
+    "description": "A water sample has a pH of 10.2. The Phenolphthalein alkalinity (P) is 40 mg/L as CaCO3 and the Total alkalinity (T) is 120 mg/L as CaCO3. The concentration of Carbonate (CO3 2-) alkalinity is most nearly:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Total Cations",
+        "value": 120,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "CO3 2-",
+        "value": 80,
+        "color": "#f59e0b"
+      },
+      {
+        "name": "HCO3-",
+        "value": 40,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "Check the Alkalinity Relationship Table. If P < 1/2 T, then Carbonate = 2*P and Bicarbonate = T - 2P.",
+    "shortcut": "P = 40, T = 120. Since 40 is less than half of 120, Carbonate is 2 * P = 80 mg/L as CaCO3.",
+    "fifthGrader": "Alkalinity comes in three flavors: Hydroxide, Carbonate, and Bicarbonate. Depending on the pH, we can figure out exactly how much of each flavor is in the water!"
+  },
+  {
+    "id": 95,
+    "category": "Water & Wastewater Systems",
+    "title": "Split Treatment Softening",
+    "description": "In a split treatment softening process, a portion of the raw water bypasses the first stage (excess lime) and is mixed with the first stage effluent in the second stage. The primary purpose of this bypassed flow is to:",
+    "implemented": true,
+    "component": "HardnessVisualizer",
+    "cations": [
+      {
+        "name": "Raw Water Mg2+",
+        "value": 150,
+        "color": "#06b6d4"
+      },
+      {
+        "name": "Softened Water Mg2+",
+        "value": 40,
+        "color": "#3b82f6"
+      }
+    ],
+    "anions": [
+      {
+        "name": "Alkalinity",
+        "value": 190,
+        "color": "#10b981"
+      }
+    ],
+    "hint": "The first stage operates at pH 11 to drop out Mg. The bypassed raw water contains HCO3- and CO2, which naturally lowers the pH and provides carbonate to react with excess Ca.",
+    "shortcut": "Bypassing raw water saves money! You don't need as much CO2 for recarbonation because the raw water naturally neutralizes the high pH of the first stage.",
+    "fifthGrader": "Instead of adding expensive acid to fix the super basic water from the first tank, we just mix in some normal raw water. It naturally cools off the chemicals and saves money!"
+  },
+  {
+    "id": 194,
     "category": "Water & Wastewater Systems",
     "title": "Radionuclide Decay in Water Supply & EPA Drinking Water Standards",
     "description": "Deep bedrock drinking water wells in a granitic aquifer produce groundwater contaminated with dissolved Radium-226 (226Ra), an alpha-emitting radionuclide with a half-life of T1/2 = 1,600 years. The raw well water has a measured 226Ra activity of 24.0 pCi/L. The EPA Maximum Contaminant Level (MCL) for combined Radium-226 and Radium-228 is 5.0 pCi/L.\n\n1. Calculate the radioactive decay constant λ for 226Ra in yr^-1.\n2. Determine how many years the water would need to be stored in an isolation tank for radioactive decay alone to reduce the activity to the EPA MCL of 5.0 pCi/L.\n3. Identify the daughter radionuclide produced when 226Ra undergoes alpha decay, and name the preferred water treatment technology to remove radium from drinking water.",

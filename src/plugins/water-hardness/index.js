@@ -33,7 +33,7 @@ const plugin = {
       description: 'Cation and anion milliequivalent bar charts, electroneutrality validator, and step-by-step stoichiometric balancing for lime-soda ash water softening precipitation reactions.'
     },
     {
-      id: 93,
+      id: 194,
       title: 'Interactive Periodic Table & Nuclear Radionuclides',
       badge: 'Nuclear Engineering / Periodic Trends',
       icon: '⚛️',
@@ -41,7 +41,7 @@ const plugin = {
       bgGlow: 'rgba(168, 85, 247, 0.12)',
       borderColor: 'rgba(168, 85, 247, 0.3)',
       formula: 'N(t) = N0 · e^(-λt), Q-value MeV, Atomic Radius & Electronegativity',
-      description: 'Complete 118-element interactive periodic table with radionuclide decay energies (U-235, Pu-239, Ra-226, Cs-137), nuclear cross-sections, and graphical element family trends.'
+      description: 'Interactive periodic table of key engineering elements with radionuclide decay energies (U-235, Pu-239, Ra-226, Cs-137), nuclear cross-sections, and graphical element family trends.'
     }
   ],
   problems

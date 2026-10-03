@@ -9,9 +9,9 @@
     "options": [
       {
         "label": "A",
-        "text": "Σ hf = -14.41 ft; Σ |hf/Q| = 19.64 ft/cfs; ΔQ = +0.40 cfs; Q_AB^(1) = 3.90 cfs (clockwise)",
+        "text": "Σ hf = -14.38 ft; Σ |hf/Q| = 19.56 ft/cfs; ΔQ = +0.40 cfs; Q_AB^(1) = 3.90 cfs (clockwise)",
         "correct": true,
-        "feedback": "Correct! Pipe resistances k = 4.727·L / (C^1.852 · D^4.870) are: k_AB = 0.806, k_BC = 1.631, k_CD = 8.110, k_DA = 1.631. With clockwise as positive: Pipe AB (+3.5 cfs) gives hf1 = +8.18 ft (|hf/Q| = 2.34); Pipe BC (+1.5 cfs) gives hf2 = +3.46 ft (|hf/Q| = 2.30); Pipe CD (counter-clockwise flow from D to C of 1.5 cfs, so Q = -1.5 cfs) gives hf3 = -17.18 ft (|hf/Q| = 11.46); Pipe DA (counter-clockwise flow from A to D of 2.5 cfs, so Q = -2.5 cfs) gives hf4 = -8.87 ft (|hf/Q| = 3.55). Loop sum Σ hf = +8.18 + 3.46 - 17.18 - 8.87 = -14.41 ft. Derivative sum Σ |hf/Q| = 2.34 + 2.30 + 11.46 + 3.55 = 19.64 ft/cfs. Hardy Cross correction: ΔQ = - [Σ hf] / [1.852 · Σ |hf/Q|] = - (-14.41) / (1.852 × 19.64) = +0.396 cfs ≈ +0.40 cfs. Corrected flow in Pipe AB is Q_AB^(1) = 3.50 + 0.40 = 3.90 cfs."
+        "feedback": "Correct! Pipe resistances k = 4.727·L / (C^1.852 · D^4.870) are: k_AB = 0.800, k_BC = 1.620, k_CD = 8.079, k_DA = 1.620. With clockwise as positive: Pipe AB (+3.5 cfs) gives hf1 = +8.14 ft (|hf/Q| = 2.33); Pipe BC (+1.5 cfs) gives hf2 = +3.43 ft (|hf/Q| = 2.28); Pipe CD (flow D→C of 1.5 cfs is counter-clockwise, Q = -1.5 cfs) gives hf3 = -17.12 ft (|hf/Q| = 11.41); Pipe DA (flow A→D of 2.5 cfs is counter-clockwise, Q = -2.5 cfs) gives hf4 = -8.84 ft (|hf/Q| = 3.54). Loop sum Σ hf = 8.14 + 3.43 - 17.12 - 8.84 = -14.38 ft. Σ |hf/Q| = 19.56 ft/cfs. ΔQ = -Σhf / (1.852 · Σ|hf/Q|) = 14.38 / (1.852 × 19.56) = +0.397 ≈ +0.40 cfs. Corrected Q_AB^(1) = 3.50 + 0.40 = 3.90 cfs."
       },
       {
         "label": "B",
@@ -27,13 +27,13 @@
       },
       {
         "label": "D",
-        "text": "Σ hf = +14.41 ft; Σ |hf/Q| = 19.64 ft/cfs; ΔQ = -0.40 cfs; Q_AB^(1) = 3.10 cfs (clockwise)",
+        "text": "Σ hf = +14.38 ft; Σ |hf/Q| = 19.56 ft/cfs; ΔQ = -0.40 cfs; Q_AB^(1) = 3.10 cfs (clockwise)",
         "correct": false,
         "feedback": "Incorrect. Reversed the sign of the head losses, treating counter-clockwise head losses as positive and clockwise as negative, leading to a negative correction."
       }
     ],
     "hint": "Recall the Hardy Cross loop correction formula for Hazen-Williams (n = 1.852): ΔQ = - [Σ hf] / [1.852 · Σ (|hf| / |Q|)]. Establish a consistent sign convention: flows and head losses in the clockwise direction around loop ABCD are positive, while flows in the counter-clockwise direction are negative.",
-    "shortcut": "Inspect which branch has the largest hydraulic resistance: Pipe CD is the longest small-diameter pipe (8\" diameter, C = 100) and carries 1.5 cfs counter-clockwise, creating an enormous counter-clockwise head loss (-17.18 ft). This dominates the loop, making Σ hf strongly negative (-14.41 ft). Because Σ hf is negative, the loop correction ΔQ = -(-14.41)/... MUST be positive, pushing more water clockwise and raising Q_AB to ~3.90 cfs.",
+    "shortcut": "Inspect which branch has the largest hydraulic resistance: Pipe CD is the longest small-diameter pipe (8\" diameter, C = 100) and carries 1.5 cfs counter-clockwise, creating an enormous counter-clockwise head loss (-17.12 ft). This dominates the loop, making Σ hf strongly negative (-14.38 ft). Because Σ hf is negative, the loop correction ΔQ = -(-14.38)/... MUST be positive, pushing more water clockwise and raising Q_AB to ~3.90 cfs.",
     "fifthGrader": "Imagine water flowing around a loop like cars on a circular race track going in two lanes. The clockwise lane has nice wide smooth pipes (12-inch and 10-inch), while the counter-clockwise lane has an old, bumpy 8-inch pipe that causes a massive water traffic jam! Because of that bottleneck, the water pressure pushes back hard. The Hardy Cross method calculates how much water (+0.40 cfs) needs to switch lanes so that both paths meet in the middle with equal pressure."
   },
   {
@@ -46,21 +46,21 @@
     "options": [
       {
         "label": "A",
-        "text": "Q1 = 5.12 cfs (51.2%), Q2 = 4.88 cfs (48.8%); hf_AB = 19.17 ft (ΔP = 8.30 psi); Deq = 28.7 in (2.39 ft)",
+        "text": "Q1 = 5.12 cfs (51.2%), Q2 = 4.88 cfs (48.8%); hf_AB = 19.2 ft (ΔP = 8.31 psi); Deq = 18.1 in (1.51 ft)",
         "correct": true,
-        "feedback": "Correct! In parallel pipes, head loss across both branches is equal: hf,1 = hf,2 → (f1·L1·Q1²)/D1⁵ = (f2·L2·Q2²)/D2⁵. Therefore, Q1/Q2 = √[(f2·L2·D1⁵) / (f1·L1·D2⁵)] = √[(0.0160 × 2000 × 1.1667⁵) / (0.0210 × 3000 × 1.000⁵)] = √[69.42 / 63.00] = 1.0497. By continuity: Q1 + Q2 = 10.0 cfs → 1.0497·Q2 + Q2 = 10.0 → Q2 = 4.88 cfs and Q1 = 5.12 cfs. Common head loss: hf_AB = 0.02517 × (0.0210 × 3000 × 5.12²) / (1.1667⁵) = 19.17 ft. Pressure drop: ΔP = γ·hf / 144 = 62.3 × 19.17 / 144 = 8.30 psi. For the equivalent pipe: hf_AB = 0.02517 · feq · Leq · Q_total² / Deq⁵ → 19.17 = 0.02517 × 0.020 × 3000 × (10.0)² / Deq⁵ → Deq⁵ = 151.02 / 19.17 = 78.78 ft⁵ → Deq = (78.78)^0.2 = 2.394 ft = 28.7 inches."
+        "feedback": "Correct! In parallel pipes the head loss across each branch is equal: (f1·L1·Q1²)/D1⁵ = (f2·L2·Q2²)/D2⁵. Q1/Q2 = √[(f2·L2·D1⁵)/(f1·L1·D2⁵)] = √[(0.0160 × 2000 × 1.1667⁵)/(0.0210 × 3000 × 1.000⁵)] = √[69.17/63.00] = 1.048. Continuity: Q1 + Q2 = 10.0 → Q2 = 10.0/2.048 = 4.88 cfs, Q1 = 5.12 cfs. Head loss: hf = 0.02517 × 0.0210 × 3000 × 5.12² / 1.1667⁵ = 19.2 ft. ΔP = 62.3 × 19.2 / 144 = 8.31 psi. Equivalent pipe: Deq⁵ = 0.02517 × 0.020 × 3000 × 10.0² / 19.2 = 7.86 ft⁵ → Deq = 7.86^0.2 = 1.51 ft = 18.1 in."
       },
       {
         "label": "B",
-        "text": "Q1 = 7.20 cfs (72.0%), Q2 = 2.80 cfs (28.0%); hf_AB = 38.00 ft (ΔP = 16.45 psi); Deq = 18.2 in (1.52 ft)",
+        "text": "Q1 = 7.20 cfs (72.0%), Q2 = 2.80 cfs (28.0%); hf_AB = 38.0 ft (ΔP = 16.4 psi); Deq = 15.8 in (1.32 ft)",
         "correct": false,
         "feedback": "Incorrect. Assumed flow splits directly in proportion to diameter (D1 / D2) rather than taking into account the fifth power of diameter and friction factor square root."
       },
       {
         "label": "C",
-        "text": "Q1 = 3.50 cfs (35.0%), Q2 = 6.50 cfs (65.0%); hf_AB = 12.45 ft (ΔP = 5.39 psi); Deq = 32.5 in (2.71 ft)",
+        "text": "Q1 = 3.50 cfs (35.0%), Q2 = 6.50 cfs (65.0%); hf_AB = 9.0 ft (ΔP = 3.9 psi); Deq = 28.7 in (2.39 ft)",
         "correct": false,
-        "feedback": "Incorrect. Inverted the flow ratio between the two pipes and used an incorrect equivalent head loss relation."
+        "feedback": "Incorrect. Inverted the flow ratio, and solved for Deq using Deq⁵ = hf/(0.02517·f·L·Q²) (the reciprocal), which inflates the diameter."
       },
       {
         "label": "D",
@@ -70,7 +70,7 @@
       }
     ],
     "hint": "In parallel pipe systems, the key physical rule is that head loss across all parallel branches is identical: hf,1 = hf,2 = hf_AB. Express Q1 in terms of Q2 using the ratio of hydraulic resistances, then apply continuity Q1 + Q2 = Q_total. For equivalent pipe, equate hf_eq(Q_total, Deq) = hf_AB and solve for Deq.",
-    "shortcut": "Use the capacity factor method: the flow conductance factor is K = √[D⁵ / (f · L)]. For Pipe 1: K1 = √[1.1667⁵ / (0.021 × 3000)] = √[2.1694 / 63.0] = 0.1856. For Pipe 2: K2 = √[1.000⁵ / (0.016 × 2000)] = √[1.0 / 32.0] = 0.1768. Total conductance K_total = 0.1856 + 0.1768 = 0.3624. Then simply: Q1 = 10.0 × (0.1856 / 0.3624) = 5.12 cfs, and Q2 = 10.0 × (0.1768 / 0.3624) = 4.88 cfs! Instantly solves without quadratic systems!",
+    "shortcut": "Use the conveyance method: K = √[D⁵/(f·L)]. K1 = √[2.161/63.0] = 0.1852; K2 = √[1.0/32.0] = 0.1768. K_total = 0.3620. Q1 = 10.0 × 0.1852/0.3620 = 5.12 cfs; Q2 = 10.0 × 0.1768/0.3620 = 4.88 cfs. No quadratic needed!",
     "fifthGrader": "Imagine a river that splits into two water slides: one slide is wide (14 inches) but long and rough (3,000 feet), while the other slide is a bit narrower (12 inches) but much shorter and super slippery smooth (2,000 feet). Because water always seeks the path of least resistance, it balances itself out almost equally (5.12 cfs vs 4.88 cfs) so that someone sliding down either slide experiences the exact same total splash and water drop!"
   }
 ]
