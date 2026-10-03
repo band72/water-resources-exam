@@ -247,6 +247,17 @@ const HardnessVisualizer = ({ problem }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showTheory, setShowTheory] = useState(true);
 
+  // Synchronize active tab whenever a different problem is selected
+  useEffect(() => {
+    if (problem?.id === 93) {
+      setActiveTab('periodic-nuclear');
+    } else if (problem?.id === 87 || problem?.id === 88 || problem?.id === 89) {
+      setActiveTab('meq-chemistry');
+    } else if (problem?.id === 86) {
+      setActiveTab('3d-hardness');
+    }
+  }, [problem?.id]);
+
   // =========================================================================
   // TAB 1: 3D WATER HARDNESS STATE & 3RD-GRADER LAB
   // =========================================================================

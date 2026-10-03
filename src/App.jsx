@@ -335,18 +335,37 @@ function App() {
               style={{ 
                 padding: '0.45rem 0.85rem', 
                 fontSize: '0.8rem', 
-                background: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 93)) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)',
-                borderColor: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 93)) ? 'var(--accent-purple, #a855f7)' : 'rgba(168, 85, 247, 0.3)',
-                color: 'var(--accent-purple, #a855f7)',
+                background: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 88 || activeProblem === 89)) ? 'rgba(56, 189, 248, 0.25)' : 'rgba(56, 189, 248, 0.08)',
+                borderColor: (activeView === 'problem' && (activeProblem === 86 || activeProblem === 87 || activeProblem === 88 || activeProblem === 89)) ? 'var(--accent-blue, #38bdf8)' : 'rgba(56, 189, 248, 0.3)',
+                color: 'var(--accent-blue, #38bdf8)',
                 fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.35rem'
               }}
               onClick={() => handleSelectProblem(86)}
-              title="3D Water Hardness, meq Chemistry & Nuclear Periodic Table Studio"
+              title="3D Water Hardness & 3rd-Grader Softening Lab"
             >
-              <span>🧪</span> 3D Hardness & Nuclear Lab
+              <span>🧪</span> 3D Hardness Lab
+            </button>
+
+            <button 
+              className="btn-secondary" 
+              style={{ 
+                padding: '0.45rem 0.85rem', 
+                fontSize: '0.8rem', 
+                background: (activeView === 'problem' && activeProblem === 93) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(168, 85, 247, 0.08)',
+                borderColor: (activeView === 'problem' && activeProblem === 93) ? 'var(--accent-purple, #a855f7)' : 'rgba(168, 85, 247, 0.3)',
+                color: 'var(--accent-purple, #a855f7)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={() => handleSelectProblem(93)}
+              title="Interactive Periodic Table, Nuclear Radionuclides & Elemental Trends"
+            >
+              <span>⚛️</span> Periodic Table
             </button>
 
             <button 
