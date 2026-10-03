@@ -1,0 +1,39 @@
+[
+  {
+    "id": 197,
+    "category": "Construction & Project Management",
+    "title": "Critical Path Method (CPM) Activity-on-Node Network & Float Analysis",
+    "description": "A heavy civil engineering construction project consists of eight separate activities (A through H) with immediate predecessors and estimated durations (in working days) represented in the Activity-on-Node (AON) network diagram:\n\n• Activity A (Dur = 6 days): Predecessor = None (Start)\n• Activity B (Dur = 4 days): Predecessor = None (Start)\n• Activity F (Dur = 10 days): Predecessor = None (Start)\n• Activity C (Dur = 3 days): Predecessor = A\n• Activity D (Dur = 4 days): Predecessor = B\n• Activity E (Dur = 3 days): Predecessor = B\n• Activity H (Dur = 2 days): Predecessors = C, D\n• Activity G (Dur = 3 days): Predecessors = E, F\n\nActivities H and G terminate at the project Finish milestone.\n\n1. Perform a forward pass to determine early start (ES) and early finish (EF) times for all activities, identifying the total project duration.\n2. Perform a backward pass to determine late finish (LF) and late start (LS) times for all activities.\n3. Compute the Total Float (TF = LS − ES = LF − EF) for all non-critical paths.\n4. Identify the Critical Path and the Total Float of Activity A and Activity B.",
+    "implemented": true,
+    "component": "CpmAnalysisVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Critical Path = Start → F → G → Finish; Duration = 13 days; TF_A = 2 days; TF_B = 3 days",
+        "correct": true,
+        "feedback": "Correct! Path durations: 1) A → C → H = 6 + 3 + 2 = 11 days. 2) B → D → H = 4 + 4 + 2 = 10 days. 3) B → E → G = 4 + 3 + 3 = 10 days. 4) F → G = 10 + 3 = 13 days. The longest path is Start → F → G → Finish with a duration of 13 days (Critical Path, float = 0). For Activity A (Dur = 6): EF = 6, ES(C) = 6, EF(C) = 9. For Activity H: ES(H) = max(EF_C, EF_D) = max(9, 8) = 9, EF(H) = 11. Project duration = 13 days, so LF(H) = 13, LS(H) = 11. For C: LF(C) = LS(H) = 11, LS(C) = 11 − 3 = 8. For A: LF(A) = LS(C) = 8, LS(A) = 8 − 6 = 2. Total Float of A = LS − ES = 2 − 0 = 2 days. For Activity B (Dur = 4): Successors are D and E. LF(B) = min(LS_D, LS_E) = min(7, 7) = 7. LS(B) = 7 − 4 = 3. Total Float of B = 3 − 0 = 3 days."
+      },
+      {
+        "label": "B",
+        "text": "Critical Path = Start → A → C → H → Finish; Duration = 11 days; TF_A = 0 days; TF_B = 1 day",
+        "correct": false,
+        "feedback": "Incorrect. Overlooked the parallel path through Activity F (Dur = 10 days) and Activity G (Dur = 3 days), which totals 13 days and governs the minimum project completion time."
+      },
+      {
+        "label": "C",
+        "text": "Critical Path = Start → B → D → H → Finish; Duration = 14 days; TF_A = 3 days; TF_B = 0 days",
+        "correct": false,
+        "feedback": "Incorrect. Summed durations incorrectly across path B-D-H (4 + 4 + 2 = 10, not 14) and incorrectly treated Activity B as on the critical path."
+      },
+      {
+        "label": "D",
+        "text": "Critical Path = Start → F → G → Finish; Duration = 13 days; TF_A = 0 days; TF_B = 2 days",
+        "correct": false,
+        "feedback": "Incorrect. Correct critical path identified, but calculated float incorrectly for Activity A. Activity A has 2 days of total float (LS = 2, ES = 0), not zero."
+      }
+    ],
+    "hint": "Remember the fundamental CPM forward pass rule: for an activity with multiple predecessors, its Early Start is the MAXIMUM of all predecessor Early Finishes (ES = max[EF_preds]). On the backward pass, Late Finish is the MINIMUM of all successor Late Starts (LF = min[LS_succs]). Total Float is simply LS − ES or LF − EF.",
+    "shortcut": "To find the critical path on the PE exam quickly without calculating every float: enumerate the possible paths from Start to Finish! Path 1 (A-C-H) = 6 + 3 + 2 = 11 days. Path 2 (B-D-H) = 4 + 4 + 2 = 10 days. Path 3 (B-E-G) = 4 + 3 + 3 = 10 days. Path 4 (F-G) = 10 + 3 = 13 days. The longest path (13 days) is automatically the critical path! Float of path A-C-H = 13 − 11 = 2 days. This eliminates Options B, C, and D in seconds!",
+    "fifthGrader": "Imagine baking a huge holiday dinner with your friends! Chopping salad takes 11 minutes (Path A-C-H), baking biscuits takes 10 minutes (Path B-D-H), but roasting the turkey takes 13 minutes (Path F-G). Even if the salad and biscuits finish early, dinner cannot start until the turkey comes out of the oven! The turkey path is the 'Critical Path' (13 minutes). The salad maker has 2 minutes of 'Float' to take a break without delaying dinner!"
+  }
+]

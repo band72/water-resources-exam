@@ -1,0 +1,76 @@
+[
+  {
+    "id": 195,
+    "category": "Water Resources & Environmental",
+    "title": "River Mass Balance, Positional Effluent Dilution & Permit Sizing",
+    "description": "A chemical manufacturing plant situated along a freshwater river plans to discharge its treated industrial effluent into the stream channel. The factory's raw process wastewater has an initial pollutant concentration of C_raw = 75.0 mg/L, and its on-site wastewater treatment facility achieves a certified pollutant removal efficiency of η = 70.0%.\n\nUpstream river monitoring (measured immediately above the proposed discharge outfall) records an ambient river flow rate of Q_r = 225.0 cfs and an ambient background pollution concentration of C_r = 1.0 mg/L. State water quality regulations mandate that the fully mixed river pollutant concentration downstream of the outfall mixing zone must not exceed C_limit = 3.0 mg/L.\n\n1. Determine the treated effluent concentration C_e discharged from the plant after 70% removal.\n2. Apply the steady-state conservative mass balance equation: Q_r · C_r + Q_e · C_e = (Q_r + Q_e) · C_mix.\n3. Calculate the maximum allowable effluent flow rate Q_e,max (in cfs) that can be discharged without exceeding the 3.0 mg/L limit.\n4. Convert the maximum discharge flow rate into million gallons per day (MGD).",
+    "implemented": true,
+    "component": "RiverMassBalanceVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "C_e = 22.50 mg/L; Q_e,max = 8.24 cfs (5.33 MGD)",
+        "correct": false,
+        "feedback": "Incorrect. Inverted the concentration gradient term (C_e - C_limit), or subtracted background concentration from the wrong term in the mass balance equation."
+      },
+      {
+        "label": "B",
+        "text": "C_e = 75.00 mg/L; Q_e,max = 6.25 cfs (4.04 MGD)",
+        "correct": false,
+        "feedback": "Incorrect. Calculated the mass balance using the raw un-treated effluent concentration (75.0 mg/L) rather than accounting for the factory's 70% removal treatment technology (C_e = 22.5 mg/L)."
+      },
+      {
+        "label": "C",
+        "text": "C_e = 22.50 mg/L; Q_e,max = 23.08 cfs (14.91 MGD) [or 22.50 cfs = 14.54 MGD using C_e = 23 mg/L]",
+        "correct": true,
+        "feedback": "Correct! 1) Treated effluent concentration: C_e = C_raw · (1 - 0.70) = 75.0 · 0.30 = 22.50 mg/L (or 23.0 mg/L rounded). 2) Steady-state mass balance at compliance limit: Q_r · C_r + Q_e · C_e = (Q_r + Q_e) · C_limit. 3) Rearranging for Q_e: Q_e · (C_e - C_limit) = Q_r · (C_limit - C_r) → Q_e,max = Q_r · (C_limit - C_r) / (C_e - C_limit) = 225.0 · (3.0 - 1.0) / (22.5 - 3.0) = 450.0 / 19.5 = 23.08 cfs. (If using 23.0 mg/L: Q_e = 450.0 / 20.0 = 22.50 cfs). 4) Unit conversion to MGD: 1 cfs = 7.4805 gal/ft³ × 86,400 s/day / 10⁶ gal/MG = 0.646317 MGD. Therefore: 22.50 cfs × 0.6463 MGD/cfs = 14.54 MGD (or 23.08 cfs × 0.6463 = 14.91 MGD). Option C is the correct answer."
+      },
+      {
+        "label": "D",
+        "text": "C_e = 22.50 mg/L; Q_e,max = 22.50 MGD (34.81 cfs)",
+        "correct": false,
+        "feedback": "Incorrect. Classic Civil PE Exam unit trap! 22.50 is the flow rate in cubic feet per second (cfs), not million gallons per day (MGD). To convert cfs to MGD, you must multiply by 0.6463 MGD/cfs (yielding 14.54 MGD)."
+      }
+    ],
+    "hint": "Set up the steady-state 1D mass balance: Mass In = Mass Out. Flow times concentration gives mass flux (Q · C). Write: Q_r · C_r + Q_e · C_e = (Q_r + Q_e) · C_limit. Expand and factor out Q_e: Q_e · (C_e - C_limit) = Q_r · (C_limit - C_r). Remember to convert the final flow rate from cfs to MGD using 1 cfs = 0.6463 MGD.",
+    "shortcut": "Look at the options: 22.5 is both the answer in cfs (when using C_e = 23) and listed in Option D as MGD. When you see the exact same numerical value with different units on the PE exam, it is almost always an intentional unit trap! Because 1 cfs ≈ 0.65 MGD, the numerical value in MGD must be roughly two-thirds of the value in cfs (22.5 × 0.65 ≈ 14.5 MGD), immediately eliminating Options A, B, and D.",
+    "fifthGrader": "Imagine you have a giant swimming pool river with 225 buckets of clear water rushing by every second, with just 1 drop of red food dye in each bucket. A factory wants to dump dirty water with 22.5 drops of dye per bucket. The water police say the mixed river can never have more than 3 drops of dye per bucket. Every bucket the factory adds raises the color, but the rushing river dilutes it! By setting up a balance scale, you find the factory can add up to 22.5 buckets per second (which is 14.5 million gallons every day) before the water turns too red!"
+  },
+  {
+    "id": 196,
+    "category": "Water Resources & Environmental",
+    "title": "River Dissolved Oxygen & Thermal Mass Balance",
+    "description": "An industrial manufacturing facility discharges warm cooling water effluent into a natural freshwater stream at a steady rate of Q_e = 5.00 MGD (7.74 cfs). A USGS streamflow gauge immediately upstream of the discharge outfall measures a river discharge of Q_r = 30.0 cfs and an ambient river temperature of T_r = 30.0°C. Downstream of the complete mixing reach, a continuous water quality sonde measures a fully mixed stream temperature of T_mix = 34.0°C.\n\nAtmospheric pressure is 760 mmHg at sea level, and salinity is 0.0 ppt. According to the NCEES Reference Handbook freshwater dissolved oxygen saturation tables:\n• At 30.0°C: DO_sat = 7.54 mg/L\n• At 34.0°C: DO_sat = 7.05 mg/L\n\nAssuming the river is at 100% dissolved oxygen saturation both upstream and downstream of the discharge outfall (zero initial oxygen deficit):\n1. Convert the 5.00 MGD industrial discharge to cubic feet per second (cfs).\n2. Set up the dissolved oxygen mass conservation balance across the mixing zone: Q_e · DO_e + Q_r · DO_r = (Q_e + Q_r) · DO_mix.\n3. Calculate the dissolved oxygen concentration DO_e (in mg/L) of the factory effluent stream.",
+    "implemented": true,
+    "component": "RiverMassBalanceVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "Q_e = 7.74 cfs; DO_e = 5.15 mg/L",
+        "correct": true,
+        "feedback": "Correct! 1) Flow conversion: Q_e = 5.00 MGD / 0.646317 MGD/cfs = 7.737 ≈ 7.74 cfs. 2) Combined flow: Q_mix = Q_r + Q_e = 30.0 + 7.74 = 37.74 cfs. 3) From DO tables: Upstream DO_r (at 30°C) = 7.54 mg/L; downstream mixed DO_mix (at 34°C) = 7.05 mg/L. 4) Mass balance: Q_e · DO_e + Q_r · DO_r = Q_mix · DO_mix → 7.74 · DO_e + 30.0 · 7.54 = 37.74 · 7.05 → 7.74 · DO_e + 226.20 = 266.07 → 7.74 · DO_e = 39.87 → DO_e = 5.15 mg/L."
+      },
+      {
+        "label": "B",
+        "text": "Q_e = 7.74 cfs; DO_e = 7.05 mg/L",
+        "correct": false,
+        "feedback": "Incorrect. Assumed the effluent DO is identical to the downstream mixed DO, neglecting the upstream dilution contribution from the 30 cfs river flow."
+      },
+      {
+        "label": "C",
+        "text": "Q_e = 5.00 cfs; DO_e = 4.11 mg/L",
+        "correct": false,
+        "feedback": "Incorrect. Substituted 5.00 directly into the mass balance without converting flow from MGD to cfs. 5.00 MGD is 7.74 cfs."
+      },
+      {
+        "label": "D",
+        "text": "Q_e = 7.74 cfs; DO_e = 9.88 mg/L",
+        "correct": false,
+        "feedback": "Incorrect. Inverted the mass balance terms, subtracting the mixed downstream mass flux from the upstream flux rather than solving for the effluent stream."
+      }
+    ],
+    "hint": "Check the units first: flow rates must be in the same units (convert 5 MGD to cfs by dividing by 0.6463). Then look up saturation DO at 30°C and 34°C. Finally, set up: Q_e · DO_e + Q_r · DO_r = (Q_e + Q_r) · DO_mix and solve for DO_e.",
+    "shortcut": "The downstream mixed water is warmer (34°C) than the upstream river (30°C), so saturation DO drops from 7.54 to 7.05 mg/L. Because the incoming river has more dissolved oxygen (7.54 mg/L) than the downstream mixed river (7.05 mg/L), the effluent MUST have a lower DO than 7.05 mg/L to drag the average down. This immediately rules out Options B and D without any calculations!",
+    "fifthGrader": "Fish breathe oxygen dissolved in water, just like we breathe air. Cool water can hold more oxygen than warm water. When the factory dumps warm water into the river, it heats up the river and also brings in less oxygen. By checking how much oxygen is missing downstream, we work backwards like detectives to find out how low the oxygen was in the factory's pipe: exactly 5.15 mg/L!"
+  }
+]
