@@ -1,14 +1,50 @@
-import Component from './HardnessVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./HardnessVisualizer.jsx'));
 
 const plugin = {
   id: 'water-hardness',
   type: 'tool',
-  title: 'Water Hardness, Chemistry & Nuclear Studio',
+  title: 'Water Hardness & Chemistry Studio',
   category: 'Water & Wastewater Systems',
   componentName: 'HardnessVisualizer',
   component: Component,
   embedsGenericViewer: true,
+
+  // Quick-launch button in the app header
+  headerLinks: [
+    {
+      id: 'hardness-lab',
+      label: '3D Hardness Lab',
+      icon: '🧪',
+      color: 'var(--accent-blue, #38bdf8)',
+      tint: '56, 189, 248',
+      title: '3D Water Hardness & 3rd-Grader Softening Lab',
+      target: 86,
+      activeFor: [86, 87, 88, 89, 90, 91, 92, 93, 94, 95],
+      order: 40
+    }
+  ],
+
+  // "Related lab" banner shown beneath the problem statement
+  crossLinks: [
+    {
+      id: 'hardness-studio',
+      showFor: [86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 194],
+      icon: '🧪',
+      color: 'var(--accent-purple)',
+      tint: '168, 85, 247',
+      title: 'Water Hardness, Chemistry & Nuclear Radionuclides Studio',
+      subtitle: 'Switch between 3D Beaker & 3rd-Grader Hardness (#86), meq Chemistry & Equation Balancer (#87), and Nuclear Periodic Table (#194).',
+      links: [
+        { label: '3D Hardness (#86)', target: 86, color: 'var(--accent-blue)', tint: '56, 189, 248' },
+        { label: 'Meq Balancer (#87)', target: 87, color: 'var(--accent-emerald)', tint: '16, 185, 129' },
+        { label: 'Nuclear Periodic (#194) →', target: 194, color: 'var(--accent-purple)', tint: '168, 85, 247' }
+      ]
+    }
+  ],
   toolCards: [
     {
       id: 86,
@@ -29,19 +65,8 @@ const plugin = {
       color: '#10b981',
       bgGlow: 'rgba(16, 185, 129, 0.12)',
       borderColor: 'rgba(16, 185, 129, 0.3)',
-      formula: 'meq/L = mg/L / EW, Lime: CO2 + Alk + Mg, Soda: NCH',
+      formula: 'meq/L = mg/L / EW, Lime: CO_2 + Alk + Mg, Soda: NCH',
       description: 'Cation and anion milliequivalent bar charts, electroneutrality validator, and step-by-step stoichiometric balancing for lime-soda ash water softening precipitation reactions.'
-    },
-    {
-      id: 194,
-      title: 'Interactive Periodic Table & Nuclear Radionuclides',
-      badge: 'Nuclear Engineering / Periodic Trends',
-      icon: '⚛️',
-      color: '#a855f7',
-      bgGlow: 'rgba(168, 85, 247, 0.12)',
-      borderColor: 'rgba(168, 85, 247, 0.3)',
-      formula: 'N(t) = N0 · e^(-λt), Q-value MeV, Atomic Radius & Electronegativity',
-      description: 'Interactive periodic table of key engineering elements with radionuclide decay energies (U-235, Pu-239, Ra-226, Cs-137), nuclear cross-sections, and graphical element family trends.'
     }
   ],
   problems

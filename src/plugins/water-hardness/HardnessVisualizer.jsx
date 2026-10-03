@@ -1,7 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
-import PeriodicNuclearStudio from './PeriodicNuclearStudio';
 
 // =========================================================================
 // CHEMISTRY & RADIONUCLIDE DATA DICTIONARIES
@@ -21,7 +20,6 @@ const WATER_IONS = [
 
 // Studio tab for a given problem id
 const modeForProblem = (id) => {
-  if (id === 194) return 'periodic-nuclear';
   if (id === 87 || id === 88 || id === 89 || id === 93 || id === 94) return 'meq-chemistry';
   return '3d-hardness';
 };
@@ -466,23 +464,21 @@ const HardnessVisualizer = ({ problem }) => {
             width: '46px',
             height: '46px',
             borderRadius: '12px',
-            background: activeTab === '3d-hardness' ? 'rgba(56, 189, 248, 0.15)' : (activeTab === 'meq-chemistry' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(168, 85, 247, 0.15)'),
-            border: activeTab === '3d-hardness' ? '1px solid rgba(56, 189, 248, 0.4)' : (activeTab === 'meq-chemistry' ? '1px solid rgba(16, 185, 129, 0.4)' : '1px solid rgba(168, 85, 247, 0.4)'),
+            background: activeTab === '3d-hardness' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+            border: activeTab === '3d-hardness' ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid rgba(16, 185, 129, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '1.5rem'
           }}>
-            {activeTab === '3d-hardness' ? '🧊' : (activeTab === 'meq-chemistry' ? '⚗️' : '⚛️')}
+            {activeTab === '3d-hardness' ? '🧊' : '⚗️'}
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
               <h2 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, fontFamily: 'var(--font-heading)' }}>
                 {activeTab === '3d-hardness'
                   ? '3D Water Hardness & 3rd-Grader Softening Studio'
-                  : (activeTab === 'meq-chemistry'
-                    ? 'Meq Chemistry, Electroneutrality & Equation Balancer'
-                    : 'Interactive Periodic Table & Nuclear Radionuclide Studio')}
+                  : 'Meq Chemistry, Electroneutrality & Equation Balancer'}
               </h2>
               <span style={{
                 fontSize: '0.7rem',
@@ -501,9 +497,7 @@ const HardnessVisualizer = ({ problem }) => {
             <p className="text-xs text-muted" style={{ margin: '0.25rem 0 0 0' }}>
               {activeTab === '3d-hardness'
                 ? 'Orbital 3D beaker with Ca²⁺/Mg²⁺ mineral magnets, soap scum curd formation, boiling kettle scale, and 3rd-grader intuition.'
-                : (activeTab === 'meq-chemistry'
-                  ? 'Milliequivalent conversions (meq/L = mg/L / EW), cation-anion electroneutrality check, and lime-soda ash balancing equations.'
-                  : 'All 118 elements: click any tile for isotopes, decay modes, Q-values, half-lives, decay chains, neutron resonance energies and periodic trends.')}
+                : 'Milliequivalent conversions (meq/L = mg/L / EW), cation-anion electroneutrality check, and lime-soda ash balancing equations.'}
             </p>
           </div>
         </div>
@@ -552,24 +546,6 @@ const HardnessVisualizer = ({ problem }) => {
               onClick={() => setActiveTab('meq-chemistry')}
             >
               <span>⚗️</span> Meq & Equation Balancer
-            </button>
-            <button
-              style={{
-                padding: '0.45rem 0.85rem',
-                borderRadius: '8px',
-                border: 'none',
-                background: activeTab === 'periodic-nuclear' ? 'var(--accent-purple, #a855f7)' : 'transparent',
-                color: activeTab === 'periodic-nuclear' ? '#070a12' : 'var(--text-muted)',
-                fontWeight: activeTab === 'periodic-nuclear' ? 700 : 500,
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.35rem'
-              }}
-              onClick={() => setActiveTab('periodic-nuclear')}
-            >
-              <span>⚛️</span> Periodic Table & Nuclear
             </button>
           </div>
 
@@ -1216,8 +1192,6 @@ const HardnessVisualizer = ({ problem }) => {
         </div>
       )}
 
-      {/* TAB 3: 118-ELEMENT PERIODIC TABLE, DECAY DATA & NEUTRON RESONANCES */}
-      {activeTab === 'periodic-nuclear' && <PeriodicNuclearStudio />}
 
       {/* ===================================================================== */}
       {/* COLLAPSIBLE THEORY & NCEES HANDBOOK FORMULAS                           */}

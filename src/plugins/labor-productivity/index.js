@@ -1,5 +1,8 @@
-import Component from './LaborVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./LaborVisualizer.jsx'));
 
 const plugin = {
   id: 'labor-productivity',

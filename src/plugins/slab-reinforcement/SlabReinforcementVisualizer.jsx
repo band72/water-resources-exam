@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import GenericProblemViewer from '../../components/GenericProblemViewer';
 
@@ -43,7 +43,6 @@ const SlabReinforcementVisualizer = ({ problem }) => {
   const [pileCapSizeInches, setPileCapSizeInches] = useState(12); // c = 12" square pile cap
   const [pileGridCount, setPileGridCount] = useState(36); // 6x6 grid = 36 piles default
   const [hasShearStuds, setHasShearStuds] = useState(false);
-  const [studsPerRail, setStudsPerRail] = useState(3); // 3 studs per rail
 
   // Fullscreen & Derivation UI states
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -120,7 +119,6 @@ const SlabReinforcementVisualizer = ({ problem }) => {
   // Net tributary punching force: Pile reaction minus downward load within critical perimeter
   const vuPunchingFactoredKips = Math.max(1, singlePileReactionFactoredKips - (quPsf * critAreaSqFt) / 1000);
   const vuPunchingServiceKips = Math.max(1, singlePileReactionKips - (qTotalPsf * critAreaSqFt) / 1000);
-  const vuPunchingLbs = vuPunchingFactoredKips * 1000;
 
   // Concrete Two-Way Punching Shear Stress Capacity vc (ACI 318)
   // For square interior column (beta = 1.0, alpha_s = 40): vc = 4 * lambda * sqrt(f'c)
@@ -826,7 +824,6 @@ const SlabReinforcementVisualizer = ({ problem }) => {
                   const slabBotY = slabTopY + slabHeightPx;
                   const leftSupX = 130;
                   const rightSupX = 630;
-                  const spanWidthPx = rightSupX - leftSupX;
 
                   // Distance d in px
                   const dPx = (effectiveDepthInches / slabThicknessInches) * slabHeightPx;

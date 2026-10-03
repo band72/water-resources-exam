@@ -1,5 +1,8 @@
-import Component from './EconVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./EconVisualizer.jsx'));
 
 const plugin = {
   id: 'econ-depreciation',

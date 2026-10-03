@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import GenericProblemViewer from '../components/GenericProblemViewer';
 import { pluginRegistry } from './registry';
 
@@ -5,6 +6,13 @@ import { pluginRegistry } from './registry';
  * Unified, decoupled Problem Renderer component
  * Replaces hardcoded switch / nested ternaries in App.jsx
  */
+// Shown while a code-split visualizer bundle is downloading
+const VisualizerLoading = () => (
+  <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+    ⏳ Loading interactive lab…
+  </div>
+);
+
 export const PluginRenderer = ({ problem }) => {
   if (!problem) return null;
 
@@ -20,15 +28,21 @@ export const PluginRenderer = ({ problem }) => {
 
   // If the visualizer already embeds GenericProblemViewer internally (e.g. RetainingWall, OpenChannel)
   if (plugin?.embedsGenericViewer) {
-    // eslint-disable-next-line react-hooks/static-components
-    return <Component problem={problem} {...problem} />;
+    return (
+      <Suspense fallback={<VisualizerLoading />}>
+        {/* eslint-disable-next-line react-hooks/static-components */}
+        <Component problem={problem} {...problem} />
+      </Suspense>
+    );
   }
 
   // Otherwise, render the dedicated visualizer along with the generic problem viewer
   return (
     <>
-      {/* eslint-disable-next-line react-hooks/static-components */}
-      <Component problem={problem} {...problem} />
+      <Suspense fallback={<VisualizerLoading />}>
+        {/* eslint-disable-next-line react-hooks/static-components */}
+        <Component problem={problem} {...problem} />
+      </Suspense>
       <GenericProblemViewer problem={problem} key={problem.id} />
     </>
   );

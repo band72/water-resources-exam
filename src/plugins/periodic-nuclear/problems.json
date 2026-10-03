@@ -1,0 +1,39 @@
+[
+  {
+    "id": 194,
+    "category": "Water & Wastewater Systems",
+    "title": "Radionuclide Decay in Water Supply & EPA Drinking Water Standards",
+    "description": "Deep bedrock drinking water wells in a granitic aquifer produce groundwater contaminated with dissolved Radium-226 (226Ra), an alpha-emitting radionuclide with a half-life of T1/2 = 1,600 years. The raw well water has a measured 226Ra activity of 24.0 pCi/L. The EPA Maximum Contaminant Level (MCL) for combined Radium-226 and Radium-228 is 5.0 pCi/L.\n\n1. Calculate the radioactive decay constant λ for 226Ra in yr^-1.\n2. Determine how many years the water would need to be stored in an isolation tank for radioactive decay alone to reduce the activity to the EPA MCL of 5.0 pCi/L.\n3. Identify the daughter radionuclide produced when 226Ra undergoes alpha decay, and name the preferred water treatment technology to remove radium from drinking water.",
+    "implemented": true,
+    "component": "PeriodicNuclearVisualizer",
+    "options": [
+      {
+        "label": "A",
+        "text": "λ = 4.33 × 10^-4 yr^-1; Storage Time = 3,620 years; Daughter = Radon-222 (222Rn); Treatment = Cation Exchange Softening or Lime Softening",
+        "correct": true,
+        "feedback": "Correct! (1) Decay constant λ = ln(2) / T1/2 = 0.69315 / 1600 yr = 4.332 × 10^-4 yr^-1. (2) Radioactive decay follows first-order kinetics: N(t) = N0 · e^(-λ·t) → 5.0 = 24.0 · e^(-4.332×10^-4 · t) → ln(5/24) = -λ·t → -1.5686 = -4.332×10^-4 · t → t = 3,621 years. (3) 226Ra (Z = 88) emits an alpha particle (4He, Z = 2) to become Radon-222 (222Rn, Z = 86, a radioactive noble gas). Because Radium (Ra2+) is an alkaline earth metal in Group 2 (just like Ca2+ and Mg2+), it behaves chemically identical to hardness and is effectively removed by standard Cation Exchange Water Softening (zeolite/resin) or Lime Softening precipitation!"
+      },
+      {
+        "label": "B",
+        "text": "λ = 1.05 × 10^-3 yr^-1; Storage Time = 120 years; Daughter = Uranium-235; Treatment = Aeration only",
+        "correct": false,
+        "feedback": "Incorrect. Miscalculated the half-life equation and assumed 226Ra decays to Uranium rather than Radon-222 via alpha decay."
+      },
+      {
+        "label": "C",
+        "text": "λ = 6.25 × 10^-4 yr^-1; Storage Time = 800 years; Daughter = Lead-206; Treatment = Granular Activated Carbon (GAC)",
+        "correct": false,
+        "feedback": "Incorrect. Did not use natural log of 2 (0.693) to calculate decay constant, and jumped straight to the final stable lead isotope."
+      },
+      {
+        "label": "D",
+        "text": "λ = 2.16 × 10^-4 yr^-1; Storage Time = 7,240 years; Daughter = Polonium-210; Treatment = Chlorination disinfection",
+        "correct": false,
+        "feedback": "Incorrect. Inverted decay formula and suggested chlorine disinfection, which has zero effect on radioactive heavy metal ions."
+      }
+    ],
+    "hint": "Radioactive decay follows N(t) = N0 · exp(-λ·t) where λ = 0.693 / T1/2. Note the chemical family connection: Radium is in Group 2 (Alkaline Earth Metals) right under Barium, Calcium, and Magnesium, so it co-precipitates in lime softening and exchanges on cation water softener resins!",
+    "shortcut": "Check the number of half-lives: 24 pCi/L → 12 (1 half-life) → 6 (2 half-lives, 3,200 yr) → 3 (3 half-lives, 4,800 yr). Since 5.0 pCi/L is just under 6.0 pCi/L, the time must be slightly more than 2 half-lives: 2.26 × 1,600 ≈ 3,620 years!",
+    "fifthGrader": "Radium-226 is a glowing radioactive rock in the ground that acts like an evil twin brother to calcium! Because it is in the same chemical family as calcium, a water softener resin bead gets tricked and traps radium just like it traps calcium hardness. But waiting for it to calm down on its own takes 3,620 years because its half-life clock ticks very slowly!"
+  }
+]

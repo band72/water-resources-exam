@@ -1,5 +1,8 @@
-import Component from './PipeNetworkVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./PipeNetworkVisualizer.jsx'));
 
 const plugin = {
   id: 'pipe-network',
@@ -9,6 +12,34 @@ const plugin = {
   componentName: 'PipeNetworkVisualizer',
   component: Component,
   embedsGenericViewer: true,
+  headerLinks: [
+    {
+      id: 'pipe-network-lab',
+      label: 'Pipe Network Lab',
+      icon: '🔄',
+      color: 'var(--accent-blue, #38bdf8)',
+      tint: '56, 189, 248',
+      title: 'Hardy Cross Looped Network & Parallel Pipes Hydraulics Lab',
+      target: 192,
+      activeFor: [192, 193],
+      order: 30
+    }
+  ],
+  crossLinks: [
+    {
+      id: 'pipe-network-studio',
+      showFor: [192, 193],
+      icon: '🌊',
+      color: 'var(--accent-blue)',
+      tint: '56, 189, 248',
+      title: 'Closed Conduit & Pipe Distribution Hydraulics Studio',
+      subtitle: 'Switch between Hardy Cross loop balancing (Hazen-Williams) and Parallel conduit friction factor & equivalent pipe sizing (Darcy-Weisbach).',
+      links: [
+        { label: 'Hardy Cross Loop (#192)', target: 192, color: 'var(--accent-blue)', tint: '56, 189, 248' },
+        { label: 'Parallel Pipes (#193) →', target: 193, color: 'var(--accent-cyan)', tint: '6, 182, 212' }
+      ]
+    }
+  ],
   toolCards: [
     {
       id: 192,

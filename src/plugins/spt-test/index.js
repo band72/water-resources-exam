@@ -1,5 +1,8 @@
-import Component from './SPTVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./SPTVisualizer.jsx'));
 
 const plugin = {
   id: 'spt-test',

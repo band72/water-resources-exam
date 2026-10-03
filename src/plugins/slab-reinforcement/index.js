@@ -1,5 +1,8 @@
-import Component from './SlabReinforcementVisualizer.jsx';
+import { lazy } from 'react';
 import problems from './problems.json';
+
+// Visualizer is code-split: its bundle loads only when one of this plugin's problems is opened
+const Component = lazy(() => import('./SlabReinforcementVisualizer.jsx'));
 
 const plugin = {
   id: 'slab-reinforcement',
@@ -9,6 +12,34 @@ const plugin = {
   componentName: 'SlabReinforcementVisualizer',
   component: Component,
   embedsGenericViewer: true,
+  headerLinks: [
+    {
+      id: 'slab-shear-lab',
+      label: 'Slab Shear Lab',
+      icon: '🧱',
+      color: 'var(--accent-amber, #f59e0b)',
+      tint: '245, 158, 11',
+      title: 'Concrete Slab Shear & Punching Reinforcement Lab',
+      target: 190,
+      activeFor: [190, 191],
+      order: 20
+    }
+  ],
+  crossLinks: [
+    {
+      id: 'slab-from-helical',
+      showFor: [189],
+      icon: '🧱',
+      color: 'var(--accent-amber, #f59e0b)',
+      tint: '245, 158, 11',
+      title: 'Concrete Slab Shear & Punching Reinforcement Lab',
+      subtitle: 'Configure ASTM iron rebar diameter & spacing to prevent one-way shear cracking and punching shear around pile caps.',
+      links: [
+        { label: 'One-Way Shear (#190) →', target: 190, color: 'var(--accent-amber, #f59e0b)', tint: '245, 158, 11', solid: true },
+        { label: 'Punching Shear (#191) →', target: 191, color: 'var(--accent-cyan)', tint: '6, 182, 212', solid: true }
+      ]
+    }
+  ],
   toolCards: [
     {
       id: 190,
