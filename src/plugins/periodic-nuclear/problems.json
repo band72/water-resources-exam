@@ -2,8 +2,8 @@
   {
     "id": 194,
     "category": "Water & Wastewater Systems",
-    "title": "Radionuclide Decay in Water Supply & EPA Drinking Water Standards",
-    "description": "Deep bedrock drinking water wells in a granitic aquifer produce groundwater contaminated with dissolved Radium-226 (226Ra), an alpha-emitting radionuclide with a half-life of T1/2 = 1,600 years. The raw well water has a measured 226Ra activity of 24.0 pCi/L. The EPA Maximum Contaminant Level (MCL) for combined Radium-226 and Radium-228 is 5.0 pCi/L.\n\n1. Calculate the radioactive decay constant λ for 226Ra in yr^-1.\n2. Determine how many years the water would need to be stored in an isolation tank for radioactive decay alone to reduce the activity to the EPA MCL of 5.0 pCi/L.\n3. Identify the daughter radionuclide produced when 226Ra undergoes alpha decay, and name the preferred water treatment technology to remove radium from drinking water.",
+    "title": "Periodic Table & Nuclear Radionuclides: 226Ra Decay in Water Supply & EPA MCL",
+    "description": "Interactive Periodic Table and nuclear radionuclide decay analysis for water engineering. Deep bedrock drinking water wells in a granitic aquifer produce groundwater contaminated with dissolved Radium-226 (226Ra), an alpha-emitting radionuclide with a half-life of T1/2 = 1,600 years. The raw well water has a measured 226Ra activity of 24.0 pCi/L. The EPA Maximum Contaminant Level (MCL) for combined Radium-226 and Radium-228 is 5.0 pCi/L.\n\n1. Calculate the radioactive decay constant λ for 226Ra in yr^-1.\n2. Determine how many years the water would need to be stored in an isolation tank for radioactive decay alone to reduce the activity to the EPA MCL of 5.0 pCi/L.\n3. Identify the daughter radionuclide produced when 226Ra undergoes alpha decay, and name the preferred water treatment technology to remove radium from drinking water.",
     "implemented": true,
     "component": "PeriodicNuclearVisualizer",
     "options": [

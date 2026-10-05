@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense } from 'react';
 import MathText from './MathText';
+import { pluginRegistry } from '../plugins/registry';
 
 const CurvePlatVisualizer = lazy(() => import('../plugins/curve-plat-geometry/CurvePlatVisualizer'));
 const StormwaterVisualizer = lazy(() => import('../plugins/stormwater-rational/StormwaterVisualizer'));
@@ -7,11 +8,27 @@ const SoilPhaseEarthworkVisualizer = lazy(() => import('../plugins/soil-phase-ea
 const PumpSystemVisualizer = lazy(() => import('../plugins/pump-system-hydraulics/PumpSystemVisualizer'));
 const BeamShearMomentVisualizer = lazy(() => import('../plugins/beam-shear-moment/BeamShearMomentVisualizer'));
 const TraverseCogoVisualizer = lazy(() => import('../plugins/traverse-cogo/TraverseCogoVisualizer'));
+const PeriodicNuclearVisualizer = lazy(() => import('../plugins/periodic-nuclear/PeriodicNuclearVisualizer'));
 
 export default function CivilToolbox({ onSelectProblem }) {
-  const [activeToolId, setActiveToolId] = useState('curve-plat');
+  const [activeToolId, setActiveToolId] = useState('periodic-nuclear');
+
+  const allSimulators = pluginRegistry.getSimulatorTools();
 
   const tools = [
+    {
+      id: 'periodic-nuclear',
+      title: 'Periodic Table & Nuclear Studio',
+      badge: 'Nuclear & Water Chemistry',
+      icon: '⚛️',
+      color: '#a855f7',
+      tint: '168, 85, 247',
+      formula: 'N(t) = N_0 · e^(-λt)  |  λ = ln(2)/T_½  |  MCL = 5.0 pCi/L',
+      description: 'Complete Interactive Periodic Table with all 118 elements and 3,200+ IAEA nuclide ground states: decay modes, Q-values, half-lives, decay chains, EPA drinking water radionuclide standards (226Ra, 222Rn, 238U), neutron resonance energies, and periodic trends.',
+      linkedProblemId: 194,
+      component: PeriodicNuclearVisualizer,
+      problemMock: { id: 194 }
+    },
     {
       id: 'curve-plat',
       title: 'Roadway & Plat Curves (Rule 2)',
@@ -105,61 +122,68 @@ export default function CivilToolbox({ onSelectProblem }) {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '9999px', background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.25)', marginBottom: '1rem' }}>
             <span>🧰</span>
             <span className="text-xs" style={{ color: 'var(--accent-amber)', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              Everyday Civil Engineer's Design Workbench
+              Civil Engineer's Interactive Toolbox
             </span>
           </div>
 
           <h2 style={{ fontSize: '2.4rem', fontWeight: 800, lineHeight: 1.2, marginBottom: '0.75rem' }}>
-            Professional Everyday <span className="text-gradient-amber">Engineering Toolbox</span>
+            Interactive Engineering <span className="text-gradient-amber">Design Toolbox</span>
           </h2>
 
           <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: '#94a3b8', margin: 0 }}>
-            Instant, interactive parametric calculators for daily civil engineering practice: subdivision plat curves (Rule 2 P.I. angle bar glyphs), Rational Method runoff and detention basins, 3-phase soil relationships and earthwork bulkage, pump TDH and system curves, beam shear and moment diagrams, and traverse COGO balancing.
+            Every plugin in the platform functions as an interactive engineering simulator. Explore all 118 elements and 3,200+ IAEA radionuclides in the Periodic Table &amp; Nuclear Studio, subdivision plat curves (Rule 2), Rational Method runoff and detention, 3-phase soil mechanics, pump TDH and system curves, beam shear &amp; moment diagrams, and traverse COGO balancing.
           </p>
         </div>
       </section>
 
-      {/* Tool Selector Bar */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
-        {tools.map((t) => {
-          const isActive = t.id === activeToolId;
-          return (
-            <button
-              key={t.id}
-              onClick={() => setActiveToolId(t.id)}
-              className="glass-panel"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'flex-start',
-                padding: '1rem',
-                cursor: 'pointer',
-                textAlign: 'left',
-                border: isActive ? `2px solid ${t.color}` : '1px solid var(--border-color)',
-                background: isActive ? `rgba(${t.tint}, 0.15)` : 'rgba(255, 255, 255, 0.03)',
-                transition: 'all 0.2s ease',
-                position: 'relative'
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', marginBottom: '0.4rem' }}>
-                <span style={{ fontSize: '1.4rem' }}>{t.icon}</span>
-                <span className="glass-badge" style={{ fontSize: '0.65rem', color: t.color }}>
-                  {t.badge}
+      {/* Featured Tool Selector Bar */}
+      <div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+          <span className="text-xs text-muted" style={{ textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700 }}>
+            Featured Simulator Workbenches:
+          </span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
+          {tools.map((t) => {
+            const isActive = t.id === activeToolId;
+            return (
+              <button
+                key={t.id}
+                onClick={() => setActiveToolId(t.id)}
+                className="glass-panel"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  padding: '1rem',
+                  cursor: 'pointer',
+                  textAlign: 'left',
+                  border: isActive ? `2px solid ${t.color}` : '1px solid var(--border-color)',
+                  background: isActive ? `rgba(${t.tint}, 0.15)` : 'rgba(255, 255, 255, 0.03)',
+                  transition: 'all 0.2s ease',
+                  position: 'relative'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <span style={{ fontSize: '1.4rem' }}>{t.icon}</span>
+                  <span className="glass-badge" style={{ fontSize: '0.65rem', color: t.color }}>
+                    {t.badge}
+                  </span>
+                </div>
+                <strong style={{ fontSize: '0.925rem', color: isActive ? '#ffffff' : '#e2e8f0', marginBottom: '0.2rem' }}>
+                  {t.title}
+                </strong>
+                <span className="text-xs text-muted" style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+                  <MathText text={t.formula} />
                 </span>
-              </div>
-              <strong style={{ fontSize: '0.925rem', color: isActive ? '#ffffff' : '#e2e8f0', marginBottom: '0.2rem' }}>
-                {t.title}
-              </strong>
-              <span className="text-xs text-muted" style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
-                <MathText text={t.formula} />
-              </span>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Active Tool Workbench Header & Actions */}
-      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="glass-panel" style={{ padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderLeft: `4px solid ${currentTool.color}` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <span style={{ fontSize: '1.75rem' }}>{currentTool.icon}</span>
           <div>
@@ -190,6 +214,64 @@ export default function CivilToolbox({ onSelectProblem }) {
       <Suspense fallback={<div className="glass-panel" style={{ padding: '2rem', textAlign: 'center' }}>⏳ Loading {currentTool.title}…</div>}>
         <ActiveComponent problem={currentTool.problemMock} {...currentTool.problemMock} />
       </Suspense>
+
+      {/* Complete Directory of Plugin Simulators */}
+      <section className="glass-panel" style={{ padding: '2rem 1.5rem', marginTop: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div>
+            <h3 style={{ fontSize: '1.3rem', margin: 0, fontWeight: 700 }}>
+              ⚡ Complete Plugin Simulators &amp; Labs Directory
+            </h3>
+            <p className="text-xs text-muted" style={{ margin: '0.25rem 0 0 0' }}>
+              Each plugin in the platform is a dedicated interactive simulator. Select any lab to explore and run simulations.
+            </p>
+          </div>
+          <span className="glass-badge" style={{ color: 'var(--accent-cyan)' }}>
+            {allSimulators.length} Interactive Simulators
+          </span>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          {allSimulators.map((s) => (
+            <div
+              key={s.id}
+              className="glass-panel"
+              style={{
+                padding: '1.1rem',
+                cursor: 'pointer',
+                background: s.bgGlow || 'rgba(255,255,255,0.03)',
+                borderColor: s.borderColor || 'var(--border-color)',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+              }}
+              onClick={() => onSelectProblem(s.id)}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+                  <span style={{ fontSize: '1.5rem' }}>{s.icon}</span>
+                  <span className="glass-badge" style={{ fontSize: '0.65rem', color: s.color }}>
+                    {s.badge}
+                  </span>
+                </div>
+                <strong style={{ fontSize: '0.95rem', color: '#fff', display: 'block', marginBottom: '0.35rem' }}>
+                  #{s.id} {s.title}
+                </strong>
+                <p className="text-xs text-muted" style={{ lineHeight: 1.4, margin: '0 0 0.5rem 0' }}>
+                  {s.description}
+                </p>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <span className="text-xs" style={{ fontFamily: 'var(--font-mono)', color: s.color, fontWeight: 600 }}>
+                  <MathText text={s.formula || ''} />
+                </span>
+                <span style={{ fontSize: '0.8rem', color: s.color, fontWeight: 700 }}>Launch ⚡</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -145,7 +145,8 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory, onGoToo
   const filteredTools = simulatorTools.filter((t) => {
     if (toolFilter === 'All') return true;
     const text = `${t.title} ${t.badge} ${t.description}`.toLowerCase();
-    if (toolFilter === 'water') return text.includes('water') || text.includes('flow') || text.includes('pipe') || text.includes('pump') || text.includes('channel') || text.includes('runoff') || text.includes('storm') || text.includes('clarifier') || text.includes('manning');
+    if (toolFilter === 'nuclear') return text.includes('nuclear') || text.includes('periodic') || text.includes('radionuclide') || text.includes('nuclide') || text.includes('decay') || text.includes('radium') || text.includes('iaea');
+    if (toolFilter === 'water') return text.includes('water') || text.includes('flow') || text.includes('pipe') || text.includes('pump') || text.includes('channel') || text.includes('runoff') || text.includes('storm') || text.includes('clarifier') || text.includes('manning') || text.includes('nuclear') || text.includes('periodic') || text.includes('radionuclide');
     if (toolFilter === 'soil') return text.includes('soil') || text.includes('geotech') || text.includes('wall') || text.includes('pile') || text.includes('spt') || text.includes('earthwork');
     if (toolFilter === 'struct') return text.includes('shear') || text.includes('beam') || text.includes('slab') || text.includes('moment') || text.includes('structural') || text.includes('reinforcement');
     if (toolFilter === 'trans') return text.includes('plat') || text.includes('curve') || text.includes('road') || text.includes('traverse') || text.includes('station') || text.includes('geometrics');
@@ -240,6 +241,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory, onGoToo
           <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
             {[
               { id: 'All', label: 'All Labs' },
+              { id: 'nuclear', label: '⚛️ Nuclear & Periodic Table' },
               { id: 'water', label: '🌊 Water & Storm' },
               { id: 'trans', label: '🛣️ Plats & Curves' },
               { id: 'soil', label: '🪨 Soil & Geotech' },

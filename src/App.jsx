@@ -153,6 +153,23 @@ function App() {
             >
               <span>🧰</span> Civil Engineer's Toolbox
             </button>
+
+            <button 
+              className="btn-secondary" 
+              style={{ 
+                width: '100%', 
+                padding: '0.55rem 1rem', 
+                background: (activeView === 'problem' && activeProblem === 194) ? 'rgba(168, 85, 247, 0.25)' : 'rgba(255,255,255,0.04)',
+                borderColor: (activeView === 'problem' && activeProblem === 194) ? 'var(--accent-purple, #a855f7)' : 'var(--border-color)',
+                color: (activeView === 'problem' && activeProblem === 194) ? 'var(--accent-purple, #a855f7)' : 'var(--text-main)',
+                fontWeight: 600,
+                fontSize: '0.85rem'
+              }}
+              onClick={() => handleSelectProblem(194)}
+              title="Launch the Interactive Periodic Table & Nuclear Radionuclides Lab"
+            >
+              <span>⚛️</span> Periodic &amp; Nuclear Lab
+            </button>
           </div>
 
           {/* Search Box */}
@@ -284,7 +301,7 @@ function App() {
           </div>
 
           {/* Quick Problem Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', overflowX: 'auto', maxWidth: 'calc(100vw - 360px)', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch', paddingBottom: '2px' }}>
             {activeView === 'problem' && (
               <>
                 <button 

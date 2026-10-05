@@ -17,14 +17,14 @@ const plugin = {
   headerLinks: [
     {
       id: 'periodic-table',
-      label: 'Periodic Table',
+      label: 'Periodic & Nuclear Lab',
       icon: '⚛️',
       color: 'var(--accent-purple, #a855f7)',
       tint: '168, 85, 247',
-      title: 'Interactive Periodic Table, Nuclear Radionuclides & Elemental Trends',
+      title: 'Interactive Periodic Table, Nuclear Radionuclides & Elemental Trends (Problem #194)',
       target: 194,
       activeFor: [194],
-      order: 50
+      order: 5
     }
   ],
 
