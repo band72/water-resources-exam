@@ -1,0 +1,89 @@
+[
+  {
+    "id": 205,
+    "category": "Hydraulics & Hydrology",
+    "title": "Rational Method Peak Runoff & Storm Sewer Pipe Sizing (Q = C·I·A)",
+    "description": "A 12.0-acre commercial shopping center site is being designed. The land use breakdown is:\n\n• Rooftops: 4.5 acres (C = 0.90)\n• Asphalt Parking & Drives: 5.0 acres (C = 0.85)\n• Compacted Turf & Landscaping: 2.5 acres (C = 0.20)\n\nThe overland flow length is L = 600 ft with an average slope S = 1.5% (0.015 ft/ft). Using the Kirpich formula for overland time of concentration:\nt_c = 0.0078 · L^(0.77) · S^(-0.385) = 0.0078 · 600^(0.77) · 0.015^(-0.385) ≈ 15.0 min.\n\nThe 25-year design rainfall intensity from the local IDF curve is:\nI = 125 / (t_c + 15) = 125 / (15 + 15) = 4.17 in/hr.\n\nThe storm sewer pipe leaving the site has a slope S_pipe = 0.0080 ft/ft (0.80%) and Manning's n = 0.012 (reinforced concrete pipe).\n\nDetermine:\n1. The composite runoff coefficient C_comp = Σ(C_i·A_i) / ΣA_i\n2. The peak stormwater runoff discharge Q_peak = C·I·A (cfs)\n3. The minimum standard circular pipe diameter D (inches) flowing full\n\nThe peak runoff Q and required storm sewer diameter D are most nearly:",
+    "implemented": true,
+    "component": "StormwaterVisualizer",
+    "totalArea": 12.0,
+    "roofArea": 4.5,
+    "paveArea": 5.0,
+    "lawnArea": 2.5,
+    "tc": 15.0,
+    "intensity": 4.17,
+    "pipeSlope": 0.008,
+    "manningN": 0.012,
+    "options": [
+      {
+        "label": "A",
+        "text": "Q = 32.4 cfs, D = 24 in",
+        "correct": false,
+        "feedback": "Incorrect. Check your composite C: (4.5·0.9 + 5·0.85 + 2.5·0.2) / 12 = (4.05 + 4.25 + 0.5) / 12 = 8.80 / 12 = 0.733. Q = 0.733 · 4.17 · 12 = 36.7 cfs."
+      },
+      {
+        "label": "B",
+        "text": "Q = 36.7 cfs, D = 36 in",
+        "correct": true,
+        "feedback": "Correct! C_comp = 8.80 / 12 = 0.733. Q = 0.733 · 4.17 · 12.0 = 36.68 cfs. For a 36-inch (3.0 ft) RCP at S=0.008: Q_full = (1.486/0.012) · (π·3²/4) · (3/4)^(2/3) · (0.008)^0.5 = 63.3 cfs > 36.7 cfs. A 30-inch pipe yields only 37.5 cfs (too close to capacity), so standard design selects 36 inches."
+      },
+      {
+        "label": "C",
+        "text": "Q = 41.2 cfs, D = 42 in",
+        "correct": false,
+        "feedback": "Incorrect. Did you assume C = 0.85 for the entire site? You must use the area-weighted composite C = 0.733."
+      },
+      {
+        "label": "D",
+        "text": "Q = 28.5 cfs, D = 30 in",
+        "correct": false,
+        "feedback": "Incorrect. Double check Q = C · I · A calculation: 0.733 · 4.17 · 12 = 36.7 cfs."
+      }
+    ],
+    "hint": "Step 1: C_comp = (4.5·0.90 + 5.0·0.85 + 2.5·0.20) / 12.0 = 8.80 / 12 = 0.733. Step 2: Q = C·I·A = 0.733 · 4.17 in/hr · 12 acres = 36.68 cfs. Step 3: Solve Manning's equation for pipe flowing full: D = [ (2.16 · Q · n) / S^(1/2) ]^(3/8) in feet.",
+    "shortcut": "Remember in US customary units: 1 cfs ≈ 1 acre-inch/hour (actually 1.008 cfs). So Q = C · I · A directly in cfs! 0.733 · 4.17 · 12 = 36.7 cfs. D = [(2.16 · 36.7 · 0.012) / 0.008^0.5]^0.375 = [0.951 / 0.0894]^0.375 = (10.63)^0.375 = 2.44 ft = 29.3 in → Round up to next standard size 30 or 36 in.",
+    "fifthGrader": "When rain falls on a parking lot and roof, it can't soak into the dirt, so it rushes away like a slide! We measure how much roof, pavement, and grass there is, multiply by how hard it's pouring, and size a huge concrete pipe underground so the parking lot never turns into a lake."
+  },
+  {
+    "id": 206,
+    "category": "Hydraulics & Hydrology",
+    "title": "Detention Basin Storage Volume & Modified Rational Hydrograph Sizing",
+    "description": "A 15.0-acre site undergoing commercial redevelopment produces a 100-year peak post-development runoff Q_post = 48.0 cfs with a time of concentration t_c = 20 min. The municipal stormwater ordinance mandates that the peak discharge from the site must not exceed the pre-development 10-year allowable release rate Q_allow = 12.0 cfs.\n\nUsing the Modified Rational Method (triangular hydrograph approximation):\n• Inflow hydrograph rises to Q_peak at time t = t_c and recedes at t = 2·t_d.\n• For a critical storm duration t_d = 45 min (where rainfall intensity produces maximum storage deficit):\n  Inflow volume V_in = Q_post(t_d) · t_d · 60 sec/min\n  Outflow volume V_out = 0.5 · Q_allow · (t_d + t_c) · 60 sec/min\n\nFor a design rainfall intensity at t_d = 45 min yielding Q_in = 38.5 cfs:\nStorage Volume Required:\nV_req = [Q_in - Q_allow · (0.5 + 0.5 · t_c / t_d)] · t_d · 60\nOr using triangular approximation: V_req ≈ (Q_in - Q_allow) · t_d · 60 sec/min.\nWith Q_in = 38.5 cfs and Q_allow = 12.0 cfs over t_d = 45 min:\nV_req = (38.5 - 12.0) cfs · (45 · 60 s) = 26.5 cfs · 2700 s = 71,550 cu ft.\n\nConvert this storage volume to Acre-Feet (1 acre = 43,560 sq ft):\nV_acre-ft = 71,550 / 43,560 = 1.64 ac-ft.\n\nThe required detention pond storage volume in acre-feet is most nearly:",
+    "implemented": true,
+    "component": "StormwaterVisualizer",
+    "totalArea": 15.0,
+    "qPost": 48.0,
+    "qAllow": 12.0,
+    "critDuration": 45.0,
+    "tc": 20.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "0.95 ac-ft (41,400 cu ft)",
+        "correct": false,
+        "feedback": "Incorrect. That assumes a short 20-minute storm duration, which does not govern the maximum detention volume."
+      },
+      {
+        "label": "B",
+        "text": "1.64 ac-ft (71,550 cu ft)",
+        "correct": true,
+        "feedback": "Correct! V_req = (Q_in - Q_allow) · t_d · 60 = (38.5 - 12.0) · 45 · 60 = 26.5 · 2700 = 71,550 cu ft. In acre-feet: 71,550 / 43,560 = 1.64 ac-ft."
+      },
+      {
+        "label": "C",
+        "text": "2.25 ac-ft (98,000 cu ft)",
+        "correct": false,
+        "feedback": "Incorrect. That neglects the allowable outflow during the storm event (zero-discharge assumption)."
+      },
+      {
+        "label": "D",
+        "text": "3.10 ac-ft (135,000 cu ft)",
+        "correct": false,
+        "feedback": "Incorrect. Check your unit conversion: 1 acre-foot = 43,560 cu ft."
+      }
+    ],
+    "hint": "Step 1: Compute net storage discharge rate ΔQ = Q_in - Q_allow = 38.5 - 12.0 = 26.5 cfs. Step 2: Multiply by storm duration in seconds: 45 min · 60 s/min = 2,700 s. Step 3: V = 26.5 · 2700 = 71,550 cu ft. Step 4: Convert to acre-feet: 71,550 / 43,560 = 1.64 ac-ft.",
+    "shortcut": "Storage volume = Net rate × time. ΔQ = 26.5 cfs. Time = 45 min = 0.75 hr. 1 cfs for 1 hour = 3600 cu ft = 0.0826 ac-ft. So V = 26.5 × 0.75 × 0.0826 = 1.64 ac-ft!",
+    "fifthGrader": "A detention basin is like a giant bathtub for rain. When a thunderstorm hits, water pours in way faster than the city pipes can handle. The basin catches the giant flood wave and lets it trickle out slowly through a small drain pipe so downstream neighborhoods don't get flooded!"
+  }
+]

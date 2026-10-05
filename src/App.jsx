@@ -1,6 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, lazy, Suspense } from 'react';
 import Dashboard from './components/Dashboard';
 import { pluginRegistry } from './plugins/registry';
+
+const CivilToolbox = lazy(() => import('./components/CivilToolbox'));
 import { PluginRenderer } from './plugins';
 import { getProblemCategory } from './utils/categorize';
 import MathText from './components/MathText';
@@ -96,6 +98,16 @@ function App() {
     }
   };
 
+  const handleGoToolbox = () => {
+    setActiveView('toolbox');
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location);
+      url.searchParams.delete('problem');
+      url.searchParams.set('view', 'toolbox');
+      window.history.pushState({}, '', url);
+    }
+  };
+
   return (
     <div className="app-container" style={{ gridTemplateColumns: sidebarOpen ? '360px 1fr' : '0px 1fr' }}>
       {/* Sidebar */}
@@ -105,23 +117,43 @@ function App() {
             <div className="brand-icon">🌊</div>
             <div>
               <h1 style={{ fontSize: '1.25rem', lineHeight: 1.2 }}>Water Resources</h1>
-              <p className="text-xs text-muted" style={{ fontWeight: 500 }}>PE Exam Interactive Studio</p>
+              <p className="text-xs text-muted" style={{ fontWeight: 500 }}>PE Exam & Engineering Studio</p>
             </div>
           </div>
 
-          <button 
-            className="btn-secondary" 
-            style={{ 
-              width: '100%', 
-              padding: '0.6rem 1rem', 
-              background: activeView === 'dashboard' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.04)',
-              borderColor: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--border-color)',
-              color: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--text-main)'
-            }}
-            onClick={handleGoDashboard}
-          >
-            <span>🧭</span> Examination Dashboard
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', width: '100%' }}>
+            <button 
+              className="btn-secondary" 
+              style={{ 
+                width: '100%', 
+                padding: '0.55rem 1rem', 
+                background: activeView === 'dashboard' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.04)',
+                borderColor: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--border-color)',
+                color: activeView === 'dashboard' ? 'var(--accent-blue)' : 'var(--text-main)',
+                fontWeight: 600,
+                fontSize: '0.85rem'
+              }}
+              onClick={handleGoDashboard}
+            >
+              <span>🧭</span> Examination Dashboard
+            </button>
+
+            <button 
+              className="btn-secondary" 
+              style={{ 
+                width: '100%', 
+                padding: '0.55rem 1rem', 
+                background: activeView === 'toolbox' ? 'rgba(245, 158, 11, 0.2)' : 'rgba(255,255,255,0.04)',
+                borderColor: activeView === 'toolbox' ? 'var(--accent-amber)' : 'var(--border-color)',
+                color: activeView === 'toolbox' ? 'var(--accent-amber)' : 'var(--text-main)',
+                fontWeight: 600,
+                fontSize: '0.85rem'
+              }}
+              onClick={handleGoToolbox}
+            >
+              <span>🧰</span> Civil Engineer's Toolbox
+            </button>
+          </div>
 
           {/* Search Box */}
           <div className="sidebar-search-box">
@@ -235,6 +267,8 @@ function App() {
               <span>/</span>
               {activeView === 'dashboard' ? (
                 <span className="breadcrumb-active">Exam Hub</span>
+              ) : activeView === 'toolbox' ? (
+                <span className="breadcrumb-active" style={{ color: 'var(--accent-amber)' }}>🧰 Everyday Civil Toolbox</span>
               ) : (
                 <>
                   <span className="breadcrumb-item" onClick={() => { setSelectedCategory(getProblemCategory(currentProblem)); setActiveView('dashboard'); }}>
@@ -278,6 +312,25 @@ function App() {
             {/* Plugin-declared quick-launch buttons */}
             <PluginHeaderLinks activeProblemId={activeView === 'problem' ? activeProblem : null} onSelectProblem={handleSelectProblem} />
 
+            <button
+              className="btn-secondary"
+              style={{
+                padding: '0.45rem 0.85rem',
+                fontSize: '0.8rem',
+                background: activeView === 'toolbox' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255,255,255,0.06)',
+                borderColor: activeView === 'toolbox' ? 'var(--accent-amber)' : 'var(--border-color)',
+                color: activeView === 'toolbox' ? 'var(--accent-amber)' : 'var(--text-main)',
+                fontWeight: 600,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem'
+              }}
+              onClick={handleGoToolbox}
+              title="Everyday Civil Engineer's Design Toolbox"
+            >
+              <span>🧰</span> Toolbox
+            </button>
+
             <button 
               className="btn-secondary" 
               style={{ padding: '0.45rem 0.85rem', fontSize: '0.8rem' }}
@@ -297,7 +350,12 @@ function App() {
               tools={pluginRegistry.getSimulatorTools()}
               onSelectProblem={handleSelectProblem} 
               onFilterCategory={(cat) => { setSelectedCategory(cat); }}
+              onGoToolbox={handleGoToolbox}
             />
+          ) : activeView === 'toolbox' ? (
+            <Suspense fallback={<div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>⏳ Loading Civil Engineer's Toolbox…</div>}>
+              <CivilToolbox onSelectProblem={handleSelectProblem} />
+            </Suspense>
           ) : (
             <>
               {/* Problem Statement Header */}

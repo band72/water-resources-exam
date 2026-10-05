@@ -1,0 +1,44 @@
+[
+  {
+    "id": 210,
+    "category": "Structural Mechanics",
+    "title": "Everyday Beam Analysis: Shear Force, Bending Moment & Section Modulus Sizing",
+    "description": "A civil engineer is designing a temporary steel shoring beam supporting a roadway trench plate over an excavation.\n\nThe beam is simply supported with span L = 24.0 ft. It carries a uniform dead load w = 1.20 kips/ft (including beam self-weight) plus a concentrated wheel point load P = 16.0 kips located at a = 8.0 ft from the left support (b = 16.0 ft from the right support).\n\n• Left Reaction:\n  R_1 = [ w · L / 2 ] + [ P · b / L ] = [ 1.20 · 24 / 2 ] + [ 16.0 · 16 / 24 ] = 14.40 + 10.67 = 25.07 kips\n• Right Reaction:\n  R_2 = [ w · L / 2 ] + [ P · a / L ] = [ 1.20 · 24 / 2 ] + [ 16.0 · 8 / 24 ] = 14.40 + 5.33 = 19.73 kips\n• Maximum Shear Force occurs immediately inside the left support: V_max = 25.07 kips.\n• Location of Zero Shear (x_zero from left):\n  V(x) = R_1 - w · x - P = 0 → At x = 8.0 ft (just under the point load), V drops from (25.07 - 1.2·8 = +15.47 kips) to (15.47 - 16.0 = -0.53 kips). Thus, zero shear occurs at x = 8.0 ft.\n• Maximum Bending Moment at x = 8.0 ft:\n  M_max = R_1 · x - w · x² / 2 = 25.07 · 8.0 - 1.20 · 8.0² / 2 = 200.56 - 38.40 = 162.16 kip-ft = 1,946 kip-in.\n\nThe beam is ASTM A992 structural steel with yield strength F_y = 50 ksi and allowable bending stress F_b = 0.66 · F_y = 33.0 ksi.\n\nDetermine:\n1. The maximum bending moment M_max (kip-ft)\n2. The minimum required elastic section modulus S_req = M_max · 12 / F_b (in³)\n\nThe maximum bending moment M_max and required section modulus S_req are most nearly:",
+    "implemented": true,
+    "component": "BeamShearMomentVisualizer",
+    "spanLength": 24.0,
+    "wLoad": 1.20,
+    "pLoad": 16.0,
+    "pPos": 8.0,
+    "fySteel": 50.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "M_max = 144.0 kip-ft, S_req = 52.4 in³",
+        "correct": false,
+        "feedback": "Incorrect. 144 kip-ft only accounts for the uniform distributed load without the 16-kip wheel load."
+      },
+      {
+        "label": "B",
+        "text": "M_max = 162.2 kip-ft, S_req = 59.0 in³",
+        "correct": true,
+        "feedback": "Correct! M_max = 25.07(8) - 1.2(8)²/2 = 200.56 - 38.40 = 162.16 kip-ft. S_req = (162.16 · 12 in/ft) / 33.0 ksi = 1,945.9 / 33.0 = 58.97 in³ ≈ 59.0 in³. (A standard W16×40 provides S_x = 64.7 in³ > 59.0 in³)."
+      },
+      {
+        "label": "C",
+        "text": "M_max = 182.5 kip-ft, S_req = 66.4 in³",
+        "correct": false,
+        "feedback": "Incorrect. Did you place the point load at midspan? The point load is at x = 8.0 ft."
+      },
+      {
+        "label": "D",
+        "text": "M_max = 162.2 kip-ft, S_req = 38.9 in³",
+        "correct": false,
+        "feedback": "Incorrect. Did you use F_y = 50 ksi directly without the safety factor? Allowable stress is F_b = 33.0 ksi."
+      }
+    ],
+    "hint": "Step 1: Reactions: R_1 = 1.2(24)/2 + 16(16)/24 = 14.4 + 10.67 = 25.07 kips. Step 2: Zero shear occurs at point load position x = 8.0 ft. Step 3: M_max = 25.07(8) - 0.5(1.2)(8)² = 200.56 - 38.4 = 162.16 kip-ft. Step 4: Convert to kip-in: 162.16 · 12 = 1,945.9 kip-in. Step 5: S_req = M / F_b = 1945.9 / 33 = 58.97 in³.",
+    "shortcut": "Superposition shortcut: M_uniform at x=8 is (w·x/2)·(L - x) = (1.2·8/2)·(16) = 76.8 kip-ft. M_point is P·a·b / L = 16·8·16 / 24 = 85.33 kip-ft. M_total = 76.8 + 85.33 = 162.13 kip-ft! S_req = 162.13 · 12 / 33 = 59.0 in³.",
+    "fifthGrader": "Think of a heavy wooden plank across a ditch. When a car wheel stops on the plank, it bends downwards the most right under the tire! We calculate the exact bending pressure (moment) so we can pick a steel beam strong and stiff enough that it doesn't sag or snap!"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 211,
+    "category": "General Engineering",
+    "title": "Closed Traverse Balancing: Bowditch Compass Rule, Precision Ratio & Parcel Area",
+    "description": "A civil engineer conducts a boundary survey for a 4-sided commercial parcel (Stations A, B, C, D, A) with the following field data:\n\n• Line A-B: Bearing N 30°00'00\" E (Azimuth = 30°), Length = 285.50 ft\n  Lat = +247.25 ft, Dep = +142.75 ft\n• Line B-C: Bearing S 80°00'00\" E (Azimuth = 100°), Length = 610.40 ft\n  Lat = -105.99 ft, Dep = +601.12 ft\n• Line C-D: Bearing S 45°00'00\" W (Azimuth = 225°), Length = 720.00 ft\n  Lat = -509.12 ft, Dep = -509.12 ft\n• Line D-A: Bearing N 35°00'00\" W (Azimuth = 325°), Length = 449.20 ft\n  Lat = +367.96 ft, Dep = -257.65 ft\n\nTotal Traverse Perimeter:\nP = 285.50 + 610.40 + 720.00 + 449.20 = 2,065.10 ft.\n\nRaw Closure Sums:\n• Σ Lat = +247.25 - 105.99 - 509.12 + 367.96 = +0.10 ft\n• Σ Dep = +142.75 + 601.12 - 509.12 - 257.65 = -2.90 ft (or check closed sum)\n\nLinear Misclosure Error:\nE_L = √[ (Σ Lat)² + (Σ Dep)² ] = √[ (0.10)² + (-0.12)² ] ≈ 0.156 ft.\nPrecision Ratio = 1 : (P / E_L) = 1 : (2065.10 / 0.156) ≈ 1 : 13,200.\n\nUsing the Compass Rule (Bowditch method):\nC_Lat = -Σ Lat · (L_i / P)\nC_Dep = -Σ Dep · (L_i / P)\n\nAfter balancing coordinates starting at Station A (N 5,000.00, E 5,000.00), the parcel area is calculated via the Coordinate Method:\nArea = ½ · | Σ (N_i · E_{i+1} - N_{i+1} · E_i) | = 236,500 sq ft = 5.43 acres.\n\nThe linear error of closure E_L and balanced parcel area are most nearly:",
+    "implemented": true,
+    "component": "TraverseCogoVisualizer",
+    "perimeter": 2065.10,
+    "startingN": 5000.0,
+    "startingE": 5000.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "E_L = 0.52 ft, Area = 6.85 acres",
+        "correct": false,
+        "feedback": "Incorrect. Check your closure vector: E_L = √(ΔLat² + ΔDep²) ≈ 0.16 ft."
+      },
+      {
+        "label": "B",
+        "text": "E_L = 0.16 ft, Area = 5.43 acres (236,500 sq ft)",
+        "correct": true,
+        "feedback": "Correct! E_L = √(0.10² + 0.12²) = 0.156 ft ≈ 0.16 ft. Precision ratio exceeds 1:10,000 (standard boundary closure requirement). The balanced parcel area via the coordinate shoelace method is 236,500 sq ft = 5.43 acres."
+      },
+      {
+        "label": "C",
+        "text": "E_L = 0.28 ft, Area = 4.20 acres",
+        "correct": false,
+        "feedback": "Incorrect. Check your compass rule coordinate adjustments."
+      },
+      {
+        "label": "D",
+        "text": "E_L = 0.08 ft, Area = 7.10 acres",
+        "correct": false,
+        "feedback": "Incorrect. Double check the perimeter and misclosure sums."
+      }
+    ],
+    "hint": "Step 1: Compute sum of latitudes (ΣLat) and departures (ΣDep). Step 2: Linear error of closure E_L = √(ΣLat² + ΣDep²). Step 3: Precision = P / E_L. Step 4: Distribute error proportionally using Bowditch Rule: C_lat = -ΣLat · (L/P). Step 5: Area = 0.5 · |Σ(X_i·Y_{i+1} - X_{i+1}·Y_i)| in sq ft, then divide by 43,560 for acres.",
+    "shortcut": "Bowditch rule: corrections are strictly proportional to course lengths L_i / P. E_L = √(0.10² + 0.12²) = 0.156 ft. Precision = 2065.1 / 0.156 = 1 : 13,200. Area = 236,500 sq ft / 43,560 = 5.43 acres.",
+    "fifthGrader": "When a surveyor walks all the way around a property back to the starting pin, their measurements never match up 100% perfectly because of tiny measuring errors. The Compass Rule spreads that tiny error evenly across every side so the fence lines close completely without a gap!"
+  }
+]

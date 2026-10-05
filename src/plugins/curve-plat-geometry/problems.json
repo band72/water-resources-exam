@@ -1,0 +1,87 @@
+[
+  {
+    "id": 203,
+    "category": "Transportation & Geometrics",
+    "title": "Subdivision Plat Corner Return & Horizontal Curve (Rule 2 P.I. Angle Bar Derivation)",
+    "description": "A surveyor is calculating the boundary lines and parcel area for a subdivision corner lot bounded by two intersecting rights-of-way:\n\n• Street Tangent 1 Bearing: N 90°00'00\" E (Azimuth = 90°)\n• Street Tangent 2 Bearing: S 12°30'00\" W (Azimuth = 192.5°)\n• Central Turn Deflection Angle: Δ = |192.5° - 90°| = 102°30'00\" (102.5°)\n• Subdivision Plat Stated Tangent Distance to P.I.: 165.00 ft along Tangent 1\n• Corner Return Fillet Curve Radius: R = 25.00 ft\n• An L-shaped P.I. angle bar glyph (┌) appears at the intersection corner.\n\nAccording to surveyor standard practice and subdivision plat rules (Rule 2), the stated boundary distance extends along the tangent to the projected Point of Intersection (P.I.), NOT to the P.C.\n\nDetermine:\n1. The exact surveyor tangent distance T = R · tan(Δ/2)\n2. The net straight boundary course length cut back to the P.C. (Length = Stated - T)\n3. The corner fillet area A_fillet = R·T - 0.5·R²·Δ_rad to adjust the gross parcel area\n\nThe tangent distance T and the straight boundary length to the P.C. are most nearly:",
+    "implemented": true,
+    "component": "CurvePlatVisualizer",
+    "curveType": "horizontal-plat",
+    "radius": 25.0,
+    "delta": 102.5,
+    "statedDistance": 165.0,
+    "piStation": 1240.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "T = 25.00 ft, Length to P.C. = 140.00 ft",
+        "correct": false,
+        "feedback": "Incorrect. T = R only when Δ = 90°. For Δ = 102°30', T = 25 · tan(51.25°) = 31.14 ft."
+      },
+      {
+        "label": "B",
+        "text": "T = 31.14 ft, Length to P.C. = 133.86 ft",
+        "correct": true,
+        "feedback": "Correct! T = 25.0 · tan(102.5° / 2) = 25 · tan(51.25°) = 25 · 1.2457 = 31.14 ft. Straight course to P.C. = 165.00 - 31.14 = 133.86 ft."
+      },
+      {
+        "label": "C",
+        "text": "T = 35.20 ft, Length to P.C. = 129.80 ft",
+        "correct": false,
+        "feedback": "Incorrect. Re-evaluate tan(Δ/2) = tan(51.25°) = 1.2457, so T = 31.14 ft."
+      },
+      {
+        "label": "D",
+        "text": "T = 19.82 ft, Length to P.C. = 145.18 ft",
+        "correct": false,
+        "feedback": "Incorrect. That would occur if Δ were acute (< 90°). Here Δ = 102.5° > 90°, so T > R."
+      }
+    ],
+    "hint": "Step 1: Check deflection angle Δ = 102.5°. Step 2: Compute T = R · tan(Δ/2) = 25 · tan(51.25°) = 31.14 ft. Step 3: By Rule 2, the P.I. angle bar glyph indicates the stated boundary extends to the P.I., so cut back by T: Length = 165.00 - 31.14 = 133.86 ft.",
+    "shortcut": "Memorize: T is always greater than R when Δ > 90°. At Δ = 102.5°, tan(51.25°) = 1.246, so T = 25 · 1.246 = 31.14 ft. Straight length = 165 - 31.14 = 133.86 ft.",
+    "fifthGrader": "Imagine two sidewalks crossing at an angle sharper than a square corner. The city rounds the corner with a curb curve so cars don't hit it. The surveyor's map gave the measurement to where the sidewalks would meet if straight (the P.I.). We just subtract the curve distance (T) to find where the curb curve actually begins!"
+  },
+  {
+    "id": 204,
+    "category": "Transportation & Geometrics",
+    "title": "Highway Crest & Sag Vertical Curve Design with Stopping Sight Distance (SSD)",
+    "description": "A highway crest vertical curve connects an entering grade g₁ = +3.5% with an exiting grade g₂ = -2.5% (grade change A = |g₂ - g₁| = 6.0%). The design speed is 60 mph, requiring a minimum stopping sight distance SSD = 570 ft per AASHTO Green Book standards.\n\nThe minimum vertical curve length parameter for a crest curve (eye height h₁ = 3.5 ft, object height h₂ = 2.0 ft) is:\nK = SSD² / 2158 = 570² / 2158 ≈ 150.6 ft/%\nL_min = K · A = 150.6 · 6.0 = 903.6 ft → rounded up to 920 ft.\n\nThe BVC (Beginning of Vertical Curve) is located at Station 24+00.00 at Elevation 450.00 ft.\n\nDetermine:\n1. The station of the curve high point (turning point x_turn = -g₁ · L / (g₂ - g₁))\n2. The elevation of the high point on the parabolic crest curve\n\nThe high point station and elevation are most nearly:",
+    "implemented": true,
+    "component": "CurvePlatVisualizer",
+    "curveType": "vertical",
+    "g1": 3.5,
+    "g2": -2.5,
+    "L": 920.0,
+    "bvcStation": 2400.0,
+    "bvcElevation": 450.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "Sta 28+60.00, Elev 459.32 ft",
+        "correct": false,
+        "feedback": "Incorrect. Check the turning point ratio: x_turn = (3.5 / 6.0) · 920 = 536.67 ft. Station = 24+00 + 5+36.67 = 29+36.67."
+      },
+      {
+        "label": "B",
+        "text": "Sta 29+36.67, Elev 459.39 ft",
+        "correct": true,
+        "feedback": "Correct! x_turn = (3.5 / 6.0) · 920 = 536.67 ft. High Point Sta = 24+00 + 5+36.67 = 29+36.67. High Point Elev = 450.00 + 0.035(536.67) + (-0.06/(2·920))(536.67)² = 450.00 + 18.78 - 9.39 = 459.39 ft."
+      },
+      {
+        "label": "C",
+        "text": "Sta 30+00.00, Elev 462.10 ft",
+        "correct": false,
+        "feedback": "Incorrect. That assumes the high point is at the midpoint of the curve (only true if g1 = -g2)."
+      },
+      {
+        "label": "D",
+        "text": "Sta 27+80.00, Elev 456.80 ft",
+        "correct": false,
+        "feedback": "Incorrect. x_turn must be on the side of the steeper grade (g1 = +3.5% vs g2 = -2.5%), so x_turn > L/2 = 460 ft."
+      }
+    ],
+    "hint": "High point location from BVC: x = -g₁ / (2a) = (g₁ · L) / A = (3.5 / 6.0) · 920 = 536.67 ft. High Point Station = 2400 + 536.67 = 2936.67 (29+36.67). Elevation: y(x) = y_BVC + g₁·x + (g₂ - g₁)/(2L) · x².",
+    "shortcut": "The turning point is always at x = (g₁ / A) · L. Here 3.5 / 6.0 = 58.33% of the curve length = 536.67 ft. The elevation offset at the turning point is always exactly half of the tangent rise: y_offset = 0.5 · g₁ · x = 0.5 · 18.78 = 9.39 ft. Elevation = 450 + 9.39 = 459.39 ft.",
+    "fifthGrader": "Think of driving over a smooth hilltop like a roller coaster track. The highest point is not always right in the middle — it leans toward the steeper side. We find the exact highest spot so engineers can put water storm drains right where rain won't puddle!"
+  }
+]

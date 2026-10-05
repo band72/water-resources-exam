@@ -1,0 +1,87 @@
+[
+  {
+    "id": 207,
+    "category": "Soil Mechanics & Foundations",
+    "title": "3-Phase Soil Relationships: Void Ratio, Porosity, Saturation & Unit Weights",
+    "description": "A field geotechnical investigation takes an undisturbed soil sample with total volume V = 0.050 cu ft and total wet weight W = 6.10 lb.\n\nAfter oven drying at 110°C for 24 hours, the dry weight of solids is W_s = 5.25 lb. Laboratory pycnometer testing determines the specific gravity of solids G_s = 2.70. (Unit weight of water γ_w = 62.4 pcf).\n\nUsing the 3-phase soil relationships:\n1. Moisture content: w = (W - W_s) / W_s = (6.10 - 5.25) / 5.25 = 0.85 / 5.25 = 16.19%\n2. Volume of solids: V_s = W_s / (G_s · γ_w) = 5.25 / (2.70 · 62.4) = 5.25 / 168.48 = 0.03116 cu ft\n3. Volume of voids: V_v = V - V_s = 0.050 - 0.03116 = 0.01884 cu ft\n4. Void ratio: e = V_v / V_s = 0.01884 / 0.03116 = 0.605\n5. Porosity: n = V_v / V = 0.01884 / 0.050 = 37.7%\n6. Degree of saturation: S = V_w / V_v = (w · G_s) / e = (0.1619 · 2.70) / 0.605 = 72.2%\n7. Dry unit weight: γ_d = W_s / V = 5.25 / 0.050 = 105.0 pcf\n\nThe void ratio e, degree of saturation S, and dry unit weight γ_d are most nearly:",
+    "implemented": true,
+    "component": "SoilPhaseEarthworkVisualizer",
+    "totalVolume": 0.050,
+    "totalWeight": 6.10,
+    "dryWeight": 5.25,
+    "gs": 2.70,
+    "options": [
+      {
+        "label": "A",
+        "text": "e = 0.520, S = 84.1%, γ_d = 112.5 pcf",
+        "correct": false,
+        "feedback": "Incorrect. Check your volume of solids: V_s = 5.25 / (2.70 · 62.4) = 0.03116 cu ft, giving e = 0.01884 / 0.03116 = 0.605."
+      },
+      {
+        "label": "B",
+        "text": "e = 0.605, S = 72.2%, γ_d = 105.0 pcf",
+        "correct": true,
+        "feedback": "Correct! V_s = 0.03116 cu ft; V_v = 0.01884 cu ft; e = 0.01884 / 0.03116 = 0.605. S = (0.1619 · 2.70) / 0.605 = 72.2%. γ_d = 5.25 / 0.050 = 105.0 pcf."
+      },
+      {
+        "label": "C",
+        "text": "e = 0.680, S = 65.0%, γ_d = 98.2 pcf",
+        "correct": false,
+        "feedback": "Incorrect. γ_d = W_s / V = 5.25 / 0.050 = 105.0 pcf exactly."
+      },
+      {
+        "label": "D",
+        "text": "e = 0.450, S = 95.0%, γ_d = 120.0 pcf",
+        "correct": false,
+        "feedback": "Incorrect. Did you divide by dry volume instead of total volume?"
+      }
+    ],
+    "hint": "Step 1: Water weight W_w = W - W_s = 6.10 - 5.25 = 0.85 lb. Step 2: Moisture content w = 0.85 / 5.25 = 16.19%. Step 3: V_s = W_s / (G_s·62.4) = 0.03116 ft³. Step 4: V_v = 0.050 - 0.03116 = 0.01884 ft³. Step 5: e = V_v / V_s = 0.605. S = (w·G_s)/e = (0.1619·2.70)/0.605 = 72.2%. γ_d = 5.25 / 0.050 = 105.0 pcf.",
+    "shortcut": "Dry unit weight γ_d = W_s / V = 5.25 / 0.05 = 105.0 pcf. From γ_d = G_s · γ_w / (1+e): 1+e = (2.70 · 62.4) / 105.0 = 168.48 / 105 = 1.6046 → e = 0.605. S = w·G_s / e = 16.19% · 2.70 / 0.605 = 72.2%.",
+    "fifthGrader": "Soil is like a sponge made of tiny rocks, water, and air bubbles! When we dry it in an oven, the water disappears and only the rocks stay. By comparing the wet sponge and dry rocks, we can tell exactly how much space was empty holes and how much was soaked with water!"
+  },
+  {
+    "id": 208,
+    "category": "Project Planning & Economics",
+    "title": "Earthwork Volume Conversion: Bank (BCY), Loose (LCY), Compacted (CCY) & Haul Cycles",
+    "description": "A highway construction contract requires 24,000 Compacted Cubic Yards (CCY) of embankment fill.\n\nGeotechnical test data for the borrow pit material:\n• Bank dry unit weight: γ_d,bank = 115.0 pcf\n• Loose unit weight: γ_d,loose = 92.0 pcf (Swell = 25.0%)\n• Compacted specification: γ_d,compact = 125.0 pcf (Shrinkage factor = 8.0% relative to bank)\n• Natural in-situ moisture content: w_borrow = 8.0%\n• Optimum Moisture Content (OMC) required for field compaction: w_opt = 13.0%\n\nHaul trucks have a struck capacity of 16.0 LCY.\n\nDetermine:\n1. The volume of borrow pit excavation required in Bank Cubic Yards (BCY):\n   BCY = CCY · (γ_d,compact / γ_d,bank) = 24,000 · (125.0 / 115.0) = 26,087 BCY\n2. The volume to be transported in Loose Cubic Yards (LCY):\n   LCY = BCY · (1 + 0.25) = 26,087 · 1.25 = 32,609 LCY\n3. The total number of haul truck trips required (16 LCY/truck)\n4. The compaction water required (gallons) to raise moisture from 8.0% to 13.0% (Δw = 5.0%):\n   Total solids weight W_s = 24,000 CCY · 27 ft³/CY · 125.0 pcf = 81,000,000 lb\n   Water weight = 81,000,000 · 0.050 = 4,050,000 lb\n   Water volume = 4,050,000 / 8.34 lb/gal = 485,612 gallons\n\nThe required excavation (BCY) and number of haul truck trips are most nearly:",
+    "implemented": true,
+    "component": "SoilPhaseEarthworkVisualizer",
+    "ccyReq": 24000,
+    "gammaBank": 115.0,
+    "gammaLoose": 92.0,
+    "gammaCompact": 125.0,
+    "wBorrow": 8.0,
+    "wOpt": 13.0,
+    "truckCap": 16.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "22,080 BCY and 1,380 truckloads",
+        "correct": false,
+        "feedback": "Incorrect. You need more BCY than CCY because the embankment is compacted denser (125 pcf vs 115 pcf)."
+      },
+      {
+        "label": "B",
+        "text": "26,087 BCY and 2,039 truckloads",
+        "correct": true,
+        "feedback": "Correct! BCY = 24,000 · (125 / 115) = 26,087 BCY. LCY = 26,087 · 1.25 = 32,609 LCY. Truckloads = 32,609 / 16 = 2,038.1 → 2,039 trips."
+      },
+      {
+        "label": "C",
+        "text": "28,500 BCY and 2,450 truckloads",
+        "correct": false,
+        "feedback": "Incorrect. Check your density ratio: 125 / 115 = 1.087, giving 26,087 BCY."
+      },
+      {
+        "label": "D",
+        "text": "24,000 BCY and 1,875 truckloads",
+        "correct": false,
+        "feedback": "Incorrect. That assumes 1 BCY = 1 CCY without accounting for compaction density increase."
+      }
+    ],
+    "hint": "Solids weight is conserved! W_s = CCY · 27 · γ_compact = BCY · 27 · γ_bank. So BCY = CCY · (γ_compact / γ_bank). Then LCY = BCY · (1 + Swell) = BCY · 1.25. Number of truck trips = LCY / Truck Capacity.",
+    "shortcut": "Ratio rule: BCY = CCY · (125/115) = 26,087 BCY. LCY = 26,087 × 1.25 = 32,609 LCY. Trips = 32,609 / 16 = 2,039 trips. Gallons of water = 24000 × 27 × 125 × 0.05 / 8.34 = 485,612 gal.",
+    "fifthGrader": "When you dig dirt out of the ground, it fluffs up like popcorn (Loose dirt). When a steamroller squashes it into a road embankment, it gets packed down tighter than it was originally (Compacted dirt). We calculate how much fluffed dirt the dump trucks must haul, plus how many water trucks must spray it so it packs like dough!"
+  }
+]

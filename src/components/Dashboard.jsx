@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { getProblemCategory } from '../utils/categorize';
 import MathText from './MathText';
 
-const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
+const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory, onGoToolbox }) => {
   const [activeTab, setActiveTab] = useState('All');
+  const [toolFilter, setToolFilter] = useState('All');
 
   // Group problems by standardized PE Exam Category
   const categories = problems.reduce((acc, prob) => {
@@ -140,6 +141,18 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
   const categoryKeys = Object.keys(categories);
   const displayedCategories = activeTab === 'All' ? categoryKeys : [activeTab];
 
+  // Filter simulator tools based on category
+  const filteredTools = simulatorTools.filter((t) => {
+    if (toolFilter === 'All') return true;
+    const text = `${t.title} ${t.badge} ${t.description}`.toLowerCase();
+    if (toolFilter === 'water') return text.includes('water') || text.includes('flow') || text.includes('pipe') || text.includes('pump') || text.includes('channel') || text.includes('runoff') || text.includes('storm') || text.includes('clarifier') || text.includes('manning');
+    if (toolFilter === 'soil') return text.includes('soil') || text.includes('geotech') || text.includes('wall') || text.includes('pile') || text.includes('spt') || text.includes('earthwork');
+    if (toolFilter === 'struct') return text.includes('shear') || text.includes('beam') || text.includes('slab') || text.includes('moment') || text.includes('structural') || text.includes('reinforcement');
+    if (toolFilter === 'trans') return text.includes('plat') || text.includes('curve') || text.includes('road') || text.includes('traverse') || text.includes('station') || text.includes('geometrics');
+    if (toolFilter === 'pm') return text.includes('cpm') || text.includes('schedule') || text.includes('labor') || text.includes('cost') || text.includes('depreciation') || text.includes('economics');
+    return true;
+  });
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '100%' }}>
       {/* Hero Studio Banner */}
@@ -152,7 +165,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.35rem 0.85rem', borderRadius: '9999px', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid rgba(56, 189, 248, 0.25)', marginBottom: '1.25rem' }}>
             <span style={{ fontSize: '0.85rem' }}>⚡</span>
             <span className="text-xs" style={{ color: 'var(--accent-blue)', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              Civil PE Exam: Water Resources & Environmental Studio
+              Civil PE Exam & Professional Practice Engineering Studio
             </span>
           </div>
 
@@ -160,18 +173,42 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
             Master Engineering Concepts with <span className="text-gradient">Interactive Simulators</span>
           </h2>
 
-          <p style={{ fontSize: '1.15rem', lineHeight: 1.6, color: '#94a3b8', marginBottom: '2rem' }}>
-            Explore 80+ rigorous PE exam practice problems. Adjust hydraulic parameters in real time, visualize fluid flows and open channels, inspect step-by-step NCEES handbook derivations, and master the exam shortcuts.
+          <p style={{ fontSize: '1.15rem', lineHeight: 1.6, color: '#94a3b8', marginBottom: '1.5rem' }}>
+            Explore {problems.length}+ rigorous PE exam practice problems. Adjust parameters in real time across hydraulics, geotechnical soil mechanics, beam shears & moments, rational stormwater detention, and subdivision plat geometry.
           </p>
+
+          {/* Direct Civil Toolbox Launcher Button */}
+          {onGoToolbox && (
+            <div style={{ marginBottom: '1.75rem' }}>
+              <button
+                className="btn-secondary"
+                onClick={onGoToolbox}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(234, 88, 12, 0.25) 100%)',
+                  borderColor: 'var(--accent-amber)',
+                  color: '#ffffff',
+                  padding: '0.65rem 1.25rem',
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  boxShadow: '0 4px 15px rgba(245, 158, 11, 0.2)'
+                }}
+              >
+                <span>🧰</span> Launch Everyday Civil Engineer's Toolbox →
+              </button>
+            </div>
+          )}
 
           {/* Quick Metrics Bar */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.75rem' }}>
             <div>
-              <div className="stat-value text-gradient-cyan" style={{ fontSize: '2rem' }}>82+</div>
+              <div className="stat-value text-gradient-cyan" style={{ fontSize: '2rem' }}>{problems.length}+</div>
               <div className="stat-label">Exam Problems</div>
             </div>
             <div>
-              <div className="stat-value" style={{ fontSize: '2rem', color: 'var(--accent-indigo)' }}>12</div>
+              <div className="stat-value" style={{ fontSize: '2rem', color: 'var(--accent-indigo)' }}>{simulatorTools.length}</div>
               <div className="stat-label">Interactive Simulators</div>
             </div>
             <div>
@@ -188,7 +225,7 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
 
       {/* Bento Grid: Quick Interactive Tools */}
       <section>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
               <span style={{ color: 'var(--accent-cyan)' }}>✦</span>
@@ -196,13 +233,33 @@ const Dashboard = ({ problems, tools, onSelectProblem, onFilterCategory }) => {
                 Interactive Design Labs
               </span>
             </div>
-            <h3 style={{ fontSize: '1.75rem' }}>Parametric Simulation Modules</h3>
+            <h3 style={{ fontSize: '1.75rem' }}>Parametric Simulation Modules ({simulatorTools.length})</h3>
           </div>
-          <span className="text-xs text-muted">Click any module to launch simulation</span>
+
+          {/* Module Filter Chips */}
+          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+            {[
+              { id: 'All', label: 'All Labs' },
+              { id: 'water', label: '🌊 Water & Storm' },
+              { id: 'trans', label: '🛣️ Plats & Curves' },
+              { id: 'soil', label: '🪨 Soil & Geotech' },
+              { id: 'struct', label: '🏗️ Structural' },
+              { id: 'pm', label: '📊 Planning' }
+            ].map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setToolFilter(f.id)}
+                className={`category-chip ${toolFilter === f.id ? 'active' : ''}`}
+                style={{ fontSize: '0.75rem', padding: '0.3rem 0.65rem' }}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="bento-grid">
-          {simulatorTools.map((tool) => (
+          {filteredTools.map((tool) => (
             <div 
               key={tool.id} 
               className="bento-card bento-col-3"

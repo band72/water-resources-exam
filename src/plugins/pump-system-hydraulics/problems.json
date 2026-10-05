@@ -1,0 +1,47 @@
+[
+  {
+    "id": 209,
+    "category": "Hydraulics & Hydrology",
+    "title": "Pump Selection & System Operating Point: TDH, System Curve & NPSH Cavitation Check",
+    "description": "A municipal booster pump station lifts water from a clearwell reservoir (water surface Elev = 210.0 ft) to an elevated distribution storage tank (water surface Elev = 325.0 ft) through 3,200 ft of 12-inch ductile iron pipe (C = 120, D = 1.0 ft).\n\n• Static head: H_stat = 325.0 - 210.0 = 115.0 ft\n• Equivalent minor loss coefficient: ΣK = 18.0 (valves, bends, entrance, exit)\n• Using the Hazen-Williams head loss equation for 12-inch pipe:\n  h_f = [ 10.44 · L / (C^1.852 · D^4.87) ] · Q^1.852 ≈ 0.000185 · Q^1.852 (Q in gpm)\n  Or in system curve form: H_sys(Q) = 115.0 + 0.000128 · Q^2\n\nThe candidate centrifugal pump has the head-capacity curve:\nH_pump(Q) = 180.0 - 0.000035 · Q²  (Q in gpm, H in ft)\nAt the operating duty point, the pump operates at an efficiency η = 78%.\n\nAtmospheric pressure is 14.7 psia (33.9 ft water), water vapor pressure at 68°F is 0.34 psia (0.78 ft water), the suction water surface is 8.0 ft below the pump centerline (suction lift z_s = -8.0 ft), suction friction loss h_fs = 2.5 ft, and the manufacturer's required NPSH is NPSH_R = 14.0 ft.\n\nDetermine:\n1. The operating discharge Q_op (gpm) and operating total dynamic head H_op (ft)\n2. The Brake Horsepower (BHP) required by the pump motor: BHP = (Q · H) / (3960 · η)\n3. The Net Positive Suction Head Available (NPSHA = P_atm/γ - z_s - h_fs - P_vap/γ) and verify cavitation safety (NPSHA > NPSHR)\n\nThe operating point (Q_op, H_op) and required BHP are most nearly:",
+    "implemented": true,
+    "component": "PumpSystemVisualizer",
+    "hStat": 115.0,
+    "hShutoff": 180.0,
+    "pipeLength": 3200,
+    "pipeDiamIn": 12,
+    "hazenC": 120,
+    "efficiency": 0.78,
+    "suctionLift": 8.0,
+    "npshR": 14.0,
+    "options": [
+      {
+        "label": "A",
+        "text": "Q = 550 gpm, H = 168 ft, BHP = 30.2 HP",
+        "correct": false,
+        "feedback": "Incorrect. Check your curve intersection: 180 - 0.000035·Q² = 115 + 0.000128·Q² → 65 = 0.000163·Q² → Q = 631 gpm."
+      },
+      {
+        "label": "B",
+        "text": "Q = 631 gpm, H = 166.1 ft, BHP = 33.9 HP",
+        "correct": true,
+        "feedback": "Correct! H_pump = H_sys → 180 - 0.000035·Q² = 115 + 0.000128·Q² → 0.000163·Q² = 65 → Q_op = √(65 / 0.000163) = 631.5 gpm ≈ 631 gpm. Operating Head H_op = 180 - 0.000035·(631.5)² = 166.1 ft. BHP = (631.5 · 166.1) / (3960 · 0.78) = 104,892 / 3,088.8 = 33.96 HP ≈ 34.0 HP. NPSHA = 33.9 - 8.0 - 2.5 - 0.78 = 22.62 ft > 14.0 ft (NPSHR) → Safe from cavitation!"
+      },
+      {
+        "label": "C",
+        "text": "Q = 750 gpm, H = 145.0 ft, BHP = 42.5 HP",
+        "correct": false,
+        "feedback": "Incorrect. At 750 gpm, H_sys = 115 + 0.000128(750)² = 187 ft, which exceeds pump capacity (160 ft)."
+      },
+      {
+        "label": "D",
+        "text": "Q = 631 gpm, H = 166.1 ft, BHP = 26.5 HP",
+        "correct": false,
+        "feedback": "Incorrect. 26.5 HP is the Water Horsepower (WHP); you must divide by efficiency η = 0.78 to obtain Brake Horsepower (BHP)."
+      }
+    ],
+    "hint": "Equate H_pump = H_sys: 180 - 0.000035·Q² = 115 + 0.000128·Q². Solve for Q: Q = √( (180 - 115) / (0.000035 + 0.000128) ) = √(65 / 0.000163) = 631.5 gpm. H_op = 166.1 ft. Water Horsepower WHP = Q · H / 3960 = 26.49 HP. BHP = WHP / 0.78 = 33.96 HP. NPSHA = 33.9 - 8.0 - 2.5 - 0.78 = 22.6 ft.",
+    "shortcut": "Remember the PE pump power formula: BHP = (gpm · TDH_ft) / (3960 · η). WHP = (631 · 166) / 3960 = 26.5 HP. Motor BHP = 26.5 / 0.78 = 34.0 HP. NPSHA = P_atm - suction lift - losses - P_vap = 33.9 - 8 - 2.5 - 0.8 = 22.6 ft (> 14 ft → No cavitation).",
+    "fifthGrader": "A water pump is like a heart pumping blood up a hill. The taller the hill (static lift) and the longer the pipe (friction), the harder it has to push. Where the pump's pushing power exactly matches the pipe's resistance is the operating sweet spot! We also make sure the pump doesn't choke or get noisy bubbles (cavitation) by giving it enough water pressure at the entrance."
+  }
+]
