@@ -157,6 +157,8 @@ const APPLICATIONS = [
 const FILTERS = [
   { id: 'all', label: 'All 118 Elements' },
   { id: 'radioactive', label: 'No Stable Isotopes ☢' },
+  { id: 'alpha', label: 'Alpha (α) Emitters' },
+  { id: 'beta', label: 'Beta (β⁻ / β⁺) Emitters' },
   { id: 'fuel', label: 'Reactor Fuels & Fission Products' },
   { id: 'drinking-water', label: 'Drinking-Water Radionuclides' },
   { id: 'resonance', label: 'Resonance Data' }
@@ -166,6 +168,10 @@ const WATER_SET = new Set([1, 38, 53, 55, 86, 88, 92]);
 const RES_SET = new Set(RESONANCES.map(r => r.z));
 
 const TREND_LABELS = {
+  decay_q: { name: 'Primary Decay Energy Q', unit: 'MeV', desc: 'Total nuclear mass energy released during radioactive decay (Q = Δm · c²). High Q-values drive higher particle kinetic energies and ionizing radiation power.' },
+  max_decay_q: { name: 'Max Decay Energy Q', unit: 'MeV', desc: 'Highest ground-state decay energy Q across all isotopes of this element, peaking far from the valley of beta stability.' },
+  isotopes: { name: 'Total Known Isotopes', unit: 'iso', desc: 'Number of ground-state nuclides identified for this element in ENSDF / IAEA LiveChart (~3,200+ total).' },
+  stable_iso: { name: 'Stable Isotopes Count', unit: 'stable', desc: 'Count of non-radioactive stable nuclides. Demonstrates nuclear magic proton numbers (Z=20 Ca has 6, Z=28 Ni has 5, Z=50 Sn has 10, Z=82 Pb has 4).' },
   radius: { name: 'Atomic Radius (empirical)', unit: 'pm', desc: 'Shrinks across a period (more nuclear charge pulls electrons in) and grows down a group (an extra electron shell).' },
   ie: { name: 'First Ionization Energy', unit: 'kJ/mol', desc: 'Energy needed to remove the outermost electron. Peaks at the noble gases, lowest at the alkali metals.' },
   en: { name: 'Electronegativity (Pauling)', unit: '', desc: 'How strongly an atom pulls bonding electrons. Highest at fluorine (3.98), lowest at cesium and francium.' },
@@ -208,17 +214,106 @@ const primaryMode = (modes) => {
   return best;
 };
 
+// Return the primary decay Q in keV
+const getNuclidePrimaryQ = (n) => {
+  if (!n || n[1] === 'Stable') return null;
+  const pm = primaryMode(n[3]);
+  const mode = pm?.[0];
+  if (mode === 'A' || mode === 'B-A') return n[5] ?? n[6] ?? n[7];
+  if (mode === 'B-' || mode === 'B-N' || mode === 'B-2N' || mode === '2B-') return n[6] ?? n[7] ?? n[5];
+  if (mode && (mode.includes('EC') || mode.includes('B+'))) return n[7] ?? n[6] ?? n[5];
+  return n[5] ?? n[6] ?? n[7];
+};
+
+const fmtQMeV = (qKeV, d = 3) => {
+  if (qKeV == null || Number.isNaN(qKeV)) return '—';
+  return `${(qKeV / 1000).toFixed(d)} MeV`;
+};
+
+// Detailed nuclear kinematics breakdown
+const getKinematics = (n) => {
+  if (!n || n[1] === 'Stable') return null;
+  const A = n[0];
+  const pm = primaryMode(n[3]);
+  const mode = pm?.[0] || '';
+  const qKeV = getNuclidePrimaryQ(n);
+  const qMeV = qKeV != null ? qKeV / 1000 : null;
+  const qJoules = qMeV != null ? qMeV * 1.602176634e-13 : null;
+  const deltaMassU = qMeV != null ? qMeV / 931.494095 : null;
+  const deltaMassKg = deltaMassU != null ? deltaMassU * 1.6605390666e-27 : null;
+
+  let alphaKineticMeV = null;
+  let recoilKineticMeV = null;
+  const isAlpha = (mode === 'A' || mode.includes('A')) && qMeV != null && A > 4;
+  if (isAlpha) {
+    alphaKineticMeV = qMeV * ((A - 4) / A);
+    recoilKineticMeV = qMeV * (4 / A);
+  }
+
+  let betaMaxMeV = null;
+  let betaAvgMeV = null;
+  let neutrinoAvgMeV = null;
+  const isBetaMinus = mode.includes('B-') && qMeV != null;
+  if (isBetaMinus) {
+    betaMaxMeV = qMeV;
+    betaAvgMeV = qMeV / 3;
+    neutrinoAvgMeV = (qMeV * 2) / 3;
+  }
+
+  let positronMaxMeV = null;
+  const isBetaPlus = (mode.includes('B+') || mode.includes('EC')) && qMeV != null;
+  if (isBetaPlus) {
+    if (qMeV > 1.022) {
+      positronMaxMeV = qMeV - 1.022;
+    }
+  }
+
+  return {
+    mode,
+    pm,
+    qKeV,
+    qMeV,
+    qJoules,
+    deltaM_u: deltaMassU,
+    deltaM_kg: deltaMassKg,
+    deltaMassU,
+    deltaMassKg,
+    isAlpha,
+    alphaKinematics: isAlpha ? {
+      eAlphaMeV: alphaKineticMeV,
+      alphaPct: ((A - 4) / A) * 100,
+      eRecoilKeV: recoilKineticMeV * 1000,
+      recoilPct: (4 / A) * 100
+    } : null,
+    isBetaMinus,
+    betaMinusKinematics: isBetaMinus ? {
+      eEndpointMeV: betaMaxMeV,
+      eAvgBetaMeV: betaAvgMeV,
+      eAvgNuMeV: neutrinoAvgMeV
+    } : null,
+    isBetaPlus,
+    betaPlusKinematics: isBetaPlus ? {
+      eBetaPlusMaxMeV: positronMaxMeV
+    } : null,
+    allQ: { qAlpha: n[5], qBeta: n[6], qEc: n[7] }
+  };
+};
+
 const sym = (z, A) => `${A ?? ''}${BY_Z[z]?.symbol ?? `Z${z}`}`;
 
 // ---------- component ----------
 const PeriodicNuclearStudio = () => {
   const [nuclides, setNuclides] = useState(null);
   const [loadError, setLoadError] = useState(null);
+  const [viewMode, setViewMode] = useState('nuclear'); // 'nuclear' | 'chemical'
   const [selZ, setSelZ] = useState(92);
   const [selA, setSelA] = useState(238);
   const [filter, setFilter] = useState('all');
-  const [trendMetric, setTrendMetric] = useState('radius');
+  const [trendMetric, setTrendMetric] = useState('decay_q');
   const [showAllIsotopes, setShowAllIsotopes] = useState(false);
+  const [isoSearch, setIsoSearch] = useState('');
+  const [isoFilter, setIsoFilter] = useState('all'); // 'all' | 'stable' | 'radioactive' | 'alpha' | 'beta'
+  const [isoSort, setIsoSort] = useState('default'); // 'default' | 'A' | 'halfLife' | 'q' | 'abund'
   const [elapsedHalfLives, setElapsedHalfLives] = useState(1);
   const [resCat, setResCat] = useState('all');
   const [selRes, setSelRes] = useState(null);
@@ -240,14 +335,69 @@ const PeriodicNuclearStudio = () => {
     return map;
   }, [nuclides]);
 
+  // Per-element nuclear statistics computed once nuclides is loaded
+  const elementNuclearStats = useMemo(() => {
+    const stats = new Map();
+    if (!nuclides) return stats;
+    ELEMENTS.forEach(e => {
+      const list = nuclides[e.z] || [];
+      const total = list.length;
+      const stable = list.filter(n => n[1] === 'Stable');
+      const radio = list.filter(n => n[1] !== 'Stable');
+      const stableCount = stable.length;
+      const isRadioactive = stableCount === 0;
+
+      let primaryRadio = null;
+      if (radio.length > 0) {
+        primaryRadio = radio.slice().sort((a, b) => (b[2] ?? 0) - (a[2] ?? 0))[0];
+      }
+      const primaryQKeV = primaryRadio ? getNuclidePrimaryQ(primaryRadio) : null;
+      const primaryQMeV = primaryQKeV != null ? +(primaryQKeV / 1000).toFixed(3) : null;
+
+      let maxQKeV = 0;
+      list.forEach(n => {
+        [n[5], n[6], n[7]].forEach(q => {
+          if (q != null && q > maxQKeV) maxQKeV = q;
+        });
+      });
+      const maxQMeV = maxQKeV > 0 ? +(maxQKeV / 1000).toFixed(3) : null;
+
+      const hasAlpha = list.some(n => {
+        const pm = primaryMode(n[3]);
+        return pm && (pm[0] === 'A' || pm[0] === 'B-A');
+      });
+      const hasBeta = list.some(n => {
+        const pm = primaryMode(n[3]);
+        return pm && (pm[0].includes('B-') || pm[0].includes('B+') || pm[0].includes('EC'));
+      });
+
+      stats.set(e.z, {
+        total,
+        stableCount,
+        isRadioactive,
+        primaryRadio,
+        primaryQKeV,
+        primaryQMeV,
+        maxQKeV,
+        maxQMeV,
+        hasAlpha,
+        hasBeta
+      });
+    });
+    return stats;
+  }, [nuclides]);
+
   const isRadioactiveEl = (z) => {
     if (!nuclides) return FALLBACK_RADIOACTIVE(z);
     return !(nuclides[z] || []).some(n => n[1] === 'Stable');
   };
 
   const matchesFilter = (z) => {
+    const nStats = elementNuclearStats.get(z);
     switch (filter) {
       case 'radioactive': return isRadioactiveEl(z);
+      case 'alpha': return nStats ? nStats.hasAlpha : z >= 84;
+      case 'beta': return nStats ? nStats.hasBeta : true;
       case 'fuel': return FUEL_SET.has(z);
       case 'drinking-water': return WATER_SET.has(z);
       case 'resonance': return RES_SET.has(z);
@@ -255,6 +405,17 @@ const PeriodicNuclearStudio = () => {
     }
   };
   const shownCount = ELEMENTS.filter(e => matchesFilter(e.z)).length;
+
+  const getElementTrendValue = (e, metric) => {
+    if (metric in e && e[metric] != null) return e[metric];
+    const nStats = elementNuclearStats.get(e.z);
+    if (!nStats) return null;
+    if (metric === 'isotopes') return nStats.total || null;
+    if (metric === 'stable_iso') return nStats.stableCount;
+    if (metric === 'decay_q') return nStats.primaryQMeV;
+    if (metric === 'max_decay_q') return nStats.maxQMeV;
+    return null;
+  };
 
   // Isotopes for selected element: stable (by A), then radioactive by half-life descending
   const isotopes = useMemo(() => {
@@ -266,6 +427,21 @@ const PeriodicNuclearStudio = () => {
       return (b[2] ?? 0) - (a[2] ?? 0);
     });
     return list;
+  }, [nuclides, selZ]);
+
+  // Isotopes sorted by mass number A for the isotope spectrum
+  const isotopesByA = useMemo(() => {
+    return (nuclides?.[selZ] || []).slice().sort((a, b) => a[0] - b[0]);
+  }, [nuclides, selZ]);
+
+  // Max Q value for the selected element's isotopes spectrum
+  const maxQForElement = useMemo(() => {
+    let max = 1;
+    (nuclides?.[selZ] || []).forEach(n => {
+      const q = getNuclidePrimaryQ(n);
+      if (q && q > max) max = q;
+    });
+    return max;
   }, [nuclides, selZ]);
 
   // Default isotope = most abundant stable, else longest-lived
@@ -280,6 +456,7 @@ const PeriodicNuclearStudio = () => {
   const nuc = nucMap.get(`${selZ}-${effA}`) || null;
   const el = BY_Z[selZ];
   const fam = FAMILY_COLORS[el?.family] || FAMILY_COLORS.unknown;
+  const currStats = elementNuclearStats.get(selZ);
 
   const decay = useMemo(() => {
     if (!nuc) return null;
@@ -288,11 +465,16 @@ const PeriodicNuclearStudio = () => {
     const info = pm ? MODE_INFO[pm[0]] : null;
     const hls = nuc[2];
     const lambdaS = hls ? Math.LN2 / hls : null;
-    const qKeV = info?.q ? nuc[info.q] : null;
+    const qKeV = getNuclidePrimaryQ(nuc);
     const specAct = lambdaS ? (lambdaS * N_A) / nuc[0] : null; // Bq/g
     const daughter = info?.d ? { z: selZ + info.d[0], A: nuc[0] + info.d[1] } : null;
     return { stable, pm, info, hls, lambdaS, qKeV, specAct, daughter };
   }, [nuc, selZ]);
+
+  const kinematics = useMemo(() => {
+    if (!nuc) return null;
+    return getKinematics(nuc);
+  }, [nuc]);
 
   // Follow primary decay mode to build a chain
   const chain = useMemo(() => {
@@ -326,7 +508,53 @@ const PeriodicNuclearStudio = () => {
 
   const notes = nuc ? NUCLIDE_NOTES[`${selZ}-${nuc[0]}`] : null;
   const isoResonances = nuc ? RESONANCES.filter(r => r.z === selZ && r.A === nuc[0]) : [];
-  const visibleIsotopes = showAllIsotopes ? isotopes : isotopes.slice(0, 12);
+
+  // Filtered & sorted isotopes for the inspector table
+  const filteredIsotopes = useMemo(() => {
+    let list = isotopes.slice();
+    if (isoSearch.trim()) {
+      const q = isoSearch.trim().toLowerCase();
+      list = list.filter(n => {
+        const text = `${el?.symbol}-${n[0]} ${n[0]} ${n[1]} ${(n[3] || []).map(m => m[0]).join(' ')}`.toLowerCase();
+        return text.includes(q);
+      });
+    }
+    if (isoFilter === 'stable') {
+      list = list.filter(n => n[1] === 'Stable');
+    } else if (isoFilter === 'radioactive') {
+      list = list.filter(n => n[1] !== 'Stable');
+    } else if (isoFilter === 'alpha') {
+      list = list.filter(n => {
+        const pm = primaryMode(n[3]);
+        return pm && (pm[0] === 'A' || pm[0] === 'B-A');
+      });
+    } else if (isoFilter === 'beta') {
+      list = list.filter(n => {
+        const pm = primaryMode(n[3]);
+        return pm && (pm[0].includes('B-') || pm[0].includes('B+') || pm[0].includes('EC'));
+      });
+    }
+    if (isoSort === 'A') {
+      list.sort((a, b) => a[0] - b[0]);
+    } else if (isoSort === 'halfLife') {
+      list.sort((a, b) => {
+        const sa = a[1] === 'Stable', sb = b[1] === 'Stable';
+        if (sa !== sb) return sa ? -1 : 1;
+        return (b[2] ?? 0) - (a[2] ?? 0);
+      });
+    } else if (isoSort === 'q') {
+      list.sort((a, b) => {
+        const qa = getNuclidePrimaryQ(a) ?? -1;
+        const qb = getNuclidePrimaryQ(b) ?? -1;
+        return qb - qa;
+      });
+    } else if (isoSort === 'abund') {
+      list.sort((a, b) => (b[4] ?? 0) - (a[4] ?? 0));
+    }
+    return list;
+  }, [isotopes, isoSearch, isoFilter, isoSort, el?.symbol]);
+
+  const visibleIsotopes = showAllIsotopes ? filteredIsotopes : filteredIsotopes.slice(0, 12);
 
   // ---------------- styles ----------------
   const card = { background: 'rgba(0, 0, 0, 0.3)', borderRadius: '14px', border: '1px solid var(--border-color)', padding: '1.25rem' };
@@ -334,7 +562,8 @@ const PeriodicNuclearStudio = () => {
     padding: '0.25rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', cursor: 'pointer',
     border: active ? `1px solid ${color}` : '1px solid rgba(255,255,255,0.1)',
     background: active ? `${color}33` : 'rgba(0,0,0,0.2)',
-    color: active ? color : 'var(--text-main)', fontWeight: active ? 700 : 500
+    color: active ? color : 'var(--text-main)', fontWeight: active ? 700 : 500,
+    transition: 'all 0.15s ease'
   });
   const kpi = { background: 'rgba(0,0,0,0.3)', padding: '0.6rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' };
 
@@ -357,28 +586,74 @@ const PeriodicNuclearStudio = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {/* Controls */}
+      {/* Controls Bar */}
       <div style={{ ...card, padding: '0.75rem 1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-          <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Filter:</span>
-          {FILTERS.map(f => (
-            <button key={f.id} id={`pt-filter-${f.id}`} style={chip(filter === f.id, '#a855f7')} onClick={() => setFilter(f.id)}>
-              {f.label}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          {/* View Mode Toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.4)', borderRadius: '8px', padding: '2px', border: '1px solid rgba(255,255,255,0.1)' }}>
+            <button
+              id="pt-mode-nuclear"
+              onClick={() => {
+                setViewMode('nuclear');
+                if (!['isotopes', 'stable_iso', 'decay_q', 'max_decay_q'].includes(trendMetric)) setTrendMetric('decay_q');
+              }}
+              style={{
+                ...chip(viewMode === 'nuclear', 'var(--accent-cyan)'),
+                borderRadius: '6px', border: 'none', padding: '0.3rem 0.7rem'
+              }}
+            >
+              ⚛️ Nuclear &amp; Decay Q View
             </button>
-          ))}
-          <span className="text-xs text-muted" style={{ marginLeft: '0.35rem' }}>
-            Showing <strong style={{ color: 'var(--accent-purple)' }}>{shownCount}</strong> of 118
-          </span>
+            <button
+              id="pt-mode-chemical"
+              onClick={() => {
+                setViewMode('chemical');
+                if (['isotopes', 'stable_iso', 'decay_q', 'max_decay_q'].includes(trendMetric)) setTrendMetric('radius');
+              }}
+              style={{
+                ...chip(viewMode === 'chemical', '#38bdf8'),
+                borderRadius: '6px', border: 'none', padding: '0.3rem 0.7rem'
+              }}
+            >
+              🧪 Chemical Trends View
+            </button>
+          </div>
+
+          {/* Filters */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
+            <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Filter:</span>
+            {FILTERS.map(f => (
+              <button key={f.id} id={`pt-filter-${f.id}`} style={chip(filter === f.id, '#a855f7')} onClick={() => setFilter(f.id)}>
+                {f.label}
+              </button>
+            ))}
+            <span className="text-xs text-muted" style={{ marginLeft: '0.35rem' }}>
+              Showing <strong style={{ color: 'var(--accent-purple)' }}>{shownCount}</strong> of 118
+            </span>
+          </div>
         </div>
+
+        {/* Tile Value / Trend Dropdown */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Tile value / trend:</span>
+          <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Tile metric / graph:</span>
           <select
             id="pt-trend-select"
             value={trendMetric}
             onChange={(e) => setTrendMetric(e.target.value)}
             style={{ background: 'rgba(0,0,0,0.4)', color: 'var(--text-main)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '6px', padding: '0.25rem 0.5rem', fontSize: '0.75rem' }}
           >
-            {Object.entries(TREND_LABELS).map(([k, v]) => <option key={k} value={k}>{v.name}</option>)}
+            <optgroup label="Nuclear &amp; Decay Energetics">
+              <option value="decay_q">Primary Decay Energy Q (MeV)</option>
+              <option value="max_decay_q">Max Decay Energy Q (MeV)</option>
+              <option value="isotopes">Total Known Isotopes (count)</option>
+              <option value="stable_iso">Stable Isotopes (count)</option>
+            </optgroup>
+            <optgroup label="Chemical &amp; Periodic Trends">
+              <option value="radius">Atomic Radius (empirical, pm)</option>
+              <option value="ie">First Ionization Energy (kJ/mol)</option>
+              <option value="en">Electronegativity (Pauling)</option>
+              <option value="ea">Electron Affinity (kJ/mol)</option>
+            </optgroup>
           </select>
         </div>
       </div>
@@ -387,23 +662,28 @@ const PeriodicNuclearStudio = () => {
       <div style={{ ...card, background: 'radial-gradient(ellipse at center, rgba(12,25,45,0.8) 0%, rgba(7,12,22,0.95) 100%)', overflowX: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <strong style={{ fontSize: '0.9rem', color: 'var(--accent-purple)' }}>Periodic Table of the Elements</strong>
+            <strong style={{ fontSize: '0.9rem', color: 'var(--accent-purple)' }}>
+              Periodic Table of the Elements &amp; Nuclear Isotopes
+            </strong>
             <span className="glass-badge" style={{ fontSize: '0.65rem', background: 'rgba(56, 189, 248, 0.15)', color: 'var(--accent-cyan)', borderColor: 'rgba(56, 189, 248, 0.3)' }}>
-              Top Row: Common Ionic Charges
+              Top Row: Oxidation Numbers / Ionic Charges
+            </span>
+            <span className="glass-badge" style={{ fontSize: '0.65rem', background: 'rgba(16, 185, 129, 0.15)', color: 'var(--accent-emerald)', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
+              {viewMode === 'nuclear' ? 'Mode: Nuclear Isotopes & Decay Q' : 'Mode: Chemical Trends'}
             </span>
           </div>
           <span className="text-xs text-muted">
-            Click any element to see its isotopes and radioactive decay. Column headers show characteristic oxidation numbers / ionic charges. {nuclides ? '' : 'Loading nuclide data…'}
+            Click any element to inspect all its isotopes, decay energies Q, decay chains, and neutron resonances. {nuclides ? '3,200+ IAEA ground-state nuclides loaded.' : 'Loading nuclide data…'}
             {loadError && <span style={{ color: 'var(--accent-rose)' }}> Failed to load nuclide data: {loadError}</span>}
           </span>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(18, minmax(38px, 1fr))',
-          gridTemplateRows: '34px repeat(7, 48px) 14px repeat(2, 48px)',
+          gridTemplateColumns: 'repeat(18, minmax(40px, 1fr))',
+          gridTemplateRows: '34px repeat(7, 52px) 14px repeat(2, 52px)',
           gap: '3px',
-          minWidth: '760px'
+          minWidth: '780px'
         }}>
           {/* Column Charges Header (Row 1) */}
           {COLUMN_CHARGES.map((c) => (
@@ -435,43 +715,103 @@ const PeriodicNuclearStudio = () => {
             </div>
           ))}
 
-          {/* f-block placeholders */}
-          {[{ row: 6, label: '57–71', f: 'lanthanide' }, { row: 7, label: '89–103', f: 'actinide' }].map(p => (
-            <div key={p.row} style={{
+          {/* f-block placeholders in main table */}
+          {[{ row: 6, label: '* 57–71', f: 'lanthanide', title: 'Lanthanides Series (Elements 57–71)' }, { row: 7, label: '** 89–103', f: 'actinide', title: 'Actinides Series (Elements 89–103)' }].map(p => (
+            <div key={p.row} title={p.title} style={{
               gridColumn: 3, gridRow: p.row + 1, borderRadius: '6px', border: `1px dashed ${FAMILY_COLORS[p.f].border}`,
-              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: FAMILY_COLORS[p.f].text
+              display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.62rem', fontWeight: 700, color: FAMILY_COLORS[p.f].text,
+              background: FAMILY_COLORS[p.f].bg, userSelect: 'none'
             }}>{p.label}</div>
           ))}
+
+          {/* f-block series row labels on the left (Columns 1-2) */}
+          <div style={{
+            gridColumn: '1 / span 2', gridRow: 10,
+            display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+            paddingRight: '6px', fontSize: '0.66rem', fontWeight: 700,
+            color: FAMILY_COLORS.lanthanide.text, userSelect: 'none', letterSpacing: '0.02em'
+          }}>
+            * Lanthanides
+          </div>
+          <div style={{
+            gridColumn: '1 / span 2', gridRow: 11,
+            display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+            paddingRight: '6px', fontSize: '0.66rem', fontWeight: 700,
+            color: FAMILY_COLORS.actinide.text, userSelect: 'none', letterSpacing: '0.02em'
+          }}>
+            ** Actinides
+          </div>
 
           {ELEMENTS.map(e => {
             const f = FAMILY_COLORS[e.family] || FAMILY_COLORS.unknown;
             const isSel = e.z === selZ;
             const on = matchesFilter(e.z);
-            const val = e[trendMetric];
+            const val = getElementTrendValue(e, trendMetric);
             const radioactive = isRadioactiveEl(e.z);
+            const nStats = elementNuclearStats.get(e.z);
+
+            // Construct rich descriptive title for hover tooltip
+            const titleTip = nuclides && nStats
+              ? `${e.name} (${e.symbol}) — Z=${e.z}, Mass=${e.mass} u\n` +
+                `• Known Ground States: ${nStats.total} isotopes\n` +
+                `• Stable Isotopes: ${nStats.stableCount} (${nStats.isRadioactive ? 'Completely radioactive' : 'Has stable isotope(s)'})\n` +
+                (nStats.primaryRadio ? `• Primary Radioisotope: ${e.symbol}-${nStats.primaryRadio[0]} (t½ = ${nStats.primaryRadio[1]})\n` : '') +
+                (nStats.primaryQMeV != null ? `• Primary Decay Q: ${nStats.primaryQMeV} MeV (${fmtSig(nStats.primaryQKeV)} keV)\n` : '') +
+                (nStats.maxQMeV != null ? `• Max Decay Q: ${nStats.maxQMeV} MeV\n` : '') +
+                `• ${TREND_LABELS[trendMetric]?.name}: ${val ?? 'n/a'} ${TREND_LABELS[trendMetric]?.unit ?? ''}`
+              : `${e.name} (Z=${e.z}) — ${TREND_LABELS[trendMetric]?.name}: ${val ?? 'n/a'} ${TREND_LABELS[trendMetric]?.unit ?? ''}`;
+
             return (
               <button
                 key={e.z}
                 id={`pt-el-${e.symbol}`}
                 onClick={() => selectElement(e.z)}
-                title={`${e.name} (Z=${e.z}) — ${TREND_LABELS[trendMetric].name}: ${val ?? 'n/a'} ${TREND_LABELS[trendMetric].unit}`}
+                title={titleTip}
                 style={{
                   gridColumn: e.x, gridRow: e.y + 1,
-                  borderRadius: '6px', padding: '2px 3px', cursor: 'pointer', position: 'relative',
+                  borderRadius: '6px', padding: '2px 2px', cursor: 'pointer', position: 'relative',
+                  minWidth: 0, width: '100%', boxSizing: 'border-box', overflow: 'hidden',
                   background: isSel ? 'var(--accent-purple)' : f.bg,
                   border: isSel ? '2px solid #fff' : `1px solid ${f.border}`,
                   opacity: hoverFam ? (e.family === hoverFam || (hoverFam === 'unknown' && !FAMILY_COLORS[e.family]) ? 1 : 0.12) : (on ? 1 : 0.15),
-                  boxShadow: hoverFam && e.family === hoverFam ? `0 0 10px ${f.border}` : 'none',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  color: '#fff', transition: 'transform 0.12s ease, opacity 0.15s ease', lineHeight: 1.05
+                  boxShadow: hoverFam && e.family === hoverFam ? `0 0 10px ${f.border}` : (isSel ? '0 0 12px rgba(168,85,247,0.7)' : 'none'),
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between',
+                  color: '#fff', transition: 'transform 0.12s ease, opacity 0.15s ease, box-shadow 0.15s ease', lineHeight: 1.05
                 }}
-                onMouseEnter={(ev) => { ev.currentTarget.style.transform = 'scale(1.12)'; ev.currentTarget.style.zIndex = 2; }}
+                onMouseEnter={(ev) => { ev.currentTarget.style.transform = 'scale(1.15)'; ev.currentTarget.style.zIndex = 3; }}
                 onMouseLeave={(ev) => { ev.currentTarget.style.transform = 'scale(1)'; ev.currentTarget.style.zIndex = 0; }}
               >
-                <span style={{ fontSize: '0.55rem', alignSelf: 'flex-start', color: isSel ? '#070a12' : 'var(--text-dim)' }}>{e.z}</span>
-                <strong style={{ fontSize: '0.85rem', color: isSel ? '#070a12' : '#fff' }}>{e.symbol}</strong>
-                <span style={{ fontSize: '0.5rem', color: isSel ? '#070a12' : f.text }}>{val ?? '—'}</span>
-                {radioactive && <span style={{ position: 'absolute', top: 0, right: 2, fontSize: '0.55rem', color: '#fde047' }}>☢</span>}
+                {/* Top: Z & Radioactive / Stability status */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', padding: '0 1px' }}>
+                  <span style={{ fontSize: '0.55rem', color: isSel ? '#070a12' : 'var(--text-dim)', fontWeight: 600 }}>{e.z}</span>
+                  {radioactive ? (
+                    <span style={{ fontSize: '0.55rem', color: isSel ? '#070a12' : '#fde047', fontWeight: 700 }} title="All isotopes are radioactive">☢</span>
+                  ) : (
+                    <span style={{ fontSize: '0.48rem', color: isSel ? '#070a12' : '#34d399', fontWeight: 700 }} title={`${nStats?.stableCount ?? ''} stable isotopes`}>
+                      ✓{nStats?.stableCount ?? ''}
+                    </span>
+                  )}
+                </div>
+
+                {/* Center: Symbol */}
+                <strong style={{ fontSize: '0.86rem', color: isSel ? '#070a12' : '#fff', fontWeight: 800 }}>{e.symbol}</strong>
+
+                {/* Bottom: Nuclear or Chemical Value */}
+                {viewMode === 'nuclear' ? (
+                  ['isotopes', 'stable_iso', 'decay_q', 'max_decay_q'].includes(trendMetric) ? (
+                    <span style={{ fontSize: '0.48rem', color: isSel ? '#070a12' : f.text, whiteSpace: 'nowrap' }}>
+                      {val != null ? `${val}${trendMetric === 'decay_q' || trendMetric === 'max_decay_q' ? 'M' : ''}` : '—'}
+                    </span>
+                  ) : (
+                    <span style={{ fontSize: '0.45rem', color: isSel ? '#070a12' : (radioactive ? '#fde047' : 'var(--accent-cyan)'), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>
+                      {nStats ? `${nStats.total}i` : ''}·{radioactive ? (nStats?.primaryQMeV != null ? `${nStats.primaryQMeV}M` : '☢') : (nStats?.primaryQMeV != null ? `${nStats.primaryQMeV}M` : 'St')}
+                    </span>
+                  )
+                ) : (
+                  <span style={{ fontSize: '0.5rem', color: isSel ? '#070a12' : f.text, whiteSpace: 'nowrap' }}>
+                    {val ?? '—'}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -531,7 +871,7 @@ const PeriodicNuclearStudio = () => {
       </div>
 
       {/* Inspector: element + isotopes | decay */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.25rem', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '1.25rem', alignItems: 'start' }}>
         {/* Element & isotope list */}
         <div style={{ ...card, border: `1px solid ${fam.border}66` }}>
           <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center', marginBottom: '0.85rem' }}>
@@ -539,16 +879,23 @@ const PeriodicNuclearStudio = () => {
               <span style={{ fontSize: '0.6rem', color: 'var(--text-dim)' }}>{el?.z}</span>
               <strong style={{ fontSize: '1.5rem' }}>{el?.symbol}</strong>
             </div>
-            <div>
-              <strong style={{ fontSize: '1.15rem' }}>{el?.name}</strong>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.3rem' }}>
+                <strong style={{ fontSize: '1.15rem' }}>{el?.name}</strong>
+                {currStats && (
+                  <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.45rem', borderRadius: 4, background: 'rgba(56,189,248,0.15)', color: '#38bdf8', border: '1px solid rgba(56,189,248,0.3)', fontFamily: 'var(--font-mono)' }}>
+                    {currStats.total} known isotopes ({currStats.stableCount} stable)
+                  </span>
+                )}
+              </div>
               <div className="text-xs text-muted">{fam.name} · Period {el?.period} · Atomic mass {el?.mass}</div>
               <div className="text-xs" style={{ marginTop: '0.2rem', color: isRadioactiveEl(selZ) ? '#fde047' : 'var(--accent-emerald)' }}>
-                {isRadioactiveEl(selZ) ? '☢ No stable isotopes — every isotope is radioactive' : '✓ Has stable isotope(s)'}
+                {isRadioactiveEl(selZ) ? '☢ No stable isotopes — all known isotopes are radioactive' : '✓ Naturally stable element (has non-radioactive isotopes)'}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem', marginBottom: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem', marginBottom: '0.85rem' }}>
             {[
               ['Radius', el?.radius, 'pm'], ['1st IE', el?.ie, 'kJ/mol'], ['EN', el?.en, ''], ['EA', el?.ea, 'kJ/mol']
             ].map(([k, v, u]) => (
@@ -559,49 +906,202 @@ const PeriodicNuclearStudio = () => {
             ))}
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-            <strong style={{ fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>Isotopes ({isotopes.length} known ground states)</strong>
-            <span className="text-xs text-muted">Click a row to see its decay</span>
+          {/* Isotope Mass & Decay Energy Spectrum Track */}
+          {isotopesByA.length > 0 && (
+            <div style={{ background: 'rgba(0,0,0,0.35)', borderRadius: 8, padding: '0.6rem', marginBottom: '0.85rem', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem', fontSize: '0.72rem' }}>
+                <strong style={{ color: 'var(--accent-cyan)' }}>
+                  Isotope Mass &amp; Decay Q-Spectrum ({isotopesByA[0][0]} – {isotopesByA[isotopesByA.length - 1][0]})
+                </strong>
+                <span className="text-muted" style={{ fontSize: '0.68rem' }}>
+                  Bar height = Q-value (MeV) · Green = Stable
+                </span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 2, height: 48, background: 'rgba(255,255,255,0.02)', padding: '2px 4px', borderRadius: 4, overflowX: 'auto' }}>
+                {isotopesByA.map(n => {
+                  const isCur = n[0] === effA;
+                  const isSt = n[1] === 'Stable';
+                  const qKeV = getNuclidePrimaryQ(n);
+                  const hPct = isSt ? 30 : Math.max(15, Math.min(100, (qKeV / maxQForElement) * 100));
+                  const pm = primaryMode(n[3]);
+                  const barColor = isCur
+                    ? 'var(--accent-purple)'
+                    : isSt
+                    ? 'var(--accent-emerald)'
+                    : pm?.[0] === 'A'
+                    ? 'var(--accent-rose)'
+                    : pm?.[0]?.includes('B-')
+                    ? '#38bdf8'
+                    : '#fb923c';
+
+                  return (
+                    <div
+                      key={n[0]}
+                      onClick={() => selectNuclide(selZ, n[0])}
+                      title={`${el?.symbol}-${n[0]} (${isSt ? 'Stable' : fmtTime(n[2])})\nDecay Q: ${fmtQMeV(qKeV)}\nMode: ${pm ? pm[0] : 'None'}`}
+                      style={{
+                        flex: '1 0 7px',
+                        minWidth: 7,
+                        maxWidth: 16,
+                        height: `${hPct}%`,
+                        background: barColor,
+                        borderRadius: '2px 2px 0 0',
+                        cursor: 'pointer',
+                        opacity: isCur ? 1 : 0.75,
+                        outline: isCur ? '2px solid #fff' : 'none',
+                        transition: 'all 0.15s ease'
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-dim)', marginTop: 3 }}>
+                <span>A = {isotopesByA[0][0]}</span>
+                <span style={{ color: 'var(--accent-purple)', fontWeight: 600 }}>Selected: {el?.symbol}-{effA}</span>
+                <span>A = {isotopesByA[isotopesByA.length - 1][0]}</span>
+              </div>
+            </div>
+          )}
+
+          {/* Isotope Search, Filter & Sort Controls */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginBottom: '0.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.3rem' }}>
+              <strong style={{ fontSize: '0.85rem', color: 'var(--accent-cyan)' }}>
+                Isotopes Table ({filteredIsotopes.length} of {isotopes.length})
+              </strong>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <span className="text-xs text-muted">Sort:</span>
+                <select
+                  value={isoSort}
+                  onChange={(e) => setIsoSort(e.target.value)}
+                  style={{ background: 'rgba(0,0,0,0.5)', color: 'var(--text-main)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '0.15rem 0.35rem', fontSize: '0.7rem' }}
+                >
+                  <option value="default">Default (Stable first, then t½)</option>
+                  <option value="A">Mass number A (A → Z)</option>
+                  <option value="q">Decay Energy Q (Highest first)</option>
+                  <option value="halfLife">Half-life (Longest first)</option>
+                  <option value="abund">Natural abundance %</option>
+                </select>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <input
+                type="text"
+                placeholder="Search isotope (e.g. 238, stable, alpha)..."
+                value={isoSearch}
+                onChange={(e) => setIsoSearch(e.target.value)}
+                style={{
+                  flex: '1 1 140px',
+                  background: 'rgba(0,0,0,0.3)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: 6,
+                  padding: '0.25rem 0.5rem',
+                  fontSize: '0.72rem',
+                  color: 'var(--text-main)'
+                }}
+              />
+              <div style={{ display: 'flex', gap: '0.2rem' }}>
+                {[
+                  ['all', 'All'],
+                  ['stable', 'Stable'],
+                  ['radioactive', '☢ Radio'],
+                  ['alpha', 'α Alpha'],
+                  ['beta', 'β Beta/EC']
+                ].map(([id, label]) => (
+                  <button
+                    key={id}
+                    onClick={() => setIsoFilter(id)}
+                    style={{
+                      ...chip(isoFilter === id, '#a855f7'),
+                      fontSize: '0.68rem',
+                      padding: '0.2rem 0.45rem'
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          <div style={{ maxHeight: '320px', overflowY: 'auto', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
-              <thead style={{ position: 'sticky', top: 0, background: '#0c121e' }}>
+
+          {/* Isotopes table */}
+          <div style={{ maxHeight: '300px', overflowY: 'auto', borderRadius: 8, border: '1px solid rgba(255,255,255,0.06)' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.72rem', fontFamily: 'var(--font-mono)' }}>
+              <thead style={{ position: 'sticky', top: 0, background: '#0c121e', zIndex: 1 }}>
                 <tr style={{ color: 'var(--text-muted)' }}>
                   <th style={{ textAlign: 'left', padding: '0.35rem' }}>Nuclide</th>
                   <th style={{ textAlign: 'right', padding: '0.35rem' }}>Half-life</th>
-                  <th style={{ textAlign: 'left', padding: '0.35rem' }}>Decay</th>
-                  <th style={{ textAlign: 'right', padding: '0.35rem' }}>Abund.</th>
+                  <th style={{ textAlign: 'left', padding: '0.35rem' }}>Decay Mode</th>
+                  <th style={{ textAlign: 'right', padding: '0.35rem', color: '#fde047' }}>Decay Energy Q</th>
+                  <th style={{ textAlign: 'right', padding: '0.35rem' }}>Abund. / Daughter</th>
                 </tr>
               </thead>
               <tbody>
-                {!nuclides && <tr><td colSpan="4" style={{ padding: '0.6rem' }} className="text-muted">Loading…</td></tr>}
+                {!nuclides && <tr><td colSpan="5" style={{ padding: '0.6rem' }} className="text-muted">Loading…</td></tr>}
+                {visibleIsotopes.length === 0 && nuclides && (
+                  <tr><td colSpan="5" style={{ padding: '0.6rem', textAlign: 'center' }} className="text-muted">No isotopes matching current filter/search.</td></tr>
+                )}
                 {visibleIsotopes.map(n => {
                   const active = n[0] === effA;
                   const pm = primaryMode(n[3]);
+                  const qKeV = getNuclidePrimaryQ(n);
+                  const qStr = fmtQMeV(qKeV);
+                  const isSt = n[1] === 'Stable';
+                  const dInfo = pm ? MODE_INFO[pm[0]] : null;
+                  const daughterSym = dInfo?.d ? sym(selZ + dInfo.d[0], n[0] + dInfo.d[1]) : null;
+
                   return (
                     <tr
                       key={n[0]}
                       onClick={() => selectNuclide(selZ, n[0])}
-                      style={{ cursor: 'pointer', background: active ? 'rgba(168,85,247,0.25)' : 'transparent', borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+                      style={{
+                        cursor: 'pointer',
+                        background: active ? 'rgba(168,85,247,0.25)' : 'transparent',
+                        borderBottom: '1px solid rgba(255,255,255,0.04)'
+                      }}
                     >
-                      <td style={{ padding: '0.35rem', fontWeight: 700, color: n[1] === 'Stable' ? 'var(--accent-emerald)' : '#fde047' }}>{el?.symbol}-{n[0]}</td>
-                      <td style={{ padding: '0.35rem', textAlign: 'right' }}>{n[1] === 'Stable' ? 'Stable' : fmtTime(n[2])}</td>
-                      <td style={{ padding: '0.35rem' }}>{pm ? `${pm[0]}${pm[1] != null ? ` ${fmtSig(pm[1])}%` : ''}` : '—'}</td>
-                      <td style={{ padding: '0.35rem', textAlign: 'right' }}>{n[4] != null ? `${n[4]}%` : ''}</td>
+                      <td style={{ padding: '0.32rem', fontWeight: 700, color: isSt ? 'var(--accent-emerald)' : '#fde047' }}>
+                        {el?.symbol}-{n[0]}
+                      </td>
+                      <td style={{ padding: '0.32rem', textAlign: 'right' }}>
+                        {isSt ? 'Stable' : fmtTime(n[2])}
+                      </td>
+                      <td style={{ padding: '0.32rem' }}>
+                        {pm ? (
+                          <span style={{ color: pm[0] === 'A' ? 'var(--accent-rose)' : pm[0].includes('B-') ? '#38bdf8' : '#fb923c' }}>
+                            {pm[0]}{pm[1] != null ? ` ${fmtSig(pm[1])}%` : ''}
+                          </span>
+                        ) : '—'}
+                      </td>
+                      <td style={{ padding: '0.32rem', textAlign: 'right', fontWeight: 600, color: qKeV ? '#fde047' : 'var(--text-dim)' }}>
+                        {qStr}
+                      </td>
+                      <td style={{ padding: '0.32rem', textAlign: 'right' }}>
+                        {n[4] != null ? (
+                          <span style={{ color: 'var(--accent-emerald)' }}>{n[4]}%</span>
+                        ) : daughterSym ? (
+                          <span style={{ color: 'var(--text-dim)' }}>→ {daughterSym}</span>
+                        ) : '—'}
+                      </td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
           </div>
-          {isotopes.length > 12 && (
-            <button className="btn-secondary" style={{ marginTop: '0.5rem', fontSize: '0.75rem', padding: '0.3rem 0.7rem' }} onClick={() => setShowAllIsotopes(!showAllIsotopes)}>
-              {showAllIsotopes ? 'Show fewer' : `Show all ${isotopes.length} isotopes`}
+          {filteredIsotopes.length > 12 && (
+            <button
+              className="btn-secondary"
+              style={{ marginTop: '0.5rem', fontSize: '0.75rem', padding: '0.3rem 0.7rem', width: '100%' }}
+              onClick={() => setShowAllIsotopes(!showAllIsotopes)}
+            >
+              {showAllIsotopes ? 'Show fewer (top 12)' : `Show all ${filteredIsotopes.length} matching isotopes`}
             </button>
           )}
         </div>
 
-        {/* Decay panel */}
+        {/* Decay panel & Nuclear Energetics */}
         <div style={{ ...card, border: '1px solid rgba(253, 224, 71, 0.3)' }}>
           {!nuc ? (
             <span className="text-muted">{nuclides ? 'No nuclide data for this element.' : 'Loading nuclide data…'}</span>
@@ -609,31 +1109,140 @@ const PeriodicNuclearStudio = () => {
             <>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '1.6rem', fontWeight: 800, fontFamily: 'var(--font-mono)', color: decay.stable ? 'var(--accent-emerald)' : '#fde047' }}>
-                  <sup style={{ fontSize: '0.9rem' }}>{nuc[0]}</sup>{el.symbol}
+                  <sup style={{ fontSize: '0.9rem' }}>{nuc[0]}</sup>{el?.symbol}
                 </span>
-                <strong>{el.name}-{nuc[0]}</strong>
-                <span className="text-xs text-muted">Z = {selZ}, N = {nuc[0] - selZ}</span>
+                <strong style={{ fontSize: '1.1rem' }}>{el?.name}-{nuc[0]}</strong>
+                <span className="text-xs text-muted">Z = {selZ}, N = {nuc[0] - selZ} (N/Z = {((nuc[0] - selZ) / selZ).toFixed(3)})</span>
               </div>
 
               {decay.stable ? (
-                <div style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 8, background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', fontSize: '0.8rem' }}>
-                  <strong style={{ color: 'var(--accent-emerald)' }}>Stable nuclide: no radioactive decay.</strong>
-                  {nuc[4] != null && <> Natural abundance {nuc[4]}%.</>} Choose a yellow isotope in the list to see its decay.
+                <div style={{ marginTop: '0.75rem', padding: '0.85rem', borderRadius: 8, background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', fontSize: '0.8rem', lineHeight: 1.6 }}>
+                  <strong style={{ color: 'var(--accent-emerald)' }}>✓ Stable ground-state nuclide: no spontaneous radioactive decay.</strong>
+                  <div style={{ marginTop: '0.3rem' }}>
+                    {nuc[4] != null ? (
+                      <>Natural terrestrial abundance is <strong>{nuc[4]}%</strong>.</>
+                    ) : (
+                      <>Synthetic or minor stable isotope.</>
+                    )} Choose another isotope in the list or spectrum bar above to explore radioactive decay modes and Q-values.
+                  </div>
                 </div>
               ) : (
                 <>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.6rem', margin: '0.85rem 0' }}>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Decay mode</span><strong style={{ color: 'var(--accent-rose)', fontSize: '0.82rem' }}>{decay.info?.label ?? decay.pm?.[0] ?? '—'}{decay.pm?.[1] != null ? ` (${fmtSig(decay.pm[1])}%)` : ''}</strong></div>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Half-life t½</span><strong style={{ color: 'var(--accent-amber)', fontSize: '0.82rem' }}>{fmtTime(decay.hls)}</strong><div className="text-xs text-dim">{nuc[1]}</div></div>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Decay energy Q</span><strong style={{ color: 'var(--accent-emerald)', fontSize: '0.82rem' }}>{decay.qKeV ? `${fmtSig(decay.qKeV / 1000, 4)} MeV` : '—'}</strong></div>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Decay constant λ</span><strong style={{ color: 'var(--accent-blue)', fontSize: '0.82rem' }}>{fmtSig(decay.lambdaS)} s⁻¹</strong><div className="text-xs text-dim">{fmtSig(decay.lambdaS * SEC_PER_YEAR)} yr⁻¹</div></div>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Specific activity</span><strong style={{ color: 'var(--accent-purple)', fontSize: '0.82rem' }}>{fmtSig(decay.specAct)} Bq/g</strong><div className="text-xs text-dim">{fmtSig(decay.specAct / 3.7e10)} Ci/g</div></div>
-                    <div style={kpi}><span className="text-xs text-muted" style={{ display: 'block' }}>Daughter</span>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Primary Decay Mode</span>
+                      <strong style={{ color: 'var(--accent-rose)', fontSize: '0.85rem' }}>
+                        {decay.info?.label ?? decay.pm?.[0] ?? '—'}{decay.pm?.[1] != null ? ` (${fmtSig(decay.pm[1])}%)` : ''}
+                      </strong>
+                    </div>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Half-life t½</span>
+                      <strong style={{ color: 'var(--accent-amber)', fontSize: '0.85rem' }}>{fmtTime(decay.hls)}</strong>
+                      <div className="text-xs text-dim">{nuc[1]}</div>
+                    </div>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Decay Energy Q</span>
+                      <strong style={{ color: '#fde047', fontSize: '0.85rem' }}>{fmtQMeV(decay.qKeV)}</strong>
+                      <div className="text-xs text-dim">{decay.qKeV ? `${decay.qKeV.toLocaleString()} keV` : '—'}</div>
+                    </div>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Decay Constant λ</span>
+                      <strong style={{ color: 'var(--accent-blue)', fontSize: '0.82rem' }}>{fmtSig(decay.lambdaS)} s⁻¹</strong>
+                      <div className="text-xs text-dim">{fmtSig(decay.lambdaS * SEC_PER_YEAR)} yr⁻¹</div>
+                    </div>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Specific Activity</span>
+                      <strong style={{ color: 'var(--accent-purple)', fontSize: '0.82rem' }}>{fmtSig(decay.specAct)} Bq/g</strong>
+                      <div className="text-xs text-dim">{fmtSig(decay.specAct / 3.7e10)} Ci/g</div>
+                    </div>
+                    <div style={kpi}>
+                      <span className="text-xs text-muted" style={{ display: 'block' }}>Daughter Nuclide</span>
                       {decay.daughter ? (
-                        <button style={{ ...chip(true, '#38bdf8'), marginTop: 2 }} onClick={() => selectNuclide(decay.daughter.z, decay.daughter.A)}>{sym(decay.daughter.z, decay.daughter.A)} →</button>
+                        <button
+                          style={{ ...chip(true, '#38bdf8'), marginTop: 2 }}
+                          onClick={() => selectNuclide(decay.daughter.z, decay.daughter.A)}
+                          title="Jump to daughter nuclide"
+                        >
+                          {sym(decay.daughter.z, decay.daughter.A)} →
+                        </button>
                       ) : <strong style={{ fontSize: '0.82rem' }}>Fission fragments</strong>}
                     </div>
                   </div>
+
+                  {/* Comprehensive Decay Kinematics & Reaction Energetics Card */}
+                  {kinematics && (
+                    <div style={{ background: 'rgba(253, 224, 71, 0.05)', borderRadius: 8, padding: '0.75rem', marginBottom: '0.85rem', border: '1px solid rgba(253, 224, 71, 0.2)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                        <strong style={{ fontSize: '0.82rem', color: '#fde047' }}>
+                          ⚡ Nuclear Reaction Kinematics &amp; Energetics
+                        </strong>
+                        <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                          Q = Δm · c²
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.45rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', marginBottom: '0.5rem' }}>
+                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: 4 }}>
+                          <span className="text-muted" style={{ display: 'block', fontSize: '0.65rem' }}>Total Q-Value</span>
+                          <strong style={{ color: '#fde047' }}>{kinematics.qMeV != null ? `${kinematics.qMeV.toFixed(4)} MeV` : '—'}</strong>
+                          <div className="text-dim" style={{ fontSize: '0.65rem' }}>{kinematics.qKeV != null ? `${kinematics.qKeV.toLocaleString()} keV` : '—'}</div>
+                        </div>
+                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: 4 }}>
+                          <span className="text-muted" style={{ display: 'block', fontSize: '0.65rem' }}>Energy per Disintegration</span>
+                          <strong style={{ color: '#38bdf8' }}>{kinematics.qJoules != null ? `${kinematics.qJoules.toExponential(4)} J` : '—'}</strong>
+                          <div className="text-dim" style={{ fontSize: '0.65rem' }}>1 MeV = 1.6022×10⁻¹³ J</div>
+                        </div>
+                        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '0.4rem', borderRadius: 4 }}>
+                          <span className="text-muted" style={{ display: 'block', fontSize: '0.65rem' }}>Mass Defect (Δm)</span>
+                          <strong style={{ color: 'var(--accent-emerald)' }}>{kinematics.deltaM_u != null ? `${kinematics.deltaM_u.toFixed(6)} u` : '—'}</strong>
+                          <div className="text-dim" style={{ fontSize: '0.65rem' }}>{kinematics.deltaM_kg != null ? `${kinematics.deltaM_kg.toExponential(3)} kg` : '—'}</div>
+                        </div>
+                      </div>
+
+                      {/* Mode-specific kinematics partitioning */}
+                      {kinematics.isAlpha && kinematics.alphaKinematics && (
+                        <div style={{ background: 'rgba(244,63,94,0.08)', borderRadius: 6, padding: '0.5rem', marginBottom: '0.45rem', fontSize: '0.72rem', border: '1px solid rgba(244,63,94,0.2)' }}>
+                          <strong style={{ color: 'var(--accent-rose)' }}>2-Body Alpha Recoil Kinematics:</strong>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.35rem', marginTop: '0.25rem', fontFamily: 'var(--font-mono)' }}>
+                            <div>Alpha Particle (E<sub>α</sub>): <strong style={{ color: '#fff' }}>{kinematics.alphaKinematics.eAlphaMeV?.toFixed(4) ?? '—'} MeV</strong> ({kinematics.alphaKinematics.alphaPct?.toFixed(2) ?? '—'}%)</div>
+                            <div>Daughter Recoil (E<sub>recoil</sub>): <strong style={{ color: '#fff' }}>{kinematics.alphaKinematics.eRecoilKeV?.toFixed(2) ?? '—'} keV</strong> ({kinematics.alphaKinematics.recoilPct?.toFixed(2) ?? '—'}%)</div>
+                          </div>
+                        </div>
+                      )}
+
+                      {kinematics.isBetaMinus && kinematics.betaMinusKinematics && (
+                        <div style={{ background: 'rgba(56,189,248,0.08)', borderRadius: 6, padding: '0.5rem', marginBottom: '0.45rem', fontSize: '0.72rem', border: '1px solid rgba(56,189,248,0.2)' }}>
+                          <strong style={{ color: '#38bdf8' }}>Beta-Minus 3-Body Continuum:</strong>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.35rem', marginTop: '0.25rem', fontFamily: 'var(--font-mono)' }}>
+                            <div>β⁻ Endpoint E<sub>max</sub>: <strong style={{ color: '#fff' }}>{kinematics.betaMinusKinematics.eEndpointMeV?.toFixed(4) ?? '—'} MeV</strong></div>
+                            <div>β⁻ Average E<sub>avg</sub>: <strong style={{ color: '#fff' }}>{kinematics.betaMinusKinematics.eAvgBetaMeV?.toFixed(4) ?? '—'} MeV</strong> (~Q/3)</div>
+                            <div>Antineutrino ν̄<sub>e</sub> avg: <strong style={{ color: '#fff' }}>{kinematics.betaMinusKinematics.eAvgNuMeV?.toFixed(4) ?? '—'} MeV</strong> (~2Q/3)</div>
+                          </div>
+                        </div>
+                      )}
+
+                      {kinematics.isBetaPlus && kinematics.betaPlusKinematics && (
+                        <div style={{ background: 'rgba(168,85,247,0.08)', borderRadius: 6, padding: '0.5rem', marginBottom: '0.45rem', fontSize: '0.72rem', border: '1px solid rgba(168,85,247,0.2)' }}>
+                          <strong style={{ color: 'var(--accent-purple)' }}>Positron Emission (β⁺) &amp; Annihilation:</strong>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.35rem', marginTop: '0.25rem', fontFamily: 'var(--font-mono)' }}>
+                            <div>Threshold (2m<sub>e</sub>c²): <strong style={{ color: '#fff' }}>1.0220 MeV</strong></div>
+                            <div>β⁺ Endpoint E<sub>max</sub>: <strong style={{ color: '#fff' }}>{kinematics.betaPlusKinematics.eBetaPlusMaxMeV?.toFixed(4) ?? '—'} MeV</strong></div>
+                            <div>Annihilation Radiation: <strong style={{ color: '#fff' }}>2 × 511 keV γ-rays</strong></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tabulated ENSDF Q-Values */}
+                      {(nuc[5] != null || nuc[6] != null || nuc[7] != null) && (
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.35rem', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                          <span>Tabulated Q-values:</span>
+                          {nuc[5] != null && <span>Q<sub>α</sub> = <strong style={{ color: 'var(--text-main)' }}>{(nuc[5] / 1000).toFixed(3)} MeV</strong></span>}
+                          {nuc[6] != null && <span>Q<sub>β⁻</sub> = <strong style={{ color: 'var(--text-main)' }}>{(nuc[6] / 1000).toFixed(3)} MeV</strong></span>}
+                          {nuc[7] != null && <span>Q<sub>EC</sub> = <strong style={{ color: 'var(--text-main)' }}>{(nuc[7] / 1000).toFixed(3)} MeV</strong></span>}
+                        </div>
+                      )}
+                    </div>
+                  )}
 
                   {nuc[3].length > 1 && (
                     <div className="text-xs text-muted" style={{ marginBottom: '0.6rem' }}>
@@ -714,18 +1323,25 @@ const PeriodicNuclearStudio = () => {
 
       {/* Trend chart */}
       <div style={card}>
-        <strong style={{ fontSize: '0.9rem', color: 'var(--accent-cyan)' }}>Periodic Trend: {TREND_LABELS[trendMetric].name}</strong>
-        <p className="text-xs text-muted" style={{ margin: '0.2rem 0 0.6rem' }}>{TREND_LABELS[trendMetric].desc} Gaps mean no measured value. Click a point to select the element.</p>
+        <strong style={{ fontSize: '0.9rem', color: 'var(--accent-cyan)' }}>Periodic Trend: {TREND_LABELS[trendMetric]?.name ?? trendMetric}</strong>
+        <p className="text-xs text-muted" style={{ margin: '0.2rem 0 0.6rem' }}>{TREND_LABELS[trendMetric]?.desc} Gaps mean no measured/tabulated value. Click a point to select the element.</p>
         {(() => {
           const W = 760, H = 230, x0 = 50, y0 = 15, w = W - x0 - 15, h = H - y0 - 35;
-          const pts = ELEMENTS.filter(e => e[trendMetric] != null);
-          const vals = pts.map(e => e[trendMetric]);
+          const pts = ELEMENTS.map(e => ({ e, val: getElementTrendValue(e, trendMetric) })).filter(item => item.val != null);
+          if (!pts.length) {
+            return <div className="text-muted text-xs" style={{ padding: '1rem', textAlign: 'center' }}>No data points available for {trendMetric}</div>;
+          }
+          const vals = pts.map(p => p.val);
           const vMax = Math.max(...vals), vMin = Math.min(0, ...vals);
+          const range = vMax - vMin || 1;
           const X = z => x0 + ((z - 1) / 117) * w;
-          const Y = v => y0 + h - ((v - vMin) / (vMax - vMin)) * h;
+          const Y = v => y0 + h - ((v - vMin) / range) * h;
           let d = '';
           let prevZ = null;
-          pts.forEach(e => { d += `${prevZ !== null && e.z === prevZ + 1 ? 'L' : 'M'} ${X(e.z)} ${Y(e[trendMetric])} `; prevZ = e.z; });
+          pts.forEach(({ e, val }) => {
+            d += `${prevZ !== null && e.z === prevZ + 1 ? 'L' : 'M'} ${X(e.z)} ${Y(val)} `;
+            prevZ = e.z;
+          });
           return (
             <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
               <rect x={x0} y={y0} width={w} height={h} fill="rgba(0,0,0,0.3)" rx="6" />
@@ -737,16 +1353,24 @@ const PeriodicNuclearStudio = () => {
               ))}
               {vMin < 0 && <line x1={x0} y1={Y(0)} x2={x0 + w} y2={Y(0)} stroke="rgba(255,255,255,0.2)" />}
               <path d={d} fill="none" stroke="var(--accent-cyan)" strokeWidth="1.6" />
-              {pts.map(e => (
-                <circle key={e.z} cx={X(e.z)} cy={Y(e[trendMetric])} r={e.z === selZ ? 5 : 2.2}
+              {pts.map(({ e, val }) => (
+                <circle
+                  key={e.z}
+                  cx={X(e.z)}
+                  cy={Y(val)}
+                  r={e.z === selZ ? 5 : 2.2}
                   fill={e.z === selZ ? 'var(--accent-purple)' : (FAMILY_COLORS[e.family]?.border || '#38bdf8')}
-                  stroke="#fff" strokeWidth={e.z === selZ ? 2 : 0.3} style={{ cursor: 'pointer' }} onClick={() => selectElement(e.z)}>
-                  <title>{e.name} ({e.symbol}): {e[trendMetric]} {TREND_LABELS[trendMetric].unit}</title>
+                  stroke="#fff"
+                  strokeWidth={e.z === selZ ? 2 : 0.3}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => selectElement(e.z)}
+                >
+                  <title>{e.name} ({e.symbol}): {val} {TREND_LABELS[trendMetric]?.unit ?? ''}</title>
                 </circle>
               ))}
               {[1, 20, 40, 60, 80, 100, 118].map(z => <text key={z} x={X(z)} y={y0 + h + 12} fill="var(--text-dim)" fontSize="8" textAnchor="middle">{z}</text>)}
               <text x={x0 + w / 2} y={H - 4} fill="var(--text-muted)" fontSize="9" textAnchor="middle">Atomic number Z (dashed lines = end of each period / noble gas)</text>
-              <text x="12" y={y0 + h / 2} fill="var(--text-muted)" fontSize="9" textAnchor="middle" transform={`rotate(-90 12 ${y0 + h / 2})`}>{TREND_LABELS[trendMetric].unit || 'Pauling'}</text>
+              <text x="12" y={y0 + h / 2} fill="var(--text-muted)" fontSize="9" textAnchor="middle" transform={`rotate(-90 12 ${y0 + h / 2})`}>{TREND_LABELS[trendMetric]?.unit || ''}</text>
             </svg>
           );
         })()}
