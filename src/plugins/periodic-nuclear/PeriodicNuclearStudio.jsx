@@ -43,6 +43,28 @@ const FAMILY_KID_INFO = {
   'unknown': { emoji: '❓', summary: 'Super-heavy elements made in labs for just a tiny moment. They fall apart so fast that scientists are still learning how they behave.', examples: 'Oganesson, Tennessine, Meitnerium', water: 'They do not exist in nature, so they never show up in water.' }
 };
 
+// Typical ionic charges / oxidation states for periodic table columns (Groups 1-18)
+const COLUMN_CHARGES = [
+  { col: 1, group: '1 (IA)', charge: '+1', color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.18)', border: 'rgba(56, 189, 248, 0.45)', desc: 'Group 1 (IA): +1 charge (Alkali metal cations: H⁺, Li⁺, Na⁺, K⁺)' },
+  { col: 2, group: '2 (IIA)', charge: '+2', color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.18)', border: 'rgba(56, 189, 248, 0.45)', desc: 'Group 2 (IIA): +2 charge (Alkaline earth hardness cations: Mg²⁺, Ca²⁺, Sr²⁺, Ba²⁺, Ra²⁺)' },
+  { col: 3, group: '3 (IIIB)', charge: '+3', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 3 (IIIB): +3 charge (Sc³⁺, Y³⁺, Lanthanides)' },
+  { col: 4, group: '4 (IVB)', charge: '+4', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 4 (IVB): +4 charge (Ti⁴⁺, Zr⁴⁺)' },
+  { col: 5, group: '5 (VB)', charge: '+5', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 5 (VB): +5 charge (V⁵⁺, Nb⁵⁺; also +2, +3, +4)' },
+  { col: 6, group: '6 (VIB)', charge: '+6', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 6 (VIB): +6, +3 charge (Cr⁶⁺ chromate, Cr³⁺, Mo, W)' },
+  { col: 7, group: '7 (VIIB)', charge: '+7', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 7 (VIIB): +7, +4, +2 charge (Mn²⁺, MnO₂ +4, MnO₄⁻ +7)' },
+  { col: 8, group: '8 (VIII)', charge: '+2,+3', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 8 (VIII): +2, +3 charge (Ferrous Fe²⁺, Ferric Fe³⁺)' },
+  { col: 9, group: '9 (VIII)', charge: '+2,+3', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 9 (VIII): +2, +3 charge (Cobalt Co²⁺, Co³⁺)' },
+  { col: 10, group: '10 (VIII)', charge: '+2', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 10 (VIII): +2 charge (Nickel Ni²⁺, Pd²⁺, Pt²⁺)' },
+  { col: 11, group: '11 (IB)', charge: '+1,+2', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 11 (IB): +1, +2 charge (Cu⁺, Cu²⁺, Ag⁺, Au³⁺)' },
+  { col: 12, group: '12 (IIB)', charge: '+2', color: '#60a5fa', bg: 'rgba(96, 165, 250, 0.14)', border: 'rgba(96, 165, 250, 0.35)', desc: 'Group 12 (IIB): +2 charge (Zn²⁺, Cd²⁺, Hg²⁺)' },
+  { col: 13, group: '13 (IIIA)', charge: '+3', color: '#34d399', bg: 'rgba(52, 211, 153, 0.18)', border: 'rgba(52, 211, 153, 0.45)', desc: 'Group 13 (IIIA): +3 charge (Al³⁺ water coagulant cation, Ga³⁺)' },
+  { col: 14, group: '14 (IVA)', charge: '±4', color: '#fbbf24', bg: 'rgba(251, 191, 36, 0.18)', border: 'rgba(251, 191, 36, 0.45)', desc: 'Group 14 (IVA): ±4 oxidation states (C⁴⁺/C⁴⁻, Si⁴⁺, Sn²⁺/⁴⁺, Pb²⁺/⁴⁺)' },
+  { col: 15, group: '15 (VA)', charge: '-3', color: '#f87171', bg: 'rgba(248, 113, 113, 0.18)', border: 'rgba(248, 113, 113, 0.45)', desc: 'Group 15 (VA): -3 common ionic charge (N³⁻, P³⁻; +5 in NO₃⁻ and PO₄³⁻)' },
+  { col: 16, group: '16 (VIA)', charge: '-2', color: '#f87171', bg: 'rgba(248, 113, 113, 0.18)', border: 'rgba(248, 113, 113, 0.45)', desc: 'Group 16 (VIA): -2 charge (Oxide O²⁻, Sulfide S²⁻, Sulfate SO₄²⁻)' },
+  { col: 17, group: '17 (VIIA)', charge: '-1', color: '#f87171', bg: 'rgba(248, 113, 113, 0.18)', border: 'rgba(248, 113, 113, 0.45)', desc: 'Group 17 (VIIA): -1 charge (Halide anions: F⁻, Cl⁻, Br⁻, I⁻)' },
+  { col: 18, group: '18 (VIIIA)', charge: '0', color: '#c084fc', bg: 'rgba(192, 132, 252, 0.14)', border: 'rgba(192, 132, 252, 0.4)', desc: 'Group 18 (VIIIA): 0 charge (Inert noble gases: He, Ne, Ar, Kr, Xe, Rn)' }
+];
+
 // Decay mode → label, daughter shift [ΔZ, ΔA] (null = fission), and which Q-value applies
 const MODE_INFO = {
   'A': { label: 'Alpha (α)', d: [-2, -4], q: 5 },
@@ -363,10 +385,15 @@ const PeriodicNuclearStudio = () => {
 
       {/* Periodic grid */}
       <div style={{ ...card, background: 'radial-gradient(ellipse at center, rgba(12,25,45,0.8) 0%, rgba(7,12,22,0.95) 100%)', overflowX: 'auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <strong style={{ fontSize: '0.9rem', color: 'var(--accent-purple)' }}>Periodic Table of the Elements</strong>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <strong style={{ fontSize: '0.9rem', color: 'var(--accent-purple)' }}>Periodic Table of the Elements</strong>
+            <span className="glass-badge" style={{ fontSize: '0.65rem', background: 'rgba(56, 189, 248, 0.15)', color: 'var(--accent-cyan)', borderColor: 'rgba(56, 189, 248, 0.3)' }}>
+              Top Row: Common Ionic Charges
+            </span>
+          </div>
           <span className="text-xs text-muted">
-            Click any element to see its isotopes and radioactive decay. ☢ = no stable isotopes. {nuclides ? '' : 'Loading nuclide data…'}
+            Click any element to see its isotopes and radioactive decay. Column headers show characteristic oxidation numbers / ionic charges. {nuclides ? '' : 'Loading nuclide data…'}
             {loadError && <span style={{ color: 'var(--accent-rose)' }}> Failed to load nuclide data: {loadError}</span>}
           </span>
         </div>
@@ -374,14 +401,44 @@ const PeriodicNuclearStudio = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(18, minmax(38px, 1fr))',
-          gridTemplateRows: 'repeat(7, 48px) 14px repeat(2, 48px)',
+          gridTemplateRows: '34px repeat(7, 48px) 14px repeat(2, 48px)',
           gap: '3px',
           minWidth: '760px'
         }}>
+          {/* Column Charges Header (Row 1) */}
+          {COLUMN_CHARGES.map((c) => (
+            <div
+              key={c.col}
+              id={`col-charge-${c.col}`}
+              title={c.desc}
+              style={{
+                gridColumn: c.col,
+                gridRow: 1,
+                borderRadius: '6px',
+                padding: '2px 1px',
+                background: c.bg,
+                border: `1px solid ${c.border}`,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                cursor: 'help',
+                transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+                userSelect: 'none'
+              }}
+              onMouseEnter={(ev) => { ev.currentTarget.style.transform = 'scale(1.12)'; ev.currentTarget.style.zIndex = 4; ev.currentTarget.style.boxShadow = `0 0 10px ${c.border}`; }}
+              onMouseLeave={(ev) => { ev.currentTarget.style.transform = 'scale(1)'; ev.currentTarget.style.zIndex = 0; ev.currentTarget.style.boxShadow = 'none'; }}
+            >
+              <span style={{ fontSize: '0.52rem', color: 'var(--text-dim, #94a3b8)', lineHeight: 1 }}>{c.col}</span>
+              <strong style={{ fontSize: '0.78rem', color: c.color, fontWeight: 800, lineHeight: 1.1 }}>{c.charge}</strong>
+            </div>
+          ))}
+
           {/* f-block placeholders */}
           {[{ row: 6, label: '57–71', f: 'lanthanide' }, { row: 7, label: '89–103', f: 'actinide' }].map(p => (
             <div key={p.row} style={{
-              gridColumn: 3, gridRow: p.row, borderRadius: '6px', border: `1px dashed ${FAMILY_COLORS[p.f].border}`,
+              gridColumn: 3, gridRow: p.row + 1, borderRadius: '6px', border: `1px dashed ${FAMILY_COLORS[p.f].border}`,
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: FAMILY_COLORS[p.f].text
             }}>{p.label}</div>
           ))}
@@ -399,7 +456,7 @@ const PeriodicNuclearStudio = () => {
                 onClick={() => selectElement(e.z)}
                 title={`${e.name} (Z=${e.z}) — ${TREND_LABELS[trendMetric].name}: ${val ?? 'n/a'} ${TREND_LABELS[trendMetric].unit}`}
                 style={{
-                  gridColumn: e.x, gridRow: e.y,
+                  gridColumn: e.x, gridRow: e.y + 1,
                   borderRadius: '6px', padding: '2px 3px', cursor: 'pointer', position: 'relative',
                   background: isSel ? 'var(--accent-purple)' : f.bg,
                   border: isSel ? '2px solid #fff' : `1px solid ${f.border}`,
