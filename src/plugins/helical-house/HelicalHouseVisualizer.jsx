@@ -86,6 +86,37 @@ const SF_TIERS = [
   }
 ];
 
+// Color interpolation helper for heat map gradient
+function interpolateRgb(c1, c2, factor) {
+  const r = Math.round(c1[0] + factor * (c2[0] - c1[0]));
+  const g = Math.round(c1[1] + factor * (c2[1] - c1[1]));
+  const b = Math.round(c1[2] + factor * (c2[2] - c1[2]));
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+// Multi-stop continuous color mapper for slab moments & soil pressure
+function getHeatMapColor(t, isTension = false) {
+  if (isTension) {
+    return 'rgba(168, 85, 247, 0.9)'; // Vivid Purple for tension uplift zone
+  }
+  const clamped = Math.max(0, Math.min(1, isNaN(t) ? 0 : t));
+  const stops = [
+    { t: 0.00, color: [2, 132, 199] },   // Sky / Cyan
+    { t: 0.25, color: [16, 185, 129] },  // Emerald
+    { t: 0.50, color: [234, 179, 8] },   // Amber
+    { t: 0.75, color: [249, 115, 22] },  // Orange
+    { t: 1.00, color: [244, 63, 94] }    // Crimson Rose
+  ];
+
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (clamped >= stops[i].t && clamped <= stops[i + 1].t) {
+      const localT = (clamped - stops[i].t) / (stops[i + 1].t - stops[i].t);
+      return interpolateRgb(stops[i].color, stops[i + 1].color, localT);
+    }
+  }
+  return `rgb(${stops[stops.length - 1].color.join(',')})`;
+}
+
 // Engineering calculation helper for bearing capacity factors
 function calculateBearingFactors(phiDeg) {
   if (phiDeg <= 0) {
@@ -119,8 +150,20 @@ const HelicalHouseVisualizer = ({ problem }) => {
   const [helixDiameterInches, setHelixDiameterInches] = useState(12); // inches
   const [helixCount, setHelixCount] = useState(1); // 1, 2, or 3 helices per pile
 
+  // Eccentricity & Aerial Heat Map States
+  const [eccentricityX, setEccentricityX] = useState(0); // ft (-15 to +15)
+  const [eccentricityY, setEccentricityY] = useState(0); // ft (-15 to +15)
+  const [heatMapMetric, setHeatMapMetric] = useState('moment'); // 'moment' | 'pressure' | 'pileReaction' | 'quadrant'
+  const [subdivisionMode, setSubdivisionMode] = useState('quadrants'); // 'quadrants' | 'sections' | 'mesh'
+  const [selectedSectionId, setSelectedSectionId] = useState(null); // 'NW', 'A1', etc.
+  const [sectionCardTab, setSectionCardTab] = useState('quadrants'); // 'quadrants' | 'sections'
+  const [showPilesOnHeatMap, setShowPilesOnHeatMap] = useState(true);
+  const [showKernBoundary, setShowKernBoundary] = useState(true);
+  const [showQuadrantDividers, setShowQuadrantDividers] = useState(true);
+  const [hoveredCell, setHoveredCell] = useState(null);
+
   // UI States
-  const [activeTab, setActiveTab] = useState('elevation'); // 'elevation' | 'plan' | 'stress'
+  const [activeTab, setActiveTab] = useState('elevation'); // 'elevation' | 'plan' | 'heatmap' | 'stress'
   const [activeSfFocus, setActiveSfFocus] = useState(2.0); // 1.0, 1.5, 2.0, 3.0
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showDerivation, setShowDerivation] = useState(true);
@@ -210,6 +253,431 @@ const HelicalHouseVisualizer = ({ problem }) => {
     return found || sfMatrixResults[2]; // Default to SF = 2.0
   }, [sfMatrixResults, activeSfFocus]);
 
+  // 5. Eccentricity, Biaxial Overturning Moments & Geotechnical Contact Pressures
+  const eccentricityResults = useMemo(() => {
+    const ex = eccentricityX;
+    const ey = eccentricityY;
+    const eMag = Math.hypot(ex, ey);
+    const P = totalDownwardLoadKips;
+
+    // Overturning Moments on 50' foundation (kip-ft)
+    const Mx = P * ey; // Moment about X-axis causing N-S inclination
+    const My = P * ex; // Moment about Y-axis causing E-W inclination
+    const Mres = Math.hypot(Mx, My);
+
+    // Kern Boundary limit for 50' x 50' square slab (Middle-Third Rule)
+    // Diamond boundary: |ex|/(B/6) + |ey|/(L/6) <= 1
+    const kernLimit = slabSideFt / 6; // 8.333 ft
+    const kernRatio = (Math.abs(ex) + Math.abs(ey)) / kernLimit;
+    const isUplift = kernRatio > 1.0001;
+
+    // Contact Bearing Pressure (psf) at (x, y) relative to slab center (-25 to +25 ft)
+    // q(x, y) = (P * 1000 / 2500) * (1 + 12*ex*x/2500 + 12*ey*y/2500)
+    const qAvgPsf = (P * 1000) / slabAreaSqFt;
+    const calcQ = (x, y) => {
+      return qAvgPsf * (1 + (12 * ex * x) / (slabSideFt * slabSideFt) + (12 * ey * y) / (slabSideFt * slabSideFt));
+    };
+
+    // Four corner pressures (psf)
+    const qNE = calcQ(25, 25);
+    const qNW = calcQ(-25, 25);
+    const qSW = calcQ(-25, -25);
+    const qSE = calcQ(25, -25);
+
+    const qMax = Math.max(qNE, qNW, qSW, qSE);
+    const qMin = Math.min(qNE, qNW, qSW, qSE);
+
+    // Helical Pile Group Reactions for activeGrid (k x k)
+    const k = activeGrid.gridK;
+    const spacing = Number(activeGrid.spacingFt);
+    const qAllow = Number(activeGrid.qAllow);
+
+    // Coordinate positions for helical piles in 50' slab (2.5' edge setback)
+    const edgeMargin = 2.5;
+    const pileSpan = slabSideFt - 2 * edgeMargin;
+    const pileStep = k > 1 ? pileSpan / (k - 1) : 0;
+
+    let sumX2 = 0;
+    let sumY2 = 0;
+    const rawPiles = [];
+
+    for (let r = 0; r < k; r++) {
+      for (let c = 0; c < k; c++) {
+        const pxFt = -25 + edgeMargin + c * pileStep;
+        const pyFt = 25 - edgeMargin - r * pileStep;
+        sumX2 += pxFt * pxFt;
+        sumY2 += pyFt * pyFt;
+        rawPiles.push({ r, c, pxFt, pyFt });
+      }
+    }
+
+    const nPiles = rawPiles.length;
+    let maxPileR = -Infinity;
+    let minPileR = Infinity;
+    let overloadedCount = 0;
+    let tensionPileCount = 0;
+
+    const evaluatedPiles = rawPiles.map(p => {
+      // Elastic pile reaction from rigid slab theory
+      const rVal = (P / nPiles) + (My * p.pxFt) / Math.max(1, sumX2) + (Mx * p.pyFt) / Math.max(1, sumY2);
+      if (rVal > maxPileR) maxPileR = rVal;
+      if (rVal < minPileR) minPileR = rVal;
+      if (rVal > qAllow) overloadedCount++;
+      if (rVal < 0) tensionPileCount++;
+      return {
+        ...p,
+        reactionKips: rVal,
+        isOverloaded: rVal > qAllow,
+        isTension: rVal < 0
+      };
+    });
+
+    // Concrete Slab Flexural Bending Moments (ACI 318 strip analysis)
+    // Cracking Moment Mcr = 0.07906 * t^2 (kip-ft/ft) for f'c = 4000 psi
+    const mCracking = 0.07906 * Math.pow(slabThicknessInches, 2);
+    const phiMn = 1.4 * Math.max(1, slabThicknessInches - 2.75); // approx design capacity w/ #5 @ 12"
+
+    const calcM = (x, y) => {
+      const qLocal = calcQ(x, y);
+      const mSpan = (Math.abs(qLocal) / 1000) * (Math.pow(spacing, 2) / 10);
+      const mOverturn = (0.12 * Mres / slabSideFt) * (0.6 + 0.4 * (Math.abs(x * ex + y * ey) / Math.max(1, 25 * Math.max(1, eMag))));
+      return mSpan + mOverturn;
+    };
+
+    const maxSlabMoment = Math.max(calcM(25, 25), calcM(-25, 25), calcM(-25, -25), calcM(25, -25));
+    const isCracking = maxSlabMoment > mCracking;
+    const isFlexuralOverload = maxSlabMoment > phiMn;
+
+    // 4 Quadrants Analysis (NW: Q2, NE: Q1, SW: Q3, SE: Q4)
+    const quadConfigs = [
+      { id: 'NW', name: 'North-West (Q2)', cx: -12.5, cy: 12.5, color: '#38bdf8' },
+      { id: 'NE', name: 'North-East (Q1)', cx: 12.5, cy: 12.5, color: '#10b981' },
+      { id: 'SW', name: 'South-West (Q3)', cx: -12.5, cy: -12.5, color: '#f59e0b' },
+      { id: 'SE', name: 'South-East (Q4)', cx: 12.5, cy: -12.5, color: '#a855f7' }
+    ];
+
+    const quadrants = quadConfigs.map(q => {
+      const qAvg = calcQ(q.cx, q.cy);
+      const quadLoadKips = (qAvg * 625) / 1000;
+      const loadPct = P > 0 ? (quadLoadKips / P) * 100 : 25;
+      const cornerM = calcM(q.cx > 0 ? 25 : -25, q.cy > 0 ? 25 : -25);
+
+      const quadPiles = evaluatedPiles.filter(p => {
+        const matchX = q.cx > 0 ? p.pxFt >= 0 : p.pxFt < 0;
+        const matchY = q.cy > 0 ? p.pyFt >= 0 : p.pyFt < 0;
+        return matchX && matchY;
+      });
+
+      const maxQuadPileR = quadPiles.length > 0 ? Math.max(...quadPiles.map(p => p.reactionKips)) : 0;
+      const hasUplift = calcQ(q.cx > 0 ? 25 : -25, q.cy > 0 ? 25 : -25) < 0;
+      const hasPileOverload = maxQuadPileR > qAllow;
+
+      let status = 'safe';
+      if (hasUplift || hasPileOverload) status = 'critical';
+      else if (cornerM > mCracking || loadPct > 36) status = 'warning';
+
+      return {
+        ...q,
+        qAvgPsf: qAvg,
+        loadKips: quadLoadKips,
+        loadPct,
+        peakMoment: cornerM,
+        maxPileReaction: maxQuadPileR,
+        pileCount: quadPiles.length,
+        status,
+        hasUplift,
+        hasPileOverload
+      };
+    });
+
+    // 16 Structural Bays / Sections Analysis (4 x 4 grid: A1 to D4)
+    // Columns A: [-25, -12.5], B: [-12.5, 0], C: [0, 12.5], D: [12.5, 25]
+    // Rows 1 (North): [12.5, 25], 2: [0, 12.5], 3: [-12.5, 0], 4 (South): [-25, -12.5]
+    const colNames = ['A', 'B', 'C', 'D'];
+    const rowNames = ['1', '2', '3', '4'];
+    const baySideFt = 12.5;
+    const bayAreaSqFt = baySideFt * baySideFt; // 156.25 sq ft
+
+    const sections16 = [];
+    for (let r = 0; r < 4; r++) {
+      for (let c = 0; c < 4; c++) {
+        const id = `${colNames[c]}${rowNames[r]}`;
+        const xMin = -25 + c * baySideFt;
+        const xMax = xMin + baySideFt;
+        const yMax = 25 - r * baySideFt;
+        const yMin = yMax - baySideFt;
+        const cx = (xMin + xMax) / 2;
+        const cy = (yMin + yMax) / 2;
+
+        let quadId = 'NE';
+        if (cx < 0 && cy >= 0) quadId = 'NW';
+        else if (cx < 0 && cy < 0) quadId = 'SW';
+        else if (cx >= 0 && cy < 0) quadId = 'SE';
+
+        const qAvg = calcQ(cx, cy);
+        const bayLoadKips = (qAvg * bayAreaSqFt) / 1000;
+        const loadPct = P > 0 ? (bayLoadKips / P) * 100 : (100 / 16);
+        const peakMoment = Math.max(calcM(xMin, yMin), calcM(xMax, yMin), calcM(xMin, yMax), calcM(xMax, yMax));
+        const centerMoment = calcM(cx, cy);
+
+        // Helical piles situated in this bay
+        const bayPiles = evaluatedPiles.filter(p => (
+          p.pxFt >= xMin - 0.05 && p.pxFt <= xMax + 0.05 &&
+          p.pyFt >= yMin - 0.05 && p.pyFt <= yMax + 0.05
+        ));
+
+        const maxPileR = bayPiles.length > 0 ? Math.max(...bayPiles.map(p => p.reactionKips)) : 0;
+        const minPileR = bayPiles.length > 0 ? Math.min(...bayPiles.map(p => p.reactionKips)) : 0;
+        const hasUplift = qAvg < 0 || minPileR < 0;
+        const hasPileOverload = maxPileR > qAllow;
+        const isCrackingBay = peakMoment > mCracking;
+
+        let status = 'safe';
+        if (hasUplift || hasPileOverload) status = 'critical';
+        else if (isCrackingBay || loadPct > 10.5) status = 'warning';
+
+        sections16.push({
+          id,
+          colIdx: c,
+          rowIdx: r,
+          colLetter: colNames[c],
+          rowNumber: rowNames[r],
+          name: `Bay ${id}`,
+          quadId,
+          cx,
+          cy,
+          xMin,
+          xMax,
+          yMin,
+          yMax,
+          tributaryArea: '156.25 sq ft (12.5′ × 12.5′)',
+          qAvgPsf: qAvg,
+          loadKips: bayLoadKips,
+          loadPct,
+          peakMoment,
+          centerMoment,
+          pileCount: bayPiles.length,
+          bayPiles,
+          maxPileReaction: maxPileR,
+          minPileReaction: minPileR,
+          hasUplift,
+          hasPileOverload,
+          isCracking: isCrackingBay,
+          status
+        });
+      }
+    }
+
+    // Engineering Issue Diagnosis
+    const issues = [];
+    if (isUplift) {
+      issues.push({
+        id: 'uplift',
+        level: 'critical',
+        badge: 'Tension Uplift',
+        color: 'var(--accent-rose)',
+        title: 'Middle-Third Kern Exceeded: Foundation Uplift Separation',
+        desc: `Resultant eccentricity e = ${eMag.toFixed(1)}′ (ex = ${ex}′, ey = ${ey}′) exceeds the Middle-Third Kern boundary (${(slabSideFt / 6).toFixed(2)}′). Negative soil contact pressure (qmin = ${qMin.toFixed(0)} psf) causes edge liftoff in the opposite quadrant. Standard compression helical piles cannot resist tension without engineered tie-down anchors!`
+      });
+    }
+    if (overloadedCount > 0) {
+      issues.push({
+        id: 'pile_overload',
+        level: 'critical',
+        badge: 'Bearing Overload',
+        color: 'var(--accent-rose)',
+        title: `${overloadedCount} Helical Pile(s) Exceed Allowable Capacity`,
+        desc: `Peak reaction Rmax = ${maxPileR.toFixed(1)} kips exceeds Qallow = ${qAllow.toFixed(1)} kips by ${((maxPileR / qAllow - 1) * 100).toFixed(0)}%. Highly stressed corner/edge piles will suffer settlement punch-in under sustained load.`
+      });
+    }
+    if (isCracking) {
+      issues.push({
+        id: 'cracking',
+        level: 'warning',
+        badge: 'Cracking Threshold',
+        color: 'var(--accent-amber)',
+        title: 'Slab Bending Moments Exceed Plain Concrete Cracking Limit',
+        desc: `Peak flexural moment Mmax = ${maxSlabMoment.toFixed(2)} kip-ft/ft exceeds the plain concrete cracking moment Mcr = ${mCracking.toFixed(2)} kip-ft/ft for a ${slabThicknessInches}″ slab. Top/bottom Grade 60 rebar spacing must be designed to arrest diagonal tension cracks.`
+      });
+    }
+
+    const maxQuad = quadrants.reduce((prev, curr) => (curr.loadPct > prev.loadPct ? curr : prev), quadrants[0]);
+    if (maxQuad.loadPct > 38) {
+      issues.push({
+        id: 'disparity',
+        level: 'warning',
+        badge: 'Load Disparity',
+        color: 'var(--accent-amber)',
+        title: `Severe Quadrant Load Concentration in ${maxQuad.id}`,
+        desc: `${maxQuad.name} carries ${maxQuad.loadPct.toFixed(1)}% of total foundation gravity load (${maxQuad.loadKips.toFixed(1)} kips vs ${(P / 4).toFixed(1)} kips balanced), inducing angular tilt across the 50 ft span.`
+      });
+    }
+
+    return {
+      ex,
+      ey,
+      eMag,
+      Mx,
+      My,
+      Mres,
+      kernLimit,
+      kernRatio,
+      isUplift,
+      calcQ,
+      qMax,
+      qMin,
+      qAvgPsf,
+      mCracking,
+      phiMn,
+      calcM,
+      maxSlabMoment,
+      isCracking,
+      isFlexuralOverload,
+      evaluatedPiles,
+      maxPileR,
+      minPileR,
+      overloadedCount,
+      tensionPileCount,
+      quadrants,
+      sections16,
+      issues
+    };
+  }, [
+    eccentricityX,
+    eccentricityY,
+    totalDownwardLoadKips,
+    slabSideFt,
+    slabAreaSqFt,
+    activeGrid,
+    slabThicknessInches
+  ]);
+
+  // 6. High-Resolution Heat Map Mesh Cells & Colorized Sections/Quadrants
+  const heatMapCells = useMemo(() => {
+    const N = 16;
+    const stepFt = slabSideFt / N; // 3.125 ft
+    const cells = [];
+    const { calcQ, calcM, qMin, qMax, maxSlabMoment, mCracking, evaluatedPiles } = eccentricityResults;
+
+    const minMoment = 0;
+    const maxMoment = Math.max(mCracking * 1.4, maxSlabMoment * 1.05, 0.1);
+    const minQ = Math.min(0, qMin);
+    const maxQ = Math.max(Number(activeGrid.qAllow) * 12, qMax * 1.05, 100);
+    const qAllow = Number(activeGrid.qAllow);
+
+    const getMetricColor = ({ momentVal, qVal, rVal, pctVal, isTension }) => {
+      if (heatMapMetric === 'moment') {
+        const t = (momentVal - minMoment) / (maxMoment - minMoment);
+        return getHeatMapColor(t, false);
+      } else if (heatMapMetric === 'pressure') {
+        if (isTension || qVal < 0) return 'rgba(168, 85, 247, 0.85)';
+        const t = qVal / Math.max(1, maxQ);
+        return getHeatMapColor(t, false);
+      } else if (heatMapMetric === 'pileReaction') {
+        if (rVal < 0) return 'rgba(168, 85, 247, 0.85)';
+        const t = rVal / Math.max(1, qAllow * 1.25);
+        return getHeatMapColor(t, false);
+      } else if (heatMapMetric === 'quadrant') {
+        const base = pctVal > 15 ? 25 : 6.25;
+        const scale = pctVal > 15 ? 20 : 7;
+        const t = Math.max(0, Math.min(1, 0.5 + (pctVal - base) / scale));
+        return getHeatMapColor(t, false);
+      }
+      return '#0284c7';
+    };
+
+    // Colorize 4 Quadrants
+    const coloredQuadrants = eccentricityResults.quadrants.map(q => ({
+      ...q,
+      color: getMetricColor({
+        momentVal: q.peakMoment,
+        qVal: q.qAvgPsf,
+        rVal: q.maxPileReaction,
+        pctVal: q.loadPct,
+        isTension: q.hasUplift
+      })
+    }));
+
+    // Colorize 16 Structural Bays / Sections
+    const coloredSections16 = eccentricityResults.sections16.map(s => ({
+      ...s,
+      color: getMetricColor({
+        momentVal: s.peakMoment,
+        qVal: s.qAvgPsf,
+        rVal: s.maxPileReaction,
+        pctVal: s.loadPct,
+        isTension: s.hasUplift
+      })
+    }));
+
+    // 256 Mesh Cells
+    for (let r = 0; r < N; r++) {
+      for (let c = 0; c < N; c++) {
+        const xFt = -25 + (c + 0.5) * stepFt;
+        const yFt = 25 - (r + 0.5) * stepFt;
+        const qVal = calcQ(xFt, yFt);
+        const mVal = calcM(xFt, yFt);
+
+        let quadId = 'NE';
+        if (xFt < 0 && yFt >= 0) quadId = 'NW';
+        else if (xFt < 0 && yFt < 0) quadId = 'SW';
+        else if (xFt >= 0 && yFt < 0) quadId = 'SE';
+
+        // Find nearest pile for reaction HUD
+        let nearestPile = evaluatedPiles[0];
+        let minDist = Infinity;
+        for (let i = 0; i < evaluatedPiles.length; i++) {
+          const d = Math.hypot(evaluatedPiles[i].pxFt - xFt, evaluatedPiles[i].pyFt - yFt);
+          if (d < minDist) {
+            minDist = d;
+            nearestPile = evaluatedPiles[i];
+          }
+        }
+
+        const isTension = qVal < 0;
+        const cellColor = getMetricColor({
+          momentVal: mVal,
+          qVal,
+          rVal: nearestPile ? nearestPile.reactionKips : 0,
+          pctVal: 25,
+          isTension
+        });
+
+        cells.push({
+          r,
+          c,
+          xFt,
+          yFt,
+          qVal,
+          mVal,
+          quadId,
+          color: cellColor,
+          isTension,
+          nearestPileReaction: nearestPile ? nearestPile.reactionKips : 0
+        });
+      }
+    }
+    return {
+      cells,
+      coloredQuadrants,
+      coloredSections16,
+      minMoment,
+      maxMoment,
+      minQ,
+      maxQ
+    };
+  }, [slabSideFt, eccentricityResults, heatMapMetric, activeGrid]);
+
+  // Selected Section Object (Quadrant or 16-Bay Section)
+  const selectedSection = useMemo(() => {
+    if (!selectedSectionId) return null;
+    return (
+      heatMapCells.coloredSections16.find(s => s.id === selectedSectionId) ||
+      heatMapCells.coloredQuadrants.find(q => q.id === selectedSectionId) ||
+      null
+    );
+  }, [selectedSectionId, heatMapCells]);
+
   // Preset Scenario Handlers
   const applyPreset = (presetKey) => {
     if (presetKey === 'standard') {
@@ -223,6 +691,8 @@ const HelicalHouseVisualizer = ({ problem }) => {
       setHelixCount(1);
       setSoilKey('medium_sand');
       setBearingCapacitySource('theoretical');
+      setEccentricityX(0);
+      setEccentricityY(0);
     } else if (presetKey === 'boring_dense') {
       // Direct soil boring report: Dense bearing sand q_ult = 60 ksf
       setSlabThicknessInches(8);
@@ -235,6 +705,8 @@ const HelicalHouseVisualizer = ({ problem }) => {
       setHelixCount(1);
       setBearingCapacitySource('boring_report');
       setBoringReportQUltKsf(60);
+      setEccentricityX(0);
+      setEccentricityY(0);
     } else if (presetKey === 'prob54') {
       // Problem 54 profile: House surcharge = 300 psf, Water table at 8 ft, Clay layer at 10-20 ft
       setSlabThicknessInches(6);
@@ -247,6 +719,8 @@ const HelicalHouseVisualizer = ({ problem }) => {
       setHelixCount(1);
       setSoilKey('stiff_clay');
       setBearingCapacitySource('theoretical');
+      setEccentricityX(0);
+      setEccentricityY(0);
     } else if (presetKey === 'high_water') {
       setSlabThicknessInches(10);
       setConcreteDensityPcf(150);
@@ -258,6 +732,8 @@ const HelicalHouseVisualizer = ({ problem }) => {
       setHelixCount(2);
       setSoilKey('loose_sand');
       setBearingCapacitySource('theoretical');
+      setEccentricityX(0);
+      setEccentricityY(0);
     } else if (presetKey === 'heavy_residence') {
       setSlabThicknessInches(12);
       setConcreteDensityPcf(150);
@@ -269,6 +745,22 @@ const HelicalHouseVisualizer = ({ problem }) => {
       setHelixCount(2);
       setSoilKey('dense_sand');
       setBearingCapacitySource('theoretical');
+      setEccentricityX(5);
+      setEccentricityY(4);
+    } else if (presetKey === 'uplift_hazard') {
+      setSlabThicknessInches(8);
+      setConcreteDensityPcf(150);
+      setHouseWeightKips(200);
+      setSurchargePsf(60);
+      setPileDepthFt(25);
+      setWaterTableDepthFt(8);
+      setHelixDiameterInches(12);
+      setHelixCount(1);
+      setSoilKey('medium_sand');
+      setBearingCapacitySource('theoretical');
+      setEccentricityX(11);
+      setEccentricityY(10);
+      setActiveTab('heatmap');
     }
   };
 
@@ -349,6 +841,13 @@ const HelicalHouseVisualizer = ({ problem }) => {
             onClick={() => applyPreset('heavy_residence')}
           >
             Heavy 2-Story (350k)
+          </button>
+          <button
+            className="btn-secondary"
+            style={{ fontSize: '0.75rem', padding: '0.35rem 0.65rem', borderColor: 'rgba(244, 63, 94, 0.4)', color: 'var(--accent-rose)' }}
+            onClick={() => applyPreset('uplift_hazard')}
+          >
+            🚨 Tension Uplift (11′, 10′)
           </button>
 
           <button
@@ -939,13 +1438,175 @@ const HelicalHouseVisualizer = ({ problem }) => {
               </div>
             </div>
           </div>
+
+          {/* Section E: Load Eccentricity & Aerial Moments */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className="text-xs text-muted" style={{ textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 700, color: 'var(--accent-rose, #f43f5e)' }}>
+                5. Load Eccentricity & Aerial Moments
+              </span>
+              {eccentricityResults.isUplift && (
+                <span className="glass-badge" style={{ fontSize: '0.65rem', borderColor: 'rgba(244, 63, 94, 0.4)', color: 'var(--accent-rose)' }}>
+                  🚨 Uplift Active
+                </span>
+              )}
+            </div>
+
+            {/* East-West Offset (ex) Slider */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.35rem' }}>
+                <span className="text-muted">East-West Eccentricity (ex):</span>
+                <strong style={{ fontFamily: 'var(--font-mono)', color: eccentricityX !== 0 ? 'var(--accent-rose)' : 'var(--text-main)' }}>
+                  {eccentricityX > 0 ? `+${eccentricityX} ft (East)` : eccentricityX < 0 ? `${eccentricityX} ft (West)` : '0.0 ft (Centered)'}
+                </strong>
+              </div>
+              <input
+                type="range"
+                min="-15"
+                max="15"
+                step="1"
+                value={eccentricityX}
+                onChange={(e) => setEccentricityX(Number(e.target.value))}
+                style={{ width: '100%', accentColor: 'var(--accent-rose, #f43f5e)' }}
+              />
+            </div>
+
+            {/* North-South Offset (ey) Slider */}
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.35rem' }}>
+                <span className="text-muted">North-South Eccentricity (ey):</span>
+                <strong style={{ fontFamily: 'var(--font-mono)', color: eccentricityY !== 0 ? 'var(--accent-rose)' : 'var(--text-main)' }}>
+                  {eccentricityY > 0 ? `+${eccentricityY} ft (North)` : eccentricityY < 0 ? `${eccentricityY} ft (South)` : '0.0 ft (Centered)'}
+                </strong>
+              </div>
+              <input
+                type="range"
+                min="-15"
+                max="15"
+                step="1"
+                value={eccentricityY}
+                onChange={(e) => setEccentricityY(Number(e.target.value))}
+                style={{ width: '100%', accentColor: 'var(--accent-rose, #f43f5e)' }}
+              />
+            </div>
+
+            {/* Quick Eccentricity Presets */}
+            <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ fontSize: '0.65rem', padding: '0.2rem 0.45rem' }}
+                onClick={() => { setEccentricityX(0); setEccentricityY(0); }}
+              >
+                🎯 Centered (0, 0)
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ fontSize: '0.65rem', padding: '0.2rem 0.45rem' }}
+                onClick={() => { setEccentricityX(6); setEccentricityY(3); }}
+              >
+                🚗 East Garage (+6, +3)
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ fontSize: '0.65rem', padding: '0.2rem 0.45rem' }}
+                onClick={() => { setEccentricityX(-8); setEccentricityY(7); }}
+              >
+                🏡 NW 2-Story (-8, +7)
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ fontSize: '0.65rem', padding: '0.2rem 0.45rem', borderColor: 'rgba(244, 63, 94, 0.4)', color: 'var(--accent-rose)' }}
+                onClick={() => { setEccentricityX(11); setEccentricityY(10); setActiveTab('heatmap'); }}
+              >
+                🚨 Kern Uplift (+11, +10)
+              </button>
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ fontSize: '0.65rem', padding: '0.2rem 0.45rem' }}
+                onClick={() => { setEccentricityX(0); setEccentricityY(-10); }}
+              >
+                🌪️ Wind Overturn (0, -10)
+              </button>
+            </div>
+
+            {/* Dynamic Eccentricity Readout Callout */}
+            <div style={{
+              padding: '0.75rem 1rem',
+              background: eccentricityResults.isUplift ? 'rgba(244, 63, 94, 0.1)' : 'rgba(244, 63, 94, 0.05)',
+              border: `1px solid ${eccentricityResults.isUplift ? 'rgba(244, 63, 94, 0.4)' : 'rgba(244, 63, 94, 0.2)'}`,
+              borderRadius: '10px',
+              fontSize: '0.82rem'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+                <span className="text-muted">Resultant Eccentricity (e):</span>
+                <strong style={{ fontFamily: 'var(--font-mono)', color: eccentricityResults.isUplift ? 'var(--accent-rose)' : '#f8fafc' }}>
+                  {eccentricityResults.eMag.toFixed(2)} ft ({eccentricityResults.isUplift ? '⚠️ Out of Kern' : '✅ Inside Kern'})
+                </strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem' }}>
+                <span className="text-muted">Overturning Moments:</span>
+                <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-rose)' }}>
+                  Mx: {eccentricityResults.Mx.toFixed(0)}k-ft • My: {eccentricityResults.My.toFixed(0)}k-ft
+                </strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem' }}>
+                <span className="text-muted">Extreme Contact Pressures:</span>
+                <span style={{ fontFamily: 'var(--font-mono)', color: eccentricityResults.qMin < 0 ? 'var(--accent-rose)' : '#38bdf8' }}>
+                  qmax: {eccentricityResults.qMax.toFixed(0)} psf • qmin: {eccentricityResults.qMin.toFixed(0)} psf
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Right Column: Dynamic SVG Schematics & Math Breakdown */}
+        {/* Right Column: Dynamic SVG Schematics, Heat Map & Math Breakdown */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          {/* Global Status & Quick Issue Header Bar */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '0.5rem',
+            padding: '0.5rem 0.85rem',
+            background: 'rgba(255, 255, 255, 0.02)',
+            borderRadius: '10px',
+            border: '1px solid var(--border-color)',
+            fontSize: '0.8rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontWeight: 700, color: 'var(--text-muted)' }}>Foundation Health:</span>
+              {eccentricityResults.issues.length === 0 ? (
+                <span style={{ color: 'var(--accent-emerald)', fontWeight: 600 }}>
+                  ✅ Compliant (All Checks Safe)
+                </span>
+              ) : (
+                <span style={{ color: 'var(--accent-rose)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                  <span>⚠️</span> {eccentricityResults.issues.length} Structural / Geotechnical Alert{eccentricityResults.issues.length > 1 ? 's' : ''} Active
+                </span>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                Peak Moment: <strong style={{ color: eccentricityResults.isCracking ? 'var(--accent-amber)' : '#f8fafc' }}>{eccentricityResults.maxSlabMoment.toFixed(1)} k-ft/ft</strong> (Mcr = {eccentricityResults.mCracking.toFixed(1)})
+              </span>
+              <span style={{ color: 'var(--border-color)' }}>•</span>
+              <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                Max Pile: <strong style={{ color: eccentricityResults.overloadedCount > 0 ? 'var(--accent-rose)' : '#38bdf8' }}>{eccentricityResults.maxPileR.toFixed(1)}k</strong> / {activeGrid.qAllow}k
+              </span>
+            </div>
+          </div>
+
           {/* View Tab Selector */}
           <div style={{
             display: 'flex',
+            flexWrap: 'wrap',
             gap: '0.5rem',
             padding: '0.35rem',
             background: 'var(--bg-card)',
@@ -956,7 +1617,7 @@ const HelicalHouseVisualizer = ({ problem }) => {
               className={`btn-secondary ${activeTab === 'elevation' ? 'active' : ''}`}
               style={{
                 flex: 1,
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 padding: '0.5rem',
                 background: activeTab === 'elevation' ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
                 borderColor: activeTab === 'elevation' ? 'var(--accent-blue)' : 'transparent',
@@ -970,7 +1631,7 @@ const HelicalHouseVisualizer = ({ problem }) => {
               className={`btn-secondary ${activeTab === 'plan' ? 'active' : ''}`}
               style={{
                 flex: 1,
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 padding: '0.5rem',
                 background: activeTab === 'plan' ? 'rgba(16, 185, 129, 0.15)' : 'transparent',
                 borderColor: activeTab === 'plan' ? 'var(--accent-emerald)' : 'transparent',
@@ -981,10 +1642,25 @@ const HelicalHouseVisualizer = ({ problem }) => {
               🗺️ 50′ × 50′ Foundation Plan ({activeGrid.gridK}×{activeGrid.gridK})
             </button>
             <button
+              className={`btn-secondary ${activeTab === 'heatmap' ? 'active' : ''}`}
+              style={{
+                flex: 1.15,
+                fontSize: '0.82rem',
+                padding: '0.5rem',
+                background: activeTab === 'heatmap' ? 'rgba(244, 63, 94, 0.18)' : 'transparent',
+                borderColor: activeTab === 'heatmap' ? 'var(--accent-rose, #f43f5e)' : 'transparent',
+                color: activeTab === 'heatmap' ? 'var(--accent-rose, #f43f5e)' : 'var(--text-muted)',
+                fontWeight: activeTab === 'heatmap' ? 700 : 500
+              }}
+              onClick={() => setActiveTab('heatmap')}
+            >
+              🔥 Aerial Slab Heat Map (Moments & Eccentricity)
+            </button>
+            <button
               className={`btn-secondary ${activeTab === 'stress' ? 'active' : ''}`}
               style={{
                 flex: 1,
-                fontSize: '0.85rem',
+                fontSize: '0.82rem',
                 padding: '0.5rem',
                 background: activeTab === 'stress' ? 'rgba(6, 182, 212, 0.15)' : 'transparent',
                 borderColor: activeTab === 'stress' ? 'var(--accent-cyan)' : 'transparent',
@@ -1341,7 +2017,966 @@ const HelicalHouseVisualizer = ({ problem }) => {
               </svg>
             )}
 
-            {/* TAB 3: Stress Depth Profile */}
+            {/* TAB 3: Aerial Slab Heat Map (Moments & Eccentricity) */}
+            {activeTab === 'heatmap' && (
+              <div style={{ display: 'flex', flexDirection: 'column', width: '100%', padding: '0.75rem' }}>
+                {/* Metric Selector & Subdivision Controls Sub-Bar */}
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  padding: '0.6rem 0.85rem',
+                  background: 'rgba(15, 23, 42, 0.85)',
+                  borderRadius: '10px',
+                  border: '1px solid var(--border-color)',
+                  marginBottom: '0.75rem'
+                }}>
+                  {/* Row 1: Slab Subdivision Mode */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', gap: '0.35rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span className="text-xs text-muted" style={{ fontWeight: 700, color: 'var(--accent-purple)' }}>
+                        Slab Subdivision:
+                      </span>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.6rem',
+                          background: subdivisionMode === 'quadrants' ? 'rgba(168, 85, 247, 0.25)' : 'transparent',
+                          borderColor: subdivisionMode === 'quadrants' ? 'var(--accent-purple, #a855f7)' : 'var(--border-color)',
+                          color: subdivisionMode === 'quadrants' ? 'var(--accent-purple, #a855f7)' : 'var(--text-muted)',
+                          fontWeight: subdivisionMode === 'quadrants' ? 700 : 500
+                        }}
+                        onClick={() => { setSubdivisionMode('quadrants'); setSectionCardTab('quadrants'); }}
+                      >
+                        🧩 4 Quadrants (25′ × 25′)
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.6rem',
+                          background: subdivisionMode === 'sections' ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
+                          borderColor: subdivisionMode === 'sections' ? 'var(--accent-blue, #38bdf8)' : 'var(--border-color)',
+                          color: subdivisionMode === 'sections' ? 'var(--accent-blue, #38bdf8)' : 'var(--text-muted)',
+                          fontWeight: subdivisionMode === 'sections' ? 700 : 500
+                        }}
+                        onClick={() => { setSubdivisionMode('sections'); setSectionCardTab('sections'); }}
+                      >
+                        📐 16 Structural Bays (12.5′ × 12.5′)
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.6rem',
+                          background: subdivisionMode === 'mesh' ? 'rgba(16, 185, 129, 0.25)' : 'transparent',
+                          borderColor: subdivisionMode === 'mesh' ? 'var(--accent-emerald, #10b981)' : 'var(--border-color)',
+                          color: subdivisionMode === 'mesh' ? 'var(--accent-emerald, #10b981)' : 'var(--text-muted)',
+                          fontWeight: subdivisionMode === 'mesh' ? 700 : 500
+                        }}
+                        onClick={() => setSubdivisionMode('mesh')}
+                      >
+                        🔥 256 Continuous Elements
+                      </button>
+                    </div>
+
+                    {selectedSectionId && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span className="glass-badge" style={{ fontSize: '0.7rem', color: '#38bdf8', borderColor: '#38bdf8' }}>
+                          Focused: {selectedSectionId}
+                        </span>
+                        <button
+                          type="button"
+                          className="btn-secondary"
+                          style={{ fontSize: '0.68rem', padding: '0.15rem 0.4rem' }}
+                          onClick={() => setSelectedSectionId(null)}
+                        >
+                          ✕ Clear Focus
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Row 2: Metric Buttons & Layer Checkboxes */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.4rem' }}>
+                    <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Metric:</span>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.55rem',
+                          background: heatMapMetric === 'moment' ? 'rgba(244, 63, 94, 0.2)' : 'transparent',
+                          borderColor: heatMapMetric === 'moment' ? 'var(--accent-rose, #f43f5e)' : 'var(--border-color)',
+                          color: heatMapMetric === 'moment' ? 'var(--accent-rose, #f43f5e)' : 'var(--text-muted)',
+                          fontWeight: heatMapMetric === 'moment' ? 700 : 500
+                        }}
+                        onClick={() => setHeatMapMetric('moment')}
+                      >
+                        ⚡ Bending Moment M
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.55rem',
+                          background: heatMapMetric === 'pressure' ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
+                          borderColor: heatMapMetric === 'pressure' ? 'var(--accent-blue, #38bdf8)' : 'var(--border-color)',
+                          color: heatMapMetric === 'pressure' ? 'var(--accent-blue, #38bdf8)' : 'var(--text-muted)',
+                          fontWeight: heatMapMetric === 'pressure' ? 700 : 500
+                        }}
+                        onClick={() => setHeatMapMetric('pressure')}
+                      >
+                        🧭 Soil Bearing q
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.55rem',
+                          background: heatMapMetric === 'pileReaction' ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
+                          borderColor: heatMapMetric === 'pileReaction' ? 'var(--accent-emerald, #10b981)' : 'var(--border-color)',
+                          color: heatMapMetric === 'pileReaction' ? 'var(--accent-emerald, #10b981)' : 'var(--text-muted)',
+                          fontWeight: heatMapMetric === 'pileReaction' ? 700 : 500
+                        }}
+                        onClick={() => setHeatMapMetric('pileReaction')}
+                      >
+                        🔩 Pile Reactions R
+                      </button>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{
+                          fontSize: '0.72rem',
+                          padding: '0.25rem 0.55rem',
+                          background: heatMapMetric === 'quadrant' ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
+                          borderColor: heatMapMetric === 'quadrant' ? 'var(--accent-purple, #a855f7)' : 'var(--border-color)',
+                          color: heatMapMetric === 'quadrant' ? 'var(--accent-purple, #a855f7)' : 'var(--text-muted)',
+                          fontWeight: heatMapMetric === 'quadrant' ? 700 : 500
+                        }}
+                        onClick={() => setHeatMapMetric('quadrant')}
+                      >
+                        📊 Load Share (%)
+                      </button>
+                    </div>
+
+                    {/* Layer Checkboxes */}
+                    <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center', fontSize: '0.75rem' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer', color: '#cbd5e1' }}>
+                        <input
+                          type="checkbox"
+                          checked={showPilesOnHeatMap}
+                          onChange={(e) => setShowPilesOnHeatMap(e.target.checked)}
+                          style={{ accentColor: 'var(--accent-emerald)' }}
+                        />
+                        Piles ({activeGrid.nInstalled})
+                      </label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer', color: '#cbd5e1' }}>
+                        <input
+                          type="checkbox"
+                          checked={showKernBoundary}
+                          onChange={(e) => setShowKernBoundary(e.target.checked)}
+                          style={{ accentColor: 'var(--accent-amber)' }}
+                        />
+                        Kern Diamond
+                      </label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer', color: '#cbd5e1' }}>
+                        <input
+                          type="checkbox"
+                          checked={showQuadrantDividers}
+                          onChange={(e) => setShowQuadrantDividers(e.target.checked)}
+                          style={{ accentColor: 'var(--accent-cyan)' }}
+                        />
+                        Dividers
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* SVG Top-Down Heat Map */}
+                <svg
+                  viewBox="0 0 720 540"
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                >
+                  <defs>
+                    {/* Tension / Uplift Striped Hatch Pattern */}
+                    <pattern id="tensionHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                      <line x1="0" y1="0" x2="0" y2="8" stroke="#c084fc" strokeWidth="2.5" opacity="0.9" />
+                    </pattern>
+
+                    {/* Overloaded Pile Glow Filter */}
+                    <filter id="overloadPulse" x="-50%" y="-50%" width="200%" height="200%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#f43f5e" />
+                    </filter>
+
+                    {/* Selected Section Focus Glow Filter */}
+                    <filter id="selectedGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#38bdf8" floodOpacity="0.85" />
+                    </filter>
+
+                    {/* Colormap Legend Gradient */}
+                    <linearGradient id="heatLegendGrad" x1="0" y1="1" x2="0" y2="0">
+                      <stop offset="0%" stopColor="#0284c7" />
+                      <stop offset="25%" stopColor="#10b981" />
+                      <stop offset="50%" stopColor="#eab308" />
+                      <stop offset="75%" stopColor="#f97316" />
+                      <stop offset="100%" stopColor="#f43f5e" />
+                    </linearGradient>
+
+                    {/* Canvas Sub-grid */}
+                    <pattern id="heatSubGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.025)" strokeWidth="1" />
+                    </pattern>
+                  </defs>
+
+                  <rect x="0" y="0" width="720" height="540" fill="url(#heatSubGrid)" />
+
+                  {/* Compass Indicator */}
+                  <g transform="translate(40, 40)">
+                    <circle cx="16" cy="16" r="15" fill="rgba(15,23,42,0.8)" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
+                    <line x1="16" y1="5" x2="16" y2="27" stroke="#64748b" strokeWidth="1" />
+                    <line x1="5" y1="16" x2="27" y2="16" stroke="#64748b" strokeWidth="1" />
+                    <polygon points="16,5 13,13 19,13" fill="#f43f5e" />
+                    <polygon points="16,27 13,19 19,19" fill="#94a3b8" />
+                    <text x="16" y="2" fill="#f43f5e" fontSize="8" fontWeight="800" textAnchor="middle">N</text>
+                  </g>
+
+                  {/* Dimension Annotations */}
+                  {/* Top Width Dimension (50.0 ft) */}
+                  <line x1="100" y1="32" x2="460" y2="32" stroke="#94a3b8" strokeWidth="1.5" />
+                  <line x1="100" y1="27" x2="100" y2="37" stroke="#94a3b8" strokeWidth="1.5" />
+                  <line x1="460" y1="27" x2="460" y2="37" stroke="#94a3b8" strokeWidth="1.5" />
+                  <text x="280" y="26" fill="#f8fafc" fontSize="11" fontWeight="700" textAnchor="middle">
+                    50.0 ft Slab Width (East-West)
+                  </text>
+
+                  {/* Left Length Dimension (50.0 ft) */}
+                  <line x1="82" y1="50" x2="82" y2="410" stroke="#94a3b8" strokeWidth="1.5" />
+                  <line x1="77" y1="50" x2="87" y2="50" stroke="#94a3b8" strokeWidth="1.5" />
+                  <line x1="77" y1="410" x2="87" y2="410" stroke="#94a3b8" strokeWidth="1.5" />
+                  <text x="74" y="230" fill="#f8fafc" fontSize="11" fontWeight="700" textAnchor="end" dominantBaseline="middle">
+                    50.0 ft Length
+                  </text>
+
+                  {/* SUBDIVISION RENDERER: Tri-Modal (Mesh / 4 Quadrants / 16 Bays) */}
+
+                  {/* Mode 1: 16 x 16 Continuous Elements Mesh (256 Cells) */}
+                  {subdivisionMode === 'mesh' && (
+                    <g>
+                      {heatMapCells.cells.map((cell) => {
+                        const cellX = 100 + cell.c * 22.5;
+                        const cellY = 50 + cell.r * 22.5;
+                        const isHovered = hoveredCell && hoveredCell.r === cell.r && hoveredCell.c === cell.c;
+                        return (
+                          <g key={`${cell.r}-${cell.c}`}>
+                            <rect
+                              x={cellX}
+                              y={cellY}
+                              width={22.5}
+                              height={22.5}
+                              fill={cell.color}
+                              stroke={isHovered ? '#ffffff' : 'rgba(0,0,0,0.1)'}
+                              strokeWidth={isHovered ? 2 : 0.4}
+                              style={{ cursor: 'crosshair' }}
+                              onMouseEnter={() => setHoveredCell(cell)}
+                              onMouseLeave={() => setHoveredCell(null)}
+                            />
+                            {cell.isTension && (heatMapMetric === 'pressure' || heatMapMetric === 'moment') && (
+                              <rect
+                                x={cellX}
+                                y={cellY}
+                                width={22.5}
+                                height={22.5}
+                                fill="url(#tensionHatch)"
+                                opacity="0.65"
+                                pointerEvents="none"
+                              />
+                            )}
+                          </g>
+                        );
+                      })}
+                    </g>
+                  )}
+
+                  {/* Mode 2: 4 Quadrants (25′ × 25′ each) */}
+                  {subdivisionMode === 'quadrants' && (
+                    <g>
+                      {heatMapCells.coloredQuadrants.map((quad) => {
+                        const qx = quad.cx < 0 ? 100 : 280;
+                        const qy = quad.cy > 0 ? 50 : 230;
+                        const isSelected = selectedSectionId === quad.id;
+                        const isHovered = hoveredCell && hoveredCell.id === quad.id;
+                        return (
+                          <g
+                            key={quad.id}
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => setSelectedSectionId(selectedSectionId === quad.id ? null : quad.id)}
+                            onMouseEnter={() => setHoveredCell(quad)}
+                            onMouseLeave={() => setHoveredCell(null)}
+                          >
+                            <rect
+                              x={qx}
+                              y={qy}
+                              width={180}
+                              height={180}
+                              fill={quad.color}
+                              fillOpacity={selectedSectionId && !isSelected ? 0.35 : 0.88}
+                              stroke={isSelected ? '#38bdf8' : isHovered ? '#ffffff' : 'rgba(255,255,255,0.35)'}
+                              strokeWidth={isSelected ? 3.5 : isHovered ? 2.5 : 1.2}
+                              filter={isSelected ? 'url(#selectedGlow)' : undefined}
+                            />
+                            {quad.hasUplift && (heatMapMetric === 'pressure' || heatMapMetric === 'moment') && (
+                              <rect
+                                x={qx}
+                                y={qy}
+                                width={180}
+                                height={180}
+                                fill="url(#tensionHatch)"
+                                opacity="0.45"
+                                pointerEvents="none"
+                              />
+                            )}
+
+                            {/* Quadrant Central Card & Readout */}
+                            <g pointerEvents="none" transform={`translate(${qx + 90}, ${qy + 90})`}>
+                              <rect
+                                x="-75"
+                                y="-55"
+                                width="150"
+                                height="110"
+                                rx="8"
+                                fill="rgba(15, 23, 42, 0.88)"
+                                stroke={isSelected ? '#38bdf8' : 'rgba(255,255,255,0.18)'}
+                                strokeWidth="1.2"
+                              />
+                              <text x="0" y="-35" fill={quad.color} fontSize="11" fontWeight="800" textAnchor="middle">
+                                {quad.name}
+                              </text>
+                              <text x="0" y="-14" fill="#f8fafc" fontSize="13" fontWeight="800" textAnchor="middle">
+                                {heatMapMetric === 'moment' && `M = ${quad.peakMoment.toFixed(2)} k-ft`}
+                                {heatMapMetric === 'pressure' && `q = ${quad.qAvgPsf.toFixed(0)} psf`}
+                                {heatMapMetric === 'pileReaction' && `Rmax = ${quad.maxPileReaction.toFixed(1)}k`}
+                                {heatMapMetric === 'quadrant' && `${quad.loadPct.toFixed(1)}% Share`}
+                              </text>
+                              <text x="0" y="3" fill="#cbd5e1" fontSize="9.5" textAnchor="middle">
+                                Load: {quad.loadKips.toFixed(1)}k ({quad.loadPct.toFixed(0)}%)
+                              </text>
+                              <text x="0" y="18" fill="#94a3b8" fontSize="9" textAnchor="middle">
+                                {quad.pileCount} Piles • Rmax: {quad.maxPileReaction.toFixed(1)}k
+                              </text>
+                              <rect
+                                x="-45"
+                                y="27"
+                                width="90"
+                                height="16"
+                                rx="4"
+                                fill={quad.status === 'critical' ? 'rgba(244,63,94,0.3)' : quad.status === 'warning' ? 'rgba(245,158,11,0.3)' : 'rgba(16,185,129,0.3)'}
+                                stroke={quad.status === 'critical' ? '#f43f5e' : quad.status === 'warning' ? '#f59e0b' : '#10b981'}
+                                strokeWidth="1"
+                              />
+                              <text
+                                x="0"
+                                y="39"
+                                fill={quad.status === 'critical' ? '#f43f5e' : quad.status === 'warning' ? '#f59e0b' : '#10b981'}
+                                fontSize="8.5"
+                                fontWeight="800"
+                                textAnchor="middle"
+                              >
+                                {quad.status === 'critical' ? (quad.hasUplift ? '⚠️ LIFTOFF' : '⚠️ OVERLOAD') : quad.status === 'warning' ? '⚠️ ELEVATED' : '✅ BALANCED'}
+                              </text>
+                            </g>
+                          </g>
+                        );
+                      })}
+                    </g>
+                  )}
+
+                  {/* Mode 3: 16 Structural Bays / Sections (12.5′ × 12.5′ each) */}
+                  {subdivisionMode === 'sections' && (
+                    <g>
+                      {heatMapCells.coloredSections16.map((sec) => {
+                        const bx = 100 + sec.colIdx * 90;
+                        const by = 50 + sec.rowIdx * 90;
+                        const isSelected = selectedSectionId === sec.id;
+                        const isHovered = hoveredCell && hoveredCell.id === sec.id;
+                        return (
+                          <g
+                            key={sec.id}
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => setSelectedSectionId(selectedSectionId === sec.id ? null : sec.id)}
+                            onMouseEnter={() => setHoveredCell(sec)}
+                            onMouseLeave={() => setHoveredCell(null)}
+                          >
+                            <rect
+                              x={bx}
+                              y={by}
+                              width={90}
+                              height={90}
+                              fill={sec.color}
+                              fillOpacity={selectedSectionId && !isSelected ? 0.35 : 0.85}
+                              stroke={isSelected ? '#38bdf8' : isHovered ? '#ffffff' : 'rgba(255,255,255,0.22)'}
+                              strokeWidth={isSelected ? 3.5 : isHovered ? 2.2 : 0.8}
+                              filter={isSelected ? 'url(#selectedGlow)' : undefined}
+                            />
+                            {sec.hasUplift && (heatMapMetric === 'pressure' || heatMapMetric === 'moment') && (
+                              <rect
+                                x={bx}
+                                y={by}
+                                width={90}
+                                height={90}
+                                fill="url(#tensionHatch)"
+                                opacity="0.45"
+                                pointerEvents="none"
+                              />
+                            )}
+
+                            {/* Bay Central Tag & Readout */}
+                            <g pointerEvents="none">
+                              <rect x={bx + 4} y={by + 4} width="22" height="15" rx="3" fill="rgba(15,23,42,0.85)" stroke="rgba(255,255,255,0.2)" strokeWidth="0.8" />
+                              <text x={bx + 15} y={by + 15} fill="#f8fafc" fontSize="8.5" fontWeight="800" textAnchor="middle">
+                                {sec.id}
+                              </text>
+
+                              <text x={bx + 45} y={by + 42} fill="#ffffff" fontSize="10.5" fontWeight="800" textAnchor="middle">
+                                {heatMapMetric === 'moment' && `${sec.peakMoment.toFixed(2)}k-ft`}
+                                {heatMapMetric === 'pressure' && `${sec.qAvgPsf.toFixed(0)} psf`}
+                                {heatMapMetric === 'pileReaction' && `${sec.maxPileReaction.toFixed(1)}k`}
+                                {heatMapMetric === 'quadrant' && `${sec.loadPct.toFixed(1)}%`}
+                              </text>
+
+                              <text x={bx + 45} y={by + 58} fill="#e2e8f0" fontSize="8.5" textAnchor="middle">
+                                {sec.loadKips.toFixed(1)}k ({sec.loadPct.toFixed(1)}%)
+                              </text>
+
+                              <circle
+                                cx={bx + 80}
+                                cy={by + 11}
+                                r="4.5"
+                                fill={sec.status === 'critical' ? '#f43f5e' : sec.status === 'warning' ? '#f59e0b' : '#10b981'}
+                              />
+                            </g>
+                          </g>
+                        );
+                      })}
+                    </g>
+                  )}
+
+                  {/* Outer Slab Boundary Frame */}
+                  <rect
+                    x="100"
+                    y="50"
+                    width="360"
+                    height="360"
+                    fill="none"
+                    stroke="#e2e8f0"
+                    strokeWidth="2.5"
+                    rx="4"
+                    pointerEvents="none"
+                  />
+
+                  {/* Quadrant & Bay Partition Grid Lines & Tags */}
+                  {showQuadrantDividers && (
+                    <g pointerEvents="none">
+                      {/* Sub-bay dividers if in sections mode — 3 interior cols + 3 interior rows */}
+                      {subdivisionMode === 'sections' && (
+                        <>
+                          {/* Interior column lines at 12.5′, 25′ (center), 37.5′ */}
+                          <line x1="190" y1="50" x2="190" y2="410" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          <line x1="280" y1="50" x2="280" y2="410" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          <line x1="370" y1="50" x2="370" y2="410" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          {/* Interior row lines at 12.5′, 25′ (center), 37.5′ */}
+                          <line x1="100" y1="140" x2="460" y2="140" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          <line x1="100" y1="230" x2="460" y2="230" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          <line x1="100" y1="320" x2="460" y2="320" stroke="rgba(255,255,255,0.22)" strokeWidth="0.9" strokeDasharray="3,3" />
+                          {/* Column labels A–D */}
+                          {['A','B','C','D'].map((l,i) => (
+                            <text key={l} x={145 + i*90} y={46} fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="700" textAnchor="middle">{l}</text>
+                          ))}
+                          {/* Row labels 1–4 */}
+                          {['1','2','3','4'].map((l,i) => (
+                            <text key={l} x={96} y={97 + i*90} fill="rgba(255,255,255,0.5)" fontSize="9" fontWeight="700" textAnchor="end">{l}</text>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Major Quadrant Axis Dividers (x = 0, y = 0) */}
+                      <line x1="280" y1="50" x2="280" y2="410" stroke="#ffffff" strokeWidth="1.8" strokeDasharray="6,4" opacity="0.75" />
+                      <line x1="100" y1="230" x2="460" y2="230" stroke="#ffffff" strokeWidth="1.8" strokeDasharray="6,4" opacity="0.75" />
+
+                      {/* Quadrant Overlay Corner Tags (Shown in Mesh & Sections modes) */}
+                      {subdivisionMode !== 'quadrants' && (
+                        <>
+                          {/* Q2: NW */}
+                          <rect x="105" y="55" width="108" height="34" rx="6" fill="rgba(15,23,42,0.85)" stroke="#38bdf8" strokeWidth="1" />
+                          <text x="112" y="69" fill="#38bdf8" fontSize="9.5" fontWeight="700">Q2 (North-West)</text>
+                          <text x="112" y="82" fill="#cbd5e1" fontSize="8.5">
+                            {eccentricityResults.quadrants[0].loadKips.toFixed(1)}k ({eccentricityResults.quadrants[0].loadPct.toFixed(0)}%) • M:{eccentricityResults.quadrants[0].peakMoment.toFixed(1)}
+                          </text>
+
+                          {/* Q1: NE */}
+                          <rect x="347" y="55" width="108" height="34" rx="6" fill="rgba(15,23,42,0.85)" stroke="#10b981" strokeWidth="1" />
+                          <text x="354" y="69" fill="#10b981" fontSize="9.5" fontWeight="700">Q1 (North-East)</text>
+                          <text x="354" y="82" fill="#cbd5e1" fontSize="8.5">
+                            {eccentricityResults.quadrants[1].loadKips.toFixed(1)}k ({eccentricityResults.quadrants[1].loadPct.toFixed(0)}%) • M:{eccentricityResults.quadrants[1].peakMoment.toFixed(1)}
+                          </text>
+
+                          {/* Q3: SW */}
+                          <rect x="105" y="371" width="108" height="34" rx="6" fill="rgba(15,23,42,0.85)" stroke="#f59e0b" strokeWidth="1" />
+                          <text x="112" y="385" fill="#f59e0b" fontSize="9.5" fontWeight="700">Q3 (South-West)</text>
+                          <text x="112" y="398" fill="#cbd5e1" fontSize="8.5">
+                            {eccentricityResults.quadrants[2].loadKips.toFixed(1)}k ({eccentricityResults.quadrants[2].loadPct.toFixed(0)}%) • M:{eccentricityResults.quadrants[2].peakMoment.toFixed(1)}
+                          </text>
+
+                          {/* Q4: SE */}
+                          <rect x="347" y="371" width="108" height="34" rx="6" fill="rgba(15,23,42,0.85)" stroke="#a855f7" strokeWidth="1" />
+                          <text x="354" y="385" fill="#a855f7" fontSize="9.5" fontWeight="700">Q4 (South-East)</text>
+                          <text x="354" y="398" fill="#cbd5e1" fontSize="8.5">
+                            {eccentricityResults.quadrants[3].loadKips.toFixed(1)}k ({eccentricityResults.quadrants[3].loadPct.toFixed(0)}%) • M:{eccentricityResults.quadrants[3].peakMoment.toFixed(1)}
+                          </text>
+                        </>
+                      )}
+                    </g>
+                  )}
+
+                  {/* Middle-Third Kern Diamond Overlay (B/6 = 8.33 ft = 60 px radius) */}
+                  {showKernBoundary && (
+                    <g pointerEvents="none">
+                      <polygon
+                        points="280,170 340,230 280,290 220,230"
+                        fill={eccentricityResults.isUplift ? 'rgba(244, 63, 94, 0.08)' : 'rgba(234, 179, 8, 0.04)'}
+                        stroke={eccentricityResults.isUplift ? '#f43f5e' : '#eab308'}
+                        strokeWidth={eccentricityResults.isUplift ? 2.5 : 1.8}
+                        strokeDasharray={eccentricityResults.isUplift ? '6,3' : '4,4'}
+                      />
+                      <text
+                        x="280"
+                        y={eccentricityResults.isUplift ? 224 : 227}
+                        fill={eccentricityResults.isUplift ? '#f43f5e' : '#fef08a'}
+                        fontSize="9.5"
+                        fontWeight="700"
+                        textAnchor="middle"
+                      >
+                        {eccentricityResults.isUplift ? 'KERN EXCEEDED (e > 8.3′)' : 'Kern Limit (e ≤ 8.3′)'}
+                      </text>
+                      <text
+                        x="280"
+                        y={eccentricityResults.isUplift ? 237 : 239}
+                        fill={eccentricityResults.isUplift ? '#fda4af' : '#cbd5e1'}
+                        fontSize="8.5"
+                        textAnchor="middle"
+                      >
+                        {eccentricityResults.isUplift ? '⚠️ Tension Uplift Hazard' : 'Full Base Compression'}
+                      </text>
+                    </g>
+                  )}
+
+                  {/* Resultant Load Centroid Target Bullseye */}
+                  {(() => {
+                    const cxCent = Math.max(105, Math.min(455, 280 + eccentricityX * 7.2));
+                    const cyCent = Math.max(55, Math.min(405, 230 - eccentricityY * 7.2));
+                    return (
+                      <g pointerEvents="none">
+                        {/* Connecting Eccentricity Vector from Center */}
+                        {(eccentricityX !== 0 || eccentricityY !== 0) && (
+                          <line
+                            x1="280"
+                            y1="230"
+                            x2={cxCent}
+                            y2={cyCent}
+                            stroke="#f43f5e"
+                            strokeWidth="2.5"
+                            strokeDasharray="4,3"
+                          />
+                        )}
+                        {/* Center Origin Mark */}
+                        <circle cx="280" cy="230" r="3" fill="#cbd5e1" opacity="0.7" />
+
+                        {/* Outer Pulsing Bullseye Ring */}
+                        <circle
+                          cx={cxCent}
+                          cy={cyCent}
+                          r="14"
+                          fill="rgba(244, 63, 94, 0.15)"
+                          stroke="#f43f5e"
+                          strokeWidth="2"
+                        />
+                        <circle cx={cxCent} cy={cyCent} r="5" fill="#f43f5e" />
+                        <line x1={cxCent - 18} y1={cyCent} x2={cxCent + 18} y2={cyCent} stroke="#ffffff" strokeWidth="1.2" />
+                        <line x1={cxCent} y1={cyCent - 18} x2={cxCent} y2={cyCent + 18} stroke="#ffffff" strokeWidth="1.2" />
+
+                        {/* Centroid Coordinates Badge */}
+                        <g transform={`translate(${cxCent > 340 ? cxCent - 145 : cxCent + 16}, ${cyCent > 340 ? cyCent - 30 : cyCent - 8})`}>
+                          <rect x="0" y="0" width="135" height="32" rx="6" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(244, 63, 94, 0.6)" strokeWidth="1" />
+                          <text x="8" y="14" fill="#ffffff" fontSize="9.5" fontWeight="700">
+                            P = {totalDownwardLoadKips.toFixed(0)}k Load Center
+                          </text>
+                          <text x="8" y="25" fill="#fda4af" fontSize="8.5">
+                            ex = {eccentricityX > 0 ? '+' : ''}{eccentricityX}′, ey = {eccentricityY > 0 ? '+' : ''}{eccentricityY}′ (e = {eccentricityResults.eMag.toFixed(1)}′)
+                          </text>
+                        </g>
+                      </g>
+                    );
+                  })()}
+
+                  {/* Helical Piles Grid Overlay */}
+                  {showPilesOnHeatMap && (
+                    <g pointerEvents="none">
+                      {eccentricityResults.evaluatedPiles.map((p, idx) => {
+                        const k = activeGrid.gridK;
+                        const edgePaddingPx = 18;
+                        const innerWidthPx = 360 - edgePaddingPx * 2;
+                        const stepPx = k > 1 ? innerWidthPx / (k - 1) : 0;
+                        const px = 100 + edgePaddingPx + p.c * stepPx;
+                        const py = 50 + edgePaddingPx + p.r * stepPx;
+
+                        const qAllow = Number(activeGrid.qAllow);
+                        let ringColor = '#10b981';
+                        if (p.isTension) ringColor = '#c084fc';
+                        else if (p.isOverloaded) ringColor = '#f43f5e';
+                        else if (p.reactionKips > 0.8 * qAllow) ringColor = '#f59e0b';
+
+                        return (
+                          <g key={idx}>
+                            {/* Halo / Glow */}
+                            <circle
+                              cx={px}
+                              cy={py}
+                              r={p.isOverloaded ? 14 : 11}
+                              fill="rgba(11, 17, 32, 0.85)"
+                              stroke={ringColor}
+                              strokeWidth={p.isOverloaded ? 2.5 : 1.8}
+                              filter={p.isOverloaded ? 'url(#overloadPulse)' : undefined}
+                            />
+                            {/* Central Shaft Core */}
+                            <circle cx={px} cy={py} r="3" fill="#ffffff" />
+                            {/* Pile Reaction Value Tag */}
+                            <text
+                              x={px}
+                              y={py - 13}
+                              fill={ringColor}
+                              fontSize="8"
+                              fontWeight="800"
+                              textAnchor="middle"
+                            >
+                              {p.reactionKips.toFixed(1)}k
+                            </text>
+                            {p.isOverloaded && (
+                              <text x={px} y={py + 21} fill="#f43f5e" fontSize="8" fontWeight="800" textAnchor="middle">
+                                ⚠️ OVER
+                              </text>
+                            )}
+                          </g>
+                        );
+                      })}
+                    </g>
+                  )}
+
+                  {/* Right Side: Scientific Colormap Legend */}
+                  <g transform="translate(485, 50)">
+                    {/* Legend Title */}
+                    <text x="0" y="14" fill="#cbd5e1" fontSize="10.5" fontWeight="700">
+                      {heatMapMetric === 'moment' && 'Slab Moment M (k-ft/ft)'}
+                      {heatMapMetric === 'pressure' && 'Contact Stress q (psf)'}
+                      {heatMapMetric === 'pileReaction' && 'Pile Reaction R (kips)'}
+                      {heatMapMetric === 'quadrant' && 'Quadrant Load Share (%)'}
+                    </text>
+
+                    {/* Gradient Color Bar */}
+                    <rect
+                      x="10"
+                      y="26"
+                      width="18"
+                      height="260"
+                      fill="url(#heatLegendGrad)"
+                      rx="4"
+                      stroke="rgba(255,255,255,0.25)"
+                      strokeWidth="1"
+                    />
+
+                    {/* Numerical Scale Ticks */}
+                    {(() => {
+                      let topLabel = '10';
+                      let midLabel = '5';
+                      let botLabel = '0';
+                      let mCrY = null;
+                      let qZeroY = null;
+
+                      if (heatMapMetric === 'moment') {
+                        const maxM = heatMapCells.maxMoment;
+                        topLabel = `${maxM.toFixed(1)}`;
+                        midLabel = `${(maxM * 0.5).toFixed(1)}`;
+                        botLabel = '0.0';
+                        if (eccentricityResults.mCracking <= maxM) {
+                          mCrY = 286 - (eccentricityResults.mCracking / maxM) * 260;
+                        }
+                      } else if (heatMapMetric === 'pressure') {
+                        const maxQ = heatMapCells.maxQ;
+                        topLabel = `${maxQ.toFixed(0)}`;
+                        midLabel = `${(maxQ * 0.5).toFixed(0)}`;
+                        botLabel = '0';
+                        if (eccentricityResults.qMin < 0) {
+                          qZeroY = 286;
+                        }
+                      } else if (heatMapMetric === 'pileReaction') {
+                        const qAllow = Number(activeGrid.qAllow);
+                        const topR = qAllow * 1.25;
+                        topLabel = `${topR.toFixed(1)}k`;
+                        midLabel = `${(topR * 0.5).toFixed(1)}k`;
+                        botLabel = '0.0k';
+                      } else if (heatMapMetric === 'quadrant') {
+                        topLabel = '45%';
+                        midLabel = '25%';
+                        botLabel = '15%';
+                      }
+
+                      return (
+                        <g>
+                          {/* Top tick */}
+                          <line x1="8" y1="26" x2="30" y2="26" stroke="#ffffff" strokeWidth="1" />
+                          <text x="34" y="30" fill="#f8fafc" fontSize="9.5" fontWeight="700">{topLabel}</text>
+
+                          {/* 75% tick */}
+                          <line x1="8" y1="91" x2="30" y2="91" stroke="#94a3b8" strokeWidth="1" />
+
+                          {/* 50% tick */}
+                          <line x1="8" y1="156" x2="30" y2="156" stroke="#ffffff" strokeWidth="1" />
+                          <text x="34" y="160" fill="#cbd5e1" fontSize="9.5">{midLabel}</text>
+
+                          {/* 25% tick */}
+                          <line x1="8" y1="221" x2="30" y2="221" stroke="#94a3b8" strokeWidth="1" />
+
+                          {/* Bottom tick */}
+                          <line x1="8" y1="286" x2="30" y2="286" stroke="#ffffff" strokeWidth="1" />
+                          <text x="34" y="290" fill="#94a3b8" fontSize="9.5">{botLabel}</text>
+
+                          {/* Cracking Moment Marker (Mcr) */}
+                          {mCrY !== null && (
+                            <g>
+                              <line x1="4" y1={mCrY} x2="36" y2={mCrY} stroke="#f59e0b" strokeWidth="2.5" />
+                              <text x="40" y={mCrY + 3} fill="#f59e0b" fontSize="9" fontWeight="800">
+                                Mcr = {eccentricityResults.mCracking.toFixed(1)} (Cracking Limit)
+                              </text>
+                            </g>
+                          )}
+
+                          {/* Tension Zone Callout if Negative Pressure */}
+                          {qZeroY !== null && (
+                            <g transform="translate(0, 305)">
+                              <rect x="10" y="0" width="18" height="18" fill="url(#tensionHatch)" stroke="#c084fc" rx="2" />
+                              <text x="34" y="13" fill="#c084fc" fontSize="9" fontWeight="700">
+                                &lt; 0 psf (Tension Uplift)
+                              </text>
+                            </g>
+                          )}
+                        </g>
+                      );
+                    })()}
+                  </g>
+
+                  {/* Bottom Interactive HUD Readout Bar */}
+                  <g transform="translate(100, 435)">
+                    <rect
+                      x="0"
+                      y="0"
+                      width="520"
+                      height="80"
+                      rx="10"
+                      fill="rgba(15, 23, 42, 0.95)"
+                      stroke="var(--border-color)"
+                      strokeWidth="1.2"
+                    />
+
+                    {hoveredCell ? (() => {
+                      // Normalize across all three hover object shapes
+                      const isMeshCell = hoveredCell.mVal !== undefined;
+                      const label = isMeshCell
+                        ? `(X = ${hoveredCell.xFt?.toFixed(1)}′, Y = ${hoveredCell.yFt?.toFixed(1)}′) • ${hoveredCell.quadId} Quadrant`
+                        : hoveredCell.name || hoveredCell.id || '';
+                      const momentVal  = isMeshCell ? hoveredCell.mVal        : (hoveredCell.peakMoment   ?? 0);
+                      const qVal       = isMeshCell ? hoveredCell.qVal        : (hoveredCell.qAvgPsf      ?? 0);
+                      const rVal       = isMeshCell ? hoveredCell.nearestPileReaction : (hoveredCell.maxPileReaction ?? 0);
+                      const isTension  = isMeshCell ? hoveredCell.isTension   : (hoveredCell.hasUplift    ?? false);
+                      const loadPct    = isMeshCell ? null : hoveredCell.loadPct;
+                      const loadKips   = isMeshCell ? null : hoveredCell.loadKips;
+                      const mCr = eccentricityResults.mCracking;
+                      const qAllow = Number(activeGrid.qAllow);
+                      return (
+                        <g>
+                          <text x="16" y="20" fill="#38bdf8" fontSize="11" fontWeight="700">
+                            📍 {label}
+                          </text>
+                          <text x="16" y="40" fill="#f8fafc" fontSize="10.5">
+                            {`Moment M = `}
+                            <tspan fill={momentVal > mCr ? '#f59e0b' : '#10b981'} fontWeight="800">
+                              {momentVal.toFixed(2)} k-ft/ft
+                            </tspan>
+                            {momentVal > mCr ? '  ⚠️ > Mcr' : '  ✅ Uncracked'}
+                          </text>
+                          <text x="16" y="58" fill="#f8fafc" fontSize="10.5">
+                            {`Contact q = `}
+                            <tspan fill={isTension ? '#f43f5e' : '#38bdf8'} fontWeight="800">
+                              {qVal.toFixed(0)} psf
+                            </tspan>
+                            {isTension ? '  ⚠️ Tension Uplift' : '  ✅ Compression'}
+                          </text>
+                          <text x="300" y="40" fill="#f8fafc" fontSize="10.5">
+                            {`Pile R = `}
+                            <tspan fill={rVal > qAllow ? '#f43f5e' : rVal < 0 ? '#c084fc' : '#10b981'} fontWeight="800">
+                              {rVal.toFixed(1)}k
+                            </tspan>
+                            {` / ${activeGrid.qAllow}k`}
+                          </text>
+                          {loadPct !== null && (
+                            <text x="300" y="58" fill="#cbd5e1" fontSize="10.5">
+                              {`Load = ${loadKips?.toFixed(1)}k (${loadPct?.toFixed(1)}% of P)`}
+                            </text>
+                          )}
+                        </g>
+                      );
+                    })() : (
+                      <g>
+                        <text x="16" y="24" fill="var(--text-main)" fontSize="11.5" fontWeight="700">
+                          🗺️ 50′ × 50′ Foundation Aerial Overview (Hover over any section above to inspect)
+                        </text>
+                        <text x="16" y="46" fill="#cbd5e1" fontSize="11">
+                          Foundation Load: <tspan fill="#f8fafc" fontWeight="700">P = {totalDownwardLoadKips.toFixed(1)} kips</tspan>{'  '}•{'  '}Eccentricity: <tspan fill={eccentricityResults.isUplift ? '#f43f5e' : '#38bdf8'} fontWeight="700">e = {eccentricityResults.eMag.toFixed(2)}′</tspan>{'  '}(Mx = {eccentricityResults.Mx.toFixed(0)}k-ft, My = {eccentricityResults.My.toFixed(0)}k-ft)
+                        </text>
+                        <text x="16" y="66" fill="#cbd5e1" fontSize="11">
+                          Middle-Third Kern: <tspan fill={eccentricityResults.isUplift ? '#f43f5e' : '#10b981'} fontWeight="700">{eccentricityResults.isUplift ? '❌ OUTSIDE KERN (UPLIFT)' : '✅ WITHIN KERN'}</tspan>{'  '}•{'  '}Max Pile: <tspan fill={eccentricityResults.overloadedCount > 0 ? '#f43f5e' : '#10b981'} fontWeight="700">{eccentricityResults.maxPileR.toFixed(1)}k</tspan> / {activeGrid.qAllow}k
+                        </text>
+                      </g>
+                    )}
+                  </g>
+                </svg>
+
+                {/* Selected Section / Quadrant Deep-Dive Panel */}
+                {selectedSection && (
+                  <div style={{
+                    marginTop: '0.75rem',
+                    padding: '1rem 1.1rem',
+                    background: 'rgba(15,23,42,0.92)',
+                    border: `1.5px solid ${selectedSection.status === 'critical' ? 'rgba(244,63,94,0.55)' : selectedSection.status === 'warning' ? 'rgba(245,158,11,0.5)' : 'rgba(16,185,129,0.4)'}`,
+                    borderRadius: '12px',
+                    backdropFilter: 'blur(8px)'
+                  }}>
+                    {/* Header */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem', flexWrap: 'wrap', gap: '0.4rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{ fontSize: '1rem', fontWeight: 800, color: '#f8fafc' }}>
+                          🔍 {selectedSection.name || selectedSection.id}
+                        </span>
+                        {selectedSection.tributaryArea && (
+                          <span className="glass-badge" style={{ fontSize: '0.68rem', color: '#94a3b8', borderColor: 'rgba(255,255,255,0.15)' }}>
+                            {selectedSection.tributaryArea}
+                          </span>
+                        )}
+                        <span
+                          className="glass-badge"
+                          style={{
+                            fontSize: '0.72rem',
+                            fontWeight: 700,
+                            color: selectedSection.status === 'critical' ? '#f43f5e' : selectedSection.status === 'warning' ? '#f59e0b' : '#10b981',
+                            borderColor: selectedSection.status === 'critical' ? 'rgba(244,63,94,0.4)' : selectedSection.status === 'warning' ? 'rgba(245,158,11,0.4)' : 'rgba(16,185,129,0.4)'
+                          }}
+                        >
+                          {selectedSection.status === 'critical' ? '⚠️ CRITICAL' : selectedSection.status === 'warning' ? '⚠️ WARNING' : '✅ OK'}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn-secondary"
+                        style={{ fontSize: '0.68rem', padding: '0.15rem 0.45rem' }}
+                        onClick={() => setSelectedSectionId(null)}
+                      >
+                        ✕ Dismiss
+                      </button>
+                    </div>
+
+                    {/* Metrics Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
+                      {/* Load Share */}
+                      <div style={{ padding: '0.55rem 0.7rem', borderRadius: '8px', background: 'rgba(56,189,248,0.08)', border: '1px solid rgba(56,189,248,0.2)' }}>
+                        <div className="text-xs text-muted" style={{ fontWeight: 600 }}>Load Share</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#38bdf8', marginTop: '0.2rem' }}>
+                          {selectedSection.loadKips?.toFixed(1)}k
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{selectedSection.loadPct?.toFixed(2)}% of P</div>
+                      </div>
+
+                      {/* Bending Moment */}
+                      <div style={{ padding: '0.55rem 0.7rem', borderRadius: '8px', background: selectedSection.isCracking ? 'rgba(245,158,11,0.1)' : 'rgba(16,185,129,0.08)', border: `1px solid ${selectedSection.isCracking ? 'rgba(245,158,11,0.35)' : 'rgba(16,185,129,0.2)'}` }}>
+                        <div className="text-xs text-muted" style={{ fontWeight: 600 }}>Peak Moment M</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: selectedSection.isCracking ? '#f59e0b' : '#10b981', marginTop: '0.2rem' }}>
+                          {(selectedSection.peakMoment ?? selectedSection.peakMoment ?? 0).toFixed(2)} k-ft/ft
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Mcr = {eccentricityResults.mCracking.toFixed(2)} k-ft/ft</div>
+                      </div>
+
+                      {/* Contact Pressure */}
+                      <div style={{ padding: '0.55rem 0.7rem', borderRadius: '8px', background: selectedSection.hasUplift ? 'rgba(168,85,247,0.1)' : 'rgba(56,189,248,0.08)', border: `1px solid ${selectedSection.hasUplift ? 'rgba(168,85,247,0.4)' : 'rgba(56,189,248,0.2)'}` }}>
+                        <div className="text-xs text-muted" style={{ fontWeight: 600 }}>Avg Contact Stress q</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: selectedSection.hasUplift ? '#c084fc' : '#38bdf8', marginTop: '0.2rem' }}>
+                          {(selectedSection.qAvgPsf ?? 0).toFixed(0)} psf
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>{selectedSection.hasUplift ? '⚠️ Tension / Uplift' : 'Full Compression Contact'}</div>
+                      </div>
+
+                      {/* Pile Reactions */}
+                      <div style={{ padding: '0.55rem 0.7rem', borderRadius: '8px', background: selectedSection.hasPileOverload ? 'rgba(244,63,94,0.1)' : 'rgba(16,185,129,0.08)', border: `1px solid ${selectedSection.hasPileOverload ? 'rgba(244,63,94,0.4)' : 'rgba(16,185,129,0.2)'}` }}>
+                        <div className="text-xs text-muted" style={{ fontWeight: 600 }}>Piles in Section</div>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: selectedSection.hasPileOverload ? '#f43f5e' : '#10b981', marginTop: '0.2rem' }}>
+                          {selectedSection.pileCount} pile{selectedSection.pileCount !== 1 ? 's' : ''}
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Rmax = {(selectedSection.maxPileReaction ?? 0).toFixed(2)}k / {activeGrid.qAllow}k Qallow</div>
+                      </div>
+
+                      {/* Position */}
+                      <div style={{ padding: '0.55rem 0.7rem', borderRadius: '8px', background: 'rgba(100,116,139,0.08)', border: '1px solid rgba(100,116,139,0.2)' }}>
+                        <div className="text-xs text-muted" style={{ fontWeight: 600 }}>Centroid (ft)</div>
+                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.2rem' }}>
+                          ({selectedSection.cx >= 0 ? '+' : ''}{selectedSection.cx?.toFixed(1)}′, {selectedSection.cy >= 0 ? '+' : ''}{selectedSection.cy?.toFixed(1)}′)
+                        </div>
+                        <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                          {selectedSection.quadId} Quadrant{selectedSection.colLetter ? ` • Col ${selectedSection.colLetter}, Row ${selectedSection.rowNumber}` : ''}
+                        </div>
+                      </div>
+
+                      {/* Individual Bay Pile Table (sections16 only) */}
+                      {selectedSection.bayPiles && selectedSection.bayPiles.length > 0 && (
+                        <div style={{ gridColumn: '1 / -1', padding: '0.55rem 0.7rem', borderRadius: '8px', background: 'rgba(100,116,139,0.06)', border: '1px solid rgba(100,116,139,0.18)' }}>
+                          <div className="text-xs text-muted" style={{ fontWeight: 600, marginBottom: '0.35rem' }}>Helical Piles in Bay {selectedSection.id}:</div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                            {selectedSection.bayPiles.map((p, idx) => (
+                              <span
+                                key={idx}
+                                className="glass-badge"
+                                style={{
+                                  fontSize: '0.68rem',
+                                  color: p.isOverloaded ? '#f43f5e' : p.isTension ? '#c084fc' : '#10b981',
+                                  borderColor: p.isOverloaded ? 'rgba(244,63,94,0.4)' : p.isTension ? 'rgba(192,132,252,0.4)' : 'rgba(16,185,129,0.3)'
+                                }}
+                              >
+                                Pile@({p.pxFt?.toFixed(1)}′, {p.pyFt?.toFixed(1)}′) R={p.reactionKips?.toFixed(1)}k
+                                {p.isOverloaded ? ' ⚠️' : p.isTension ? ' ↑' : ''}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* TAB 4: Stress Depth Profile */}
             {activeTab === 'stress' && (
               <svg
                 viewBox="0 0 600 440"
@@ -1471,6 +3106,223 @@ const HelicalHouseVisualizer = ({ problem }) => {
             )}
           </div>
 
+          {/* Interactive Issue Diagnosis Console */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.85rem',
+            padding: '1.25rem',
+            background: 'var(--bg-card)',
+            borderRadius: '16px',
+            border: '1px solid var(--border-color)',
+            backdropFilter: 'var(--glass-blur)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+              <h4 style={{ fontSize: '0.98rem', fontWeight: 700, margin: 0, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>🚨</span> Real-Time Foundation Health & Issue Diagnosis
+              </h4>
+              <span className="text-xs text-muted">
+                Updates dynamically with any slider adjustment
+              </span>
+            </div>
+
+            {/* 4 Health Status Badges */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
+              {/* 1. Kern Uplift */}
+              <div style={{
+                padding: '0.65rem 0.75rem',
+                borderRadius: '10px',
+                background: eccentricityResults.isUplift ? 'rgba(244, 63, 94, 0.12)' : 'rgba(16, 185, 129, 0.1)',
+                border: `1px solid ${eccentricityResults.isUplift ? 'rgba(244, 63, 94, 0.4)' : 'rgba(16, 185, 129, 0.3)'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.2rem'
+              }}>
+                <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Middle-Third Kern</span>
+                <strong style={{ fontSize: '0.85rem', color: eccentricityResults.isUplift ? 'var(--accent-rose)' : 'var(--accent-emerald)' }}>
+                  {eccentricityResults.isUplift ? '❌ UPLIFT ACTIVE' : '✅ COMPLIANT'}
+                </strong>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                  e = {eccentricityResults.eMag.toFixed(1)}′ / 8.3′
+                </span>
+              </div>
+
+              {/* 2. Pile Compressive Capacity */}
+              <div style={{
+                padding: '0.65rem 0.75rem',
+                borderRadius: '10px',
+                background: eccentricityResults.overloadedCount > 0 ? 'rgba(244, 63, 94, 0.12)' : 'rgba(16, 185, 129, 0.1)',
+                border: `1px solid ${eccentricityResults.overloadedCount > 0 ? 'rgba(244, 63, 94, 0.4)' : 'rgba(16, 185, 129, 0.3)'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.2rem'
+              }}>
+                <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Helical Pile Limit</span>
+                <strong style={{ fontSize: '0.85rem', color: eccentricityResults.overloadedCount > 0 ? 'var(--accent-rose)' : 'var(--accent-emerald)' }}>
+                  {eccentricityResults.overloadedCount > 0 ? `❌ ${eccentricityResults.overloadedCount} OVERLOADED` : '✅ ALL PILES OK'}
+                </strong>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                  Max: {eccentricityResults.maxPileR.toFixed(1)}k / {activeGrid.qAllow}k
+                </span>
+              </div>
+
+              {/* 3. Slab Flexural Cracking */}
+              <div style={{
+                padding: '0.65rem 0.75rem',
+                borderRadius: '10px',
+                background: eccentricityResults.isCracking ? 'rgba(245, 158, 11, 0.12)' : 'rgba(16, 185, 129, 0.1)',
+                border: `1px solid ${eccentricityResults.isCracking ? 'rgba(245, 158, 11, 0.4)' : 'rgba(16, 185, 129, 0.3)'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.2rem'
+              }}>
+                <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Concrete Cracking</span>
+                <strong style={{ fontSize: '0.85rem', color: eccentricityResults.isCracking ? 'var(--accent-amber)' : 'var(--accent-emerald)' }}>
+                  {eccentricityResults.isCracking ? '⚠️ CRACKING RISK' : '✅ UNCRACKED'}
+                </strong>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                  M = {eccentricityResults.maxSlabMoment.toFixed(1)} / {eccentricityResults.mCracking.toFixed(1)} k-ft/ft
+                </span>
+              </div>
+
+              {/* 4. Quadrant Symmetry */}
+              <div style={{
+                padding: '0.65rem 0.75rem',
+                borderRadius: '10px',
+                background: eccentricityResults.issues.some(i => i.id === 'disparity') ? 'rgba(245, 158, 11, 0.12)' : 'rgba(16, 185, 129, 0.1)',
+                border: `1px solid ${eccentricityResults.issues.some(i => i.id === 'disparity') ? 'rgba(245, 158, 11, 0.4)' : 'rgba(16, 185, 129, 0.3)'}`,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.2rem'
+              }}>
+                <span className="text-xs text-muted" style={{ fontWeight: 600 }}>Quadrant Balance</span>
+                <strong style={{ fontSize: '0.85rem', color: eccentricityResults.issues.some(i => i.id === 'disparity') ? 'var(--accent-amber)' : 'var(--accent-emerald)' }}>
+                  {eccentricityResults.issues.some(i => i.id === 'disparity') ? '⚠️ ASYMMETRIC' : '✅ BALANCED'}
+                </strong>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
+                  Max Q: {Math.max(...eccentricityResults.quadrants.map(q => q.loadPct)).toFixed(0)}% share
+                </span>
+              </div>
+            </div>
+
+            {/* Active Issue Cards */}
+            {eccentricityResults.issues.length > 0 ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', marginTop: '0.25rem' }}>
+                {eccentricityResults.issues.map((issue) => (
+                  <div
+                    key={issue.id}
+                    style={{
+                      padding: '0.75rem 1rem',
+                      borderRadius: '10px',
+                      background: issue.level === 'critical' ? 'rgba(244, 63, 94, 0.08)' : 'rgba(245, 158, 11, 0.08)',
+                      border: `1px solid ${issue.level === 'critical' ? 'rgba(244, 63, 94, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`,
+                      borderLeft: `4px solid ${issue.color}`,
+                      fontSize: '0.85rem',
+                      lineHeight: 1.45
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                      <strong style={{ color: issue.color, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        <span>{issue.level === 'critical' ? '🚨' : '⚠️'}</span> {issue.title}
+                      </strong>
+                      <span className="glass-badge" style={{ fontSize: '0.65rem', color: issue.color, borderColor: issue.color }}>
+                        {issue.badge}
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, color: '#cbd5e1', fontSize: '0.82rem' }}>
+                      {issue.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{
+                padding: '0.75rem 1rem',
+                borderRadius: '10px',
+                background: 'rgba(16, 185, 129, 0.08)',
+                border: '1px solid rgba(16, 185, 129, 0.25)',
+                fontSize: '0.82rem',
+                color: '#34d399',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}>
+                <span>✅</span>
+                <span>
+                  <strong>Optimal Foundation Performance:</strong> Load centroid is within the Middle-Third Kern boundary (e ≤ 8.33′). Full base compression is maintained, and all helical pile reactions are safely beneath the allowable capacity (Qallow = {activeGrid.qAllow} kips).
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* 4 Quadrants Detailed Inspection Cards */}
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: 0, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>🧩</span> 50′ × 50′ Slab Quadrant & Section Performance
+              </h4>
+              <span className="text-xs text-muted">25′ × 25′ Quadrant Tributaries (625 sq ft each)</span>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
+              {eccentricityResults.quadrants.map((quad) => (
+                <div
+                  key={quad.id}
+                  style={{
+                    padding: '0.85rem',
+                    borderRadius: '12px',
+                    background: 'var(--bg-card)',
+                    border: `1.5px solid ${quad.status === 'critical' ? 'var(--accent-rose)' : quad.status === 'warning' ? 'var(--accent-amber)' : 'var(--border-color)'}`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.45rem',
+                    position: 'relative'
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontWeight: 800, color: quad.color, fontSize: '0.9rem' }}>
+                      {quad.name}
+                    </span>
+                    <span className="glass-badge" style={{
+                      fontSize: '0.65rem',
+                      color: quad.status === 'critical' ? 'var(--accent-rose)' : quad.status === 'warning' ? 'var(--accent-amber)' : 'var(--accent-emerald)',
+                      borderColor: quad.status === 'critical' ? 'rgba(244,63,94,0.4)' : quad.status === 'warning' ? 'rgba(245,158,11,0.4)' : 'rgba(16,185,129,0.3)'
+                    }}>
+                      {quad.status === 'critical' ? 'CRITICAL' : quad.status === 'warning' ? 'ELEVATED' : 'SAFE'}
+                    </span>
+                  </div>
+
+                  <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.4rem', display: 'flex', flexDirection: 'column', gap: '0.25rem', fontSize: '0.78rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span className="text-muted">Tributary Load:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: '#f8fafc' }}>
+                        {quad.loadKips.toFixed(1)}k ({quad.loadPct.toFixed(1)}%)
+                      </strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span className="text-muted">Avg Soil Bearing:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: quad.qAvgPsf < 0 ? 'var(--accent-rose)' : '#38bdf8' }}>
+                        {quad.qAvgPsf.toFixed(0)} psf
+                      </strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span className="text-muted">Peak Slab Moment:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: quad.peakMoment > eccentricityResults.mCracking ? 'var(--accent-amber)' : 'var(--accent-emerald)' }}>
+                        {quad.peakMoment.toFixed(2)} k-ft/ft
+                      </strong>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span className="text-muted">Max Pile Reaction:</span>
+                      <strong style={{ fontFamily: 'var(--font-mono)', color: quad.maxPileReaction > Number(activeGrid.qAllow) ? 'var(--accent-rose)' : '#f8fafc' }}>
+                        {quad.maxPileReaction.toFixed(1)} kips
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Mathematical Step-by-Step Derivation Breakdown */}
           <div style={{
             background: 'var(--bg-card)',
@@ -1561,6 +3413,21 @@ const HelicalHouseVisualizer = ({ problem }) => {
                     Minimum Piles Required: <code>Nreq = ⌈{totalDownwardLoadKips.toFixed(1)} / {activeGrid.qAllow}⌉ = {activeGrid.nReq} piles</code><br />
                     Square Foundation Grid: <code>k = ⌈√{activeGrid.nReq}⌉ = {activeGrid.gridK} ➔ {activeGrid.gridK} × {activeGrid.gridK} = {activeGrid.nInstalled} piles installed</code><br />
                     <strong>On-Center Pile Spacing: <code>S = 50 ft / ({activeGrid.gridK} - 1) = {activeGrid.spacingFt} ft O.C.</code></strong> (Operating SF = {activeGrid.operatingSf})
+                  </div>
+                </div>
+
+                {/* Step 5 */}
+                <div style={{ padding: '0.75rem 1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '10px' }}>
+                  <div style={{ fontWeight: 700, color: 'var(--accent-rose, #f43f5e)', marginBottom: '0.35rem' }}>
+                    Step 5: Slab Eccentricity, Overturning Moments & Middle-Third Kern Limit
+                  </div>
+                  <div>
+                    Biaxial Eccentricity: <code>ex = {eccentricityX} ft, ey = {eccentricityY} ft ➔ e = √({eccentricityX}² + {eccentricityY}²) = {eccentricityResults.eMag.toFixed(2)} ft</code><br />
+                    Overturning Moments: <code>Mx = Ptotal × ey = {totalDownwardLoadKips.toFixed(1)} × {eccentricityY} = {eccentricityResults.Mx.toFixed(1)} kip-ft</code>, <code>My = Ptotal × ex = {totalDownwardLoadKips.toFixed(1)} × {eccentricityX} = {eccentricityResults.My.toFixed(1)} kip-ft</code> (Mres = {eccentricityResults.Mres.toFixed(1)} kip-ft)<br />
+                    Middle-Third Kern Boundary: <code>|ex|/(B/6) + |ey|/(L/6) = {((Math.abs(eccentricityX) + Math.abs(eccentricityY)) / (50 / 6)).toFixed(2)} {eccentricityResults.isUplift ? '> 1.0 (⚠️ TENSION UPLIFT EXCEEDED)' : '≤ 1.0 (✅ Full Slab Base Compression)'}</code><br />
+                    Extreme Contact Stresses: <code>qmax = {eccentricityResults.qMax.toFixed(0)} psf, qmin = {eccentricityResults.qMin.toFixed(0)} psf</code> ({eccentricityResults.qMin < 0 ? 'Negative stress indicates edge tension liftoff!' : 'Compressive across entire 2,500 sq ft footprint'})<br />
+                    Critical Helical Pile Reaction: <code>Rmax = {eccentricityResults.maxPileR.toFixed(1)} kips {eccentricityResults.maxPileR > Number(activeGrid.qAllow) ? `(⚠️ Exceeds Qallow = ${activeGrid.qAllow} kips)` : `(✅ Safe ≤ Qallow = ${activeGrid.qAllow} kips)`}</code><br />
+                    Plain Concrete Cracking Moment: <code>Mcr = 0.07906 × t² = {eccentricityResults.mCracking.toFixed(2)} kip-ft/ft</code> vs Peak Flexural Moment <code>Mmax = {eccentricityResults.maxSlabMoment.toFixed(2)} kip-ft/ft</code>
                   </div>
                 </div>
               </div>
